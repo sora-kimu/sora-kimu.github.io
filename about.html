@@ -164,12 +164,26 @@
   const toggle = document.getElementById('themeToggle');
   const root = document.documentElement;
   const saved = localStorage.getItem('theme');
-  if (saved === 'dark') { root.setAttribute('data-theme', 'dark'); toggle.textContent = '☀️'; }
-  else if (saved === 'light') { root.setAttribute('data-theme', 'light'); toggle.textContent = '🌙'; }
+
+  if (saved === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    toggle.textContent = '☀️';
+  } else if (saved === 'light') {
+    root.setAttribute('data-theme', 'light');
+    toggle.textContent = '🌙';
+  }
+
   toggle.addEventListener('click', () => {
     const isDark = root.getAttribute('data-theme') === 'dark';
-    if (isDark) { root.setAttribute('data-theme', 'light'); localStorage.setItem('theme', 'light'); toggle.textContent = '🌙'; }
-    else { root.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); toggle.textContent = '☀️'; }
+    if (isDark) {
+      root.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+      toggle.textContent = '🌙';
+    } else {
+      root.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+      toggle.textContent = '☀️';
+    }
   });
 </script>
 
@@ -177,16 +191,15 @@
 
   <!-- INTRO -->
   <div class="section">
-<p class="greeting">Hi, I'm Sora! 🐚👋<br>
-<span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted);">
-(소라 means "conch shell" in Korean — yes, the 🐚 is literally my name.)
-</span></p>
+    <p class="greeting">Hi, I'm Sora! 🐚👋<br>
+      <span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted);">
+        (소라 means "conch shell" in Korean — yes, the 🐚 is literally my name.)
+      </span>
+    </p>
     <p>
-      I'm an independent HCI researcher working on the manufacturing floor
-      in pharmaceutical GMP environments in South Korea.
-      I study <strong>Regulatory HCI</strong> — how compliance systems quietly
-      structure accountability, and how design can intervene to make those structures
-      visible and contestable.
+      I'm an independent HCI researcher working in pharmaceutical GMP environments in South Korea.
+      I study <strong>Regulatory HCI</strong> — how compliance systems quietly structure accountability,
+      and how design can intervene to make those structures visible and contestable.
     </p>
     <p>
       The short version: I spend a lot of time thinking about why things feel inevitable
@@ -197,7 +210,7 @@
 
   <!-- THE SOLO GRIND -->
   <div class="section">
-    <p class="section-label">The part that sounds unhinged 🙃</p>
+    <p class="section-label">The slightly unhinged part 🙃</p>
     <p>
       I built this entire research program by myself.
       No lab. No advisor. No institutional affiliation. No roadmap.
@@ -212,11 +225,11 @@
       Over the past few years, I've developed a four-stage responsibility lifecycle theory,
       run user studies with GMP practitioners, built Streamlit prototypes, coded FDA Warning Letters,
       and written papers across HCI, STS, and computational methods —
-      all while working full-time on a manufacturing floor.
+      all while working full-time in pharmaceutical GMP environments.
     </p>
     <p>
-      I'm not trying to be impressive here — this was simply the only way I knew how
-      to answer the questions. Which is probably a sign I should do a PhD.
+      I built this work independently because it was the only way I knew
+      to pursue the questions seriously. Which is probably a sign I should do a PhD.
       <strong>Applying for Fall 2027.</strong> 🤞
     </p>
   </div>
@@ -289,11 +302,21 @@
       </div>
       <div class="contact-item">
         <span class="contact-label">GitHub</span>
-        <a href="https://github.com/sorakim-lab" target="_blank">sorakim-lab</a>
+        <a href="https://github.com/sorakim-lab" target="_blank" rel="noopener noreferrer">sorakim-lab</a>
       </div>
       <div class="contact-item">
         <span class="contact-label">SSRN</span>
-        <a href="https://ssrn.com" target="_blank">SSRN Profile</a>
+        <a href="https://ssrn.com" target="_blank" rel="noopener noreferrer">SSRN Profile</a>
       </div>
     </div>
     <a href="#" class="cv-btn">📎 Download CV</a>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 Sora Kim · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
+</footer>
+
+</body>
+</html>
