@@ -1,445 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Sora Kim</title>
-<meta content="Sora Kim studies how responsibility converges in GMP-regulated investigations, and how AI-supported scaffolds can preserve comparison and delay premature closure." name="description"/>
-<link href="assets/favicon-light.png" media="(prefers-color-scheme: light)" rel="icon" type="image/png"/>
-<link href="assets/favicon-dark.png" media="(prefers-color-scheme: dark)" rel="icon" type="image/png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<style>
-  :root{
-    --bg:#ffffff;--bg2:#f5f5f7;--panel:#ffffff;
-    --line:rgba(0,0,0,0.08);--line-soft:rgba(0,0,0,0.05);
-    --text:#0a0a0a;--text-2:#1c1c1e;--text-3:#636369;--text-4:#9a9aa1;
-    --accent:#1a3a6b;--accent-soft:rgba(26,58,107,0.07);--accent-strong:rgba(26,58,107,0.12);
-    --sans:'Plus Jakarta Sans',-apple-system,'Apple SD Gothic Neo',sans-serif;
-    --mono:'DM Mono',monospace;
-    --max:1120px;--nav-h:64px;
-  }
-  html.dark{
-    --bg:#000000;--bg2:#111111;--panel:#1c1c1e;
-    --line:rgba(255,255,255,0.09);--line-soft:rgba(255,255,255,0.05);
-    --text:#f5f5f7;--text-2:#e5e5ea;--text-3:#8e8e93;--text-4:#48484a;
-    --accent:#4a7fd4;--accent-soft:rgba(74,127,212,0.10);--accent-strong:rgba(74,127,212,0.16);
-  }
-  @media(prefers-color-scheme:dark){:root{
-    --bg:#000000;--bg2:#111111;--panel:#1c1c1e;
-    --line:rgba(255,255,255,0.09);--line-soft:rgba(255,255,255,0.05);
-    --text:#f5f5f7;--text-2:#e5e5ea;--text-3:#8e8e93;--text-4:#48484a;
-    --accent:#4a7fd4;--accent-soft:rgba(74,127,212,0.10);--accent-strong:rgba(74,127,212,0.16);
-  }}
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--text-2);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  a{color:inherit;text-decoration:none}
-  img{display:block;max-width:100%}
-  button{font:inherit;background:none;border:none;cursor:pointer}
-  .wrap{width:min(var(--max),calc(100% - 48px));margin:0 auto}
-  .nav{position:sticky;top:0;z-index:100;height:var(--nav-h);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%)}
-  .nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;width:min(var(--max),calc(100% - 48px));margin:0 auto}
-  .nav-icon{width:18px;height:18px;object-fit:contain;content:url(assets/favicon-light.png);flex-shrink:0}
-  html.dark .nav-icon{content:url(assets/favicon-dark.png)}
-  @media(prefers-color-scheme:dark){.nav-icon{content:url(assets/favicon-dark.png)}}
-  .brand-name{font-size:15px;font-weight:700;color:var(--text);letter-spacing:-0.03em}
-  .nav-links{display:flex;align-items:center;gap:24px;list-style:none}
-  .nav-links a{font-size:13px;color:var(--text-3);letter-spacing:-0.01em;transition:color 150ms}
-  .nav-links a:hover{color:var(--text)}
-  .nav-right{display:flex;align-items:center;gap:8px}
-  .theme-btn{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-3);transition:border-color 150ms,color 150ms}
-  .theme-btn:hover{border-color:var(--text-3);color:var(--text)}
-  .theme-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .cv-btn{height:34px;padding:0 14px;border:1px solid var(--line);border-radius:8px;font-size:12px;font-weight:500;color:var(--text-2);font-family:var(--mono);letter-spacing:0.02em;transition:border-color 150ms,background 150ms;display:inline-flex;align-items:center;justify-content:center}
-  .cv-btn:hover{border-color:var(--text-3);background:var(--bg2)}
-  .hamburger{display:none;width:36px;height:36px;border:1px solid var(--line);border-radius:50%;align-items:center;justify-content:center;color:var(--text-3);cursor:pointer;flex-direction:column;gap:4px;transition:border-color 150ms}
-  .hamburger:hover{border-color:var(--text-3)}
-  .hamburger span{display:block;width:14px;height:1.5px;background:currentColor;border-radius:2px;transition:transform 250ms ease,opacity 250ms ease}
-  .hamburger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
-  .hamburger.open span:nth-child(2){opacity:0}
-  .hamburger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
-  .mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;background:color-mix(in srgb,var(--bg) 97%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:200;padding:32px 24px;flex-direction:column;gap:8px;border-top:1px solid var(--line)}
-  .mobile-menu.open{display:flex}
-  .mobile-menu a{font-size:1.5rem;font-weight:700;letter-spacing:-0.03em;color:var(--text);padding:12px 0;border-bottom:1px solid var(--line-soft);transition:color 150ms}
-  .mobile-menu a:hover{color:var(--accent)}
-  .mobile-menu-cv{margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--text-4);letter-spacing:0.04em}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sora Kim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --text-muted: #555555;
+      --text-light: #888888;
+      --border: #e5e5e5;
+      --surface: #fafafa;
+      --blue: #2563EB;
+    }
 
-  /* ── HERO ── */
-  .hero{padding:88px 0 80px;border-bottom:1px solid var(--line)}
-  .hero-inner{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:32px;align-items:start}
-  .hero-copy{padding:4px 0}
-  .hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--text-4);text-transform:uppercase;margin-bottom:20px}
-  .hero-h1{font-size:clamp(3rem,6.4vw,5.2rem);font-weight:800;line-height:1.01;letter-spacing:-0.05em;color:var(--text);margin-bottom:20px;max-width:11ch}
-  .hero-sub{font-size:16px;font-weight:400;color:var(--text-3);line-height:1.75;max-width:56ch}
-  .hero-sub strong{color:var(--text-2);font-weight:600}
-  .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
-  .btn-fill{height:44px;padding:0 22px;background:var(--text);color:var(--bg);border-radius:10px;font-size:13px;font-weight:600;letter-spacing:-0.01em;transition:opacity 150ms;display:inline-flex;align-items:center;justify-content:center}
-  .btn-fill:hover{opacity:0.84}
-  .btn-ghost{height:44px;padding:0 22px;border:1px solid var(--line);border-radius:10px;font-size:13px;font-weight:500;color:var(--text-2);transition:border-color 150ms,background 150ms;display:inline-flex;align-items:center;justify-content:center}
-  .btn-ghost:hover{border-color:var(--text-4);background:var(--bg2)}
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #111111;
+        --text: #f0f0f0;
+        --text-muted: #aaaaaa;
+        --text-light: #666666;
+        --border: #2a2a2a;
+        --surface: #1a1a1a;
+        --blue: #60a5fa;
+      }
+    }
 
-  /* aside: photo only + one line */
-  .hero-aside{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel)}
-  .portrait-frame{aspect-ratio:1/1.2;background:var(--bg2)}
-  .portrait-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(100%);transition:filter 300ms ease}
-  .portrait-frame img:hover{filter:grayscale(0%)}
-  .aside-claim{padding:16px 18px;font-size:13px;color:var(--text-3);line-height:1.7;border-top:1px solid var(--line)}
+    [data-theme="dark"] {
+      --bg: #111111;
+      --text: #f0f0f0;
+      --text-muted: #aaaaaa;
+      --text-light: #666666;
+      --border: #2a2a2a;
+      --surface: #1a1a1a;
+      --blue: #60a5fa;
+    }
 
-  /* ── METRICS strip ── */
-  .metrics{padding:0;border-bottom:1px solid var(--line)}
-  .metrics-strip{display:flex;gap:0;border-bottom:none}
-  .metric-item{flex:1;padding:22px 28px;border-right:1px solid var(--line)}
-  .metric-item:last-child{border-right:none}
-  .metric-num{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-4);margin-bottom:6px}
-  .metric-val{font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.03em}
+    [data-theme="light"] {
+      --bg: #ffffff;
+      --text: #111111;
+      --text-muted: #555555;
+      --text-light: #888888;
+      --border: #e5e5e5;
+      --surface: #fafafa;
+      --blue: #2563EB;
+    }
 
-  /* ── PROJECTS ── */
-  .projects{padding:64px 0 58px;border-bottom:1px solid var(--line)}
-  .projects-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
-  .section-label{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-4)}
-  .section-title{font-size:clamp(1.6rem,2.8vw,2.25rem);font-weight:700;letter-spacing:-0.04em;color:var(--text);line-height:1.1;margin-top:8px;margin-bottom:40px}
-  .section-all{font-family:var(--mono);font-size:11px;color:var(--text-4);letter-spacing:0.04em;transition:color 150ms}
-  .section-all:hover{color:var(--accent)}
-  .project-hero{display:grid;grid-template-columns:1.02fr 0.98fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:3px;transition:border-color 200ms,box-shadow 200ms,transform 200ms;background:var(--panel);box-shadow:0 10px 40px rgba(10,10,10,0.07)}
-  html.dark .project-hero{box-shadow:0 10px 40px rgba(0,0,0,0.26)}
-  .project-hero:hover{border-color:rgba(26,58,107,0.34);box-shadow:0 16px 52px rgba(10,10,10,0.10);transform:translateY(-2px)}
-  html.dark .project-hero:hover{border-color:rgba(74,127,212,0.3);box-shadow:0 16px 52px rgba(0,0,0,0.32)}
-  .project-hero-left{padding:36px 38px;border-right:1px solid var(--line)}
-  .project-hero-right{padding:36px 38px;background:linear-gradient(160deg,var(--accent-soft) 0%,transparent 60%),var(--panel);display:flex;flex-direction:column;justify-content:space-between}
-  .project-num{font-family:var(--mono);font-size:10px;color:var(--text-4);letter-spacing:0.08em;margin-bottom:14px}
-  .project-hero .project-title{font-size:1.8rem;font-weight:800;letter-spacing:-0.045em;color:var(--text);line-height:1.06;margin-bottom:14px;max-width:14ch}
-  .project-hero .project-desc{font-size:14px;color:var(--text-3);line-height:1.75}
-  .project-hero-stat{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:0.04em;line-height:2}
-  .project-hero-claim{font-size:1.08rem;font-weight:700;color:var(--text);line-height:1.55;letter-spacing:-0.025em;margin-top:30px}
-  .project-sub-list{display:grid;gap:1px;background:var(--line);border-radius:16px;overflow:hidden}
-  .project-sub{display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:20px 24px;background:var(--panel);transition:background 150ms}
-  .project-sub:hover{background:var(--bg2)}
-  .project-sub .project-num{margin-bottom:0}
-  .project-sub .project-title{font-size:1rem;font-weight:700;letter-spacing:-0.02em;color:var(--text);line-height:1.2;margin-bottom:4px}
-  .project-sub .project-desc{font-size:13px;color:var(--text-3);line-height:1.6}
-  .tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
-  .tag{font-family:var(--mono);font-size:10px;letter-spacing:0.02em;padding:3px 7px;border-radius:5px}
-  .tag-a{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-strong)}
-  .tag-n{background:var(--bg2);color:var(--text-4);border:1px solid var(--line)}
-  .project-arrow{font-size:13px;color:var(--text-4);transition:color 150ms,transform 150ms}
-  .project-sub:hover .project-arrow{color:var(--accent);transform:translateX(3px)}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* ── PR / BOTTOM ── */
-  .section{padding:58px 0;border-bottom:1px solid var(--line)}
-  .pr-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:12px;align-items:start}
-  .pr-papers{border:1px solid var(--line);border-radius:16px;padding:28px;background:var(--panel);transition:border-color 180ms}
-  .pr-papers:hover{border-color:var(--text-4)}
-  .pr-research{border:1px solid var(--accent);border-radius:16px;padding:32px;background:linear-gradient(160deg,var(--accent-strong) 0%,var(--accent-soft) 40%,transparent 75%),var(--panel);transition:border-color 180ms,transform 180ms,box-shadow 180ms;box-shadow:0 6px 28px rgba(26,58,107,0.08)}
-  html.dark .pr-research{box-shadow:0 6px 28px rgba(74,127,212,0.10)}
-  .pr-research:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(26,58,107,0.13)}
-  .teaser-kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-4);margin-bottom:10px}
-  .pr-research .teaser-kicker{color:var(--accent);opacity:0.9}
-  .teaser-h{font-size:1.4rem;font-weight:700;letter-spacing:-0.04em;color:var(--text);line-height:1.1;margin-bottom:10px}
-  .pr-research .teaser-h{font-size:1.92rem}
-  .teaser-p{font-size:14px;color:var(--text-3);line-height:1.75;margin-bottom:16px}
-  .pr-research .teaser-p{font-size:14px;color:var(--text-2)}
-  .teaser-link{font-family:var(--mono);font-size:11px;color:var(--text-4);letter-spacing:0.02em}
-  .pr-research .teaser-link{color:var(--accent);font-size:12px}
-  .bottom-grid{display:grid;grid-template-columns:1.18fr 0.82fr;gap:12px}
-  .about-card,.contact-card{border:1px solid var(--line);border-radius:16px;padding:28px;background:var(--panel)}
-  .about-title{font-size:1.2rem;font-weight:700;letter-spacing:-0.03em;color:var(--text);line-height:1.3;margin-top:8px}
-  .about-body{font-size:14px;color:var(--text-3);line-height:1.84;margin-top:10px}
-  .contact-stack{display:grid;gap:8px;margin-top:12px}
-  .contact-row{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:10px;padding:11px 14px;transition:border-color 150ms,background 150ms}
-  .contact-row:hover{border-color:var(--text-4);background:var(--bg2)}
-  .contact-kind{font-size:13px;font-weight:700;color:var(--text)}
-  .contact-val{font-family:var(--mono);font-size:11px;color:var(--text-3);line-height:1.6;max-width:62%;text-align:right;white-space:normal;overflow-wrap:anywhere}
-  footer{padding:20px 0 36px}
-  .footer-inner{border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--mono);font-size:10px;color:var(--text-4);letter-spacing:0.04em}
-  .footer-inner a:hover{color:var(--accent)}
-  .reveal{opacity:1;transform:none}
-  .js-ready .reveal{opacity:0;transform:translateY(12px);transition:opacity 550ms cubic-bezier(.2,.7,0,1),transform 550ms cubic-bezier(.2,.7,0,1)}
-  .js-ready .reveal.on{opacity:1;transform:none}
-  @media(max-width:900px){
-    .hero-inner,.pr-grid,.bottom-grid{grid-template-columns:1fr}
-    .project-hero{grid-template-columns:1fr}
-    .project-hero-left{border-right:none;border-bottom:1px solid var(--line)}
-    .metrics-strip{flex-wrap:wrap}
-    .metric-item{flex:1 1 33%}
-    .hero{padding:72px 0 56px}
-  }
-  @media(max-width:600px){
-    .wrap{width:calc(100% - 32px)}
-    .nav-links{display:none}
-    .hamburger{display:flex}
-    .project-hero-left,.project-hero-right,.pr-papers,.pr-research,.about-card,.contact-card{padding:24px}
-    .hero-h1{font-size:2.6rem}
-    .hero-sub{font-size:15px}
-    .metric-item{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--line)}
-    .metric-item:last-child{border-bottom:none}
-    .section-title{font-size:1.5rem}
-    .teaser-h{font-size:1.2rem}
-    .pr-research .teaser-h{font-size:1.46rem}
-    .footer-inner{flex-direction:column;align-items:flex-start;gap:6px}
-  }
-  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none !important;transition:none !important}.reveal{opacity:1;transform:none}}
-</style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    /* NAV */
+    nav {
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+    }
+
+    .nav-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--blue);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--blue);
+    }
+
+    /* MAIN */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 32px 80px;
+    }
+
+    /* PROFILE ROW */
+    .profile-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .profile-img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .profile-text h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .profile-text .tagline {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .social {
+      display: flex;
+      gap: 16px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .social a {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--blue);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .social a:hover { text-decoration: underline; }
+
+    /* BIO */
+    .bio {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 24px;
+      border-top: 1px solid var(--border);
+      padding-top: 32px;
+    }
+
+    .bio strong { color: var(--text); font-weight: 600; }
+
+    /* KEYWORDS */
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+
+    .kw {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text-muted);
+      background: var(--surface);
+    }
+
+    /* SECTION LABEL */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    /* PAPERS */
+    .paper {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .paper:first-of-type { border-top: 1px solid var(--border); }
+
+    .paper-cluster {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--blue);
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .paper-title {
+      font-size: 0.97rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .paper-title a { color: var(--text); text-decoration: none; }
+    .paper-title a:hover { color: var(--blue); }
+
+    .paper-desc {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+
+    .paper-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .paper-kw {
+      font-size: 11px;
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-light);
+      background: var(--surface);
+    }
+
+    .see-all {
+      display: inline-block;
+      margin-top: 20px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .see-all:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    footer a { color: var(--text-light); text-decoration: none; }
+    footer a:hover { color: var(--blue); }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      nav {
+        padding: 14px 20px;
+      }
+      .nav-links {
+        gap: 18px;
+      }
+      main {
+        padding: 40px 20px 60px;
+      }
+      .profile-row {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .profile-img {
+        width: 96px;
+        height: 96px;
+        margin-top: 0;
+      }
+      .social {
+        justify-content: center;
+      }
+      .profile-text h1 {
+        font-size: 1.5rem;
+      }
+      .keywords {
+        gap: 6px;
+      }
+    }
+  </style>
 </head>
 <body>
-<header class="nav">
-<div class="nav-inner">
-  <a aria-label="Sora Kim home" href="index.html" style="display:flex;align-items:center;gap:8px;">
-    <img alt="" aria-hidden="true" class="nav-icon" src="assets/favicon-light.png"/>
-    <span class="brand-name">Sora Kim</span>
-  </a>
-  <nav aria-label="Primary">
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="papers.html">Papers</a></li>
-      <li><a href="research.html">Research</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
-  <div class="nav-right">
-    <button aria-label="Toggle theme" class="theme-btn" id="themeBtn">
-      <svg aria-hidden="true" viewBox="0 0 24 24" style="pointer-events:none">
-        <path d="M12 3v2M12 19v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M3 12h2M19 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-        <circle cx="12" cy="12" r="4"></circle>
-      </svg>
-    </button>
-    <a class="cv-btn" href="assets/sora_kim_cv.pdf" rel="noopener" target="_blank">CV.pdf ↗</a>
-    <button aria-label="Toggle menu" class="hamburger" id="hamburgerBtn">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</div>
-</header>
 
-<nav aria-label="Mobile navigation" class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
-  <a href="projects.html">Projects</a>
-  <a href="papers.html">Papers</a>
-  <a href="research.html">Research</a>
-  <a href="about.html">About</a>
-  <div class="mobile-menu-cv"><a href="assets/sora_kim_cv.pdf" rel="noopener" target="_blank">CV.pdf ↗</a></div>
+<nav>
+  <a href="index.html" class="nav-name">🐚 Sora Kim</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="papers.html">Papers</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
 </nav>
 
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    toggle.textContent = '☀️';
+  } else if (saved === 'light') {
+    root.setAttribute('data-theme', 'light');
+    toggle.textContent = '🌙';
+  }
+
+  toggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      root.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+      toggle.textContent = '🌙';
+    } else {
+      root.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+      toggle.textContent = '☀️';
+    }
+  });
+</script>
+
 <main>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero-inner">
-        <div class="hero-copy reveal">
-          <div class="hero-eyebrow">HCI · STS · Accountability in Regulated Systems</div>
-          <h1 class="hero-h1">Responsibility converges under pressure.</h1>
-          <p class="hero-sub">
-            I study how <strong>responsibility converges in regulated systems</strong> and how documentation, workflow, and AI scaffolds shape which explanations remain visible before closure.
-          </p>
-          <div class="hero-actions">
-            <a class="btn-fill" href="projects.html">View projects</a>
-            <a class="btn-ghost" href="papers.html">Read papers</a>
-          </div>
-        </div>
-        <div class="hero-aside reveal">
-          <div class="portrait-frame">
-            <img alt="Portrait of Sora Kim" src="assets/sora-kim.jpg"/>
-          </div>
-          <div class="aside-claim">
-            Responsibility is not given — it is produced through system structure under constraint.
-          </div>
-        </div>
+
+  <div class="profile-row">
+    <img src="profile.jpg" alt="Sora Kim" class="profile-img">
+    <div class="profile-text">
+      <h1>Sora Kim</h1>
+      <p class="tagline">
+        Independent HCI researcher · Pharmaceutical GMP, South Korea<br>
+        PhD applicant, Fall 2027
+      </p>
+      <div class="social">
+        <a href="mailto:sorakim.lab@gmail.com">✉️ Email</a>
+        <a href="https://github.com/sorakim-lab" target="_blank">🐙 GitHub</a>
+        <a href="https://ssrn.com" target="_blank">📄 SSRN</a>
+        <a href="#">📎 CV</a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- METRICS strip -->
-  <section class="metrics">
-    <div class="wrap">
-      <div class="metrics-strip reveal">
-        <div class="metric-item">
-          <div class="metric-num">Research program</div>
-          <div class="metric-val">5 HCI papers · 5 STS foundations</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-num">Empirical basis</div>
-          <div class="metric-val">Prototype-based studies with GMP practitioners</div>
-        </div>
-        <div class="metric-item">
-          <div class="metric-num">Design contribution</div>
-          <div class="metric-val">5 prototype interventions across access, structure, coordination, and reasoning</div>
-        </div>
+  <p class="bio">
+    Hi! 👋 I'm Sora (소라 in Korean), an independent researcher grounded in four years of pharmaceutical GMP field experience.
+    I study <strong>Regulatory HCI</strong> — how compliance systems actively structure how practitioners interpret situations,
+    make decisions, and assign responsibility, often producing systematic patterns such as premature convergence.
+    My work designs interface and AI-based interventions that make these underlying structures visible,
+    expand the space of reasoning, and resist premature closure in high-stakes environments.
+  </p>
+
+  <div class="keywords">
+    <span class="kw">🏭 Regulated Environments</span>
+    <span class="kw">⚖️ Accountability</span>
+    <span class="kw">🤖 AI-Assisted Decision Making</span>
+    <span class="kw">🔍 Sociotechnical Systems</span>
+    <span class="kw">📋 GMP / Pharmaceutical</span>
+    <span class="kw">🧠 Judgment Preservation</span>
+    <span class="kw">🤝 Responsible AI</span>
+    <span class="kw">💬 Human-AI Interaction</span>
+  </div>
+
+  <p class="section-label">Selected Papers</p>
+
+  <div class="papers-list">
+
+    <div class="paper">
+      <div class="paper-cluster">HCI · AI · Regulated Environments</div>
+      <div class="paper-title">
+        <a href="#">Keeping Comparison Open: Interface Scaffolding Against Premature Accountability Convergence in Regulated Investigations</a>
+      </div>
+      <div class="paper-desc">
+        Reframes RCA failure as an HCI problem. Introduces AI as comparison enforcer — detecting premature closure and reopening the comparison space, rather than generating candidate explanations.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">⚖️ Premature convergence</span>
+        <span class="paper-kw">🤖 AI scaffolding</span>
+        <span class="paper-kw">🔬 Root cause analysis</span>
+        <span class="paper-kw">🏭 GMP</span>
+        <span class="paper-kw">🧠 Judgment preservation</span>
+        <span class="paper-kw">🤝 Responsible AI</span>
+        <span class="paper-kw">💬 Human-AI Interaction</span>
       </div>
     </div>
-  </section>
 
-  <!-- PROJECTS -->
-  <section class="projects">
-    <div class="wrap">
-      <div class="projects-head reveal">
-        <div>
-          <div class="section-label">Selected Projects</div>
-          <h2 class="section-title">Research Program</h2>
-        </div>
-        <a class="section-all" href="projects.html">All projects →</a>
+    <div class="paper">
+      <div class="paper-cluster">HCI · Framework</div>
+      <div class="paper-title">
+        <a href="#">How Regulated Systems Produce Responsibility: A Four-Layer Framework for Interaction Design</a>
       </div>
-
-      <a class="project-hero reveal" href="project-rca-reasoning-scaffolder.html">
-        <div class="project-hero-left">
-          <div class="project-num">01 — Featured</div>
-          <div class="project-title">Expanding Causal Reasoning under Closure Pressure</div>
-          <p class="project-desc">Closure pressure compresses the space of accountable interpretation before broader contributors can be compared — not because investigators reason poorly, but because investigation structure forecloses alternatives early.</p>
-        </div>
-        <div class="project-hero-right">
-          <div class="project-hero-stat">
-            N=20 · think-aloud protocol<br/>
-            18/20 broadened causal reasoning within 10 minutes<br/>
-            15/20 reconsidered initial attribution under scaffolded comparison<br/>
-            CHI 2027 full paper submission in preparation · CSCW 2026 poster under review
-          </div>
-          <div class="project-hero-claim">
-            Comparison collapse is structural — and AI scaffolds can intervene by preserving alternatives long enough for responsibility to settle less prematurely.
-          </div>
-        </div>
-      </a>
-
-      <div class="project-sub-list reveal" style="margin-top:2px">
-        <a class="project-sub" href="project-sop-accessibility.html">
-          <div class="project-num">02</div>
-          <div>
-            <div class="project-title">Procedural Visibility in SOP Navigation</div>
-            <div class="project-desc">Access shapes interpretation: reduced retrieval time (~6 min → ~1 min) while expanding the range of procedures considered actionable.</div>
-            <div class="tags">
-              <span class="tag tag-a">N=20 · Deployed</span>
-              <span class="tag tag-n">Streamlit</span>
-            </div>
-          </div>
-          <div class="project-arrow">→</div>
-        </a>
-        <a class="project-sub" href="project-cross-reference.html">
-          <div class="project-num">03</div>
-          <div>
-            <div class="project-title">Cross-Reference Burden and Traceability Visibility</div>
-            <div class="project-desc">Loopback behavior as a structural signal: navigation friction reflected missing or non-navigable document relationships rather than user error. Less experienced practitioners averaged 7–10 loopbacks vs. 2–3 for experienced — a design gap, not a training gap.</div>
-            <div class="tags">
-              <span class="tag tag-a">Task-based · Deployed</span>
-              <span class="tag tag-n">Streamlit</span>
-            </div>
-          </div>
-          <div class="project-arrow">→</div>
-        </a>
+      <div class="paper-desc">
+        Introduces Regulatory HCI as a framework that reframes regulated environments as interaction systems — grounded in four prototype-based empirical studies with N=20 GMP-experienced participants each.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">🗂️ Regulatory HCI</span>
+        <span class="paper-kw">🔍 Sociotechnical systems</span>
+        <span class="paper-kw">👁️ Invisible work</span>
+        <span class="paper-kw">📐 Design framework</span>
+        <span class="paper-kw">🏭 GMP</span>
+        <span class="paper-kw">🤝 Responsible AI</span>
       </div>
     </div>
-  </section>
 
-  <!-- PAPERS + RESEARCH -->
-  <section class="section">
-    <div class="wrap">
-      <div class="pr-grid">
-        <a class="pr-papers reveal" href="papers.html">
-          <div class="teaser-kicker">Papers</div>
-          <div class="teaser-h">HCI papers and STS foundations</div>
-          <p class="teaser-p">Five HCI papers and five STS foundations that together explain how responsibility converges, and how design can reopen interpretive space before closure.</p>
-          <div class="teaser-link">Go to papers →</div>
-        </a>
-        <a class="pr-research reveal" href="research.html">
-          <div class="teaser-kicker">Research</div>
-          <div class="teaser-h">How sociotechnical systems organize responsibility — and how AI can intervene</div>
-          <p class="teaser-p">STS theory explains why accountability narrows. HCI prototypes test how to reopen it.</p>
-          <div class="teaser-link">Go to research →</div>
-        </a>
+    <div class="paper">
+      <div class="paper-cluster">Computational · CSS</div>
+      <div class="paper-title">
+        <a href="#">Responsibility as a Multi-Layer Signal: A Unified Computational Framework for Accountability Concentration in Regulatory Investigations</a>
+      </div>
+      <div class="paper-desc">
+        Operationalizes accountability concentration across three representational layers — process, structural, and linguistic — integrated into a composite Responsibility Concentration Index.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">📊 Computational accountability</span>
+        <span class="paper-kw">📝 Regulatory NLP</span>
+        <span class="paper-kw">🕸️ Accountability graphs</span>
+        <span class="paper-kw">📄 FDA Warning Letters</span>
+        <span class="paper-kw">📈 Composite index</span>
+        <span class="paper-kw">🤝 Responsible AI</span>
       </div>
     </div>
-  </section>
 
-  <!-- ABOUT + CONTACT -->
-  <section class="section">
-    <div class="wrap">
-      <div class="bottom-grid">
-        <div class="about-card reveal">
-          <div class="section-label">About</div>
-          <div class="about-title">Why responsibility narrows too quickly in regulated work.</div>
-          <div class="about-body">Four years in pharmaceutical GMP quality systems shaped the core question: not whether regulation should be weakened, but why responsibility narrows so quickly — and how systems can stay rigorous while giving practitioners more room to compare competing explanations before closure hardens. This work is organized under the name <strong>Regulatory UX</strong> — a research program examining how system design produces accountability conditions in compliance-constrained environments.</div>
-        </div>
-        <div class="contact-card reveal">
-          <div class="section-label">Contact</div>
-          <div class="about-title">Get in touch</div>
-          <div class="contact-stack">
-            <a class="contact-row" href="mailto:sorakim.lab@gmail.com">
-              <span class="contact-kind">Email</span>
-              <span class="contact-val">sorakim.lab@gmail.com</span>
-            </a>
-            <a class="contact-row" href="research.html">
-              <span class="contact-kind">Focus</span>
-              <span class="contact-val">responsibility · regulated systems · AI scaffolds</span>
-            </a>
-            <a class="contact-row" href="assets/sora_kim_cv.pdf" rel="noopener" target="_blank">
-              <span class="contact-kind">CV</span>
-              <span class="contact-val">open pdf ↗</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
+
+  <a href="papers.html" class="see-all">All papers →</a>
+
 </main>
 
 <footer>
-  <div class="wrap">
-    <div class="footer-inner">
-      <span>Sora Kim</span>
-      <span><a href="papers.html">Papers</a> · <a href="projects.html">Projects</a> · <a href="research.html">Research</a></span>
-    </div>
-  </div>
+  © 2026 Sora Kim · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
 </footer>
 
-<script>
-(function(){
-  var root=document.documentElement;
-  var themeBtn=document.getElementById('themeBtn');
-  var hamburgerBtn=document.getElementById('hamburgerBtn');
-  var mobileMenu=document.getElementById('mobileMenu');
-  try{
-    var saved=localStorage.getItem('theme');
-    if(saved==='dark') root.classList.add('dark');
-    else if(saved==='light') root.classList.remove('dark');
-    else if(window.matchMedia('(prefers-color-scheme: dark)').matches) root.classList.add('dark');
-  }catch(e){}
-  if(themeBtn){
-    themeBtn.addEventListener('click',function(){
-      root.classList.toggle('dark');
-      try{localStorage.setItem('theme',root.classList.contains('dark')?'dark':'light');}catch(e){}
-    });
-  }
-  if(hamburgerBtn&&mobileMenu){
-    hamburgerBtn.addEventListener('click',function(){
-      hamburgerBtn.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-      document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';
-    });
-    mobileMenu.querySelectorAll('a').forEach(function(link){
-      link.addEventListener('click',function(){
-        hamburgerBtn.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow='';
-      });
-    });
-  }
-  document.body.classList.add('js-ready');
-  var reveals=document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window){
-    var observer=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){e.target.classList.add('on');observer.unobserve(e.target);}
-      });
-    },{threshold:0,rootMargin:'0px 0px -20px 0px'});
-    reveals.forEach(function(el){observer.observe(el);});
-  }else{
-    reveals.forEach(function(el){el.classList.add('on');});
-  }
-  setTimeout(function(){
-    reveals.forEach(function(el){
-      var r=el.getBoundingClientRect();
-      if(r.top<window.innerHeight){el.classList.add('on');}
-    });
-  },100);
-})();
-</script>
 </body>
 </html>
