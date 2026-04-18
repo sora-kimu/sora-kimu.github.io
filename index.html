@@ -17,6 +17,7 @@
       --border: #e5e5e5;
       --surface: #fafafa;
       --blue: #2563EB;
+      --accent: #7c3aed;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -28,6 +29,7 @@
         --border: #2a2a2a;
         --surface: #1a1a1a;
         --blue: #60a5fa;
+        --accent: #a78bfa;
       }
     }
 
@@ -39,6 +41,7 @@
       --border: #2a2a2a;
       --surface: #1a1a1a;
       --blue: #60a5fa;
+      --accent: #a78bfa;
     }
 
     [data-theme="light"] {
@@ -49,6 +52,7 @@
       --border: #e5e5e5;
       --surface: #fafafa;
       --blue: #2563EB;
+      --accent: #7c3aed;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -179,6 +183,19 @@
 
     .social a:hover { text-decoration: underline; }
 
+    /* THESIS TAG */
+    .thesis {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 24px;
+      padding: 12px 16px;
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      line-height: 1.5;
+    }
+
     /* BIO */
     .bio {
       font-size: 1rem;
@@ -217,6 +234,19 @@
       text-transform: uppercase;
       color: var(--text-light);
       margin-bottom: 20px;
+      margin-top: 48px;
+    }
+
+    .section-label:first-of-type {
+      margin-top: 0;
+    }
+
+    .section-intro {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.7;
+      font-style: italic;
     }
 
     /* PAPERS */
@@ -235,6 +265,10 @@
       margin-bottom: 6px;
     }
 
+    .paper-cluster.under-review {
+      color: var(--accent);
+    }
+
     .paper-title {
       font-size: 0.97rem;
       font-weight: 600;
@@ -244,6 +278,18 @@
 
     .paper-title a { color: var(--text); text-decoration: none; }
     .paper-title a:hover { color: var(--blue); }
+
+    .paper-venue {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .paper-venue .status {
+      color: var(--accent);
+      font-weight: 500;
+    }
 
     .paper-desc {
       font-size: 0.87rem;
@@ -266,6 +312,52 @@
       color: var(--text-light);
       background: var(--surface);
     }
+
+    /* DEPLOYED TOOLS */
+    .tool {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tool:first-of-type { border-top: 1px solid var(--border); }
+
+    .tool-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tool-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .tool-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-light);
+      letter-spacing: 0.04em;
+    }
+
+    .tool-desc {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 8px;
+    }
+
+    .tool-paper-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .tool-paper-link:hover { text-decoration: underline; }
 
     .see-all {
       display: inline-block;
@@ -323,6 +415,10 @@
       .keywords {
         gap: 6px;
       }
+      .tool-header {
+        flex-direction: column;
+        gap: 4px;
+      }
     }
   </style>
 </head>
@@ -333,6 +429,7 @@
   <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="papers.html">Papers</a></li>
+    <li><a href="tools.html">Tools</a></li>
     <li><a href="about.html">About</a></li>
   </ul>
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
@@ -368,104 +465,409 @@
 <main>
 
   <div class="profile-row">
-<img src="crop_trial.jpg" alt="Sora Kim" class="profile-img">
+    <img src="crop_trial.jpg" alt="Sora Kim" class="profile-img">
     <div class="profile-text">
       <h1>Sora Kim</h1>
       <p class="tagline">
-        Independent HCI researcher · Pharmaceutical GMP, South Korea<br>
+        Independent researcher · Pharmaceutical GMP, South Korea<br>
         PhD applicant, Fall 2027
       </p>
       <div class="social">
         <a href="mailto:sorakim.lab@gmail.com">✉️ Email</a>
         <a href="https://github.com/sorakim-lab" target="_blank">🐙 GitHub</a>
-        <a href="https://ssrn.com" target="_blank">📄 SSRN</a>
+        <a href="https://ssrn.com/author=10648616" target="_blank">📄 SSRN</a>
         <a href="SorakimCV.pdf">📎 CV</a>
       </div>
     </div>
   </div>
 
+  <div class="thesis">
+    ▸ Responsibility is produced, not assigned.
+  </div>
+
   <p class="bio">
-    Hi! 👋 I'm Sora (소라 in Korean), an independent researcher grounded in four years of pharmaceutical Good Manufacturing Practices (GMP) field experience.
-    I study <strong>Regulatory HCI</strong> — how compliance systems actively structure how practitioners interpret situations,
-    make decisions, and assign responsibility, often producing systematic patterns such as premature convergence.
-    My work designs interface and AI-based interventions that make these underlying structures visible,
-    expand the space of reasoning, and resist premature closure in high-stakes environments.
+    Hi! 👋 I'm Sora (소라 in Korean), an independent researcher developing <strong>Accountability-Aware AI</strong> —
+    a research program at the intersection of Science &amp; Technology Studies, Human-Computer Interaction,
+    and organizational technology adoption. Drawing on four years of embedded practice in pharmaceutical
+    Good Manufacturing Practice (GMP) quality control, I study how regulated organizations structure
+    responsibility <em>before</em> failures occur, and how AI systems reshape what can be known and attributed.
+    My work spans <strong>14+ papers</strong> and <strong>8 production tools</strong> serving 50+ users at a GMP-regulated manufacturing site.
   </p>
 
   <div class="keywords">
-    <span class="kw">🏭 Regulated Environments</span>
-    <span class="kw">⚖️ Accountability</span>
-    <span class="kw">🤖 AI-Assisted Decision Making</span>
+    <span class="kw">⚖️ Accountability Infrastructure</span>
+    <span class="kw">🤖 Accountability-Aware AI</span>
     <span class="kw">🔍 Sociotechnical Systems</span>
+    <span class="kw">🏭 Regulated Environments</span>
     <span class="kw">📋 GMP / Pharmaceutical</span>
     <span class="kw">🧠 Judgment Preservation</span>
     <span class="kw">🤝 Responsible AI</span>
     <span class="kw">💬 Human-AI Interaction</span>
   </div>
 
-  <p class="section-label">Selected Papers</p>
+  <!-- UNDER REVIEW -->
+  <p class="section-label">Under Review</p>
+  <p class="section-intro">
+    A four-paper lifecycle theory of accountability in regulated organizations: pre-action structuring (AAC),
+    procedural document infrastructure (CF), investigative convergence (RC), and AI-accelerated closure (PAC).
+  </p>
 
   <div class="papers-list">
 
     <div class="paper">
-      <div class="paper-cluster">HCI · AI · Regulated Environments</div>
+      <div class="paper-cluster under-review">STS · Organizational Theory</div>
       <div class="paper-title">
-        <a href="kim_scaffolder_2026_v2.0.pdf">Keeping Comparison Open: Interface Scaffolding Against Premature Accountability Convergence in Regulated Investigations</a>
+        <a href="https://ssrn.com/abstract=6371980" target="_blank">Accountability Before Action: How Organizations Structure Responsibility in Advance of Outcomes</a>
       </div>
+      <div class="paper-venue">Under review · <span class="status">Academy of Management Review</span> (AMR-2026-0516)</div>
       <div class="paper-desc">
-        Reframes Root Cause Analysis (RCA) failure as an HCI problem. Introduces AI as comparison enforcer — detecting premature closure and reopening the comparison space, rather than generating candidate explanations.
+        Introduces "Accountability Before Action" (AAC) as the pre-failure structuring of responsibility through procedural
+        routines, documentation regimes, and evaluative anticipation. Draws on Garfinkel, Latour, and Star &amp; Ruhleder.
       </div>
       <div class="paper-keywords">
-        <span class="paper-kw">⚖️ Premature convergence</span>
-        <span class="paper-kw">🤖 AI scaffolding</span>
-        <span class="paper-kw">🔬 Root cause analysis</span>
-        <span class="paper-kw">🏭 GMP</span>
-        <span class="paper-kw">🧠 Judgment preservation</span>
-        <span class="paper-kw">🤝 Responsible AI</span>
-        <span class="paper-kw">💬 Human-AI Interaction</span>
+        <span class="paper-kw">⚖️ AAC</span>
+        <span class="paper-kw">🔍 Infrastructure studies</span>
+        <span class="paper-kw">📐 Organizational theory</span>
       </div>
     </div>
 
     <div class="paper">
-      <div class="paper-cluster">HCI · Framework · Regulated Environments</div>
+      <div class="paper-cluster under-review">STS · Document Infrastructure</div>
       <div class="paper-title">
-        <a href="kim_regulatoryHCI_2026_v2.0.pdf">How Regulated Systems Produce Responsibility: A Four-Layer Framework for Interaction Design</a>
+        <a href="https://ssrn.com/abstract=6391278" target="_blank">Cognitive Friction: Procedural Documents as Accountability Infrastructure in Regulated Organizations</a>
       </div>
+      <div class="paper-venue">Under review · <span class="status">Organization</span> (ORG-26-0241)</div>
       <div class="paper-desc">
-        Introduces Regulatory HCI as a framework that reframes regulated environments as interaction systems — grounded in four prototype-based empirical studies with N=20 GMP-experienced participants each.
+        Operationalizes cognitive friction at sentence level across a 400-sentence corpus from regulated procedural documents.
+        Reframes document friction as accountability infrastructure rather than cognitive burden.
       </div>
       <div class="paper-keywords">
-        <span class="paper-kw">🗂️ Regulatory HCI</span>
-        <span class="paper-kw">🔍 Sociotechnical systems</span>
-        <span class="paper-kw">👁️ Invisible work</span>
-        <span class="paper-kw">📐 Design framework</span>
-        <span class="paper-kw">🏭 GMP</span>
-        <span class="paper-kw">🤝 Responsible AI</span>
+        <span class="paper-kw">📄 Cognitive Friction</span>
+        <span class="paper-kw">🔍 Document infrastructure</span>
+        <span class="paper-kw">📊 Corpus analysis</span>
       </div>
     </div>
 
     <div class="paper">
-      <div class="paper-cluster">Computational Methods</div>
+      <div class="paper-cluster under-review">STS · Investigative Systems</div>
       <div class="paper-title">
-        <a href="kim_umbrella_2026.pdf">Responsibility as a Multi-Layer Signal: A Unified Computational Framework for Accountability Convergence in Regulatory Investigations</a>
+        <a href="https://ssrn.com/abstract=6372301" target="_blank">Responsibility Convergence: How Investigative Systems Stabilize Attribution</a>
       </div>
+      <div class="paper-venue">Under review · <span class="status">Organization Science</span> (ORSC-MS-2026-22511)</div>
       <div class="paper-desc">
-        Operationalizes accountability convergence across three representational layers — process, structural, and linguistic — integrated into a composite Responsibility Convergence Index.
+        Identifies three mechanisms through which investigative systems converge on firm-level attribution:
+        ambiguity resolution, closure pressure, and legibility bias. Empirical anchor: 159/160 FDA Warning Letters converge on firm.
       </div>
       <div class="paper-keywords">
-        <span class="paper-kw">📊 Computational accountability</span>
-        <span class="paper-kw">📝 Regulatory NLP</span>
-        <span class="paper-kw">🕸️ Accountability graphs</span>
+        <span class="paper-kw">⚖️ Responsibility Convergence</span>
         <span class="paper-kw">📄 FDA Warning Letters</span>
-        <span class="paper-kw">🏭 GMP</span>
-        <span class="paper-kw">📈 Composite index</span>
-        <span class="paper-kw">🤝 Responsible AI</span>
+        <span class="paper-kw">🔍 Attribution</span>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="paper-cluster under-review">STS · AI &amp; Technology</div>
+      <div class="paper-title">
+        <a href="https://ssrn.com/abstract=6391379" target="_blank">Premature Accountability Convergence: How Technology Accelerates Responsibility Stabilization in Organizations</a>
+      </div>
+      <div class="paper-venue">Under review · <span class="status">Information and Organization</span> (INFORG-D-26-00222)</div>
+      <div class="paper-desc">
+        Reframes AI's role from "acceleration" to "earlier institutional closure of interpretive possibility."
+        Identifies three mechanisms: representational compression, epistemic authority amplification, and temporal contraction.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">🤖 AI accountability</span>
+        <span class="paper-kw">⏱️ Temporal closure</span>
+        <span class="paper-kw">🏭 Sociomateriality</span>
       </div>
     </div>
 
   </div>
 
-  <a href="papers.html" class="see-all">All papers →</a>
+  <!-- HCI PAPERS -->
+  <p class="section-label">HCI &amp; Design Research</p>
+  <p class="section-intro">
+    Five HCI papers on judgment-preserving design in regulated work, each tied to a deployed production tool.
+    Together they articulate a four-layer framework for accountability infrastructure design.
+  </p>
+
+  <div class="papers-list">
+
+    <div class="paper">
+      <div class="paper-cluster">HCI · Framework · TOCHI</div>
+      <div class="paper-title">
+        <a href="#" target="_blank">Accountability Infrastructure Design: A Four-Layer Framework for Judgment-Preserving Systems in Regulated Work</a>
+      </div>
+      <div class="paper-venue">In preparation · <span class="status">ACM TOCHI</span></div>
+      <div class="paper-desc">
+        Umbrella paper. Introduces a four-layer framework (accessibility, structure, coordination, reasoning)
+        and three design principles: upstream stabilization, observability over optimization, and judgment preservation.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">🗂️ Four-layer framework</span>
+        <span class="paper-kw">🧠 Judgment preservation</span>
+        <span class="paper-kw">📐 Design principles</span>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="paper-cluster">HCI · AI Scaffolding · CSCW 2027</div>
+      <div class="paper-title">
+        <a href="#" target="_blank">Keeping Comparison Open: An RCA Scaffolder for Preserving Interpretive Alternatives in Regulated Investigations</a>
+      </div>
+      <div class="paper-venue">In preparation · <span class="status">CSCW 2027</span></div>
+      <div class="paper-desc">
+        Introduces AI as <em>comparison enforcer</em> — detecting premature closure and reopening the comparison space,
+        rather than generating candidate explanations. N=20 user study.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">🤖 AI scaffolding</span>
+        <span class="paper-kw">🔬 Root cause analysis</span>
+        <span class="paper-kw">⚖️ Premature convergence</span>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="paper-cluster">HCI · Document Review</div>
+      <div class="paper-title">
+        <a href="#" target="_blank">Friction Before Failure: Dissociating Procedural Legibility from Procedural Endorsement</a>
+      </div>
+      <div class="paper-venue">Working paper · SSRN</div>
+      <div class="paper-desc">
+        Dissociation finding: immediate legibility ≠ endorsement. Checklist supports immediate comprehension (5.0);
+        TF-IDF supports conceptual orientation (5.0) — but through distinct cognitive pathways.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">🔍 Document friction</span>
+        <span class="paper-kw">🧠 Dissociation</span>
+        <span class="paper-kw">📋 CAPA review</span>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="paper-cluster">HCI · AI-Assisted Retrieval</div>
+      <div class="paper-title">
+        <a href="#" target="_blank">From Retrieval to Reasoning: AI-Assisted SOP Access and the Shape of Interpretive Action</a>
+      </div>
+      <div class="paper-venue">Working paper · SSRN</div>
+      <div class="paper-desc">
+        Extends SOP accessibility from retrieval problem to interpretive condition. AI layer functions to
+        EXPLAIN, SURFACE, and KEEP interpretive alternatives rather than resolve them.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">🤖 AI-assisted retrieval</span>
+        <span class="paper-kw">📋 SOP</span>
+        <span class="paper-kw">🧠 Interpretive action</span>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="paper-cluster">HCI · Cross-Document Coordination</div>
+      <div class="paper-title">
+        <a href="#" target="_blank">When Documents Don't Connect: The Human as Missing Infrastructure in Regulated Document Systems</a>
+      </div>
+      <div class="paper-venue">Working paper · SSRN</div>
+      <div class="paper-desc">
+        Identifies the human as "missing infrastructure" in cross-document accountability gaps.
+        Loopback as method. Star &amp; Ruhleder lineage.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">👁️ Invisible work</span>
+        <span class="paper-kw">🔗 Cross-doc coordination</span>
+        <span class="paper-kw">🏭 Infrastructure gaps</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- COMPUTATIONAL PAPERS -->
+  <p class="section-label">Computational Research</p>
+  <p class="section-intro">
+    A computational research program operationalizing accountability across four signal layers
+    (detection, graph structure, attribution, distribution), applied to FDA Warning Letters.
+  </p>
+
+  <div class="papers-list">
+
+    <div class="paper">
+      <div class="paper-cluster">Computational · Umbrella</div>
+      <div class="paper-title">
+        <a href="#" target="_blank">Responsibility as Multi-Layer Signal: A Computational Framework for FDA Warning Letters</a>
+      </div>
+      <div class="paper-venue">Working paper · SSRN · <span class="status">Umbrella</span></div>
+      <div class="paper-desc">
+        Integrates PAC detection (F1 0.901–0.913), Accountability Graph Extraction (star topology, Firm in-degree 0.444),
+        Attribution Prediction (LR F1=0.725), and RDM (PCA+Ridge, w_ps=0.995) into a unified framework.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">📊 Computational accountability</span>
+        <span class="paper-kw">📄 FDA Warning Letters</span>
+        <span class="paper-kw">🕸️ Multi-layer signal</span>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="paper-cluster">Computational · NLP</div>
+      <div class="paper-title">
+        <a href="https://github.com/sorakim-lab/premature-convergence-detection" target="_blank">Premature Convergence Detection in Regulatory Investigative Texts</a>
+      </div>
+      <div class="paper-venue">Working paper · <span class="status">GitHub</span></div>
+      <div class="paper-desc">
+        Detects structural pre-convergence in FDA Warning Letters — firm-level attribution stabilizes
+        <em>before</em> investigative reasoning is complete. F1 0.901–0.913.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">📝 Regulatory NLP</span>
+        <span class="paper-kw">⚖️ Convergence detection</span>
+        <span class="paper-kw">🧪 Classification</span>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="paper-cluster">Computational · Graph</div>
+      <div class="paper-title">
+        <a href="#" target="_blank">Accountability Graph Extraction from Regulatory Texts</a>
+      </div>
+      <div class="paper-venue">Working paper · SSRN</div>
+      <div class="paper-desc">
+        Extracts accountability graphs from FDA Warning Letters. Reveals star topology centered on "Firm"
+        (in-degree 0.444) as structural pattern.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">🕸️ Graph extraction</span>
+        <span class="paper-kw">📊 Network analysis</span>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="paper-cluster">Computational · Classification</div>
+      <div class="paper-title">
+        <a href="#" target="_blank">Responsibility Attribution Prediction: A Classification Approach to FDA Warning Letters</a>
+      </div>
+      <div class="paper-venue">Working paper · SSRN</div>
+      <div class="paper-desc">
+        Classification approach to attribution: Individual AUC=0.940; LR F1=0.725.
+        30.6% of cases reassigned from Firm to System when model-corrected.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">🧪 ML classification</span>
+        <span class="paper-kw">⚖️ Attribution</span>
+      </div>
+    </div>
+
+    <div class="paper">
+      <div class="paper-cluster">Computational · Metric</div>
+      <div class="paper-title">
+        <a href="#" target="_blank">Responsibility Distribution Metric: An Entropy-Centrality Approach to Accountability Structure</a>
+      </div>
+      <div class="paper-venue">Working paper · SSRN</div>
+      <div class="paper-desc">
+        Composite metric combining entropy and centrality. PCA+Ridge produces w_ps=0.995.
+        Cross-framework convergence with other three papers around WL2018-05.
+      </div>
+      <div class="paper-keywords">
+        <span class="paper-kw">📈 Composite metric</span>
+        <span class="paper-kw">🕸️ Entropy + centrality</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DEPLOYED SYSTEMS -->
+  <p class="section-label">Deployed Systems</p>
+  <p class="section-intro">
+    Production tools designed and deployed at a GMP-regulated pharmaceutical manufacturing site.
+    All systems operate as unvalidated productivity layers external to validated GMP systems,
+    with team lead awareness and support. These systems constitute the empirical substrate for the HCI papers above.
+  </p>
+
+  <div class="tools-list">
+
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-name">📊 QC Stability Dashboard</div>
+        <div class="tool-meta">53 active users · ongoing</div>
+      </div>
+      <div class="tool-desc">
+        Deadline-tracking interface for stability testing programs. Surfaces 25-day deadline windows and workload bottlenecks.
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-name">🔍 SOP Retrieval System</div>
+        <div class="tool-meta">→ Paper: From Retrieval to Reasoning</div>
+      </div>
+      <div class="tool-desc">
+        Semantic search tool for GMP procedural documents. Foundation for the HCI paper on AI-assisted SOP access
+        and interpretive action.
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-name">🔗 Document Navigation Tool</div>
+        <div class="tool-meta">→ Paper: When Documents Don't Connect</div>
+      </div>
+      <div class="tool-desc">
+        Cross-document linking interface for regulated quality documentation. Reveals the human as missing infrastructure
+        in cross-document coordination.
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-name">📋 Review Dashboard</div>
+        <div class="tool-meta">→ Paper: Friction Before Failure</div>
+      </div>
+      <div class="tool-desc">
+        Prioritized document review interface surfacing procedural friction before formal deviation.
+        Basis for the dissociation finding between legibility and endorsement.
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-name">🔬 RCA Scaffolder</div>
+        <div class="tool-meta">→ Paper: Keeping Comparison Open</div>
+      </div>
+      <div class="tool-desc">
+        Investigative scaffold that preserves analyst judgment while structuring causal reasoning.
+        AI functions as comparison enforcer, not explanation generator.
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-name">📝 Veeva Vault Change Control Assistant</div>
+        <div class="tool-meta">Production</div>
+      </div>
+      <div class="tool-desc">
+        Workflow support for electronic change control submissions through Veeva Vault QMS.
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-name">🧪 Reagent Inventory &amp; Expiry Tool</div>
+        <div class="tool-meta">Production</div>
+      </div>
+      <div class="tool-desc">
+        Automated expiry tracking and inventory alerts for QC reagents. Prevents deviations from expired materials.
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-header">
+        <div class="tool-name">🤖 Document Auto-Review AI</div>
+        <div class="tool-meta">Production</div>
+      </div>
+      <div class="tool-desc">
+        Format and compliance pre-check for procedural documents. Flags formatting issues before formal review.
+      </div>
+    </div>
+
+  </div>
 
 </main>
 
