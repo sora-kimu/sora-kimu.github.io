@@ -16,8 +16,14 @@
       --text-light: #888888;
       --border: #e5e5e5;
       --surface: #fafafa;
+      --surface-hover: #f0f0f0;
       --blue: #2563EB;
       --accent: #7c3aed;
+      --warning: #dc2626;
+      --layer-1: #dbeafe;
+      --layer-2: #ddd6fe;
+      --layer-3: #fbcfe8;
+      --layer-4: #fed7aa;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -28,8 +34,14 @@
         --text-light: #666666;
         --border: #2a2a2a;
         --surface: #1a1a1a;
+        --surface-hover: #242424;
         --blue: #60a5fa;
         --accent: #a78bfa;
+        --warning: #f87171;
+        --layer-1: #1e3a5f;
+        --layer-2: #3b2f6b;
+        --layer-3: #5f2a4a;
+        --layer-4: #5f3a1a;
       }
     }
 
@@ -40,8 +52,14 @@
       --text-light: #666666;
       --border: #2a2a2a;
       --surface: #1a1a1a;
+      --surface-hover: #242424;
       --blue: #60a5fa;
       --accent: #a78bfa;
+      --warning: #f87171;
+      --layer-1: #1e3a5f;
+      --layer-2: #3b2f6b;
+      --layer-3: #5f2a4a;
+      --layer-4: #5f3a1a;
     }
 
     [data-theme="light"] {
@@ -51,8 +69,14 @@
       --text-light: #888888;
       --border: #e5e5e5;
       --surface: #fafafa;
+      --surface-hover: #f0f0f0;
       --blue: #2563EB;
       --accent: #7c3aed;
+      --warning: #dc2626;
+      --layer-1: #dbeafe;
+      --layer-2: #ddd6fe;
+      --layer-3: #fbcfe8;
+      --layer-4: #fed7aa;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -76,7 +100,7 @@
       position: sticky;
       top: 0;
       background: var(--bg);
-      z-index: 10;
+      z-index: 100;
     }
 
     .nav-name {
@@ -127,7 +151,7 @@
 
     /* MAIN */
     main {
-      max-width: 720px;
+      max-width: 780px;
       margin: 0 auto;
       padding: 52px 32px 72px;
     }
@@ -146,7 +170,6 @@
       border-radius: 50%;
       object-fit: cover;
       flex-shrink: 0;
-      margin-top: 0;
       object-position: top center;
     }
 
@@ -233,20 +256,527 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--text-light);
-      margin-bottom: 20px;
-      margin-top: 48px;
+      margin-bottom: 16px;
+      margin-top: 56px;
     }
 
     .section-label:first-of-type {
       margin-top: 0;
     }
 
-    .section-intro {
+    .section-desc {
       font-size: 0.9rem;
       color: var(--text-muted);
       margin-bottom: 24px;
       line-height: 1.7;
-      font-style: italic;
+    }
+
+    /* ========================================
+       LIFECYCLE DIAGRAM (with animation)
+       ======================================== */
+    .lifecycle {
+      margin-bottom: 24px;
+      padding: 28px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .lifecycle-stages {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .lifecycle-stage {
+      padding: 14px 10px;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .lifecycle-stage:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(124, 58, 237, 0.2);
+    }
+
+    .lifecycle-stage.active {
+      border-color: var(--accent);
+      background: var(--surface-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(124, 58, 237, 0.25);
+    }
+
+    .lifecycle-stage.pulse {
+      animation: pulse 0.6s ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translateY(-3px) scale(1); }
+      50% { transform: translateY(-3px) scale(1.05); }
+    }
+
+    .lifecycle-stage-code {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      margin-bottom: 4px;
+      letter-spacing: 0.06em;
+    }
+
+    .lifecycle-stage-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .lifecycle-arrow {
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: var(--text-light);
+      z-index: 1;
+      pointer-events: none;
+      transition: color 0.3s;
+    }
+
+    .lifecycle-stage.active .lifecycle-arrow,
+    .lifecycle-stage:hover .lifecycle-arrow {
+      color: var(--accent);
+    }
+
+    .lifecycle-detail {
+      padding: 18px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      min-height: 140px;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .lifecycle-detail .stage-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .lifecycle-detail .stage-venue {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .lifecycle-detail a {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .lifecycle-detail a:hover { text-decoration: underline; }
+
+    /* ========================================
+       FOUR-LAYER FRAMEWORK (with animation)
+       ======================================== */
+    .four-layer {
+      margin-bottom: 24px;
+      padding: 28px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .layer-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+
+    .layer {
+      padding: 16px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .layer::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background: var(--accent);
+      transition: width 0.3s;
+      opacity: 0;
+    }
+
+    .layer:hover::before,
+    .layer.active::before {
+      width: 4px;
+      opacity: 1;
+    }
+
+    .layer:hover {
+      transform: translateX(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .layer.active {
+      transform: translateX(8px);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+    }
+
+    .layer-4 { background: var(--layer-4); }
+    .layer-3 { background: var(--layer-3); }
+    .layer-2 { background: var(--layer-2); }
+    .layer-1 { background: var(--layer-1); }
+
+    .layer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .layer-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .layer-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .layer-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    .layer-detail {
+      padding: 18px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      min-height: 140px;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .layer-detail .detail-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .layer-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .layer-detail-col strong {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text-light);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .layer-detail .detail-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--blue);
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 12px;
+    }
+
+    .layer-detail .detail-link:hover { text-decoration: underline; }
+
+    /* ========================================
+       PAPERS ↔ TOOLS MAPPING with SVG lines
+       ======================================== */
+    .mapping {
+      margin-bottom: 24px;
+      padding: 28px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .mapping-container {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 8px;
+      align-items: start;
+      position: relative;
+    }
+
+    .mapping-col-header {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .mapping-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mapping-item {
+      padding: 10px 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      line-height: 1.4;
+    }
+
+    .mapping-item:hover {
+      border-color: var(--accent);
+      transform: scale(1.02);
+    }
+
+    .mapping-item.highlighted {
+      border-color: var(--accent);
+      background: var(--surface-hover);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+      transform: scale(1.02);
+    }
+
+    .mapping-item.dimmed {
+      opacity: 0.25;
+      transform: scale(0.98);
+    }
+
+    .mapping-svg {
+      position: absolute;
+      top: 30px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .mapping-line {
+      fill: none;
+      stroke: var(--border);
+      stroke-width: 1.5;
+      transition: all 0.3s;
+    }
+
+    .mapping-line.active {
+      stroke: var(--accent);
+      stroke-width: 2.5;
+      filter: drop-shadow(0 2px 4px rgba(124, 58, 237, 0.3));
+    }
+
+    /* ========================================
+       FDA NETWORK VISUALIZATION
+       ======================================== */
+    .fda-network {
+      margin-bottom: 24px;
+      padding: 28px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .fda-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .fda-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--bg);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+
+    .fda-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .fda-btn.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .fda-svg-container {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    .fda-svg {
+      width: 100%;
+      height: 380px;
+      display: block;
+    }
+
+    .fda-node-circle {
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .fda-node-circle:hover {
+      filter: brightness(1.1);
+    }
+
+    .fda-node-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      fill: var(--text);
+      pointer-events: none;
+      text-anchor: middle;
+    }
+
+    .fda-edge {
+      stroke: var(--border);
+      stroke-width: 1;
+      fill: none;
+      transition: all 0.3s;
+    }
+
+    .fda-edge.active {
+      stroke: var(--accent);
+      stroke-width: 2;
+    }
+
+    .fda-edge.outlier {
+      stroke: var(--warning);
+      stroke-width: 2;
+      stroke-dasharray: 4 2;
+    }
+
+    .fda-info {
+      margin-top: 16px;
+      padding: 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      min-height: 60px;
+    }
+
+    .fda-info strong { color: var(--text); }
+
+    .fda-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .fda-stat {
+      padding: 10px;
+      background: var(--surface);
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .fda-stat-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .fda-stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text-light);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .fda-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .fda-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .fda-legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
     }
 
     /* PAPERS */
@@ -265,9 +795,7 @@
       margin-bottom: 6px;
     }
 
-    .paper-cluster.under-review {
-      color: var(--accent);
-    }
+    .paper-cluster.under-review { color: var(--accent); }
 
     .paper-title {
       font-size: 0.97rem;
@@ -286,10 +814,7 @@
       font-family: 'DM Mono', monospace;
     }
 
-    .paper-venue .status {
-      color: var(--accent);
-      font-weight: 500;
-    }
+    .paper-venue .status { color: var(--accent); font-weight: 500; }
 
     .paper-desc {
       font-size: 0.87rem;
@@ -298,11 +823,7 @@
       margin-bottom: 10px;
     }
 
-    .paper-keywords {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .paper-keywords { display: flex; flex-wrap: wrap; gap: 6px; }
 
     .paper-kw {
       font-size: 11px;
@@ -312,52 +833,6 @@
       color: var(--text-light);
       background: var(--surface);
     }
-
-    /* DEPLOYED TOOLS */
-    .tool {
-      padding: 18px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .tool:first-of-type { border-top: 1px solid var(--border); }
-
-    .tool-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 6px;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .tool-name {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .tool-meta {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--text-light);
-      letter-spacing: 0.04em;
-    }
-
-    .tool-desc {
-      font-size: 0.87rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-      margin-bottom: 8px;
-    }
-
-    .tool-paper-link {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--blue);
-      text-decoration: none;
-    }
-
-    .tool-paper-link:hover { text-decoration: underline; }
 
     .see-all {
       display: inline-block;
@@ -370,7 +845,6 @@
 
     .see-all:hover { text-decoration: underline; }
 
-    /* FOOTER */
     footer {
       border-top: 1px solid var(--border);
       text-align: center;
@@ -384,16 +858,10 @@
     footer a:hover { color: var(--blue); }
 
     /* MOBILE */
-    @media (max-width: 600px) {
-      nav {
-        padding: 14px 20px;
-      }
-      .nav-links {
-        gap: 18px;
-      }
-      main {
-        padding: 32px 20px 56px;
-      }
+    @media (max-width: 700px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 18px; }
+      main { padding: 32px 20px 56px; }
       .profile-row {
         flex-direction: column;
         align-items: center;
@@ -401,24 +869,16 @@
         gap: 20px;
         margin-bottom: 22px;
       }
-      .profile-img {
-        width: 136px;
-        height: 136px;
-        margin-top: 0;
-      }
-      .social {
-        justify-content: center;
-      }
-      .profile-text h1 {
-        font-size: 1.5rem;
-      }
-      .keywords {
-        gap: 6px;
-      }
-      .tool-header {
-        flex-direction: column;
-        gap: 4px;
-      }
+      .profile-img { width: 136px; height: 136px; }
+      .social { justify-content: center; }
+      .profile-text h1 { font-size: 1.5rem; }
+      .keywords { gap: 6px; }
+      .lifecycle-stages { grid-template-columns: repeat(2, 1fr); }
+      .lifecycle-arrow { display: none; }
+      .mapping-container { grid-template-columns: 1fr; }
+      .mapping-svg { display: none; }
+      .layer-detail-grid { grid-template-columns: 1fr; }
+      .fda-stats { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -438,7 +898,6 @@
 <script>
   const toggle = document.getElementById('themeToggle');
   const root = document.documentElement;
-
   const saved = localStorage.getItem('theme');
   if (saved === 'dark') {
     root.setAttribute('data-theme', 'dark');
@@ -447,7 +906,6 @@
     root.setAttribute('data-theme', 'light');
     toggle.textContent = '🌙';
   }
-
   toggle.addEventListener('click', () => {
     const isDark = root.getAttribute('data-theme') === 'dark';
     if (isDark) {
@@ -505,75 +963,187 @@
     <span class="kw">💬 Human-AI Interaction</span>
   </div>
 
-  <!-- UNDER REVIEW -->
-  <p class="section-label">Under Review</p>
-  <p class="section-intro">
-    A four-paper lifecycle theory of accountability in regulated organizations: pre-action structuring (AAC),
-    procedural document infrastructure (CF), investigative convergence (RC), and AI-accelerated closure (PAC).
+  <!-- LIFECYCLE -->
+  <p class="section-label">Theoretical Program — The Accountability Lifecycle</p>
+  <p class="section-desc">
+    A four-stage theory of how organizations produce responsibility. Click each stage — or watch the auto-demo below.
   </p>
+
+  <div class="lifecycle">
+    <div class="lifecycle-stages">
+      <div class="lifecycle-stage active" data-stage="aac">
+        <div class="lifecycle-stage-code">STAGE 1 · AAC</div>
+        <div class="lifecycle-stage-name">Accountability Before Action</div>
+        <div class="lifecycle-arrow">→</div>
+      </div>
+      <div class="lifecycle-stage" data-stage="cf">
+        <div class="lifecycle-stage-code">STAGE 2 · CF</div>
+        <div class="lifecycle-stage-name">Cognitive Friction</div>
+        <div class="lifecycle-arrow">→</div>
+      </div>
+      <div class="lifecycle-stage" data-stage="rc">
+        <div class="lifecycle-stage-code">STAGE 3 · RC</div>
+        <div class="lifecycle-stage-name">Responsibility Convergence</div>
+        <div class="lifecycle-arrow">→</div>
+      </div>
+      <div class="lifecycle-stage" data-stage="pac">
+        <div class="lifecycle-stage-code">STAGE 4 · PAC</div>
+        <div class="lifecycle-stage-name">Premature Accountability Convergence</div>
+      </div>
+    </div>
+
+    <div class="lifecycle-detail" id="lifecycle-detail"></div>
+  </div>
+
+  <!-- FOUR LAYER -->
+  <p class="section-label">Design Program — Four-Layer Framework</p>
+  <p class="section-desc">
+    How to design accountability infrastructure. Four layers, each operationalized by a deployed system
+    and documented in an HCI paper. Click to explore.
+  </p>
+
+  <div class="four-layer">
+    <div class="layer-stack">
+      <div class="layer layer-4 active" data-layer="reasoning">
+        <div class="layer-header">
+          <div class="layer-name">🧠 Reasoning</div>
+          <div class="layer-num">Layer 4</div>
+        </div>
+        <div class="layer-desc">Supporting judgment under closure pressure</div>
+      </div>
+      <div class="layer layer-3" data-layer="coordination">
+        <div class="layer-header">
+          <div class="layer-name">🤝 Coordination</div>
+          <div class="layer-num">Layer 3</div>
+        </div>
+        <div class="layer-desc">Surfacing friction before failure</div>
+      </div>
+      <div class="layer layer-2" data-layer="structure">
+        <div class="layer-header">
+          <div class="layer-name">🔗 Structure</div>
+          <div class="layer-num">Layer 2</div>
+        </div>
+        <div class="layer-desc">Revealing cross-document connections</div>
+      </div>
+      <div class="layer layer-1" data-layer="accessibility">
+        <div class="layer-header">
+          <div class="layer-name">🔍 Accessibility</div>
+          <div class="layer-num">Layer 1 · Foundation</div>
+        </div>
+        <div class="layer-desc">Reaching procedural knowledge when needed</div>
+      </div>
+    </div>
+
+    <div class="layer-detail" id="layer-detail"></div>
+  </div>
+
+  <!-- MAPPING with SVG curves -->
+  <p class="section-label">Research ↔ Practice Mapping</p>
+  <p class="section-desc">
+    Each HCI paper grew from a deployed tool, and each tool is documented in a paper.
+    Hover any card — curves will show you the pair.
+  </p>
+
+  <div class="mapping">
+    <div class="mapping-container" id="mappingContainer">
+      <div>
+        <div class="mapping-col-header">HCI Papers</div>
+        <div class="mapping-list">
+          <div class="mapping-item" data-pair="rca" data-type="paper" data-idx="0">
+            <strong>Keeping Comparison Open</strong><br>
+            <span style="font-size: 0.75rem; color: var(--text-light);">CSCW 2027 · AI comparison enforcer</span>
+          </div>
+          <div class="mapping-item" data-pair="review" data-type="paper" data-idx="1">
+            <strong>Friction Before Failure</strong><br>
+            <span style="font-size: 0.75rem; color: var(--text-light);">SSRN · Dissociation finding</span>
+          </div>
+          <div class="mapping-item" data-pair="sop" data-type="paper" data-idx="2">
+            <strong>From Retrieval to Reasoning</strong><br>
+            <span style="font-size: 0.75rem; color: var(--text-light);">SSRN · AI-assisted retrieval</span>
+          </div>
+          <div class="mapping-item" data-pair="navigation" data-type="paper" data-idx="3">
+            <strong>When Documents Don't Connect</strong><br>
+            <span style="font-size: 0.75rem; color: var(--text-light);">SSRN · Human as infrastructure</span>
+          </div>
+        </div>
+      </div>
+
+      <div></div>
+
+      <div>
+        <div class="mapping-col-header">Deployed Tools</div>
+        <div class="mapping-list">
+          <div class="mapping-item" data-pair="rca" data-type="tool" data-idx="0">
+            <strong>🔬 RCA Scaffolder</strong><br>
+            <span style="font-size: 0.75rem; color: var(--text-light);">Comparison enforcer in deployment</span>
+          </div>
+          <div class="mapping-item" data-pair="review" data-type="tool" data-idx="1">
+            <strong>📋 Review Dashboard</strong><br>
+            <span style="font-size: 0.75rem; color: var(--text-light);">Friction surfacing in CAPA review</span>
+          </div>
+          <div class="mapping-item" data-pair="sop" data-type="tool" data-idx="2">
+            <strong>🔍 SOP Retrieval System</strong><br>
+            <span style="font-size: 0.75rem; color: var(--text-light);">Semantic search + AI layer</span>
+          </div>
+          <div class="mapping-item" data-pair="navigation" data-type="tool" data-idx="3">
+            <strong>🔗 Document Navigation Tool</strong><br>
+            <span style="font-size: 0.75rem; color: var(--text-light);">Cross-doc linking interface</span>
+          </div>
+        </div>
+      </div>
+
+      <svg class="mapping-svg" id="mappingSvg" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+  </div>
+
+  <!-- FDA NETWORK -->
+  <p class="section-label">Computational Demo — FDA Warning Letters Network</p>
+  <p class="section-desc">
+    An interactive visualization of accountability attribution in a sample of FDA Warning Letters.
+    From my <em>Accountability Graph Extraction</em> paper (part of the Computational Research program below).
+    Click a letter to explore its attribution structure.
+  </p>
+
+  <div class="fda-network">
+    <div class="fda-controls">
+      <button class="fda-btn active" data-letter="WL2020-01">WL2020-01</button>
+      <button class="fda-btn" data-letter="WL2019-03">WL2019-03</button>
+      <button class="fda-btn" data-letter="WL2021-07">WL2021-07</button>
+      <button class="fda-btn" data-letter="WL2018-05">WL2018-05 ⚠️</button>
+      <button class="fda-btn" data-letter="WL2022-02">WL2022-02</button>
+    </div>
+
+    <div class="fda-svg-container">
+      <svg class="fda-svg" id="fdaSvg" viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+
+    <div class="fda-info" id="fdaInfo"></div>
+
+    <div class="fda-stats" id="fdaStats"></div>
+
+    <div class="fda-legend">
+      <div class="fda-legend-item"><div class="fda-legend-dot" style="background: #7c3aed;"></div>Firm (accountability recipient)</div>
+      <div class="fda-legend-item"><div class="fda-legend-dot" style="background: #2563EB;"></div>System</div>
+      <div class="fda-legend-item"><div class="fda-legend-dot" style="background: #10b981;"></div>Individual</div>
+      <div class="fda-legend-item"><div class="fda-legend-dot" style="background: #f59e0b;"></div>Material</div>
+      <div class="fda-legend-item">⚠️ Outlier case (cross-framework convergence)</div>
+    </div>
+  </div>
+
+  <!-- SELECTED PAPERS -->
+  <p class="section-label">Selected Papers</p>
 
   <div class="papers-list">
 
     <div class="paper">
-      <div class="paper-cluster under-review">STS · Organizational Theory</div>
-      <div class="paper-title">
-        <a href="https://ssrn.com/abstract=6371980" target="_blank">Accountability Before Action: How Organizations Structure Responsibility in Advance of Outcomes</a>
-      </div>
-      <div class="paper-venue">Under review · <span class="status">Academy of Management Review</span> (AMR-2026-0516)</div>
-      <div class="paper-desc">
-        Introduces "Accountability Before Action" (AAC) as the pre-failure structuring of responsibility through procedural
-        routines, documentation regimes, and evaluative anticipation. Draws on Garfinkel, Latour, and Star &amp; Ruhleder.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">⚖️ AAC</span>
-        <span class="paper-kw">🔍 Infrastructure studies</span>
-        <span class="paper-kw">📐 Organizational theory</span>
-      </div>
-    </div>
-
-    <div class="paper">
-      <div class="paper-cluster under-review">STS · Document Infrastructure</div>
-      <div class="paper-title">
-        <a href="https://ssrn.com/abstract=6391278" target="_blank">Cognitive Friction: Procedural Documents as Accountability Infrastructure in Regulated Organizations</a>
-      </div>
-      <div class="paper-venue">Under review · <span class="status">Organization</span> (ORG-26-0241)</div>
-      <div class="paper-desc">
-        Operationalizes cognitive friction at sentence level across a 400-sentence corpus from regulated procedural documents.
-        Reframes document friction as accountability infrastructure rather than cognitive burden.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">📄 Cognitive Friction</span>
-        <span class="paper-kw">🔍 Document infrastructure</span>
-        <span class="paper-kw">📊 Corpus analysis</span>
-      </div>
-    </div>
-
-    <div class="paper">
-      <div class="paper-cluster under-review">STS · Investigative Systems</div>
-      <div class="paper-title">
-        <a href="https://ssrn.com/abstract=6372301" target="_blank">Responsibility Convergence: How Investigative Systems Stabilize Attribution</a>
-      </div>
-      <div class="paper-venue">Under review · <span class="status">Organization Science</span> (ORSC-MS-2026-22511)</div>
-      <div class="paper-desc">
-        Identifies three mechanisms through which investigative systems converge on firm-level attribution:
-        ambiguity resolution, closure pressure, and legibility bias. Empirical anchor: 159/160 FDA Warning Letters converge on firm.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">⚖️ Responsibility Convergence</span>
-        <span class="paper-kw">📄 FDA Warning Letters</span>
-        <span class="paper-kw">🔍 Attribution</span>
-      </div>
-    </div>
-
-    <div class="paper">
-      <div class="paper-cluster under-review">STS · AI &amp; Technology</div>
+      <div class="paper-cluster under-review">STS · AI &amp; Technology · PAC</div>
       <div class="paper-title">
         <a href="https://ssrn.com/abstract=6391379" target="_blank">Premature Accountability Convergence: How Technology Accelerates Responsibility Stabilization in Organizations</a>
       </div>
-      <div class="paper-venue">Under review · <span class="status">Information and Organization</span> (INFORG-D-26-00222)</div>
+      <div class="paper-venue">Under review · <span class="status">Information and Organization</span></div>
       <div class="paper-desc">
         Reframes AI's role from "acceleration" to "earlier institutional closure of interpretive possibility."
-        Identifies three mechanisms: representational compression, epistemic authority amplification, and temporal contraction.
+        Three mechanisms: representational compression, epistemic authority amplification, and temporal contraction.
       </div>
       <div class="paper-keywords">
         <span class="paper-kw">🤖 AI accountability</span>
@@ -582,17 +1152,6 @@
       </div>
     </div>
 
-  </div>
-
-  <!-- HCI PAPERS -->
-  <p class="section-label">HCI &amp; Design Research</p>
-  <p class="section-intro">
-    Five HCI papers on judgment-preserving design in regulated work, each tied to a deployed production tool.
-    Together they articulate a four-layer framework for accountability infrastructure design.
-  </p>
-
-  <div class="papers-list">
-
     <div class="paper">
       <div class="paper-cluster">HCI · Framework · TOCHI</div>
       <div class="paper-title">
@@ -600,8 +1159,8 @@
       </div>
       <div class="paper-venue">In preparation · <span class="status">ACM TOCHI</span></div>
       <div class="paper-desc">
-        Umbrella paper. Introduces a four-layer framework (accessibility, structure, coordination, reasoning)
-        and three design principles: upstream stabilization, observability over optimization, and judgment preservation.
+        Umbrella paper synthesizing five HCI studies. The framework visualized above, with three design principles:
+        upstream stabilization, observability over optimization, judgment preservation.
       </div>
       <div class="paper-keywords">
         <span class="paper-kw">🗂️ Four-layer framework</span>
@@ -628,76 +1187,14 @@
     </div>
 
     <div class="paper">
-      <div class="paper-cluster">HCI · Document Review</div>
-      <div class="paper-title">
-        <a href="#" target="_blank">Friction Before Failure: Dissociating Procedural Legibility from Procedural Endorsement</a>
-      </div>
-      <div class="paper-venue">Working paper · SSRN</div>
-      <div class="paper-desc">
-        Dissociation finding: immediate legibility ≠ endorsement. Checklist supports immediate comprehension (5.0);
-        TF-IDF supports conceptual orientation (5.0) — but through distinct cognitive pathways.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">🔍 Document friction</span>
-        <span class="paper-kw">🧠 Dissociation</span>
-        <span class="paper-kw">📋 CAPA review</span>
-      </div>
-    </div>
-
-    <div class="paper">
-      <div class="paper-cluster">HCI · AI-Assisted Retrieval</div>
-      <div class="paper-title">
-        <a href="#" target="_blank">From Retrieval to Reasoning: AI-Assisted SOP Access and the Shape of Interpretive Action</a>
-      </div>
-      <div class="paper-venue">Working paper · SSRN</div>
-      <div class="paper-desc">
-        Extends SOP accessibility from retrieval problem to interpretive condition. AI layer functions to
-        EXPLAIN, SURFACE, and KEEP interpretive alternatives rather than resolve them.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">🤖 AI-assisted retrieval</span>
-        <span class="paper-kw">📋 SOP</span>
-        <span class="paper-kw">🧠 Interpretive action</span>
-      </div>
-    </div>
-
-    <div class="paper">
-      <div class="paper-cluster">HCI · Cross-Document Coordination</div>
-      <div class="paper-title">
-        <a href="#" target="_blank">When Documents Don't Connect: The Human as Missing Infrastructure in Regulated Document Systems</a>
-      </div>
-      <div class="paper-venue">Working paper · SSRN</div>
-      <div class="paper-desc">
-        Identifies the human as "missing infrastructure" in cross-document accountability gaps.
-        Loopback as method. Star &amp; Ruhleder lineage.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">👁️ Invisible work</span>
-        <span class="paper-kw">🔗 Cross-doc coordination</span>
-        <span class="paper-kw">🏭 Infrastructure gaps</span>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- COMPUTATIONAL PAPERS -->
-  <p class="section-label">Computational Research</p>
-  <p class="section-intro">
-    A computational research program operationalizing accountability across four signal layers
-    (detection, graph structure, attribution, distribution), applied to FDA Warning Letters.
-  </p>
-
-  <div class="papers-list">
-
-    <div class="paper">
       <div class="paper-cluster">Computational · Umbrella</div>
       <div class="paper-title">
         <a href="#" target="_blank">Responsibility as Multi-Layer Signal: A Computational Framework for FDA Warning Letters</a>
       </div>
-      <div class="paper-venue">Working paper · SSRN · <span class="status">Umbrella</span></div>
+      <div class="paper-venue">Working paper · SSRN</div>
       <div class="paper-desc">
-        Integrates PAC detection (F1 0.901–0.913), Accountability Graph Extraction (star topology, Firm in-degree 0.444),
-        Attribution Prediction (LR F1=0.725), and RDM (PCA+Ridge, w_ps=0.995) into a unified framework.
+        Integrates four frameworks: PAC detection, accountability graph extraction, attribution prediction, and RDM.
+        Core finding: structural pre-convergence in FDA Warning Letters <em>before</em> investigative reasoning is complete.
       </div>
       <div class="paper-keywords">
         <span class="paper-kw">📊 Computational accountability</span>
@@ -706,174 +1203,421 @@
       </div>
     </div>
 
-    <div class="paper">
-      <div class="paper-cluster">Computational · NLP</div>
-      <div class="paper-title">
-        <a href="https://github.com/sorakim-lab/premature-convergence-detection" target="_blank">Premature Convergence Detection in Regulatory Investigative Texts</a>
-      </div>
-      <div class="paper-venue">Working paper · <span class="status">GitHub</span></div>
-      <div class="paper-desc">
-        Detects structural pre-convergence in FDA Warning Letters — firm-level attribution stabilizes
-        <em>before</em> investigative reasoning is complete. F1 0.901–0.913.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">📝 Regulatory NLP</span>
-        <span class="paper-kw">⚖️ Convergence detection</span>
-        <span class="paper-kw">🧪 Classification</span>
-      </div>
-    </div>
-
-    <div class="paper">
-      <div class="paper-cluster">Computational · Graph</div>
-      <div class="paper-title">
-        <a href="#" target="_blank">Accountability Graph Extraction from Regulatory Texts</a>
-      </div>
-      <div class="paper-venue">Working paper · SSRN</div>
-      <div class="paper-desc">
-        Extracts accountability graphs from FDA Warning Letters. Reveals star topology centered on "Firm"
-        (in-degree 0.444) as structural pattern.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">🕸️ Graph extraction</span>
-        <span class="paper-kw">📊 Network analysis</span>
-      </div>
-    </div>
-
-    <div class="paper">
-      <div class="paper-cluster">Computational · Classification</div>
-      <div class="paper-title">
-        <a href="#" target="_blank">Responsibility Attribution Prediction: A Classification Approach to FDA Warning Letters</a>
-      </div>
-      <div class="paper-venue">Working paper · SSRN</div>
-      <div class="paper-desc">
-        Classification approach to attribution: Individual AUC=0.940; LR F1=0.725.
-        30.6% of cases reassigned from Firm to System when model-corrected.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">🧪 ML classification</span>
-        <span class="paper-kw">⚖️ Attribution</span>
-      </div>
-    </div>
-
-    <div class="paper">
-      <div class="paper-cluster">Computational · Metric</div>
-      <div class="paper-title">
-        <a href="#" target="_blank">Responsibility Distribution Metric: An Entropy-Centrality Approach to Accountability Structure</a>
-      </div>
-      <div class="paper-venue">Working paper · SSRN</div>
-      <div class="paper-desc">
-        Composite metric combining entropy and centrality. PCA+Ridge produces w_ps=0.995.
-        Cross-framework convergence with other three papers around WL2018-05.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">📈 Composite metric</span>
-        <span class="paper-kw">🕸️ Entropy + centrality</span>
-      </div>
-    </div>
-
   </div>
 
-  <!-- DEPLOYED SYSTEMS -->
-  <p class="section-label">Deployed Systems</p>
-  <p class="section-intro">
-    Production tools designed and deployed at a GMP-regulated pharmaceutical manufacturing site.
-    All systems operate as unvalidated productivity layers external to validated GMP systems,
-    with team lead awareness and support. These systems constitute the empirical substrate for the HCI papers above.
-  </p>
-
-  <div class="tools-list">
-
-    <div class="tool">
-      <div class="tool-header">
-        <div class="tool-name">📊 QC Stability Dashboard</div>
-        <div class="tool-meta">53 active users · ongoing</div>
-      </div>
-      <div class="tool-desc">
-        Deadline-tracking interface for stability testing programs. Surfaces 25-day deadline windows and workload bottlenecks.
-      </div>
-    </div>
-
-    <div class="tool">
-      <div class="tool-header">
-        <div class="tool-name">🔍 SOP Retrieval System</div>
-        <div class="tool-meta">→ Paper: From Retrieval to Reasoning</div>
-      </div>
-      <div class="tool-desc">
-        Semantic search tool for GMP procedural documents. Foundation for the HCI paper on AI-assisted SOP access
-        and interpretive action.
-      </div>
-    </div>
-
-    <div class="tool">
-      <div class="tool-header">
-        <div class="tool-name">🔗 Document Navigation Tool</div>
-        <div class="tool-meta">→ Paper: When Documents Don't Connect</div>
-      </div>
-      <div class="tool-desc">
-        Cross-document linking interface for regulated quality documentation. Reveals the human as missing infrastructure
-        in cross-document coordination.
-      </div>
-    </div>
-
-    <div class="tool">
-      <div class="tool-header">
-        <div class="tool-name">📋 Review Dashboard</div>
-        <div class="tool-meta">→ Paper: Friction Before Failure</div>
-      </div>
-      <div class="tool-desc">
-        Prioritized document review interface surfacing procedural friction before formal deviation.
-        Basis for the dissociation finding between legibility and endorsement.
-      </div>
-    </div>
-
-    <div class="tool">
-      <div class="tool-header">
-        <div class="tool-name">🔬 RCA Scaffolder</div>
-        <div class="tool-meta">→ Paper: Keeping Comparison Open</div>
-      </div>
-      <div class="tool-desc">
-        Investigative scaffold that preserves analyst judgment while structuring causal reasoning.
-        AI functions as comparison enforcer, not explanation generator.
-      </div>
-    </div>
-
-    <div class="tool">
-      <div class="tool-header">
-        <div class="tool-name">📝 Veeva Vault Change Control Assistant</div>
-        <div class="tool-meta">Production</div>
-      </div>
-      <div class="tool-desc">
-        Workflow support for electronic change control submissions through Veeva Vault QMS.
-      </div>
-    </div>
-
-    <div class="tool">
-      <div class="tool-header">
-        <div class="tool-name">🧪 Reagent Inventory &amp; Expiry Tool</div>
-        <div class="tool-meta">Production</div>
-      </div>
-      <div class="tool-desc">
-        Automated expiry tracking and inventory alerts for QC reagents. Prevents deviations from expired materials.
-      </div>
-    </div>
-
-    <div class="tool">
-      <div class="tool-header">
-        <div class="tool-name">🤖 Document Auto-Review AI</div>
-        <div class="tool-meta">Production</div>
-      </div>
-      <div class="tool-desc">
-        Format and compliance pre-check for procedural documents. Flags formatting issues before formal review.
-      </div>
-    </div>
-
-  </div>
+  <a href="papers.html" class="see-all">See all 14 papers →</a>
 
 </main>
 
 <footer>
   © 2026 Sora Kim · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
 </footer>
+
+<script>
+  // ========================================
+  // LIFECYCLE INTERACTION + AUTO DEMO
+  // ========================================
+  const lifecycleData = {
+    aac: {
+      title: "Stage 1 · Accountability Before Action (AAC)",
+      venue: "Under review · Academy of Management Review",
+      desc: "How organizations structure responsibility <em>before</em> failures occur, through three structural components: procedural structuring, documentation regimes, and evaluative anticipation. The foundation of the lifecycle.",
+      link: "https://ssrn.com/abstract=6371980"
+    },
+    cf: {
+      title: "Stage 2 · Cognitive Friction (CF)",
+      venue: "Under review · Organization",
+      desc: "Procedural documents as accountability infrastructure. A 400-sentence corpus analysis identifies conditional branching as the primary source of cognitive friction. Friction distributes responsibility across the document-reader interface.",
+      link: "https://ssrn.com/abstract=6391278"
+    },
+    rc: {
+      title: "Stage 3 · Responsibility Convergence (RC)",
+      venue: "Under review · Organization Science",
+      desc: "Three mechanisms through which investigative systems converge on firm-level attribution: ambiguity resolution, closure pressure, and legibility bias. Empirical anchor: 159/160 FDA Warning Letters converge on firm.",
+      link: "https://ssrn.com/abstract=6372301"
+    },
+    pac: {
+      title: "Stage 4 · Premature Accountability Convergence (PAC)",
+      venue: "Under review · Information and Organization",
+      desc: "How technology accelerates responsibility stabilization. Reframes AI's role from 'acceleration' to 'earlier institutional closure of interpretive possibility.' Three mechanisms: representational compression, epistemic authority amplification, temporal contraction.",
+      link: "https://ssrn.com/abstract=6391379"
+    }
+  };
+
+  const stages = document.querySelectorAll('.lifecycle-stage');
+  const lifecycleDetail = document.getElementById('lifecycle-detail');
+  let autoDemoStopped = false;
+
+  function showStage(key) {
+    stages.forEach(s => s.classList.remove('active'));
+    const stage = document.querySelector(`.lifecycle-stage[data-stage="${key}"]`);
+    if (stage) {
+      stage.classList.add('active', 'pulse');
+      setTimeout(() => stage.classList.remove('pulse'), 600);
+    }
+    const data = lifecycleData[key];
+    lifecycleDetail.innerHTML = `
+      <div class="stage-title">${data.title}</div>
+      <div class="stage-venue">${data.venue}</div>
+      ${data.desc}
+      <br><br>
+      <a href="${data.link}" target="_blank">→ Read on SSRN</a>
+    `;
+  }
+
+  showStage('aac');
+
+  stages.forEach(stage => {
+    stage.addEventListener('click', () => {
+      autoDemoStopped = true;
+      showStage(stage.dataset.stage);
+    });
+  });
+
+  // Auto demo: cycle through stages on first view (if user hasn't clicked yet)
+  const stageOrder = ['aac', 'cf', 'rc', 'pac'];
+  let autoIdx = 0;
+  setTimeout(function autoAdvance() {
+    if (autoDemoStopped) return;
+    autoIdx = (autoIdx + 1) % 4;
+    showStage(stageOrder[autoIdx]);
+    if (autoIdx < 3) {
+      setTimeout(autoAdvance, 2200);
+    }
+  }, 2500);
+
+  // ========================================
+  // FOUR-LAYER FRAMEWORK
+  // ========================================
+  const layerData = {
+    reasoning: {
+      title: "Reasoning — Supporting judgment under closure pressure",
+      desc: "The top layer: how interfaces preserve analyst judgment when investigative systems pressure toward premature attribution. AI functions as <em>comparison enforcer</em>, not explanation generator.",
+      paper: "<em>Keeping Comparison Open</em> (CSCW 2027)",
+      tool: "RCA Scaffolder"
+    },
+    coordination: {
+      title: "Coordination — Surfacing friction before failure",
+      desc: "Making procedural friction observable before it escalates into formal deviation. The dissociation finding: immediate legibility and conceptual orientation work through distinct cognitive pathways.",
+      paper: "<em>Friction Before Failure</em> (SSRN)",
+      tool: "Review Dashboard"
+    },
+    structure: {
+      title: "Structure — Revealing cross-document connections",
+      desc: "The invisible work of connecting documents across regulated systems. Identifies the human as 'missing infrastructure' in cross-document accountability gaps. Star &amp; Ruhleder lineage.",
+      paper: "<em>When Documents Don't Connect</em> (SSRN)",
+      tool: "Document Navigation Tool"
+    },
+    accessibility: {
+      title: "Accessibility — Reaching procedural knowledge when needed",
+      desc: "The foundation: how practitioners reach SOPs at the moment of action. Reframes retrieval as interpretive condition, not mere access. AI layer functions to EXPLAIN, SURFACE, and KEEP alternatives.",
+      paper: "<em>From Retrieval to Reasoning</em> (SSRN)",
+      tool: "SOP Retrieval System"
+    }
+  };
+
+  const layers = document.querySelectorAll('.layer');
+  const layerDetail = document.getElementById('layer-detail');
+
+  function showLayer(key) {
+    layers.forEach(l => l.classList.remove('active'));
+    const layer = document.querySelector(`.layer[data-layer="${key}"]`);
+    if (layer) layer.classList.add('active');
+    const data = layerData[key];
+    layerDetail.innerHTML = `
+      <div class="detail-title">${data.title}</div>
+      ${data.desc}
+      <div class="layer-detail-grid">
+        <div class="layer-detail-col">
+          <strong>Paper</strong>
+          ${data.paper}
+        </div>
+        <div class="layer-detail-col">
+          <strong>Deployed system</strong>
+          ${data.tool}
+        </div>
+      </div>
+      <a href="tools.html" class="detail-link">→ See the tool</a>
+    `;
+  }
+
+  showLayer('reasoning');
+
+  layers.forEach(layer => {
+    layer.addEventListener('click', () => showLayer(layer.dataset.layer));
+  });
+
+  // ========================================
+  // PAPERS ↔ TOOLS MAPPING with SVG curves
+  // ========================================
+  const mappingContainer = document.getElementById('mappingContainer');
+  const mappingSvg = document.getElementById('mappingSvg');
+  const mappingItems = document.querySelectorAll('.mapping-item');
+
+  function drawCurves(highlightedPair = null) {
+    if (!mappingSvg) return;
+    mappingSvg.innerHTML = '';
+    const rect = mappingContainer.getBoundingClientRect();
+    mappingSvg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
+
+    const papers = document.querySelectorAll('.mapping-item[data-type="paper"]');
+    const tools = document.querySelectorAll('.mapping-item[data-type="tool"]');
+
+    papers.forEach(paperEl => {
+      const pair = paperEl.dataset.pair;
+      const toolEl = document.querySelector(`.mapping-item[data-type="tool"][data-pair="${pair}"]`);
+      if (!toolEl) return;
+
+      const pRect = paperEl.getBoundingClientRect();
+      const tRect = toolEl.getBoundingClientRect();
+      const containerRect = mappingContainer.getBoundingClientRect();
+
+      const x1 = pRect.right - containerRect.left;
+      const y1 = pRect.top + pRect.height / 2 - containerRect.top;
+      const x2 = tRect.left - containerRect.left;
+      const y2 = tRect.top + tRect.height / 2 - containerRect.top;
+
+      const midX = (x1 + x2) / 2;
+      const path = `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`;
+
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      line.setAttribute('d', path);
+      line.setAttribute('class', 'mapping-line' + (highlightedPair === pair ? ' active' : ''));
+      mappingSvg.appendChild(line);
+    });
+  }
+
+  setTimeout(() => drawCurves(), 100);
+  window.addEventListener('resize', () => drawCurves());
+
+  mappingItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const pair = item.dataset.pair;
+      mappingItems.forEach(other => {
+        if (other.dataset.pair === pair) other.classList.add('highlighted');
+        else other.classList.add('dimmed');
+      });
+      drawCurves(pair);
+    });
+
+    item.addEventListener('mouseleave', () => {
+      mappingItems.forEach(other => {
+        other.classList.remove('highlighted');
+        other.classList.remove('dimmed');
+      });
+      drawCurves();
+    });
+
+    item.addEventListener('click', () => {
+      const pair = item.dataset.pair;
+      const isHighlighted = item.classList.contains('highlighted');
+      mappingItems.forEach(other => {
+        other.classList.remove('highlighted');
+        other.classList.remove('dimmed');
+      });
+      if (!isHighlighted) {
+        mappingItems.forEach(other => {
+          if (other.dataset.pair === pair) other.classList.add('highlighted');
+          else other.classList.add('dimmed');
+        });
+        drawCurves(pair);
+      } else {
+        drawCurves();
+      }
+    });
+  });
+
+  // ========================================
+  // FDA WARNING LETTERS NETWORK
+  // ========================================
+  const fdaData = {
+    "WL2020-01": {
+      title: "Sterile manufacturing deviations (2020)",
+      summary: "Data integrity and sterility assurance failures. Attribution converges on <strong>Firm</strong> despite multiple system-level causes.",
+      nodes: [
+        { id: "Firm", x: 350, y: 190, type: "firm", size: 38 },
+        { id: "QC System", x: 180, y: 100, type: "system", size: 24 },
+        { id: "Training", x: 180, y: 280, type: "system", size: 22 },
+        { id: "Operator", x: 530, y: 100, type: "individual", size: 20 },
+        { id: "Equipment", x: 530, y: 280, type: "material", size: 18 }
+      ],
+      edges: [
+        { from: "QC System", to: "Firm", weight: 0.3 },
+        { from: "Training", to: "Firm", weight: 0.2 },
+        { from: "Operator", to: "Firm", weight: 0.3 },
+        { from: "Equipment", to: "Firm", weight: 0.2 }
+      ],
+      stats: { firmIn: "0.444", centrality: "0.82", outlier: "No" },
+      outlier: false
+    },
+    "WL2019-03": {
+      title: "GMP documentation violations (2019)",
+      summary: "Procedural documentation failures. Star topology: all pathways terminate at <strong>Firm</strong> despite distributed causes.",
+      nodes: [
+        { id: "Firm", x: 350, y: 190, type: "firm", size: 38 },
+        { id: "Doc System", x: 150, y: 150, type: "system", size: 28 },
+        { id: "SOP Gap", x: 150, y: 250, type: "system", size: 20 },
+        { id: "Reviewer", x: 550, y: 190, type: "individual", size: 22 }
+      ],
+      edges: [
+        { from: "Doc System", to: "Firm", weight: 0.4 },
+        { from: "SOP Gap", to: "Firm", weight: 0.2 },
+        { from: "Reviewer", to: "Firm", weight: 0.25 }
+      ],
+      stats: { firmIn: "0.448", centrality: "0.85", outlier: "No" },
+      outlier: false
+    },
+    "WL2021-07": {
+      title: "Quality unit oversight failures (2021)",
+      summary: "Quality unit oversight issues with moderate attribution distribution. Still firm-centric.",
+      nodes: [
+        { id: "Firm", x: 350, y: 190, type: "firm", size: 36 },
+        { id: "QA Unit", x: 170, y: 190, type: "system", size: 30 },
+        { id: "Management", x: 530, y: 120, type: "individual", size: 24 },
+        { id: "Batch Record", x: 530, y: 260, type: "material", size: 20 }
+      ],
+      edges: [
+        { from: "QA Unit", to: "Firm", weight: 0.35 },
+        { from: "Management", to: "Firm", weight: 0.3 },
+        { from: "Batch Record", to: "Firm", weight: 0.15 }
+      ],
+      stats: { firmIn: "0.421", centrality: "0.79", outlier: "No" },
+      outlier: false
+    },
+    "WL2018-05": {
+      title: "⚠️ Cross-framework outlier case (2018)",
+      summary: "<strong>Extreme outlier across all four frameworks.</strong> Individual-level attribution uniquely dominates here — opposite of the firm-convergence pattern. Flagged by PAC detection, graph extraction, attribution prediction, and RDM.",
+      nodes: [
+        { id: "Firm", x: 350, y: 240, type: "firm", size: 22 },
+        { id: "Individual", x: 350, y: 100, type: "individual", size: 40 },
+        { id: "Intentional Act", x: 180, y: 60, type: "individual", size: 22 },
+        { id: "Supervisor", x: 520, y: 60, type: "individual", size: 22 },
+        { id: "System", x: 520, y: 280, type: "system", size: 16 }
+      ],
+      edges: [
+        { from: "Intentional Act", to: "Individual", weight: 0.5, outlier: true },
+        { from: "Supervisor", to: "Individual", weight: 0.3, outlier: true },
+        { from: "Individual", to: "Firm", weight: 0.2 },
+        { from: "System", to: "Firm", weight: 0.1 }
+      ],
+      stats: { firmIn: "0.12", centrality: "0.28", outlier: "YES" },
+      outlier: true
+    },
+    "WL2022-02": {
+      title: "AI-assisted deviation review (2022)",
+      summary: "Recent case showing technology-mediated attribution. AI system output cited but responsibility still converges on firm.",
+      nodes: [
+        { id: "Firm", x: 350, y: 190, type: "firm", size: 38 },
+        { id: "AI Review", x: 160, y: 100, type: "system", size: 26 },
+        { id: "CAPA System", x: 160, y: 280, type: "system", size: 24 },
+        { id: "Analyst", x: 540, y: 190, type: "individual", size: 22 }
+      ],
+      edges: [
+        { from: "AI Review", to: "Firm", weight: 0.3 },
+        { from: "CAPA System", to: "Firm", weight: 0.3 },
+        { from: "Analyst", to: "Firm", weight: 0.25 }
+      ],
+      stats: { firmIn: "0.452", centrality: "0.86", outlier: "No" },
+      outlier: false
+    }
+  };
+
+  const fdaColors = {
+    firm: "#7c3aed",
+    system: "#2563EB",
+    individual: "#10b981",
+    material: "#f59e0b"
+  };
+
+  const fdaSvg = document.getElementById('fdaSvg');
+  const fdaInfo = document.getElementById('fdaInfo');
+  const fdaStats = document.getElementById('fdaStats');
+  const fdaBtns = document.querySelectorAll('.fda-btn');
+
+  function renderNetwork(letterId) {
+    const data = fdaData[letterId];
+    fdaSvg.innerHTML = '';
+
+    // Draw edges first (behind nodes)
+    data.edges.forEach(edge => {
+      const fromNode = data.nodes.find(n => n.id === edge.from);
+      const toNode = data.nodes.find(n => n.id === edge.to);
+      if (!fromNode || !toNode) return;
+
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', fromNode.x);
+      line.setAttribute('y1', fromNode.y);
+      line.setAttribute('x2', toNode.x);
+      line.setAttribute('y2', toNode.y);
+      line.setAttribute('class', 'fda-edge' + (edge.outlier ? ' outlier' : ' active'));
+      line.style.strokeWidth = 1 + edge.weight * 3;
+      fdaSvg.appendChild(line);
+    });
+
+    // Draw nodes
+    data.nodes.forEach(node => {
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', node.x);
+      circle.setAttribute('cy', node.y);
+      circle.setAttribute('r', node.size);
+      circle.setAttribute('fill', fdaColors[node.type]);
+      circle.setAttribute('class', 'fda-node-circle');
+      circle.setAttribute('opacity', '0.85');
+      if (data.outlier && node.type === 'individual' && node.size >= 30) {
+        circle.setAttribute('stroke', '#dc2626');
+        circle.setAttribute('stroke-width', '3');
+        circle.setAttribute('stroke-dasharray', '4 2');
+      }
+
+      const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      label.setAttribute('x', node.x);
+      label.setAttribute('y', node.y + node.size + 14);
+      label.setAttribute('class', 'fda-node-label');
+      label.textContent = node.id;
+
+      g.appendChild(circle);
+      g.appendChild(label);
+      fdaSvg.appendChild(g);
+
+      // Fade-in animation
+      g.style.opacity = '0';
+      setTimeout(() => {
+        g.style.opacity = '1';
+        g.style.transition += ', opacity 0.5s';
+      }, 50);
+    });
+
+    fdaInfo.innerHTML = `<strong>${data.title}</strong><br>${data.summary}`;
+
+    fdaStats.innerHTML = `
+      <div class="fda-stat">
+        <div class="fda-stat-value">${data.stats.firmIn}</div>
+        <div class="fda-stat-label">Firm In-Degree</div>
+      </div>
+      <div class="fda-stat">
+        <div class="fda-stat-value">${data.stats.centrality}</div>
+        <div class="fda-stat-label">Centrality</div>
+      </div>
+      <div class="fda-stat">
+        <div class="fda-stat-value" style="color: ${data.stats.outlier === 'YES' ? 'var(--warning)' : 'var(--accent)'};">${data.stats.outlier}</div>
+        <div class="fda-stat-label">Outlier</div>
+      </div>
+    `;
+  }
+
+  renderNetwork('WL2020-01');
+
+  fdaBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      fdaBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderNetwork(btn.dataset.letter);
+    });
+  });
+</script>
 
 </body>
 </html>
