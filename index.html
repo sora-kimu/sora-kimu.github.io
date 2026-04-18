@@ -1,1623 +1,413 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sora Kim</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
-  <style>
-    :root {
-      --bg: #ffffff;
-      --text: #111111;
-      --text-muted: #555555;
-      --text-light: #888888;
-      --border: #e5e5e5;
-      --surface: #fafafa;
-      --surface-hover: #f0f0f0;
-      --blue: #2563EB;
-      --accent: #7c3aed;
-      --warning: #dc2626;
-      --layer-1: #dbeafe;
-      --layer-2: #ddd6fe;
-      --layer-3: #fbcfe8;
-      --layer-4: #fed7aa;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --bg: #111111;
-        --text: #f0f0f0;
-        --text-muted: #aaaaaa;
-        --text-light: #666666;
-        --border: #2a2a2a;
-        --surface: #1a1a1a;
-        --surface-hover: #242424;
-        --blue: #60a5fa;
-        --accent: #a78bfa;
-        --warning: #f87171;
-        --layer-1: #1e3a5f;
-        --layer-2: #3b2f6b;
-        --layer-3: #5f2a4a;
-        --layer-4: #5f3a1a;
-      }
-    }
-
-    [data-theme="dark"] {
-      --bg: #111111;
-      --text: #f0f0f0;
-      --text-muted: #aaaaaa;
-      --text-light: #666666;
-      --border: #2a2a2a;
-      --surface: #1a1a1a;
-      --surface-hover: #242424;
-      --blue: #60a5fa;
-      --accent: #a78bfa;
-      --warning: #f87171;
-      --layer-1: #1e3a5f;
-      --layer-2: #3b2f6b;
-      --layer-3: #5f2a4a;
-      --layer-4: #5f3a1a;
-    }
-
-    [data-theme="light"] {
-      --bg: #ffffff;
-      --text: #111111;
-      --text-muted: #555555;
-      --text-light: #888888;
-      --border: #e5e5e5;
-      --surface: #fafafa;
-      --surface-hover: #f0f0f0;
-      --blue: #2563EB;
-      --accent: #7c3aed;
-      --warning: #dc2626;
-      --layer-1: #dbeafe;
-      --layer-2: #ddd6fe;
-      --layer-3: #fbcfe8;
-      --layer-4: #fed7aa;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      font-size: 18px;
-      line-height: 1.7;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    /* NAV */
-    nav {
-      padding: 18px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: var(--bg);
-      z-index: 100;
-    }
-
-    .nav-name {
-      font-family: 'DM Mono', monospace;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      color: var(--text-muted);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--blue);
-    }
-
-    .theme-toggle {
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 4px 10px;
-      font-size: 14px;
-      cursor: pointer;
-      color: var(--text);
-      transition: all 0.15s;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--blue);
-    }
-
-    /* MAIN */
-    main {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 52px 32px 72px;
-    }
-
-    /* PROFILE ROW */
-    .profile-row {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      margin-bottom: 28px;
-    }
-
-    .profile-img {
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
-      object-position: top center;
-    }
-
-    .profile-text h1 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 8px;
-      letter-spacing: -0.02em;
-    }
-
-    .profile-text .tagline {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .social {
-      display: flex;
-      gap: 16px;
-      margin-top: 14px;
-      flex-wrap: wrap;
-    }
-
-    .social a {
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      color: var(--blue);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .social a:hover { text-decoration: underline; }
-
-    /* THESIS TAG */
-    .thesis {
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      color: var(--accent);
-      margin-bottom: 24px;
-      padding: 12px 16px;
-      background: var(--surface);
-      border-left: 3px solid var(--accent);
-      border-radius: 4px;
-      line-height: 1.5;
-    }
-
-    /* BIO */
-    .bio {
-      font-size: 1rem;
-      color: var(--text);
-      line-height: 1.85;
-      margin-bottom: 24px;
-      border-top: 1px solid var(--border);
-      padding-top: 32px;
-    }
-
-    .bio strong { color: var(--text); font-weight: 600; }
-
-    /* KEYWORDS */
-    .keywords {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 48px;
-    }
-
-    .kw {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      padding: 5px 12px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      color: var(--text-muted);
-      background: var(--surface);
-    }
-
-    /* SECTION LABEL */
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 16px;
-      margin-top: 56px;
-    }
-
-    .section-label:first-of-type {
-      margin-top: 0;
-    }
-
-    .section-desc {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-      line-height: 1.7;
-    }
-
-    /* ========================================
-       LIFECYCLE DIAGRAM (with animation)
-       ======================================== */
-    .lifecycle {
-      margin-bottom: 24px;
-      padding: 28px 20px;
-      background: var(--surface);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-
-    .lifecycle-stages {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
-      position: relative;
-    }
-
-    .lifecycle-stage {
-      padding: 14px 10px;
-      background: var(--bg);
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-    }
-
-    .lifecycle-stage:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(124, 58, 237, 0.2);
-    }
-
-    .lifecycle-stage.active {
-      border-color: var(--accent);
-      background: var(--surface-hover);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(124, 58, 237, 0.25);
-    }
-
-    .lifecycle-stage.pulse {
-      animation: pulse 0.6s ease-in-out;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: translateY(-3px) scale(1); }
-      50% { transform: translateY(-3px) scale(1.05); }
-    }
-
-    .lifecycle-stage-code {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--accent);
-      margin-bottom: 4px;
-      letter-spacing: 0.06em;
-    }
-
-    .lifecycle-stage-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.3;
-    }
-
-    .lifecycle-arrow {
-      position: absolute;
-      top: 50%;
-      right: -10px;
-      transform: translateY(-50%);
-      font-size: 14px;
-      color: var(--text-light);
-      z-index: 1;
-      pointer-events: none;
-      transition: color 0.3s;
-    }
-
-    .lifecycle-stage.active .lifecycle-arrow,
-    .lifecycle-stage:hover .lifecycle-arrow {
-      color: var(--accent);
-    }
-
-    .lifecycle-detail {
-      padding: 18px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      min-height: 140px;
-      font-size: 0.88rem;
-      line-height: 1.7;
-      color: var(--text-muted);
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .lifecycle-detail .stage-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    .lifecycle-detail .stage-venue {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--accent);
-      margin-bottom: 10px;
-      letter-spacing: 0.04em;
-    }
-
-    .lifecycle-detail a {
-      color: var(--blue);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-family: 'DM Mono', monospace;
-    }
-
-    .lifecycle-detail a:hover { text-decoration: underline; }
-
-    /* ========================================
-       FOUR-LAYER FRAMEWORK (with animation)
-       ======================================== */
-    .four-layer {
-      margin-bottom: 24px;
-      padding: 28px 20px;
-      background: var(--surface);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-
-    .layer-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-bottom: 20px;
-    }
-
-    .layer {
-      padding: 16px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 2px solid transparent;
-      position: relative;
-    }
-
-    .layer::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 0;
-      background: var(--accent);
-      transition: width 0.3s;
-      opacity: 0;
-    }
-
-    .layer:hover::before,
-    .layer.active::before {
-      width: 4px;
-      opacity: 1;
-    }
-
-    .layer:hover {
-      transform: translateX(8px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-
-    .layer.active {
-      transform: translateX(8px);
-      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
-    }
-
-    .layer-4 { background: var(--layer-4); }
-    .layer-3 { background: var(--layer-3); }
-    .layer-2 { background: var(--layer-2); }
-    .layer-1 { background: var(--layer-1); }
-
-    .layer-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-    }
-
-    .layer-name {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .layer-num {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-    }
-
-    .layer-desc {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-      line-height: 1.5;
-    }
-
-    .layer-detail {
-      padding: 18px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      min-height: 140px;
-      font-size: 0.88rem;
-      line-height: 1.7;
-      color: var(--text-muted);
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    .layer-detail .detail-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    .layer-detail-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    .layer-detail-col strong {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: var(--text-light);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .layer-detail .detail-link {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--blue);
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 12px;
-    }
-
-    .layer-detail .detail-link:hover { text-decoration: underline; }
-
-    /* ========================================
-       PAPERS ↔ TOOLS MAPPING with SVG lines
-       ======================================== */
-    .mapping {
-      margin-bottom: 24px;
-      padding: 28px 20px;
-      background: var(--surface);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      position: relative;
-    }
-
-    .mapping-container {
-      display: grid;
-      grid-template-columns: 1fr 60px 1fr;
-      gap: 8px;
-      align-items: start;
-      position: relative;
-    }
-
-    .mapping-col-header {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .mapping-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .mapping-item {
-      padding: 10px 12px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 0.82rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      line-height: 1.4;
-    }
-
-    .mapping-item:hover {
-      border-color: var(--accent);
-      transform: scale(1.02);
-    }
-
-    .mapping-item.highlighted {
-      border-color: var(--accent);
-      background: var(--surface-hover);
-      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
-      transform: scale(1.02);
-    }
-
-    .mapping-item.dimmed {
-      opacity: 0.25;
-      transform: scale(0.98);
-    }
-
-    .mapping-svg {
-      position: absolute;
-      top: 30px;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .mapping-line {
-      fill: none;
-      stroke: var(--border);
-      stroke-width: 1.5;
-      transition: all 0.3s;
-    }
-
-    .mapping-line.active {
-      stroke: var(--accent);
-      stroke-width: 2.5;
-      filter: drop-shadow(0 2px 4px rgba(124, 58, 237, 0.3));
-    }
-
-    /* ========================================
-       FDA NETWORK VISUALIZATION
-       ======================================== */
-    .fda-network {
-      margin-bottom: 24px;
-      padding: 28px 20px;
-      background: var(--surface);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-
-    .fda-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .fda-btn {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      padding: 6px 12px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: var(--bg);
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.2s;
-      letter-spacing: 0.04em;
-    }
-
-    .fda-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .fda-btn.active {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-    }
-
-    .fda-svg-container {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-      overflow: hidden;
-    }
-
-    .fda-svg {
-      width: 100%;
-      height: 380px;
-      display: block;
-    }
-
-    .fda-node-circle {
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .fda-node-circle:hover {
-      filter: brightness(1.1);
-    }
-
-    .fda-node-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      fill: var(--text);
-      pointer-events: none;
-      text-anchor: middle;
-    }
-
-    .fda-edge {
-      stroke: var(--border);
-      stroke-width: 1;
-      fill: none;
-      transition: all 0.3s;
-    }
-
-    .fda-edge.active {
-      stroke: var(--accent);
-      stroke-width: 2;
-    }
-
-    .fda-edge.outlier {
-      stroke: var(--warning);
-      stroke-width: 2;
-      stroke-dasharray: 4 2;
-    }
-
-    .fda-info {
-      margin-top: 16px;
-      padding: 14px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      min-height: 60px;
-    }
-
-    .fda-info strong { color: var(--text); }
-
-    .fda-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .fda-stat {
-      padding: 10px;
-      background: var(--surface);
-      border-radius: 6px;
-      text-align: center;
-    }
-
-    .fda-stat-value {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--accent);
-      font-family: 'DM Mono', monospace;
-    }
-
-    .fda-stat-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: var(--text-light);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-
-    .fda-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: var(--text-muted);
-    }
-
-    .fda-legend-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .fda-legend-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    /* PAPERS */
-    .paper {
-      padding: 22px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .paper:first-of-type { border-top: 1px solid var(--border); }
-
-    .paper-cluster {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--blue);
-      letter-spacing: 0.06em;
-      margin-bottom: 6px;
-    }
-
-    .paper-cluster.under-review { color: var(--accent); }
-
-    .paper-title {
-      font-size: 0.97rem;
-      font-weight: 600;
-      line-height: 1.5;
-      margin-bottom: 6px;
-    }
-
-    .paper-title a { color: var(--text); text-decoration: none; }
-    .paper-title a:hover { color: var(--blue); }
-
-    .paper-venue {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-      font-family: 'DM Mono', monospace;
-    }
-
-    .paper-venue .status { color: var(--accent); font-weight: 500; }
-
-    .paper-desc {
-      font-size: 0.87rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-      margin-bottom: 10px;
-    }
-
-    .paper-keywords { display: flex; flex-wrap: wrap; gap: 6px; }
-
-    .paper-kw {
-      font-size: 11px;
-      padding: 3px 10px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      color: var(--text-light);
-      background: var(--surface);
-    }
-
-    .see-all {
-      display: inline-block;
-      margin-top: 20px;
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      color: var(--blue);
-      text-decoration: none;
-    }
-
-    .see-all:hover { text-decoration: underline; }
-
-    footer {
-      border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 24px;
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--text-light);
-    }
-
-    footer a { color: var(--text-light); text-decoration: none; }
-    footer a:hover { color: var(--blue); }
-
-    /* MOBILE */
-    @media (max-width: 700px) {
-      nav { padding: 14px 20px; }
-      .nav-links { gap: 18px; }
-      main { padding: 32px 20px 56px; }
-      .profile-row {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 20px;
-        margin-bottom: 22px;
-      }
-      .profile-img { width: 136px; height: 136px; }
-      .social { justify-content: center; }
-      .profile-text h1 { font-size: 1.5rem; }
-      .keywords { gap: 6px; }
-      .lifecycle-stages { grid-template-columns: repeat(2, 1fr); }
-      .lifecycle-arrow { display: none; }
-      .mapping-container { grid-template-columns: 1fr; }
-      .mapping-svg { display: none; }
-      .layer-detail-grid { grid-template-columns: 1fr; }
-      .fda-stats { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-
-<nav>
-  <a href="index.html" class="nav-name">🐚 Sora Kim</a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="papers.html">Papers</a></li>
-    <li><a href="tools.html">Tools</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-</nav>
-
-<script>
-  const toggle = document.getElementById('themeToggle');
-  const root = document.documentElement;
-  const saved = localStorage.getItem('theme');
-  if (saved === 'dark') {
-    root.setAttribute('data-theme', 'dark');
-    toggle.textContent = '☀️';
-  } else if (saved === 'light') {
-    root.setAttribute('data-theme', 'light');
-    toggle.textContent = '🌙';
-  }
-  toggle.addEventListener('click', () => {
-    const isDark = root.getAttribute('data-theme') === 'dark';
-    if (isDark) {
-      root.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
-      toggle.textContent = '🌙';
-    } else {
-      root.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-      toggle.textContent = '☀️';
-    }
-  });
-</script>
-
-<main>
-
-  <div class="profile-row">
-    <img src="crop_trial.jpg" alt="Sora Kim" class="profile-img">
-    <div class="profile-text">
-      <h1>Sora Kim</h1>
-      <p class="tagline">
-        Independent researcher · Pharmaceutical GMP, South Korea<br>
-        PhD applicant, Fall 2027
-      </p>
-      <div class="social">
-        <a href="mailto:sorakim.lab@gmail.com">✉️ Email</a>
-        <a href="https://github.com/sorakim-lab" target="_blank">🐙 GitHub</a>
-        <a href="https://ssrn.com/author=10648616" target="_blank">📄 SSRN</a>
-        <a href="SorakimCV.pdf">📎 CV</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="thesis">
-    ▸ Responsibility is produced, not assigned.
-  </div>
-
-  <p class="bio">
-    Hi! 👋 I'm Sora (소라 in Korean), an independent researcher developing <strong>Accountability-Aware AI</strong> —
-    a research program at the intersection of STS, HCI,
-    and organizational technology adoption. Drawing on four years of embedded practice in pharmaceutical
-    Good Manufacturing Practice (GMP) quality control, I study how regulated organizations structure
-    responsibility <em>before</em> failures occur, and how AI systems reshape what can be known and attributed.
-    My work spans <strong>14+ papers</strong> and <strong>8 production tools</strong> used by a ~50-person quality team at a GMP-regulated manufacturing site.
-  </p>
-
-  <div class="keywords">
-    <span class="kw">⚖️ Accountability Infrastructure</span>
-    <span class="kw">🤖 Accountability-Aware AI</span>
-    <span class="kw">🔍 Sociotechnical Systems</span>
-    <span class="kw">🏭 Regulated Environments</span>
-    <span class="kw">📋 GMP / Pharmaceutical</span>
-    <span class="kw">🧠 Judgment Preservation</span>
-    <span class="kw">🤝 Responsible AI</span>
-    <span class="kw">💬 Human-AI Interaction</span>
-  </div>
-
-  <!-- LIFECYCLE -->
-  <p class="section-label">Theoretical Program — The Accountability Lifecycle</p>
-  <p class="section-desc">
-    A four-stage theory of how organizations produce responsibility. Click each stage — or watch the auto-demo below.
-  </p>
-
-  <div class="lifecycle">
-    <div class="lifecycle-stages">
-      <div class="lifecycle-stage active" data-stage="aac">
-        <div class="lifecycle-stage-code">STAGE 1 · AAC</div>
-        <div class="lifecycle-stage-name">Accountability Before Action</div>
-        <div class="lifecycle-arrow">→</div>
-      </div>
-      <div class="lifecycle-stage" data-stage="cf">
-        <div class="lifecycle-stage-code">STAGE 2 · CF</div>
-        <div class="lifecycle-stage-name">Cognitive Friction</div>
-        <div class="lifecycle-arrow">→</div>
-      </div>
-      <div class="lifecycle-stage" data-stage="rc">
-        <div class="lifecycle-stage-code">STAGE 3 · RC</div>
-        <div class="lifecycle-stage-name">Responsibility Convergence</div>
-        <div class="lifecycle-arrow">→</div>
-      </div>
-      <div class="lifecycle-stage" data-stage="pac">
-        <div class="lifecycle-stage-code">STAGE 4 · PAC</div>
-        <div class="lifecycle-stage-name">Premature Accountability Convergence</div>
-      </div>
-    </div>
-
-    <div class="lifecycle-detail" id="lifecycle-detail"></div>
-  </div>
-
-  <!-- FOUR LAYER -->
-  <p class="section-label">Design Program — Four-Layer Framework</p>
-  <p class="section-desc">
-    How to design accountability infrastructure. Four layers, each operationalized by a deployed system
-    and documented in an HCI paper. Click to explore.
-  </p>
-
-  <div class="four-layer">
-    <div class="layer-stack">
-      <div class="layer layer-4 active" data-layer="reasoning">
-        <div class="layer-header">
-          <div class="layer-name">🧠 Reasoning</div>
-          <div class="layer-num">Layer 4</div>
-        </div>
-        <div class="layer-desc">Supporting judgment under closure pressure</div>
-      </div>
-      <div class="layer layer-3" data-layer="coordination">
-        <div class="layer-header">
-          <div class="layer-name">🤝 Coordination</div>
-          <div class="layer-num">Layer 3</div>
-        </div>
-        <div class="layer-desc">Surfacing friction before failure</div>
-      </div>
-      <div class="layer layer-2" data-layer="structure">
-        <div class="layer-header">
-          <div class="layer-name">🔗 Structure</div>
-          <div class="layer-num">Layer 2</div>
-        </div>
-        <div class="layer-desc">Revealing cross-document connections</div>
-      </div>
-      <div class="layer layer-1" data-layer="accessibility">
-        <div class="layer-header">
-          <div class="layer-name">🔍 Accessibility</div>
-          <div class="layer-num">Layer 1 · Foundation</div>
-        </div>
-        <div class="layer-desc">Reaching procedural knowledge when needed</div>
-      </div>
-    </div>
-
-    <div class="layer-detail" id="layer-detail"></div>
-  </div>
-
-  <!-- MAPPING with SVG curves -->
-  <p class="section-label">Research ↔ Practice Mapping</p>
-  <p class="section-desc">
-    Each HCI paper grew from a deployed tool, and each tool is documented in a paper.
-    Hover any card — curves will show you the pair.
-  </p>
-
-  <div class="mapping">
-    <div class="mapping-container" id="mappingContainer">
-      <div>
-        <div class="mapping-col-header">HCI Papers</div>
-        <div class="mapping-list">
-          <div class="mapping-item" data-pair="rca" data-type="paper" data-idx="0">
-            <strong>Keeping Comparison Open</strong><br>
-            <span style="font-size: 0.75rem; color: var(--text-light);">CSCW 2027 · AI comparison enforcer</span>
-          </div>
-          <div class="mapping-item" data-pair="review" data-type="paper" data-idx="1">
-            <strong>Friction Before Failure</strong><br>
-            <span style="font-size: 0.75rem; color: var(--text-light);">SSRN · Dissociation finding</span>
-          </div>
-          <div class="mapping-item" data-pair="sop" data-type="paper" data-idx="2">
-            <strong>From Retrieval to Reasoning</strong><br>
-            <span style="font-size: 0.75rem; color: var(--text-light);">SSRN · AI-assisted retrieval</span>
-          </div>
-          <div class="mapping-item" data-pair="navigation" data-type="paper" data-idx="3">
-            <strong>When Documents Don't Connect</strong><br>
-            <span style="font-size: 0.75rem; color: var(--text-light);">SSRN · Human as infrastructure</span>
-          </div>
-        </div>
-      </div>
-
-      <div></div>
-
-      <div>
-        <div class="mapping-col-header">Deployed Tools</div>
-        <div class="mapping-list">
-          <div class="mapping-item" data-pair="rca" data-type="tool" data-idx="0">
-            <strong>🔬 RCA Scaffolder</strong><br>
-            <span style="font-size: 0.75rem; color: var(--text-light);">Comparison enforcer in deployment</span>
-          </div>
-          <div class="mapping-item" data-pair="review" data-type="tool" data-idx="1">
-            <strong>📋 Review Dashboard</strong><br>
-            <span style="font-size: 0.75rem; color: var(--text-light);">Friction surfacing in CAPA review</span>
-          </div>
-          <div class="mapping-item" data-pair="sop" data-type="tool" data-idx="2">
-            <strong>🔍 SOP Retrieval System</strong><br>
-            <span style="font-size: 0.75rem; color: var(--text-light);">Semantic search + AI layer</span>
-          </div>
-          <div class="mapping-item" data-pair="navigation" data-type="tool" data-idx="3">
-            <strong>🔗 Document Navigation Tool</strong><br>
-            <span style="font-size: 0.75rem; color: var(--text-light);">Cross-doc linking interface</span>
-          </div>
-        </div>
-      </div>
-
-      <svg class="mapping-svg" id="mappingSvg" xmlns="http://www.w3.org/2000/svg"></svg>
-    </div>
-  </div>
-
-  <!-- FDA NETWORK -->
-  <p class="section-label">Computational Demo — FDA Warning Letters Network</p>
-  <p class="section-desc">
-    An interactive visualization of accountability attribution in a sample of FDA Warning Letters.
-    From my <em>Accountability Graph Extraction</em> paper (part of the Computational Research program below).
-    Click a letter to explore its attribution structure.
-  </p>
-
-  <div class="fda-network">
-    <div class="fda-controls">
-      <button class="fda-btn active" data-letter="WL2020-01">WL2020-01</button>
-      <button class="fda-btn" data-letter="WL2019-03">WL2019-03</button>
-      <button class="fda-btn" data-letter="WL2021-07">WL2021-07</button>
-      <button class="fda-btn" data-letter="WL2018-05">WL2018-05 ⚠️</button>
-      <button class="fda-btn" data-letter="WL2022-02">WL2022-02</button>
-    </div>
-
-    <div class="fda-svg-container">
-      <svg class="fda-svg" id="fdaSvg" viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg"></svg>
-    </div>
-
-    <div class="fda-info" id="fdaInfo"></div>
-
-    <div class="fda-stats" id="fdaStats"></div>
-
-    <div class="fda-legend">
-      <div class="fda-legend-item"><div class="fda-legend-dot" style="background: #7c3aed;"></div>Firm (accountability recipient)</div>
-      <div class="fda-legend-item"><div class="fda-legend-dot" style="background: #2563EB;"></div>System</div>
-      <div class="fda-legend-item"><div class="fda-legend-dot" style="background: #10b981;"></div>Individual</div>
-      <div class="fda-legend-item"><div class="fda-legend-dot" style="background: #f59e0b;"></div>Material</div>
-      <div class="fda-legend-item">⚠️ Outlier case (cross-framework convergence)</div>
-    </div>
-  </div>
-
-  <!-- SELECTED PAPERS -->
-  <p class="section-label">Selected Papers</p>
-
-  <div class="papers-list">
-
-    <div class="paper">
-      <div class="paper-cluster under-review">STS · AI &amp; Technology · PAC</div>
-      <div class="paper-title">
-        <a href="https://ssrn.com/abstract=6391379" target="_blank">Premature Accountability Convergence: How Technology Accelerates Responsibility Stabilization in Organizations</a>
-      </div>
-      <div class="paper-venue">Under review · <span class="status">Information and Organization</span></div>
-      <div class="paper-desc">
-        Reframes AI's role from "acceleration" to "earlier institutional closure of interpretive possibility."
-        Three mechanisms: representational compression, epistemic authority amplification, and temporal contraction.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">🤖 AI accountability</span>
-        <span class="paper-kw">⏱️ Temporal closure</span>
-        <span class="paper-kw">🏭 Sociomateriality</span>
-      </div>
-    </div>
-
-    <div class="paper">
-      <div class="paper-cluster">HCI · Framework · TOCHI</div>
-      <div class="paper-title">
-        <a href="#" target="_blank">Accountability Infrastructure Design: A Four-Layer Framework for Judgment-Preserving Systems in Regulated Work</a>
-      </div>
-      <div class="paper-venue">In preparation · <span class="status">ACM TOCHI</span></div>
-      <div class="paper-desc">
-        Umbrella paper synthesizing five HCI studies. The framework visualized above, with three design principles:
-        upstream stabilization, observability over optimization, judgment preservation.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">🗂️ Four-layer framework</span>
-        <span class="paper-kw">🧠 Judgment preservation</span>
-        <span class="paper-kw">📐 Design principles</span>
-      </div>
-    </div>
-
-    <div class="paper">
-      <div class="paper-cluster">HCI · AI Scaffolding · CSCW 2027</div>
-      <div class="paper-title">
-        <a href="#" target="_blank">Keeping Comparison Open: An RCA Scaffolder for Preserving Interpretive Alternatives in Regulated Investigations</a>
-      </div>
-      <div class="paper-venue">In preparation · <span class="status">CSCW 2027</span></div>
-      <div class="paper-desc">
-        Introduces AI as <em>comparison enforcer</em> — detecting premature closure and reopening the comparison space,
-        rather than generating candidate explanations. N=20 user study.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">🤖 AI scaffolding</span>
-        <span class="paper-kw">🔬 Root cause analysis</span>
-        <span class="paper-kw">⚖️ Premature convergence</span>
-      </div>
-    </div>
-
-    <div class="paper">
-      <div class="paper-cluster">Computational · Umbrella</div>
-      <div class="paper-title">
-        <a href="#" target="_blank">Responsibility as Multi-Layer Signal: A Computational Framework for FDA Warning Letters</a>
-      </div>
-      <div class="paper-venue">Working paper · SSRN</div>
-      <div class="paper-desc">
-        Integrates four frameworks: PAC detection, accountability graph extraction, attribution prediction, and RDM.
-        Core finding: structural pre-convergence in FDA Warning Letters <em>before</em> investigative reasoning is complete.
-      </div>
-      <div class="paper-keywords">
-        <span class="paper-kw">📊 Computational accountability</span>
-        <span class="paper-kw">📄 FDA Warning Letters</span>
-        <span class="paper-kw">🕸️ Multi-layer signal</span>
-      </div>
-    </div>
-
-  </div>
-
-  <a href="papers.html" class="see-all">See all 14 papers →</a>
-
-</main>
-
-<footer>
-  © 2026 Sora Kim · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
-</footer>
-
-<script>
-  // ========================================
-  // LIFECYCLE INTERACTION + AUTO DEMO
-  // ========================================
-  const lifecycleData = {
-    aac: {
-      title: "Stage 1 · Accountability Before Action (AAC)",
-      venue: "Under review · Academy of Management Review",
-      desc: "How organizations structure responsibility <em>before</em> failures occur, through three structural components: procedural structuring, documentation regimes, and evaluative anticipation. The foundation of the lifecycle.",
-      link: "https://ssrn.com/abstract=6371980"
-    },
-    cf: {
-      title: "Stage 2 · Cognitive Friction (CF)",
-      venue: "Under review · Organization",
-      desc: "Procedural documents as accountability infrastructure. A 400-sentence corpus analysis identifies conditional branching as the primary source of cognitive friction. Friction distributes responsibility across the document-reader interface.",
-      link: "https://ssrn.com/abstract=6391278"
-    },
-    rc: {
-      title: "Stage 3 · Responsibility Convergence (RC)",
-      venue: "Under review · Organization Science",
-      desc: "Three mechanisms through which investigative systems converge on firm-level attribution: ambiguity resolution, closure pressure, and legibility bias. Empirical anchor: 159/160 FDA Warning Letters converge on firm.",
-      link: "https://ssrn.com/abstract=6372301"
-    },
-    pac: {
-      title: "Stage 4 · Premature Accountability Convergence (PAC)",
-      venue: "Under review · Information and Organization",
-      desc: "How technology accelerates responsibility stabilization. Reframes AI's role from 'acceleration' to 'earlier institutional closure of interpretive possibility.' Three mechanisms: representational compression, epistemic authority amplification, temporal contraction.",
-      link: "https://ssrn.com/abstract=6391379"
-    }
-  };
-
-  const stages = document.querySelectorAll('.lifecycle-stage');
-  const lifecycleDetail = document.getElementById('lifecycle-detail');
-  let autoDemoStopped = false;
-
-  function showStage(key) {
-    stages.forEach(s => s.classList.remove('active'));
-    const stage = document.querySelector(`.lifecycle-stage[data-stage="${key}"]`);
-    if (stage) {
-      stage.classList.add('active', 'pulse');
-      setTimeout(() => stage.classList.remove('pulse'), 600);
-    }
-    const data = lifecycleData[key];
-    lifecycleDetail.innerHTML = `
-      <div class="stage-title">${data.title}</div>
-      <div class="stage-venue">${data.venue}</div>
-      ${data.desc}
-      <br><br>
-      <a href="${data.link}" target="_blank">→ Read on SSRN</a>
-    `;
-  }
-
-  showStage('aac');
-
-  stages.forEach(stage => {
-    stage.addEventListener('click', () => {
-      autoDemoStopped = true;
-      showStage(stage.dataset.stage);
-    });
-  });
-
-  // Auto demo: cycle through stages on first view (if user hasn't clicked yet)
-  const stageOrder = ['aac', 'cf', 'rc', 'pac'];
-  let autoIdx = 0;
-  setTimeout(function autoAdvance() {
-    if (autoDemoStopped) return;
-    autoIdx = (autoIdx + 1) % 4;
-    showStage(stageOrder[autoIdx]);
-    if (autoIdx < 3) {
-      setTimeout(autoAdvance, 2200);
-    }
-  }, 2500);
-
-  // ========================================
-  // FOUR-LAYER FRAMEWORK
-  // ========================================
-  const layerData = {
-    reasoning: {
-      title: "Reasoning — Supporting judgment under closure pressure",
-      desc: "The top layer: how interfaces preserve analyst judgment when investigative systems pressure toward premature attribution. AI functions as <em>comparison enforcer</em>, not explanation generator.",
-      paper: "<em>Keeping Comparison Open</em> (CSCW 2027)",
-      tool: "RCA Scaffolder"
-    },
-    coordination: {
-      title: "Coordination — Surfacing friction before failure",
-      desc: "Making procedural friction observable before it escalates into formal deviation. The dissociation finding: immediate legibility and conceptual orientation work through distinct cognitive pathways.",
-      paper: "<em>Friction Before Failure</em> (SSRN)",
-      tool: "Review Dashboard"
-    },
-    structure: {
-      title: "Structure — Revealing cross-document connections",
-      desc: "The invisible work of connecting documents across regulated systems. Identifies the human as 'missing infrastructure' in cross-document accountability gaps. Star &amp; Ruhleder lineage.",
-      paper: "<em>When Documents Don't Connect</em> (SSRN)",
-      tool: "Document Navigation Tool"
-    },
-    accessibility: {
-      title: "Accessibility — Reaching procedural knowledge when needed",
-      desc: "The foundation: how practitioners reach SOPs at the moment of action. Reframes retrieval as interpretive condition, not mere access. AI layer functions to EXPLAIN, SURFACE, and KEEP alternatives.",
-      paper: "<em>From Retrieval to Reasoning</em> (SSRN)",
-      tool: "SOP Retrieval System"
-    }
-  };
-
-  const layers = document.querySelectorAll('.layer');
-  const layerDetail = document.getElementById('layer-detail');
-
-  function showLayer(key) {
-    layers.forEach(l => l.classList.remove('active'));
-    const layer = document.querySelector(`.layer[data-layer="${key}"]`);
-    if (layer) layer.classList.add('active');
-    const data = layerData[key];
-    layerDetail.innerHTML = `
-      <div class="detail-title">${data.title}</div>
-      ${data.desc}
-      <div class="layer-detail-grid">
-        <div class="layer-detail-col">
-          <strong>Paper</strong>
-          ${data.paper}
-        </div>
-        <div class="layer-detail-col">
-          <strong>Deployed system</strong>
-          ${data.tool}
-        </div>
-      </div>
-      <a href="tools.html" class="detail-link">→ See the tool</a>
-    `;
-  }
-
-  showLayer('reasoning');
-
-  layers.forEach(layer => {
-    layer.addEventListener('click', () => showLayer(layer.dataset.layer));
-  });
-
-  // ========================================
-  // PAPERS ↔ TOOLS MAPPING with SVG curves
-  // ========================================
-  const mappingContainer = document.getElementById('mappingContainer');
-  const mappingSvg = document.getElementById('mappingSvg');
-  const mappingItems = document.querySelectorAll('.mapping-item');
-
-  function drawCurves(highlightedPair = null) {
-    if (!mappingSvg) return;
-    mappingSvg.innerHTML = '';
-    const rect = mappingContainer.getBoundingClientRect();
-    mappingSvg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
-
-    const papers = document.querySelectorAll('.mapping-item[data-type="paper"]');
-    const tools = document.querySelectorAll('.mapping-item[data-type="tool"]');
-
-    papers.forEach(paperEl => {
-      const pair = paperEl.dataset.pair;
-      const toolEl = document.querySelector(`.mapping-item[data-type="tool"][data-pair="${pair}"]`);
-      if (!toolEl) return;
-
-      const pRect = paperEl.getBoundingClientRect();
-      const tRect = toolEl.getBoundingClientRect();
-      const containerRect = mappingContainer.getBoundingClientRect();
-
-      const x1 = pRect.right - containerRect.left;
-      const y1 = pRect.top + pRect.height / 2 - containerRect.top;
-      const x2 = tRect.left - containerRect.left;
-      const y2 = tRect.top + tRect.height / 2 - containerRect.top;
-
-      const midX = (x1 + x2) / 2;
-      const path = `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`;
-
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      line.setAttribute('d', path);
-      line.setAttribute('class', 'mapping-line' + (highlightedPair === pair ? ' active' : ''));
-      mappingSvg.appendChild(line);
-    });
-  }
-
-  setTimeout(() => drawCurves(), 100);
-  window.addEventListener('resize', () => drawCurves());
-
-  mappingItems.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-      const pair = item.dataset.pair;
-      mappingItems.forEach(other => {
-        if (other.dataset.pair === pair) other.classList.add('highlighted');
-        else other.classList.add('dimmed');
-      });
-      drawCurves(pair);
-    });
-
-    item.addEventListener('mouseleave', () => {
-      mappingItems.forEach(other => {
-        other.classList.remove('highlighted');
-        other.classList.remove('dimmed');
-      });
-      drawCurves();
-    });
-
-    item.addEventListener('click', () => {
-      const pair = item.dataset.pair;
-      const isHighlighted = item.classList.contains('highlighted');
-      mappingItems.forEach(other => {
-        other.classList.remove('highlighted');
-        other.classList.remove('dimmed');
-      });
-      if (!isHighlighted) {
-        mappingItems.forEach(other => {
-          if (other.dataset.pair === pair) other.classList.add('highlighted');
-          else other.classList.add('dimmed');
-        });
-        drawCurves(pair);
-      } else {
-        drawCurves();
-      }
-    });
-  });
-
-  // ========================================
-  // FDA WARNING LETTERS NETWORK
-  // ========================================
-  const fdaData = {
-    "WL2020-01": {
-      title: "Sterile manufacturing deviations (2020)",
-      summary: "Data integrity and sterility assurance failures. Attribution converges on <strong>Firm</strong> despite multiple system-level causes.",
-      nodes: [
-        { id: "Firm", x: 350, y: 190, type: "firm", size: 38 },
-        { id: "QC System", x: 180, y: 100, type: "system", size: 24 },
-        { id: "Training", x: 180, y: 280, type: "system", size: 22 },
-        { id: "Operator", x: 530, y: 100, type: "individual", size: 20 },
-        { id: "Equipment", x: 530, y: 280, type: "material", size: 18 }
-      ],
-      edges: [
-        { from: "QC System", to: "Firm", weight: 0.3 },
-        { from: "Training", to: "Firm", weight: 0.2 },
-        { from: "Operator", to: "Firm", weight: 0.3 },
-        { from: "Equipment", to: "Firm", weight: 0.2 }
-      ],
-      stats: { firmIn: "0.444", centrality: "0.82", outlier: "No" },
-      outlier: false
-    },
-    "WL2019-03": {
-      title: "GMP documentation violations (2019)",
-      summary: "Procedural documentation failures. Star topology: all pathways terminate at <strong>Firm</strong> despite distributed causes.",
-      nodes: [
-        { id: "Firm", x: 350, y: 190, type: "firm", size: 38 },
-        { id: "Doc System", x: 150, y: 150, type: "system", size: 28 },
-        { id: "SOP Gap", x: 150, y: 250, type: "system", size: 20 },
-        { id: "Reviewer", x: 550, y: 190, type: "individual", size: 22 }
-      ],
-      edges: [
-        { from: "Doc System", to: "Firm", weight: 0.4 },
-        { from: "SOP Gap", to: "Firm", weight: 0.2 },
-        { from: "Reviewer", to: "Firm", weight: 0.25 }
-      ],
-      stats: { firmIn: "0.448", centrality: "0.85", outlier: "No" },
-      outlier: false
-    },
-    "WL2021-07": {
-      title: "Quality unit oversight failures (2021)",
-      summary: "Quality unit oversight issues with moderate attribution distribution. Still firm-centric.",
-      nodes: [
-        { id: "Firm", x: 350, y: 190, type: "firm", size: 36 },
-        { id: "QA Unit", x: 170, y: 190, type: "system", size: 30 },
-        { id: "Management", x: 530, y: 120, type: "individual", size: 24 },
-        { id: "Batch Record", x: 530, y: 260, type: "material", size: 20 }
-      ],
-      edges: [
-        { from: "QA Unit", to: "Firm", weight: 0.35 },
-        { from: "Management", to: "Firm", weight: 0.3 },
-        { from: "Batch Record", to: "Firm", weight: 0.15 }
-      ],
-      stats: { firmIn: "0.421", centrality: "0.79", outlier: "No" },
-      outlier: false
-    },
-    "WL2018-05": {
-      title: "⚠️ Cross-framework outlier case (2018)",
-      summary: "<strong>Extreme outlier across all four frameworks.</strong> Individual-level attribution uniquely dominates here — opposite of the firm-convergence pattern. Flagged by PAC detection, graph extraction, attribution prediction, and RDM.",
-      nodes: [
-        { id: "Firm", x: 350, y: 240, type: "firm", size: 22 },
-        { id: "Individual", x: 350, y: 100, type: "individual", size: 40 },
-        { id: "Intentional Act", x: 180, y: 60, type: "individual", size: 22 },
-        { id: "Supervisor", x: 520, y: 60, type: "individual", size: 22 },
-        { id: "System", x: 520, y: 280, type: "system", size: 16 }
-      ],
-      edges: [
-        { from: "Intentional Act", to: "Individual", weight: 0.5, outlier: true },
-        { from: "Supervisor", to: "Individual", weight: 0.3, outlier: true },
-        { from: "Individual", to: "Firm", weight: 0.2 },
-        { from: "System", to: "Firm", weight: 0.1 }
-      ],
-      stats: { firmIn: "0.12", centrality: "0.28", outlier: "YES" },
-      outlier: true
-    },
-    "WL2022-02": {
-      title: "AI-assisted deviation review (2022)",
-      summary: "Recent case showing technology-mediated attribution. AI system output cited but responsibility still converges on firm.",
-      nodes: [
-        { id: "Firm", x: 350, y: 190, type: "firm", size: 38 },
-        { id: "AI Review", x: 160, y: 100, type: "system", size: 26 },
-        { id: "CAPA System", x: 160, y: 280, type: "system", size: 24 },
-        { id: "Analyst", x: 540, y: 190, type: "individual", size: 22 }
-      ],
-      edges: [
-        { from: "AI Review", to: "Firm", weight: 0.3 },
-        { from: "CAPA System", to: "Firm", weight: 0.3 },
-        { from: "Analyst", to: "Firm", weight: 0.25 }
-      ],
-      stats: { firmIn: "0.452", centrality: "0.86", outlier: "No" },
-      outlier: false
-    }
-  };
-
-  const fdaColors = {
-    firm: "#7c3aed",
-    system: "#2563EB",
-    individual: "#10b981",
-    material: "#f59e0b"
-  };
-
-  const fdaSvg = document.getElementById('fdaSvg');
-  const fdaInfo = document.getElementById('fdaInfo');
-  const fdaStats = document.getElementById('fdaStats');
-  const fdaBtns = document.querySelectorAll('.fda-btn');
-
-  function renderNetwork(letterId) {
-    const data = fdaData[letterId];
-    fdaSvg.innerHTML = '';
-
-    // Draw edges first (behind nodes)
-    data.edges.forEach(edge => {
-      const fromNode = data.nodes.find(n => n.id === edge.from);
-      const toNode = data.nodes.find(n => n.id === edge.to);
-      if (!fromNode || !toNode) return;
-
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('x1', fromNode.x);
-      line.setAttribute('y1', fromNode.y);
-      line.setAttribute('x2', toNode.x);
-      line.setAttribute('y2', toNode.y);
-      line.setAttribute('class', 'fda-edge' + (edge.outlier ? ' outlier' : ' active'));
-      line.style.strokeWidth = 1 + edge.weight * 3;
-      fdaSvg.appendChild(line);
-    });
-
-    // Draw nodes
-    data.nodes.forEach(node => {
-      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      g.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', node.x);
-      circle.setAttribute('cy', node.y);
-      circle.setAttribute('r', node.size);
-      circle.setAttribute('fill', fdaColors[node.type]);
-      circle.setAttribute('class', 'fda-node-circle');
-      circle.setAttribute('opacity', '0.85');
-      if (data.outlier && node.type === 'individual' && node.size >= 30) {
-        circle.setAttribute('stroke', '#dc2626');
-        circle.setAttribute('stroke-width', '3');
-        circle.setAttribute('stroke-dasharray', '4 2');
-      }
-
-      const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      label.setAttribute('x', node.x);
-      label.setAttribute('y', node.y + node.size + 14);
-      label.setAttribute('class', 'fda-node-label');
-      label.textContent = node.id;
-
-      g.appendChild(circle);
-      g.appendChild(label);
-      fdaSvg.appendChild(g);
-
-      // Fade-in animation
-      g.style.opacity = '0';
-      setTimeout(() => {
-        g.style.opacity = '1';
-        g.style.transition += ', opacity 0.5s';
-      }, 50);
-    });
-
-    fdaInfo.innerHTML = `<strong>${data.title}</strong><br>${data.summary}`;
-
-    fdaStats.innerHTML = `
-      <div class="fda-stat">
-        <div class="fda-stat-value">${data.stats.firmIn}</div>
-        <div class="fda-stat-label">Firm In-Degree</div>
-      </div>
-      <div class="fda-stat">
-        <div class="fda-stat-value">${data.stats.centrality}</div>
-        <div class="fda-stat-label">Centrality</div>
-      </div>
-      <div class="fda-stat">
-        <div class="fda-stat-value" style="color: ${data.stats.outlier === 'YES' ? 'var(--warning)' : 'var(--accent)'};">${data.stats.outlier}</div>
-        <div class="fda-stat-label">Outlier</div>
-      </div>
-    `;
-  }
-
-  renderNetwork('WL2020-01');
-
-  fdaBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      fdaBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderNetwork(btn.dataset.letter);
-    });
-  });
-</script>
-
-</body>
-</html>
+\documentclass[sigconf,review]{acmart}
+
+% -----------------------------------------------
+% Premature Convergence Detection
+% FAccT Workshop Paper
+% Kim, Sora (2026)
+% -----------------------------------------------
+
+\title{Detecting Premature Accountability Convergence: 
+A Computational Framework for Regulatory Investigations}
+
+\author{Sora Kim}
+\affiliation{%
+  \institution{Pharmaceutical Manufacturing Industry}
+  \country{South Korea}
+}
+\email{sorakim.lab@gmail.com}
+
+\begin{abstract}
+Premature accountability convergence (PAC) occurs when investigative reasoning 
+closes too early on a single explanation, despite available alternatives. 
+While prior work has theorized this phenomenon in regulated environments, 
+no computational framework exists for its detection. 
+I present a feature-based classification approach that operationalizes PAC 
+as a process-quality detection task, distinct from correctness assessment. 
+Using a synthetic dataset (n=500) validated against an FDA Warning Letter 
+corpus (N=50, 2016--2025), I train and evaluate three classifiers 
+(Logistic Regression, Random Forest, SVM), achieving AUC scores above 0.97 
+across all models. Ablation analysis identifies commitment level as the 
+strongest predictor ($\Delta$F1 = 0.060), while SHAP analysis reveals 
+that explanation count drives case-level variation. 
+Our framework provides a foundation for accountability-aware AI systems 
+in high-stakes regulatory contexts.
+\end{abstract}
+
+\keywords{accountability, premature convergence, NLP, regulatory AI, 
+FDA, explainability}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+In high-stakes investigative settings, accountability is not simply 
+discovered from evidence --- it is constructed through sequential 
+interpretive decisions. When this process closes too early on a single 
+explanation, premature accountability convergence (PAC) occurs: 
+alternatives remain available, but reasoning has already stabilized 
+\cite{kim2026pac}.
+
+PAC is particularly consequential in regulated manufacturing environments, 
+where root cause analysis (RCA) determines corrective actions, 
+regulatory responses, and organizational liability. 
+A premature conclusion --- even a correct one --- may leave systemic 
+contributors unexamined, increasing the risk of recurrence.
+
+Despite growing interest in accountability in AI and organizational systems 
+\cite{bovens2007}, no computational framework exists for detecting PAC 
+as it occurs. Prior work has theorized convergence as a social and 
+organizational phenomenon, but has not operationalized it as a 
+detectable signal in text or process data.
+
+This paper makes three contributions:
+\begin{itemize}
+    \item I formalize PAC detection as a \textit{process-quality} 
+    classification task, distinct from correctness assessment.
+    \item I design an entropy-based explanatory diversity score and 
+    a feature set grounded in PAC theory.
+    \item I validate our framework against an FDA Warning Letter corpus 
+    (N=50, 2016--2025), demonstrating empirical alignment between 
+    synthetic and real-world regulatory data.
+\end{itemize}
+
+\section{Related Work}
+
+\subsection{Accountability in Computational Systems}
+Accountability has been studied extensively in public administration 
+and AI governance \cite{bovens2007}, but computational approaches 
+remain limited. Prior work on algorithmic accountability has focused 
+on outcome fairness \cite{barocas2019} and transparency \cite{doshi2017}, 
+rather than the \textit{process} by which responsibility is constructed. 
+I extend this line of work by treating accountability convergence 
+as a computationally tractable phenomenon.
+
+\subsection{Convergence and Closure in Reasoning}
+Premature closure --- the tendency to settle on an explanation before 
+exhausting alternatives --- has been documented in medical diagnosis 
+\cite{croskerry2002}, legal reasoning, and organizational investigation. 
+However, existing work relies on qualitative analysis or expert judgment. 
+Our framework operationalizes premature closure as a detectable 
+signal using structural and linguistic features.
+
+\subsection{NLP for Regulatory Text}
+Recent work has applied NLP to regulatory documents including 
+clinical notes \cite{johnson2016} and legal corpora. 
+FDA Warning Letters have been used for compliance analysis 
+\cite{kim2026aac}, but not for process-quality assessment. 
+I introduce this corpus as a validation resource for 
+convergence detection.
+
+\section{Framework}
+
+\subsection{Definition}
+I define premature accountability convergence at time $t$ as follows:
+
+\begin{quote}
+\textit{Premature convergence at time $t$ occurs when the reasoning 
+state exhibits low explanatory diversity and high attribution commitment, 
+despite later evidence demonstrating that additional plausible 
+explanations or attributional revisions were still available 
+\cite{kim2026pac}.}
+\end{quote}
+
+This definition has three key properties. 
+First, it is \textit{process-oriented}: correctness of the final 
+conclusion is irrelevant. 
+Second, it is \textit{temporally grounded}: convergence is assessed 
+relative to what was knowable at time $t$. 
+Third, it is \textit{empirically operationalizable}: each component 
+can be measured from process data or document structure.
+
+\subsection{Feature Design}
+I operationalize PAC through six features derived from 
+reasoning logs or investigative documents:
+
+\begin{itemize}
+    \item \textbf{Explanation count}: number of distinct causal 
+    explanations considered at time $t$
+    \item \textbf{Diversity score}: Shannon entropy over explanation 
+    categories, $H = -\sum p_i \log_2 p_i$
+    \item \textbf{Commitment level}: ordinal scale (0=low, 1=medium, 
+    2=high) reflecting epistemic certainty
+    \item \textbf{Uncertainty marker}: presence of hedging language 
+    (\textit{possibly}, \textit{may}, \textit{unclear})
+    \item \textbf{Closure language}: presence of commitment language 
+    (\textit{clearly}, \textit{obviously}, \textit{root cause is})
+    \item \textbf{Alternative considered}: whether alternative 
+    explanations were explicitly examined
+\end{itemize}
+
+\subsection{Labeling}
+Labels are assigned probabilistically via a risk score:
+
+\begin{equation}
+r = w_1(3{-}e) + w_2 c + w_3(1{-}u) + w_4 l
+\end{equation}
+
+where $e$, $c$, $u$, $l$ denote explanation count, commitment level, 
+uncertainty marker, and closure language respectively, 
+and $w_1 = w_2 = w_3 = w_4 = 0.25$. 
+Gaussian noise $\mathcal{N}(0, 0.15)$ is added to simulate 
+real-world label ambiguity. Cases exceeding threshold $\theta = 0.5$ 
+are labeled as premature ($y=1$).
+
+\section{Experiments}
+
+\subsection{Dataset}
+I construct a two-part dataset following a synthetic-to-real 
+validation design.
+
+\textbf{Synthetic dataset.} 
+I generate $n=500$ cases using probabilistic labeling 
+(Section 3.3), yielding a near-balanced distribution 
+(42\% premature, 58\% non-premature). 
+The mean explanatory diversity score is 1.584 (SD = 0.821).
+
+\textbf{FDA Warning Letter corpus.} 
+I validate against $N=50$ FDA Warning Letters 
+(2016--2025, 21 CFR 210/211), comprising 160 violations 
+across 50 finished pharmaceutical manufacturing cases \cite{kim2026aac}. 
+The corpus yields a mean diversity score of 1.601 (SD = 0.489), 
+closely approximating the synthetic distribution 
+($\Delta = 0.017$), supporting the ecological validity 
+of our synthetic design.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure2_diversity.png}
+\caption{Explanatory diversity score distribution. 
+Premature cases concentrate near zero entropy, 
+while non-premature cases spread toward higher diversity.}
+\label{fig:diversity}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure3_fda_violation.png}
+\caption{Violation count distribution across 50 FDA Warning Letter cases. 
+Mean = 3.2 violations per case.}
+\label{fig:fdaviolation}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure4_synthetic_vs_fda.png}
+\caption{Diversity score distribution: synthetic dataset vs FDA  Warning Letter corpus. 
+Mean scores are nearly identical (1.584 vs 1.601).}
+\label{fig:syntheticfda}
+\end{figure}
+
+\subsection{Models}
+I evaluate three classifiers within a standardized pipeline 
+(StandardScaler + classifier): 
+Logistic Regression (LR), Random Forest (RF, $n=100$ trees), 
+and Support Vector Machine (SVM, RBF kernel). 
+All models are evaluated via 5-fold cross-validation 
+with F1 as the primary metric, and AUC on a held-out 
+test set (20\%).
+
+\subsection{Results}
+Table~\ref{tab:model} reports model performance. 
+All three classifiers achieve consistent F1 scores 
+(0.901--0.913) and AUC above 0.97, suggesting that 
+premature convergence is a robustly detectable signal 
+rather than an artifact of any particular model architecture.
+
+\begin{table}[h]
+\caption{Model Comparison (5-fold CV)}
+\label{tab:model}
+\begin{tabular}{lcc}
+\hline
+\textbf{Model} & \textbf{F1 (CV)} & \textbf{AUC} \\
+\hline
+Logistic Regression & 0.909 $\pm$ 0.031 & 0.973 \\
+Random Forest       & 0.901 $\pm$ 0.031 & 0.975 \\
+SVM                 & 0.913 $\pm$ 0.036 & 0.974 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure7_roc.png}
+\caption{ROC curves for all three classifiers. All models achieve AUC above 0.97.}
+\label{fig:roc}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure1_feature_importance.png}
+\caption{Feature importance coefficients from Logistic Regression. 
+Red bars indicate features that increase premature convergence risk; 
+blue bars indicate features that decrease risk.}
+\label{fig:featimp}
+\end{figure}
+
+\subsection{Ablation Study}
+I conduct a leave-one-feature-out ablation study 
+to assess individual feature contributions (Figure~\ref{fig:ablation}). 
+Removing \texttt{commitment\_level} produces the largest 
+performance drop ($\Delta$F1 = 0.060), identifying it as 
+the most critical feature. 
+Conversely, removing \texttt{diversity\_score}, 
+\texttt{closure\_language}, and \texttt{alternative\_considered} 
+marginally improves performance, suggesting these features 
+introduce noise under the current labeling scheme.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure8_ablation.png}
+\caption{Ablation study: F1 change when each feature is removed. Red = important, Blue = adds noise.}
+\label{fig:ablation}
+\end{figure}
+
+\subsection{SHAP Analysis}
+SHAP analysis (Figure~\ref{fig:shap}) reveals that 
+\texttt{explanation\_count} and \texttt{diversity\_score} 
+contribute most strongly to individual predictions, 
+while \texttt{commitment\_level} operates as a 
+necessary condition captured more effectively at 
+the population level. 
+This complementary pattern suggests that convergence 
+is signaled through both epistemic commitment 
+and explanatory breadth.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure9_shap.png}
+\caption{SHAP summary plot showing feature contributions to premature convergence prediction.}
+\label{fig:shap}
+\end{figure}
+
+\section{Discussion}
+
+\subsection{Key Findings}
+Our results yield five findings relevant to accountability-aware AI design.
+
+\textbf{Finding 1: Commitment dominates at the population level.}
+Ablation analysis identifies \texttt{commitment\_level} as the 
+strongest predictor ($\Delta$F1 = 0.060), suggesting that 
+epistemic certainty --- not surface linguistic markers --- 
+is the primary signal of premature convergence.
+
+\textbf{Finding 2: Explanation count drives case-level variation.}
+SHAP analysis reveals that \texttt{explanation\_count} contributes 
+most strongly to individual predictions, complementing the 
+population-level finding. Together, these suggest a two-signal 
+model: commitment as a necessary condition, 
+explanation breadth as the discriminating factor.
+
+\textbf{Finding 3: Synthetic data approximates real-world patterns.}
+The near-identical diversity scores between synthetic (1.584) 
+and FDA Warning Letter corpus (1.601) data ($\Delta = 0.017$) support the 
+ecological validity of our labeling design.
+
+\textbf{Finding 4: PAC is robustly detectable.}
+AUC scores above 0.97 across three model architectures 
+suggest that premature convergence leaves consistent, 
+learnable traces in process-level features.
+
+\textbf{Finding 5: 24\% of FDA Warning Letter cases show elevated convergence risk.}
+Applying our risk score to the FDA Warning Letter corpus identifies 12 of 50 
+cases (24\%) above the convergence threshold, with WL2018-05 
+exhibiting an outlier score of 1.0 --- a single violation 
+with zero explanatory diversity.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure5_fda_risk.png}
+\caption{Premature convergence risk scores across 50 FDA Warning Letter cases. 12 cases (24\%) exceed the risk threshold.}
+\label{fig:fdarisk}
+\end{figure}
+
+\subsection{Limitations}
+Several limitations should be noted. 
+First, our synthetic dataset relies on probabilistic labeling 
+rather than human annotation, which may introduce systematic bias. 
+Second, FDA Warning Letters represent final regulatory outputs 
+rather than in-process reasoning logs, limiting our ability 
+to observe convergence as it unfolds. 
+Third, our feature set is hand-designed; future work should 
+explore learned representations from transformer-based models.
+Additionally, the FDA Warning Letter corpus exhibits limited 
+responsibility subject diversity (Firm: 159/160 cases), 
+reflecting the structural nature of regulatory enforcement 
+documents rather than a limitation of the detection framework itself.
+
+\subsection{Implications for FAccT}
+Our framework connects to core FAccT concerns in two ways. 
+First, premature convergence is itself a fairness issue: 
+when accountability narrows too quickly onto individuals 
+rather than systems, structural contributors go unexamined. 
+Second, our detection approach provides a technical foundation 
+for accountability auditing tools --- systems that flag 
+investigative closure before alternatives have been adequately explored.
+
+\section{Conclusion}
+
+I presented a computational framework for detecting premature 
+accountability convergence in regulatory investigations. 
+By operationalizing PAC as a process-quality classification task, 
+I demonstrated that convergence leaves detectable traces in 
+structural and linguistic features of investigative reasoning. 
+Three classifiers achieve AUC above 0.97, with commitment level 
+and explanation count emerging as the strongest predictive signals. 
+Validation against an FDA Warning Letter corpus confirms the 
+ecological validity of our synthetic design.
+
+This work advances a computational approach to accountability 
+that moves beyond outcome assessment toward process quality --- 
+asking not only whether the right answer was reached, 
+but whether the reasoning remained sufficiently open 
+before closing.
+
+Future work will extend this framework to real-time reasoning 
+logs, human annotation studies, and transformer-based 
+feature extraction, with the goal of building 
+accountability-aware investigation support systems 
+for high-stakes regulatory environments.
+
+% -----------------------------------------------
+% References
+% -----------------------------------------------
+
+\begin{thebibliography}{9}
+
+\bibitem{kim2026pac}
+Kim, S. (2026). 
+\textit{Premature Accountability Convergence}. 
+SSRN Preprint.
+
+\bibitem{kim2026aac}
+Kim, S. (2026). 
+\textit{Anticipated Accountability Convergence}. 
+SSRN Preprint.
+
+\bibitem{bovens2007}
+Bovens, M. (2007). 
+Analysing and assessing accountability: A conceptual framework. 
+\textit{European Law Journal}, 13(4), 447--468.
+
+\bibitem{barocas2019}
+Barocas, S., Hardt, M., \& Narayanan, A. (2019). 
+\textit{Fairness and Machine Learning}. 
+fairmlbook.org.
+
+\bibitem{doshi2017}
+Doshi-Velez, F., \& Kim, B. (2017). 
+Towards a rigorous science of interpretable machine learning. 
+\textit{arXiv preprint arXiv:1702.08608}.
+
+\bibitem{croskerry2002}
+Croskerry, P. (2002). 
+Achieving quality in clinical decision making. 
+\textit{Academic Emergency Medicine}, 9(11), 1184--1204.
+
+\bibitem{johnson2016}
+Johnson, A. E. W., et al. (2016). 
+MIMIC-III, a freely accessible critical care database. 
+\textit{Scientific Data}, 3, 160035.
+
+\end{thebibliography}
+\end{document}
