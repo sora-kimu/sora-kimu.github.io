@@ -1006,7 +1006,7 @@
 
   <div class="four-layer">
     <div class="layer-stack">
-      <div class="layer layer-4 active" data-layer="reasoning">
+      <div class="layer layer-4" data-layer="reasoning">
         <div class="layer-header">
           <div class="layer-name">🧠 Reasoning</div>
           <div class="layer-num">Layer 4</div>
@@ -1027,7 +1027,7 @@
         </div>
         <div class="layer-desc">Revealing cross-document connections</div>
       </div>
-      <div class="layer layer-1" data-layer="accessibility">
+      <div class="layer layer-1 active" data-layer="accessibility">
         <div class="layer-header">
           <div class="layer-name">🔍 Accessibility</div>
           <div class="layer-num">Layer 1 · Foundation</div>
@@ -1343,7 +1343,7 @@
     `;
   }
 
-  showLayer('reasoning');
+  showLayer('accessibility');
 
   layers.forEach(layer => {
     layer.addEventListener('click', () => showLayer(layer.dataset.layer));
