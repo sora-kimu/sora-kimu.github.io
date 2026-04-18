@@ -475,6 +475,21 @@
       text-decoration: underline;
     }
 
+    .paper-link.request {
+      color: var(--text-muted);
+      background: var(--surface);
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 10px;
+    }
+
+    .paper-link.request:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      text-decoration: none;
+    }
+
     .paper-keywords {
       display: flex;
       flex-wrap: wrap;
@@ -696,7 +711,7 @@
         <a href="https://ssrn.com/abstract=6391278" target="_blank" class="paper-link">📄 SSRN</a>
       </div>
       <div class="paper-keywords">
-        <span class="paper-kw">📄 Cognitive Friction</span>
+        <span class="paper-kw">📄 CF</span>
         <span class="paper-kw">🔍 Document infrastructure</span>
         <span class="paper-kw">📊 Corpus analysis</span>
       </div>
@@ -717,7 +732,7 @@
         <a href="https://ssrn.com/abstract=6372301" target="_blank" class="paper-link">📄 SSRN</a>
       </div>
       <div class="paper-keywords">
-        <span class="paper-kw">⚖️ Responsibility Convergence</span>
+        <span class="paper-kw">⚖️ RC</span>
         <span class="paper-kw">📄 FDA Warning Letters</span>
         <span class="paper-kw">🔍 Attribution</span>
       </div>
@@ -738,7 +753,7 @@
         <a href="https://ssrn.com/abstract=6391379" target="_blank" class="paper-link">📄 SSRN</a>
       </div>
       <div class="paper-keywords">
-        <span class="paper-kw">🤖 AI accountability</span>
+        <span class="paper-kw">🤖 PAC</span>
         <span class="paper-kw">⏱️ Temporal closure</span>
         <span class="paper-kw">🏭 Sociomateriality</span>
       </div>
@@ -756,7 +771,7 @@
     <div class="paper" id="hci-umbrella" data-category="hci">
       <div class="paper-cluster">HCI · Framework · TOCHI</div>
       <div class="paper-title">
-        <a href="#" target="_blank">Accountability Infrastructure Design: A Four-Layer Framework for Judgment-Preserving Systems in Regulated Work</a>
+        <span>Accountability Infrastructure Design: A Four-Layer Framework for Judgment-Preserving Systems in Regulated Work</span>
       </div>
       <div class="paper-venue">In preparation · <span class="status">ACM TOCHI</span></div>
       <div class="paper-desc">
@@ -766,6 +781,7 @@
       </div>
       <div class="paper-links">
         <a href="tools.html" class="paper-link">🛠 → Tool family (5 deployed systems)</a>
+        <a href="mailto:sorakim.lab@gmail.com?subject=Paper request: Accountability Infrastructure Design" class="paper-link request">📧 Available upon request</a>
       </div>
       <div class="paper-keywords">
         <span class="paper-kw">🗂️ Four-layer framework</span>
@@ -777,7 +793,7 @@
     <div class="paper" id="rca-paper" data-category="hci">
       <div class="paper-cluster">HCI · AI Scaffolding · CSCW 2027</div>
       <div class="paper-title">
-        <a href="#" target="_blank">Keeping Comparison Open: Interface Scaffolding Against Premature Accountability Convergence in Regulated Investigations</a>
+        <span>Keeping Comparison Open: Interface Scaffolding Against Premature Accountability Convergence in Regulated Investigations</span>
       </div>
       <div class="paper-venue">In preparation · <span class="status">CSCW 2027</span></div>
       <div class="paper-desc">
@@ -786,6 +802,7 @@
       </div>
       <div class="paper-links">
         <a href="tools.html#rca-scaffolder" class="paper-link">🛠 → RCA Scaffolder</a>
+        <a href="mailto:sorakim.lab@gmail.com?subject=Paper request: Keeping Comparison Open" class="paper-link request">📧 Available upon request</a>
       </div>
       <div class="paper-keywords">
         <span class="paper-kw">🤖 AI scaffolding</span>
@@ -797,7 +814,7 @@
     <div class="paper" id="friction-paper" data-category="hci">
       <div class="paper-cluster">HCI · Document Review</div>
       <div class="paper-title">
-        <a href="#" target="_blank">Friction Before Failure: Making Review Burden Visible in Regulated Document Work</a>
+        <span>Friction Before Failure: Making Review Burden Visible in Regulated Document Work</span>
       </div>
       <div class="paper-venue">Working paper · SSRN</div>
       <div class="paper-desc">
@@ -806,6 +823,7 @@
       </div>
       <div class="paper-links">
         <a href="tools.html#review-dashboard" class="paper-link">🛠 → Review Dashboard</a>
+        <a href="mailto:sorakim.lab@gmail.com?subject=Paper request: Friction Before Failure" class="paper-link request">📧 Available upon request</a>
       </div>
       <div class="paper-keywords">
         <span class="paper-kw">🔍 Document friction</span>
@@ -817,7 +835,7 @@
     <div class="paper" id="retrieval-paper" data-category="hci">
       <div class="paper-cluster">HCI · AI-Assisted Retrieval</div>
       <div class="paper-title">
-        <a href="#" target="_blank">From Retrieval to Reasoning: How SOP Accessibility Shapes Interpretation in Regulated Work</a>
+        <span>From Retrieval to Reasoning: How SOP Accessibility Shapes Interpretation in Regulated Work</span>
       </div>
       <div class="paper-venue">Working paper · SSRN</div>
       <div class="paper-desc">
@@ -826,6 +844,7 @@
       </div>
       <div class="paper-links">
         <a href="tools.html#sop-retrieval" class="paper-link">🛠 → SOP Retrieval System</a>
+        <a href="mailto:sorakim.lab@gmail.com?subject=Paper request: From Retrieval to Reasoning" class="paper-link request">📧 Available upon request</a>
       </div>
       <div class="paper-keywords">
         <span class="paper-kw">🤖 AI-assisted retrieval</span>
@@ -837,7 +856,7 @@
     <div class="paper" id="navigation-paper" data-category="hci">
       <div class="paper-cluster">HCI · Cross-Document Coordination</div>
       <div class="paper-title">
-        <a href="#" target="_blank">When Documents Don't Connect: Traceability Burden and Loopback Behavior in GMP Document Navigation</a>
+        <span>When Documents Don't Connect: Traceability Burden and Loopback Behavior in GMP Document Navigation</span>
       </div>
       <div class="paper-venue">Working paper · SSRN</div>
       <div class="paper-desc">
@@ -846,6 +865,7 @@
       </div>
       <div class="paper-links">
         <a href="tools.html#document-navigation" class="paper-link">🛠 → Document Navigation Tool</a>
+        <a href="mailto:sorakim.lab@gmail.com?subject=Paper request: When Documents Don't Connect" class="paper-link request">📧 Available upon request</a>
       </div>
       <div class="paper-keywords">
         <span class="paper-kw">👁️ Invisible work</span>
@@ -867,13 +887,16 @@
     <div class="paper" id="cs-umbrella" data-category="cs">
       <div class="paper-cluster">Computational · Umbrella</div>
       <div class="paper-title">
-        <a href="#" target="_blank">Responsibility as Multi-Layer Signal: A Computational Framework for FDA Warning Letters</a>
+        <span>Responsibility as Multi-Layer Signal: A Computational Framework for FDA Warning Letters</span>
       </div>
       <div class="paper-venue">Working paper · SSRN · <span class="status">Umbrella</span></div>
       <div class="paper-desc">
         Integrates PAC Detection (F1 0.901–0.913), Accountability Graph Extraction (star topology, Firm
         in-degree 0.444), Attribution Prediction (LR F1=0.725, Individual AUC=0.940), and RDM
         (PCA+Ridge, w_ps=0.995) into the Responsibility Convergence Index (RCI).
+      </div>
+      <div class="paper-links">
+        <a href="mailto:sorakim.lab@gmail.com?subject=Paper request: Responsibility as Multi-Layer Signal" class="paper-link request">📧 Available upon request</a>
       </div>
       <div class="paper-keywords">
         <span class="paper-kw">📊 Computational accountability</span>
@@ -905,13 +928,16 @@
     <div class="paper" id="graph-extraction" data-category="cs">
       <div class="paper-cluster">Computational · Graph Extraction</div>
       <div class="paper-title">
-        <a href="#" target="_blank">Accountability Graph Extraction from Regulatory Texts</a>
+        <span>Accountability Graph Extraction from Regulatory Texts</span>
       </div>
       <div class="paper-venue">Working paper · SSRN</div>
       <div class="paper-desc">
         Extracts accountability graphs from FDA Warning Letters. Reveals star topology centered on
         "Firm" (in-degree 0.444) as structural pattern. System, Individual, and Material entities
         occupy peripheral positions despite being causally implicated.
+      </div>
+      <div class="paper-links">
+        <a href="mailto:sorakim.lab@gmail.com?subject=Paper request: Accountability Graph Extraction" class="paper-link request">📧 Available upon request</a>
       </div>
       <div class="paper-keywords">
         <span class="paper-kw">🕸️ Graph extraction</span>
@@ -922,12 +948,15 @@
     <div class="paper" id="attribution-prediction" data-category="cs">
       <div class="paper-cluster">Computational · Classification</div>
       <div class="paper-title">
-        <a href="#" target="_blank">Responsibility Attribution Prediction: A Classification Approach to FDA Warning Letters</a>
+        <span>Responsibility Attribution Prediction: A Classification Approach to FDA Warning Letters</span>
       </div>
       <div class="paper-venue">Working paper · SSRN</div>
       <div class="paper-desc">
         Classification approach to attribution prediction: Individual AUC=0.940; Logistic Regression F1=0.725.
         When corrected for text-surface bias, 30.6% of cases reassign from Firm to System.
+      </div>
+      <div class="paper-links">
+        <a href="mailto:sorakim.lab@gmail.com?subject=Paper request: Responsibility Attribution Prediction" class="paper-link request">📧 Available upon request</a>
       </div>
       <div class="paper-keywords">
         <span class="paper-kw">🧪 ML classification</span>
@@ -938,12 +967,15 @@
     <div class="paper" id="rdm" data-category="cs">
       <div class="paper-cluster">Computational · Metric</div>
       <div class="paper-title">
-        <a href="#" target="_blank">Responsibility Distribution Metric: An Entropy-Centrality Approach to Accountability Structure</a>
+        <span>Responsibility Distribution Metric: An Entropy-Centrality Approach to Accountability Structure</span>
       </div>
       <div class="paper-venue">Working paper · SSRN</div>
       <div class="paper-desc">
         Composite metric combining entropy and centrality. PCA+Ridge regression yields w_ps=0.995.
         Cross-framework convergence validates WL2018-05 as extreme outlier.
+      </div>
+      <div class="paper-links">
+        <a href="mailto:sorakim.lab@gmail.com?subject=Paper request: Responsibility Distribution Metric" class="paper-link request">📧 Available upon request</a>
       </div>
       <div class="paper-keywords">
         <span class="paper-kw">📈 Composite metric</span>
