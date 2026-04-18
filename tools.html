@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools · Sora Kim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --text-muted: #555555;
+      --text-light: #888888;
+      --border: #e5e5e5;
+      --surface: #fafafa;
+      --surface-hover: #f0f0f0;
+      --blue: #2563EB;
+      --accent: #7c3aed;
+      --green: #059669;
+      --orange: #f59e0b;
+      --layer-1-bg: #dbeafe;
+      --layer-2-bg: #ddd6fe;
+      --layer-3-bg: #fbcfe8;
+      --layer-4-bg: #fed7aa;
+      --layer-1-text: #1e40af;
+      --layer-2-text: #6d28d9;
+      --layer-3-text: #be185d;
+      --layer-4-text: #c2410c;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #111111;
+        --text: #f0f0f0;
+        --text-muted: #aaaaaa;
+        --text-light: #666666;
+        --border: #2a2a2a;
+        --surface: #1a1a1a;
+        --surface-hover: #242424;
+        --blue: #60a5fa;
+        --accent: #a78bfa;
+        --green: #34d399;
+        --orange: #fbbf24;
+        --layer-1-bg: #1e3a5f;
+        --layer-2-bg: #3b2f6b;
+        --layer-3-bg: #5f2a4a;
+        --layer-4-bg: #5f3a1a;
+        --layer-1-text: #93c5fd;
+        --layer-2-text: #c4b5fd;
+        --layer-3-text: #f9a8d4;
+        --layer-4-text: #fdba74;
+      }
+    }
+
+    [data-theme="dark"] {
+      --bg: #111111;
+      --text: #f0f0f0;
+      --text-muted: #aaaaaa;
+      --text-light: #666666;
+      --border: #2a2a2a;
+      --surface: #1a1a1a;
+      --surface-hover: #242424;
+      --blue: #60a5fa;
+      --accent: #a78bfa;
+      --green: #34d399;
+      --orange: #fbbf24;
+      --layer-1-bg: #1e3a5f;
+      --layer-2-bg: #3b2f6b;
+      --layer-3-bg: #5f2a4a;
+      --layer-4-bg: #5f3a1a;
+      --layer-1-text: #93c5fd;
+      --layer-2-text: #c4b5fd;
+      --layer-3-text: #f9a8d4;
+      --layer-4-text: #fdba74;
+    }
+
+    [data-theme="light"] {
+      --bg: #ffffff;
+      --text: #111111;
+      --text-muted: #555555;
+      --text-light: #888888;
+      --border: #e5e5e5;
+      --surface: #fafafa;
+      --surface-hover: #f0f0f0;
+      --blue: #2563EB;
+      --accent: #7c3aed;
+      --green: #059669;
+      --orange: #f59e0b;
+      --layer-1-bg: #dbeafe;
+      --layer-2-bg: #ddd6fe;
+      --layer-3-bg: #fbcfe8;
+      --layer-4-bg: #fed7aa;
+      --layer-1-text: #1e40af;
+      --layer-2-text: #6d28d9;
+      --layer-3-text: #be185d;
+      --layer-4-text: #c2410c;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.7;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav {
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--blue);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+
+    .theme-toggle:hover { border-color: var(--blue); }
+
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 52px 32px 72px;
+    }
+
+    .page-header { margin-bottom: 32px; }
+
+    .page-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .page-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .page-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text-light);
+      letter-spacing: 0.04em;
+    }
+
+    /* STATS */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .stat-box {
+      padding: 18px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1);
+    }
+
+    .stat-value {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* DISCLAIMER */
+    .disclaimer {
+      padding: 14px 18px;
+      background: var(--surface);
+      border-left: 3px solid var(--orange);
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    .disclaimer strong {
+      color: var(--text);
+      font-style: normal;
+    }
+
+    /* SECTION */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 8px;
+      margin-top: 64px;
+    }
+
+    .section-label:first-of-type {
+      margin-top: 0;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-intro {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    /* ============================================
+       RESEARCH TOOL CARD (larger, with figure)
+       ============================================ */
+    .research-tool {
+      margin-bottom: 40px;
+      padding: 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      transition: all 0.3s;
+      scroll-margin-top: 80px;
+    }
+
+    .research-tool:hover {
+      border-color: var(--accent);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .research-tool-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .research-tool-title-block {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .research-tool-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .research-tool-tagline {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .research-tool-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tool-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .tool-tag.layer-1 { background: var(--layer-1-bg); color: var(--layer-1-text); }
+    .tool-tag.layer-2 { background: var(--layer-2-bg); color: var(--layer-2-text); }
+    .tool-tag.layer-3 { background: var(--layer-3-bg); color: var(--layer-3-text); }
+    .tool-tag.layer-4 { background: var(--layer-4-bg); color: var(--layer-4-text); }
+    .tool-tag.ongoing {
+      background: var(--bg);
+      color: var(--green);
+      border: 1px solid var(--green);
+    }
+
+    /* TWO COLUMN: deployment + prototype */
+    .tool-dual-view {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .dual-col {
+      padding: 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .dual-col-header {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dual-col-header-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .dual-col-header-dot.production { background: var(--green); }
+    .dual-col-header-dot.research { background: var(--accent); }
+
+    .dual-col-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .dual-col-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* SVG illustration in production col */
+    .production-illustration {
+      width: 100%;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 8px 0 12px;
+      color: var(--text-muted);
+    }
+
+    .production-illustration svg {
+      width: 80px;
+      height: 80px;
+    }
+
+    /* Research prototype figure */
+    .prototype-figure {
+      width: 100%;
+      margin: 8px 0 12px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: white;
+    }
+
+    .prototype-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* STUDY FINDINGS BOX */
+    .findings-box {
+      margin: 20px 0;
+      padding: 18px 20px;
+      background: linear-gradient(135deg, var(--surface-hover) 0%, var(--surface) 100%);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .findings-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .findings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .finding-stat {
+      text-align: center;
+    }
+
+    .finding-value {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .finding-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    .finding-highlight {
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.6;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .finding-highlight strong { color: var(--accent); }
+
+    /* PAPER LINK (unchanged style) */
+    .tool-paper-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.88rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+      margin-top: 16px;
+    }
+
+    .tool-paper-link:hover {
+      border-color: var(--accent);
+      background: var(--surface-hover);
+    }
+
+    .tool-paper-link-icon {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .tool-paper-link-title {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .tool-paper-link-venue {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .tool-paper-link-arrow {
+      margin-left: auto;
+      color: var(--text-light);
+      transition: all 0.2s;
+    }
+
+    .tool-paper-link:hover .tool-paper-link-arrow {
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    /* ============================================
+       INTERNAL TOOL CARD (simpler)
+       ============================================ */
+    .internal-tool {
+      margin-bottom: 20px;
+      padding: 22px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: all 0.3s;
+    }
+
+    .internal-tool:hover {
+      border-color: var(--accent);
+    }
+
+    .internal-tool-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .internal-illustration {
+      flex-shrink: 0;
+      width: 80px;
+      height: 80px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .internal-illustration svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .internal-info {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .internal-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .internal-tagline {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+
+    .internal-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tool-tag.internal {
+      background: var(--surface-hover);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .tool-tag.users {
+      background: var(--bg);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    footer a { color: var(--text-light); text-decoration: none; }
+    footer a:hover { color: var(--blue); }
+
+    @media (max-width: 700px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 18px; }
+      main { padding: 32px 20px 56px; }
+      .page-title { font-size: 1.5rem; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .tool-dual-view { grid-template-columns: 1fr; }
+      .internal-tool-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .research-tool-header {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">🐚 Sora Kim</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="papers.html">Papers</a></li>
+    <li><a href="tools.html" class="active">Tools</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
+
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    toggle.textContent = '☀️';
+  } else if (saved === 'light') {
+    root.setAttribute('data-theme', 'light');
+    toggle.textContent = '🌙';
+  }
+  toggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      root.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+      toggle.textContent = '🌙';
+    } else {
+      root.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+      toggle.textContent = '☀️';
+    }
+  });
+</script>
+
+<main>
+
+  <div class="page-header">
+    <h1 class="page-title">Tools</h1>
+    <p class="page-subtitle">
+      I build tools on two tracks. <strong>Research prototypes</strong> are evaluated in user studies and published as HCI papers.
+      <strong>Production systems</strong> operate at a GMP-regulated pharmaceutical manufacturing site as unvalidated productivity layers.
+      For four of my HCI papers, both exist: a deployed production tool grounding the research, and a synthetic-data prototype that made the user study externally evaluable.
+    </p>
+    <p class="page-meta">4 research prototypes · 4 internal tools · N=20 per study · ~50 team members</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-value">8</div>
+      <div class="stat-label">Tools Total</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">4</div>
+      <div class="stat-label">User Studies</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">~50</div>
+      <div class="stat-label">Team Members</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">4</div>
+      <div class="stat-label">Years Embedded</div>
+    </div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <strong>On visual representation:</strong> Production deployment screenshots cannot be shown — the tools operate over proprietary GMP data
+    and are covered by company confidentiality. Illustrated here are (1) <em>conceptual illustrations</em> representing the <em>function</em> of each production tool,
+    and (2) <em>figures from the research papers</em> showing the synthetic-data prototypes that were evaluated in user studies. The papers are linked below each tool.
+  </div>
+
+  <!-- ============================================
+       RESEARCH-LINKED TOOLS
+       ============================================ -->
+  <p class="section-label">Part 1 — Research-Linked Systems</p>
+  <h2 class="section-title">Four-Layer Framework · Deployed + Studied</h2>
+  <p class="section-intro">
+    Each tool below exists in two forms: a production system deployed at the GMP site, and a research prototype built on synthetic data
+    and evaluated in an N=20 user study. The research prototypes let me make claims about the design principles externally evaluable
+    without exposing proprietary content. All four are published as standalone HCI papers.
+  </p>
+
+  <!-- TOOL 1: RCA Scaffolder -->
+  <div class="research-tool" id="rca-scaffolder">
+    <div class="research-tool-header">
+      <div class="research-tool-title-block">
+        <div class="research-tool-name">🔬 RCA Scaffolder</div>
+        <div class="research-tool-tagline">
+          AI as <em>comparison enforcer</em>: organizes investigation into five stages that require explicit comparison
+          before closure, with an AI layer that detects premature convergence and reopens the comparison space.
+        </div>
+      </div>
+      <div class="research-tool-meta">
+        <span class="tool-tag layer-4">Layer 4 · Reasoning</span>
+        <span class="tool-tag ongoing">● Ongoing</span>
+      </div>
+    </div>
+
+    <div class="tool-dual-view">
+      <div class="dual-col">
+        <div class="dual-col-header">
+          <div class="dual-col-header-dot production"></div>
+          Production Deployment
+        </div>
+        <div class="production-illustration">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="20" r="6" fill="currentColor" opacity="0.8"/>
+            <line x1="50" y1="26" x2="25" y2="50" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+            <line x1="50" y1="26" x2="50" y2="50" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+            <line x1="50" y1="26" x2="75" y2="50" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+            <circle cx="25" cy="55" r="5" fill="currentColor" opacity="0.6"/>
+            <circle cx="50" cy="55" r="5" fill="currentColor" opacity="0.6"/>
+            <circle cx="75" cy="55" r="5" fill="currentColor" opacity="0.6"/>
+            <line x1="25" y1="60" x2="15" y2="80" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <line x1="25" y1="60" x2="35" y2="80" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <line x1="75" y1="60" x2="65" y2="80" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <line x1="75" y1="60" x2="85" y2="80" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <circle cx="15" cy="83" r="3" fill="currentColor" opacity="0.4"/>
+            <circle cx="35" cy="83" r="3" fill="currentColor" opacity="0.4"/>
+            <circle cx="65" cy="83" r="3" fill="currentColor" opacity="0.4"/>
+            <circle cx="85" cy="83" r="3" fill="currentColor" opacity="0.4"/>
+            <circle cx="50" cy="20" r="10" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="dual-col-desc">
+          Deployed investigative scaffold that structures causal reasoning in real CAPA investigations.
+          Team lead awareness and support.
+        </div>
+      </div>
+
+      <div class="dual-col">
+        <div class="dual-col-header">
+          <div class="dual-col-header-dot research"></div>
+          Research Prototype · N=20
+        </div>
+        <div class="prototype-figure">
+          <img src="figures/fig_rca_pac.jpg" alt="RCA Scaffolder PAC Analysis screen showing convergence detection, flagged individual-blame language, and three alternative causal pathways surfaced by the AI layer">
+        </div>
+        <div class="dual-col-desc">
+          <em>Step 3: PAC Analysis.</em> AI detects individual-blame language, surfaces alternative causal pathways
+          (procedural, contextual, documentation), generates reopening questions.
+        </div>
+      </div>
+    </div>
+
+    <div class="findings-box">
+      <div class="findings-label">🧪 Study Findings</div>
+      <div class="findings-grid">
+        <div class="finding-stat">
+          <div class="finding-value">18/20</div>
+          <div class="finding-label">produced broader causal accounts</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">15/20</div>
+          <div class="finding-label">reconsidered initial attribution</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">12/15</div>
+          <div class="finding-label">shifted person → systemic</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">5.0/5</div>
+          <div class="finding-label">usability rating</div>
+        </div>
+      </div>
+      <div class="finding-highlight">
+        <strong>Central finding:</strong> At the initial timepoint, 15/20 participants produced single-cause person-centered explanations with confidence
+        ratings averaging 1/5 — indicating that early convergence reflects institutional pressure, not epistemic certainty.
+        Structured comparison scaffolding broadened reasoning without destabilizing epistemic grounding.
+      </div>
+    </div>
+
+    <a href="papers.html#rca-paper" class="tool-paper-link">
+      <span class="tool-paper-link-icon">📄 Paper</span>
+      <div>
+        <div class="tool-paper-link-title">Keeping Comparison Open: Interface Scaffolding Against Premature Accountability Convergence</div>
+        <div class="tool-paper-link-venue">In preparation · CSCW 2027</div>
+      </div>
+      <span class="tool-paper-link-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- TOOL 2: Review Dashboard -->
+  <div class="research-tool" id="review-dashboard">
+    <div class="research-tool-header">
+      <div class="research-tool-title-block">
+        <div class="research-tool-name">📋 Review Dashboard</div>
+        <div class="research-tool-tagline">
+          A six-tab observability layer over review workflows, plus a TF-IDF pattern detection layer.
+          Makes coordination burden visible <em>before</em> it becomes a formal deviation.
+        </div>
+      </div>
+      <div class="research-tool-meta">
+        <span class="tool-tag layer-3">Layer 3 · Coordination</span>
+        <span class="tool-tag ongoing">● Ongoing</span>
+      </div>
+    </div>
+
+    <div class="tool-dual-view">
+      <div class="dual-col">
+        <div class="dual-col-header">
+          <div class="dual-col-header-dot production"></div>
+          Production Deployment
+        </div>
+        <div class="production-illustration">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="15" width="70" height="12" rx="2" fill="currentColor" opacity="0.8"/>
+            <rect x="15" y="32" width="70" height="10" rx="2" fill="currentColor" opacity="0.5"/>
+            <rect x="15" y="47" width="70" height="10" rx="2" fill="currentColor" opacity="0.35"/>
+            <rect x="15" y="62" width="70" height="10" rx="2" fill="currentColor" opacity="0.25"/>
+            <rect x="15" y="77" width="70" height="10" rx="2" fill="currentColor" opacity="0.2"/>
+            <circle cx="8" cy="21" r="3" fill="#dc2626"/>
+            <circle cx="8" cy="37" r="2.5" fill="#f59e0b"/>
+            <circle cx="8" cy="52" r="2" fill="#f59e0b" opacity="0.6"/>
+            <circle cx="8" cy="67" r="2" fill="currentColor" opacity="0.3"/>
+            <circle cx="8" cy="82" r="2" fill="currentColor" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="dual-col-desc">
+          Deployed priority dashboard that surfaces review friction signals in live CAPA review workflows.
+        </div>
+      </div>
+
+      <div class="dual-col">
+        <div class="dual-col-header">
+          <div class="dual-col-header-dot research"></div>
+          Research Prototype · N=20
+        </div>
+        <div class="prototype-figure">
+          <img src="figures/fig_review_heatmap.jpg" alt="Review Dashboard Heatmap tab showing turnaround times by reviewer role and document type, plus revision loop frequency heatmap revealing structural friction patterns">
+        </div>
+        <div class="dual-col-desc">
+          <em>Heatmap tab.</em> Revision loop frequency by reviewer × round. QC loops concentrate in Round 1 (31 events),
+          QA in Round 2 (30), RA across Rounds 3–5 — revealing role-specific friction patterns.
+        </div>
+      </div>
+    </div>
+
+    <div class="findings-box">
+      <div class="findings-label">🧪 Study Findings — Dissociation</div>
+      <div class="findings-grid">
+        <div class="finding-stat">
+          <div class="finding-value">20/20</div>
+          <div class="finding-label">anticipated reduced accountability asymmetry</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">5.0/5</div>
+          <div class="finding-label">checklist (immediate legibility)</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">5.0/5</div>
+          <div class="finding-label">TF-IDF layer (with orientation)</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">20/20</div>
+          <div class="finding-label">adoption intent</div>
+        </div>
+      </div>
+      <div class="finding-highlight">
+        <strong>Central finding — Dissociation:</strong> Equivalent ratings, distinct cognitive pathways.
+        The checklist was immediately accessible because it addresses a problem practitioners already recognize.
+        The pattern detection layer required initial orientation because it addresses a problem practitioners
+        had not previously had tools to name — <em>structural friction accumulation</em>.
+      </div>
+    </div>
+
+    <a href="papers.html#friction-paper" class="tool-paper-link">
+      <span class="tool-paper-link-icon">📄 Paper</span>
+      <div>
+        <div class="tool-paper-link-title">Friction Before Failure: Making Review Burden Visible in Regulated Document Work</div>
+        <div class="tool-paper-link-venue">Working paper · SSRN</div>
+      </div>
+      <span class="tool-paper-link-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- TOOL 3: Document Navigation -->
+  <div class="research-tool" id="document-navigation">
+    <div class="research-tool-header">
+      <div class="research-tool-title-block">
+        <div class="research-tool-name">🔗 Document Navigation Tool</div>
+        <div class="research-tool-tagline">
+          Makes implicit cross-document relationships navigable. Two studies: a Traceability Explorer and a
+          Cognitive Navigation Explorer that operationalizes <em>loopback behavior</em> as a structural friction signal.
+        </div>
+      </div>
+      <div class="research-tool-meta">
+        <span class="tool-tag layer-2">Layer 2 · Structure</span>
+        <span class="tool-tag ongoing">● Ongoing</span>
+      </div>
+    </div>
+
+    <div class="tool-dual-view">
+      <div class="dual-col">
+        <div class="dual-col-header">
+          <div class="dual-col-header-dot production"></div>
+          Production Deployment
+        </div>
+        <div class="production-illustration">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="15" width="22" height="28" rx="2" fill="none" stroke="currentColor" stroke-width="2" opacity="0.7"/>
+            <line x1="14" y1="22" x2="28" y2="22" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+            <line x1="14" y1="28" x2="28" y2="28" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+            <rect x="68" y="15" width="22" height="28" rx="2" fill="none" stroke="currentColor" stroke-width="2" opacity="0.7"/>
+            <line x1="72" y1="22" x2="86" y2="22" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+            <line x1="72" y1="28" x2="86" y2="28" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+            <rect x="39" y="57" width="22" height="28" rx="2" fill="none" stroke="currentColor" stroke-width="2" opacity="0.7"/>
+            <line x1="43" y1="64" x2="57" y2="64" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+            <line x1="43" y1="70" x2="57" y2="70" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+            <path d="M 32 30 Q 45 30, 50 57" stroke="#7c3aed" stroke-width="1.5" fill="none" opacity="0.8" stroke-dasharray="3 2"/>
+            <path d="M 68 30 Q 55 30, 50 57" stroke="#7c3aed" stroke-width="1.5" fill="none" opacity="0.8" stroke-dasharray="3 2"/>
+            <path d="M 32 29 Q 50 15, 68 29" stroke="#7c3aed" stroke-width="1.5" fill="none" opacity="0.6" stroke-dasharray="3 2"/>
+          </svg>
+        </div>
+        <div class="dual-col-desc">
+          Deployed cross-document linking interface over the facility's quality documentation network.
+        </div>
+      </div>
+
+      <div class="dual-col">
+        <div class="dual-col-header">
+          <div class="dual-col-header-dot research"></div>
+          Research Prototype · N=20
+        </div>
+        <div class="prototype-figure">
+          <img src="figures/fig_nav_chain.jpg" alt="Traceability Explorer Chain Viewer showing the full documentation chain for a deviation record, with 150 records indexed, 31 unlinked deviations, 103 broken downstream links, and 21 traceability risks surfaced">
+        </div>
+        <div class="dual-col-desc">
+          <em>Traceability Explorer + Cognitive Navigation Explorer.</em> 150-record synthetic corpus.
+          Identified 31 missing CAPA links, 103 broken downstream links, 21 lifecycle mismatches.
+        </div>
+      </div>
+    </div>
+
+    <div class="findings-box">
+      <div class="findings-label">🧪 Study Findings — Two Studies</div>
+      <div class="findings-grid">
+        <div class="finding-stat">
+          <div class="finding-value">7→4 min</div>
+          <div class="finding-label">path reconstruction time</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">20/20</div>
+          <div class="finding-label">completed target pathways</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">~5</div>
+          <div class="finding-label">loopbacks per session (mean)</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">2–3 vs 7–10</div>
+          <div class="finding-label">loopbacks: senior vs junior</div>
+        </div>
+      </div>
+      <div class="finding-highlight">
+        <strong>Central finding — Loopback as structural signal:</strong> Less experienced practitioners averaged
+        <strong>3× more loopbacks</strong> than senior practitioners. Participants consistently attributed navigation difficulty
+        to document structure, not interface design — establishing loopback frequency as an empirical indicator of
+        document-structural friction, not a usability failure.
+      </div>
+    </div>
+
+    <a href="papers.html#navigation-paper" class="tool-paper-link">
+      <span class="tool-paper-link-icon">📄 Paper</span>
+      <div>
+        <div class="tool-paper-link-title">When Documents Don't Connect: Traceability Burden and Loopback Behavior</div>
+        <div class="tool-paper-link-venue">Working paper · SSRN</div>
+      </div>
+      <span class="tool-paper-link-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- TOOL 4: SOP Retrieval -->
+  <div class="research-tool" id="sop-retrieval">
+    <div class="research-tool-header">
+      <div class="research-tool-title-block">
+        <div class="research-tool-name">🔍 SOP Retrieval System</div>
+        <div class="research-tool-tagline">
+          Semantic search over GMP procedural documents with an AI layer that EXPLAINS why each result appeared,
+          SURFACES related procedures, and KEEPS interpretive alternatives open.
+        </div>
+      </div>
+      <div class="research-tool-meta">
+        <span class="tool-tag layer-1">Layer 1 · Accessibility (Foundation)</span>
+        <span class="tool-tag ongoing">● Ongoing</span>
+      </div>
+    </div>
+
+    <div class="tool-dual-view">
+      <div class="dual-col">
+        <div class="dual-col-header">
+          <div class="dual-col-header-dot production"></div>
+          Production Deployment
+        </div>
+        <div class="production-illustration">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="35" cy="35" r="18" fill="none" stroke="currentColor" stroke-width="2.5" opacity="0.8"/>
+            <line x1="48" y1="48" x2="60" y2="60" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+            <circle cx="75" cy="25" r="5" fill="currentColor" opacity="0.7"/>
+            <circle cx="82" cy="45" r="5" fill="currentColor" opacity="0.6"/>
+            <circle cx="80" cy="70" r="5" fill="currentColor" opacity="0.5"/>
+            <circle cx="65" cy="85" r="5" fill="currentColor" opacity="0.4"/>
+            <line x1="52" y1="40" x2="73" y2="27" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
+            <line x1="53" y1="43" x2="80" y2="45" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
+            <line x1="52" y1="48" x2="78" y2="70" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
+            <line x1="48" y1="52" x2="63" y2="83" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
+          </svg>
+        </div>
+        <div class="dual-col-desc">
+          Deployed keyword-searchable metadata layer over validated SOP archives. Operates externally;
+          does not modify source files.
+        </div>
+      </div>
+
+      <div class="dual-col">
+        <div class="dual-col-header">
+          <div class="dual-col-header-dot research"></div>
+          Research Prototype · N=20
+        </div>
+        <div class="prototype-figure">
+          <img src="figures/fig_sop_results.jpg" alt="SOP Accessibility Search showing results for query 'sterility' with 73 sections found, match strength indicators (Strong / Good / Weak), document identifiers, and contextual snippets with matched terms highlighted">
+        </div>
+        <div class="dual-col-desc">
+          <em>Search results.</em> Match strength (Strong/Good/Weak), document ID, section location,
+          contextual snippet. Evaluated over 500-SOP synthetic corpus.
+        </div>
+      </div>
+    </div>
+
+    <div class="findings-box">
+      <div class="findings-label">🧪 Study Findings</div>
+      <div class="findings-grid">
+        <div class="finding-stat">
+          <div class="finding-value">6→1 min</div>
+          <div class="finding-label">retrieval time</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">18/20</div>
+          <div class="finding-label">rated system intuitive</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">20/20</div>
+          <div class="finding-label">willing to reuse</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">4.5/5</div>
+          <div class="finding-label">result cue usefulness</div>
+        </div>
+      </div>
+      <div class="finding-highlight">
+        <strong>Central finding — Retrieval shapes interpretation:</strong> Participants described how retrieval burden
+        constrains their <em>behavioral repertoire</em> — "when you cannot find a SOP easily, you end up acting within the SOPs
+        you already know." In GMP contexts, this is a direct constraint on authorized action, not just efficiency.
+      </div>
+    </div>
+
+    <a href="papers.html#retrieval-paper" class="tool-paper-link">
+      <span class="tool-paper-link-icon">📄 Paper</span>
+      <div>
+        <div class="tool-paper-link-title">From Retrieval to Reasoning: How SOP Accessibility Shapes Interpretation</div>
+        <div class="tool-paper-link-venue">Working paper · SSRN</div>
+      </div>
+      <span class="tool-paper-link-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- ============================================
+       INTERNAL TOOLS
+       ============================================ -->
+  <p class="section-label">Part 2 — Internal Productivity Tools</p>
+  <h2 class="section-title">Operational Systems · No User Study</h2>
+  <p class="section-intro">
+    Four additional tools built for internal efficiency at the GMP site. These were developed without a research design or
+    user study — the goal was operational utility, not external evaluation. Included here because they are part of the
+    four-year deployment record and contribute to the <em>embedded practitioner-researcher</em> profile.
+  </p>
+
+  <!-- QC Stability Dashboard -->
+  <div class="internal-tool" id="qc-stability">
+    <div class="internal-tool-header">
+      <div class="internal-illustration">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect x="15" y="20" width="70" height="60" rx="4" fill="none" stroke="currentColor" stroke-width="2" opacity="0.7"/>
+          <line x1="15" y1="32" x2="85" y2="32" stroke="currentColor" stroke-width="2" opacity="0.7"/>
+          <circle cx="28" cy="44" r="2" fill="currentColor" opacity="0.4"/>
+          <circle cx="42" cy="44" r="2" fill="currentColor" opacity="0.4"/>
+          <circle cx="56" cy="44" r="3" fill="#f59e0b"/>
+          <circle cx="70" cy="44" r="2" fill="currentColor" opacity="0.4"/>
+          <circle cx="28" cy="56" r="2" fill="currentColor" opacity="0.4"/>
+          <circle cx="42" cy="56" r="3" fill="#dc2626"/>
+          <circle cx="56" cy="56" r="2" fill="currentColor" opacity="0.4"/>
+          <circle cx="70" cy="56" r="2" fill="currentColor" opacity="0.4"/>
+          <circle cx="28" cy="68" r="2" fill="currentColor" opacity="0.4"/>
+          <circle cx="42" cy="68" r="2" fill="currentColor" opacity="0.4"/>
+          <circle cx="70" cy="68" r="3" fill="#f59e0b"/>
+        </svg>
+      </div>
+      <div class="internal-info">
+        <div class="internal-name">📊 QC Stability Dashboard</div>
+        <div class="internal-tagline">
+          Deadline-tracking interface for stability testing programs. Tracks 25-day testing windows and coordinates
+          schedule across multiple programs. A primary planning surface for time-sensitive QC work.
+        </div>
+        <div class="internal-meta-row">
+          <span class="tool-tag internal">Internal productivity tool</span>
+          <span class="tool-tag ongoing">● Ongoing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Veeva Vault Change Control -->
+  <div class="internal-tool" id="veeva-change-control">
+    <div class="internal-tool-header">
+      <div class="internal-illustration">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="50" r="10" fill="currentColor" opacity="0.8"/>
+          <path d="M 16 50 L 19 53 L 24 47" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="30" y1="50" x2="42" y2="50" stroke="currentColor" stroke-width="2" opacity="0.5" stroke-dasharray="2 2"/>
+          <circle cx="52" cy="50" r="10" fill="currentColor" opacity="0.5"/>
+          <path d="M 48 50 L 51 53 L 56 47" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="62" y1="50" x2="74" y2="50" stroke="currentColor" stroke-width="2" opacity="0.3" stroke-dasharray="2 2"/>
+          <circle cx="84" cy="50" r="10" fill="none" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="internal-info">
+        <div class="internal-name">📝 Veeva Vault Change Control Assistant</div>
+        <div class="internal-tagline">
+          Workflow support for electronic change control submissions through Veeva Vault QMS. Guides users through
+          required fields, flags common compliance issues, reduces submission errors.
+        </div>
+        <div class="internal-meta-row">
+          <span class="tool-tag internal">Workflow support</span>
+          <span class="tool-tag ongoing">● Ongoing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reagent Inventory -->
+  <div class="internal-tool" id="reagent-inventory">
+    <div class="internal-tool-header">
+      <div class="internal-illustration">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 20 20 L 20 35 L 12 55 L 28 55 L 20 35 Z" fill="currentColor" opacity="0.7"/>
+          <path d="M 50 20 L 50 35 L 42 55 L 58 55 L 50 35 Z" fill="currentColor" opacity="0.5"/>
+          <path d="M 80 20 L 80 35 L 72 55 L 88 55 L 80 35 Z" fill="currentColor" opacity="0.4"/>
+          <circle cx="20" cy="70" r="4" fill="#059669"/>
+          <circle cx="50" cy="70" r="4" fill="#f59e0b"/>
+          <circle cx="80" cy="70" r="4" fill="#dc2626"/>
+        </svg>
+      </div>
+      <div class="internal-info">
+        <div class="internal-name">🧪 Reagent Inventory &amp; Expiry Tool</div>
+        <div class="internal-tagline">
+          Automated expiry tracking and pre-expiry alerts for QC reagents. Moves reagent management from reactive
+          deviation handling to proactive accountability — expired reagents are a common root cause for QC deviations.
+        </div>
+        <div class="internal-meta-row">
+          <span class="tool-tag internal">Inventory system</span>
+          <span class="tool-tag ongoing">● Ongoing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document Auto-Review AI -->
+  <div class="internal-tool" id="auto-review">
+    <div class="internal-tool-header">
+      <div class="internal-illustration">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <rect x="25" y="15" width="50" height="65" rx="2" fill="none" stroke="currentColor" stroke-width="2" opacity="0.7"/>
+          <line x1="32" y1="25" x2="68" y2="25" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+          <line x1="32" y1="32" x2="60" y2="32" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+          <line x1="32" y1="39" x2="68" y2="39" stroke="#dc2626" stroke-width="2"/>
+          <circle cx="72" cy="39" r="3" fill="#dc2626"/>
+          <line x1="32" y1="46" x2="55" y2="46" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+          <line x1="32" y1="53" x2="68" y2="53" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+          <line x1="32" y1="60" x2="60" y2="60" stroke="#f59e0b" stroke-width="2"/>
+          <circle cx="64" cy="60" r="3" fill="#f59e0b"/>
+          <line x1="32" y1="67" x2="68" y2="67" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+          <circle cx="15" cy="15" r="7" fill="#7c3aed" opacity="0.8"/>
+          <text x="15" y="18" font-family="monospace" font-size="7" font-weight="bold" text-anchor="middle" fill="white">AI</text>
+        </svg>
+      </div>
+      <div class="internal-info">
+        <div class="internal-name">🤖 Document Auto-Review AI</div>
+        <div class="internal-tagline">
+          Format and compliance pre-check for procedural documents. Flags formatting, numbering, and terminology
+          issues before formal review — reduces reviewer burden, keeps final interpretation with the human reviewer.
+        </div>
+        <div class="internal-meta-row">
+          <span class="tool-tag internal">AI pre-check</span>
+          <span class="tool-tag ongoing">● Ongoing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 Sora Kim · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
+</footer>
+
+</body>
+</html>
