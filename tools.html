@@ -750,18 +750,18 @@
     accountability infrastructure in AI-integrated regulated work</strong>.
   </p>
 
-  <!-- TOOL 1: RCA Scaffolder -->
-  <div class="research-tool" id="rca-scaffolder">
+  <!-- TOOL 1: SOP Retrieval -->
+  <div class="research-tool" id="sop-retrieval">
     <div class="research-tool-header">
       <div class="research-tool-title-block">
-        <div class="research-tool-name">🔬 RCA Scaffolder</div>
+        <div class="research-tool-name">🔍 SOP Retrieval System</div>
         <div class="research-tool-tagline">
-          AI as <em>comparison enforcer</em>: organizes investigation into five stages that require explicit comparison
-          before closure, with an AI layer that detects premature convergence and reopens the comparison space.
+          Semantic search over GMP procedural documents with an AI layer that EXPLAINS why each result appeared,
+          SURFACES related procedures, and KEEPS interpretive alternatives open.
         </div>
       </div>
       <div class="research-tool-meta">
-        <span class="tool-tag layer-4">Layer 4 · Reasoning</span>
+        <span class="tool-tag layer-1">Layer 1 · Accessibility (Foundation)</span>
         <span class="tool-tag ongoing">● Ongoing</span>
       </div>
     </div>
@@ -774,27 +774,21 @@
         </div>
         <div class="production-illustration">
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="20" r="6" fill="currentColor" opacity="0.8"/>
-            <line x1="50" y1="26" x2="25" y2="50" stroke="currentColor" stroke-width="2" opacity="0.6"/>
-            <line x1="50" y1="26" x2="50" y2="50" stroke="currentColor" stroke-width="2" opacity="0.6"/>
-            <line x1="50" y1="26" x2="75" y2="50" stroke="currentColor" stroke-width="2" opacity="0.6"/>
-            <circle cx="25" cy="55" r="5" fill="currentColor" opacity="0.6"/>
-            <circle cx="50" cy="55" r="5" fill="currentColor" opacity="0.6"/>
-            <circle cx="75" cy="55" r="5" fill="currentColor" opacity="0.6"/>
-            <line x1="25" y1="60" x2="15" y2="80" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
-            <line x1="25" y1="60" x2="35" y2="80" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
-            <line x1="75" y1="60" x2="65" y2="80" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
-            <line x1="75" y1="60" x2="85" y2="80" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
-            <circle cx="15" cy="83" r="3" fill="currentColor" opacity="0.4"/>
-            <circle cx="35" cy="83" r="3" fill="currentColor" opacity="0.4"/>
-            <circle cx="65" cy="83" r="3" fill="currentColor" opacity="0.4"/>
-            <circle cx="85" cy="83" r="3" fill="currentColor" opacity="0.4"/>
-            <circle cx="50" cy="20" r="10" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+            <circle cx="35" cy="35" r="18" fill="none" stroke="currentColor" stroke-width="2.5" opacity="0.8"/>
+            <line x1="48" y1="48" x2="60" y2="60" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+            <circle cx="75" cy="25" r="5" fill="currentColor" opacity="0.7"/>
+            <circle cx="82" cy="45" r="5" fill="currentColor" opacity="0.6"/>
+            <circle cx="80" cy="70" r="5" fill="currentColor" opacity="0.5"/>
+            <circle cx="65" cy="85" r="5" fill="currentColor" opacity="0.4"/>
+            <line x1="52" y1="40" x2="73" y2="27" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
+            <line x1="53" y1="43" x2="80" y2="45" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
+            <line x1="52" y1="48" x2="78" y2="70" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
+            <line x1="48" y1="52" x2="63" y2="83" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
           </svg>
         </div>
         <div class="dual-col-desc">
-          Deployed investigative scaffold that structures causal reasoning in real CAPA investigations.
-          Team lead awareness and support.
+          Deployed keyword-searchable metadata layer over validated SOP archives. Operates externally;
+          does not modify source files.
         </div>
       </div>
 
@@ -804,11 +798,11 @@
           Research Prototype · N=20
         </div>
         <div class="prototype-figure">
-          <img src="figures/fig_rca_pac.jpg" alt="RCA Scaffolder PAC Analysis screen showing convergence detection, flagged individual-blame language, and three alternative causal pathways surfaced by the AI layer">
+          <img src="figures/fig_sop_results.jpg" alt="SOP Accessibility Search showing results for query 'sterility' with 73 sections found, match strength indicators (Strong / Good / Weak), document identifiers, and contextual snippets with matched terms highlighted">
         </div>
         <div class="dual-col-desc">
-          <em>Step 3: PAC Analysis.</em> AI detects individual-blame language, surfaces alternative causal pathways
-          (procedural, contextual, documentation), generates reopening questions.
+          <em>Search results.</em> Match strength (Strong/Good/Weak), document ID, section location,
+          contextual snippet. Evaluated over 500-SOP synthetic corpus.
         </div>
       </div>
     </div>
@@ -817,134 +811,40 @@
       <div class="findings-label">🧪 Study Findings</div>
       <div class="findings-grid">
         <div class="finding-stat">
+          <div class="finding-value">6→1 min</div>
+          <div class="finding-label">retrieval time</div>
+        </div>
+        <div class="finding-stat">
           <div class="finding-value">18/20</div>
-          <div class="finding-label">produced broader causal accounts</div>
-        </div>
-        <div class="finding-stat">
-          <div class="finding-value">15/20</div>
-          <div class="finding-label">reconsidered initial attribution</div>
-        </div>
-        <div class="finding-stat">
-          <div class="finding-value">12/15</div>
-          <div class="finding-label">shifted person → systemic</div>
-        </div>
-        <div class="finding-stat">
-          <div class="finding-value">5.0/5</div>
-          <div class="finding-label">usability rating</div>
-        </div>
-      </div>
-      <div class="finding-highlight">
-        <strong>Central finding:</strong> At the initial timepoint, 15/20 participants produced single-cause person-centered explanations with confidence
-        ratings averaging 1/5 — indicating that early convergence reflects institutional pressure, not epistemic certainty.
-        Structured comparison scaffolding broadened reasoning without destabilizing epistemic grounding.
-      </div>
-    </div>
-
-    <a href="papers.html#rca-paper" class="tool-paper-link">
-      <span class="tool-paper-link-icon">📄 Paper</span>
-      <div>
-        <div class="tool-paper-link-title">Keeping Comparison Open: Interface Scaffolding Against Premature Accountability Convergence in Regulated Investigations</div>
-        <div class="tool-paper-link-venue">In preparation · CSCW 2027</div>
-      </div>
-      <span class="tool-paper-link-arrow">→</span>
-    </a>
-  </div>
-
-  <!-- TOOL 2: Review Dashboard -->
-  <div class="research-tool" id="review-dashboard">
-    <div class="research-tool-header">
-      <div class="research-tool-title-block">
-        <div class="research-tool-name">📋 Review Dashboard</div>
-        <div class="research-tool-tagline">
-          A six-tab observability layer over review workflows, plus a TF-IDF pattern detection layer.
-          Makes coordination burden visible <em>before</em> it becomes a formal deviation.
-        </div>
-      </div>
-      <div class="research-tool-meta">
-        <span class="tool-tag layer-3">Layer 3 · Coordination</span>
-        <span class="tool-tag ongoing">● Ongoing</span>
-      </div>
-    </div>
-
-    <div class="tool-dual-view">
-      <div class="dual-col">
-        <div class="dual-col-header">
-          <div class="dual-col-header-dot production"></div>
-          Production Deployment
-        </div>
-        <div class="production-illustration">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <rect x="15" y="15" width="70" height="12" rx="2" fill="currentColor" opacity="0.8"/>
-            <rect x="15" y="32" width="70" height="10" rx="2" fill="currentColor" opacity="0.5"/>
-            <rect x="15" y="47" width="70" height="10" rx="2" fill="currentColor" opacity="0.35"/>
-            <rect x="15" y="62" width="70" height="10" rx="2" fill="currentColor" opacity="0.25"/>
-            <rect x="15" y="77" width="70" height="10" rx="2" fill="currentColor" opacity="0.2"/>
-            <circle cx="8" cy="21" r="3" fill="#dc2626"/>
-            <circle cx="8" cy="37" r="2.5" fill="#f59e0b"/>
-            <circle cx="8" cy="52" r="2" fill="#f59e0b" opacity="0.6"/>
-            <circle cx="8" cy="67" r="2" fill="currentColor" opacity="0.3"/>
-            <circle cx="8" cy="82" r="2" fill="currentColor" opacity="0.3"/>
-          </svg>
-        </div>
-        <div class="dual-col-desc">
-          Deployed priority dashboard that surfaces review friction signals in live CAPA review workflows.
-        </div>
-      </div>
-
-      <div class="dual-col">
-        <div class="dual-col-header">
-          <div class="dual-col-header-dot research"></div>
-          Research Prototype · N=20
-        </div>
-        <div class="prototype-figure">
-          <img src="figures/fig_review_heatmap.jpg" alt="Review Dashboard Heatmap tab showing turnaround times by reviewer role and document type, plus revision loop frequency heatmap revealing structural friction patterns">
-        </div>
-        <div class="dual-col-desc">
-          <em>Heatmap tab.</em> Revision loop frequency by reviewer × round. QC loops concentrate in Round 1 (31 events),
-          QA in Round 2 (30), RA across Rounds 3–5 — revealing role-specific friction patterns.
-        </div>
-      </div>
-    </div>
-
-    <div class="findings-box">
-      <div class="findings-label">🧪 Study Findings — Dissociation</div>
-      <div class="findings-grid">
-        <div class="finding-stat">
-          <div class="finding-value">20/20</div>
-          <div class="finding-label">anticipated reduced accountability asymmetry</div>
-        </div>
-        <div class="finding-stat">
-          <div class="finding-value">5.0/5</div>
-          <div class="finding-label">checklist (immediate legibility)</div>
-        </div>
-        <div class="finding-stat">
-          <div class="finding-value">5.0/5</div>
-          <div class="finding-label">TF-IDF layer (with orientation)</div>
+          <div class="finding-label">rated system intuitive</div>
         </div>
         <div class="finding-stat">
           <div class="finding-value">20/20</div>
-          <div class="finding-label">adoption intent</div>
+          <div class="finding-label">willing to reuse</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">4.5/5</div>
+          <div class="finding-label">result cue usefulness</div>
         </div>
       </div>
       <div class="finding-highlight">
-        <strong>Central finding — Dissociation:</strong> Equivalent ratings, distinct cognitive pathways.
-        The checklist was immediately accessible because it addresses a problem practitioners already recognize.
-        The pattern detection layer required initial orientation because it addresses a problem practitioners
-        had not previously had tools to name — <em>structural friction accumulation</em>.
+        <strong>Central finding — Retrieval shapes interpretation:</strong> Participants described how retrieval burden
+        constrains their <em>behavioral repertoire</em> — "when you cannot find a SOP easily, you end up acting within the SOPs
+        you already know." In GMP contexts, this is a direct constraint on authorized action, not just efficiency.
       </div>
     </div>
 
-    <a href="papers.html#friction-paper" class="tool-paper-link">
+    <a href="papers.html#retrieval-paper" class="tool-paper-link">
       <span class="tool-paper-link-icon">📄 Paper</span>
       <div>
-        <div class="tool-paper-link-title">Friction Before Failure: Making Review Burden Visible in Regulated Document Work</div>
+        <div class="tool-paper-link-title">From Retrieval to Reasoning: How SOP Accessibility Shapes Interpretation in Regulated Work</div>
         <div class="tool-paper-link-venue">Working paper · SSRN</div>
       </div>
       <span class="tool-paper-link-arrow">→</span>
     </a>
   </div>
 
-  <!-- TOOL 3: Document Navigation -->
+  <!-- TOOL 2: Document Navigation -->
   <div class="research-tool" id="document-navigation">
     <div class="research-tool-header">
       <div class="research-tool-title-block">
@@ -1040,18 +940,18 @@
     </a>
   </div>
 
-  <!-- TOOL 4: SOP Retrieval -->
-  <div class="research-tool" id="sop-retrieval">
+  <!-- TOOL 3: Review Dashboard -->
+  <div class="research-tool" id="review-dashboard">
     <div class="research-tool-header">
       <div class="research-tool-title-block">
-        <div class="research-tool-name">🔍 SOP Retrieval System</div>
+        <div class="research-tool-name">📋 Review Dashboard</div>
         <div class="research-tool-tagline">
-          Semantic search over GMP procedural documents with an AI layer that EXPLAINS why each result appeared,
-          SURFACES related procedures, and KEEPS interpretive alternatives open.
+          A six-tab observability layer over review workflows, plus a TF-IDF pattern detection layer.
+          Makes coordination burden visible <em>before</em> it becomes a formal deviation.
         </div>
       </div>
       <div class="research-tool-meta">
-        <span class="tool-tag layer-1">Layer 1 · Accessibility (Foundation)</span>
+        <span class="tool-tag layer-3">Layer 3 · Coordination</span>
         <span class="tool-tag ongoing">● Ongoing</span>
       </div>
     </div>
@@ -1064,21 +964,20 @@
         </div>
         <div class="production-illustration">
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="35" cy="35" r="18" fill="none" stroke="currentColor" stroke-width="2.5" opacity="0.8"/>
-            <line x1="48" y1="48" x2="60" y2="60" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
-            <circle cx="75" cy="25" r="5" fill="currentColor" opacity="0.7"/>
-            <circle cx="82" cy="45" r="5" fill="currentColor" opacity="0.6"/>
-            <circle cx="80" cy="70" r="5" fill="currentColor" opacity="0.5"/>
-            <circle cx="65" cy="85" r="5" fill="currentColor" opacity="0.4"/>
-            <line x1="52" y1="40" x2="73" y2="27" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
-            <line x1="53" y1="43" x2="80" y2="45" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
-            <line x1="52" y1="48" x2="78" y2="70" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
-            <line x1="48" y1="52" x2="63" y2="83" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
+            <rect x="15" y="15" width="70" height="12" rx="2" fill="currentColor" opacity="0.8"/>
+            <rect x="15" y="32" width="70" height="10" rx="2" fill="currentColor" opacity="0.5"/>
+            <rect x="15" y="47" width="70" height="10" rx="2" fill="currentColor" opacity="0.35"/>
+            <rect x="15" y="62" width="70" height="10" rx="2" fill="currentColor" opacity="0.25"/>
+            <rect x="15" y="77" width="70" height="10" rx="2" fill="currentColor" opacity="0.2"/>
+            <circle cx="8" cy="21" r="3" fill="#dc2626"/>
+            <circle cx="8" cy="37" r="2.5" fill="#f59e0b"/>
+            <circle cx="8" cy="52" r="2" fill="#f59e0b" opacity="0.6"/>
+            <circle cx="8" cy="67" r="2" fill="currentColor" opacity="0.3"/>
+            <circle cx="8" cy="82" r="2" fill="currentColor" opacity="0.3"/>
           </svg>
         </div>
         <div class="dual-col-desc">
-          Deployed keyword-searchable metadata layer over validated SOP archives. Operates externally;
-          does not modify source files.
+          Deployed priority dashboard that surfaces review friction signals in live CAPA review workflows.
         </div>
       </div>
 
@@ -1088,11 +987,112 @@
           Research Prototype · N=20
         </div>
         <div class="prototype-figure">
-          <img src="figures/fig_sop_results.jpg" alt="SOP Accessibility Search showing results for query 'sterility' with 73 sections found, match strength indicators (Strong / Good / Weak), document identifiers, and contextual snippets with matched terms highlighted">
+          <img src="figures/fig_review_heatmap.jpg" alt="Review Dashboard Heatmap tab showing turnaround times by reviewer role and document type, plus revision loop frequency heatmap revealing structural friction patterns">
         </div>
         <div class="dual-col-desc">
-          <em>Search results.</em> Match strength (Strong/Good/Weak), document ID, section location,
-          contextual snippet. Evaluated over 500-SOP synthetic corpus.
+          <em>Heatmap tab.</em> Revision loop frequency by reviewer × round. QC loops concentrate in Round 1 (31 events),
+          QA in Round 2 (30), RA across Rounds 3–5 — revealing role-specific friction patterns.
+        </div>
+      </div>
+    </div>
+
+    <div class="findings-box">
+      <div class="findings-label">🧪 Study Findings — Dissociation</div>
+      <div class="findings-grid">
+        <div class="finding-stat">
+          <div class="finding-value">20/20</div>
+          <div class="finding-label">anticipated reduced accountability asymmetry</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">5.0/5</div>
+          <div class="finding-label">checklist (immediate legibility)</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">5.0/5</div>
+          <div class="finding-label">TF-IDF layer (with orientation)</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">20/20</div>
+          <div class="finding-label">adoption intent</div>
+        </div>
+      </div>
+      <div class="finding-highlight">
+        <strong>Central finding — Dissociation:</strong> Equivalent ratings, distinct cognitive pathways.
+        The checklist was immediately accessible because it addresses a problem practitioners already recognize.
+        The pattern detection layer required initial orientation because it addresses a problem practitioners
+        had not previously had tools to name — <em>structural friction accumulation</em>.
+      </div>
+    </div>
+
+    <a href="papers.html#friction-paper" class="tool-paper-link">
+      <span class="tool-paper-link-icon">📄 Paper</span>
+      <div>
+        <div class="tool-paper-link-title">Friction Before Failure: Making Review Burden Visible in Regulated Document Work</div>
+        <div class="tool-paper-link-venue">Working paper · SSRN</div>
+      </div>
+      <span class="tool-paper-link-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- TOOL 4: RCA Scaffolder -->
+  <div class="research-tool" id="rca-scaffolder">
+    <div class="research-tool-header">
+      <div class="research-tool-title-block">
+        <div class="research-tool-name">🔬 RCA Scaffolder</div>
+        <div class="research-tool-tagline">
+          AI as <em>comparison enforcer</em>: organizes investigation into five stages that require explicit comparison
+          before closure, with an AI layer that detects premature convergence and reopens the comparison space.
+        </div>
+      </div>
+      <div class="research-tool-meta">
+        <span class="tool-tag layer-4">Layer 4 · Reasoning</span>
+        <span class="tool-tag ongoing">● Ongoing</span>
+      </div>
+    </div>
+
+    <div class="tool-dual-view">
+      <div class="dual-col">
+        <div class="dual-col-header">
+          <div class="dual-col-header-dot production"></div>
+          Production Deployment
+        </div>
+        <div class="production-illustration">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="20" r="6" fill="currentColor" opacity="0.8"/>
+            <line x1="50" y1="26" x2="25" y2="50" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+            <line x1="50" y1="26" x2="50" y2="50" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+            <line x1="50" y1="26" x2="75" y2="50" stroke="currentColor" stroke-width="2" opacity="0.6"/>
+            <circle cx="25" cy="55" r="5" fill="currentColor" opacity="0.6"/>
+            <circle cx="50" cy="55" r="5" fill="currentColor" opacity="0.6"/>
+            <circle cx="75" cy="55" r="5" fill="currentColor" opacity="0.6"/>
+            <line x1="25" y1="60" x2="15" y2="80" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <line x1="25" y1="60" x2="35" y2="80" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <line x1="75" y1="60" x2="65" y2="80" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <line x1="75" y1="60" x2="85" y2="80" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <circle cx="15" cy="83" r="3" fill="currentColor" opacity="0.4"/>
+            <circle cx="35" cy="83" r="3" fill="currentColor" opacity="0.4"/>
+            <circle cx="65" cy="83" r="3" fill="currentColor" opacity="0.4"/>
+            <circle cx="85" cy="83" r="3" fill="currentColor" opacity="0.4"/>
+            <circle cx="50" cy="20" r="10" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="dual-col-desc">
+          Deployed investigative scaffold that structures causal reasoning in real CAPA investigations.
+          Team lead awareness and support.
+        </div>
+      </div>
+
+      <div class="dual-col">
+        <div class="dual-col-header">
+          <div class="dual-col-header-dot research"></div>
+          Research Prototype · N=20
+        </div>
+        <div class="prototype-figure">
+          <img src="figures/fig_rca_pac.jpg" alt="RCA Scaffolder PAC Analysis screen showing convergence detection, flagged individual-blame language, and three alternative causal pathways surfaced by the AI layer">
+        </div>
+        <div class="dual-col-desc">
+          <em>Step 3: PAC Analysis.</em> AI detects individual-blame language, surfaces alternative causal pathways
+          (procedural, contextual, documentation), generates reopening questions.
         </div>
       </div>
     </div>
@@ -1101,34 +1101,34 @@
       <div class="findings-label">🧪 Study Findings</div>
       <div class="findings-grid">
         <div class="finding-stat">
-          <div class="finding-value">6→1 min</div>
-          <div class="finding-label">retrieval time</div>
-        </div>
-        <div class="finding-stat">
           <div class="finding-value">18/20</div>
-          <div class="finding-label">rated system intuitive</div>
+          <div class="finding-label">produced broader causal accounts</div>
         </div>
         <div class="finding-stat">
-          <div class="finding-value">20/20</div>
-          <div class="finding-label">willing to reuse</div>
+          <div class="finding-value">15/20</div>
+          <div class="finding-label">reconsidered initial attribution</div>
         </div>
         <div class="finding-stat">
-          <div class="finding-value">4.5/5</div>
-          <div class="finding-label">result cue usefulness</div>
+          <div class="finding-value">12/15</div>
+          <div class="finding-label">shifted person → systemic</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">5.0/5</div>
+          <div class="finding-label">usability rating</div>
         </div>
       </div>
       <div class="finding-highlight">
-        <strong>Central finding — Retrieval shapes interpretation:</strong> Participants described how retrieval burden
-        constrains their <em>behavioral repertoire</em> — "when you cannot find a SOP easily, you end up acting within the SOPs
-        you already know." In GMP contexts, this is a direct constraint on authorized action, not just efficiency.
+        <strong>Central finding:</strong> At the initial timepoint, 15/20 participants produced single-cause person-centered explanations with confidence
+        ratings averaging 1/5 — indicating that early convergence reflects institutional pressure, not epistemic certainty.
+        Structured comparison scaffolding broadened reasoning without destabilizing epistemic grounding.
       </div>
     </div>
 
-    <a href="papers.html#retrieval-paper" class="tool-paper-link">
+    <a href="papers.html#rca-paper" class="tool-paper-link">
       <span class="tool-paper-link-icon">📄 Paper</span>
       <div>
-        <div class="tool-paper-link-title">From Retrieval to Reasoning: How SOP Accessibility Shapes Interpretation in Regulated Work</div>
-        <div class="tool-paper-link-venue">Working paper · SSRN</div>
+        <div class="tool-paper-link-title">Keeping Comparison Open: Interface Scaffolding Against Premature Accountability Convergence in Regulated Investigations</div>
+        <div class="tool-paper-link-venue">In preparation · CSCW 2027</div>
       </div>
       <span class="tool-paper-link-arrow">→</span>
     </a>
