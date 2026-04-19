@@ -303,38 +303,42 @@
 
     .research-tool-header {
       display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .research-tool-name-row {
+      display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 16px;
-      margin-bottom: 18px;
       flex-wrap: wrap;
-    }
-
-    .research-tool-title-block {
-      flex: 1;
-      min-width: 250px;
     }
 
     .research-tool-name {
       font-size: 1.25rem;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 10px;
+      flex: 1;
+      min-width: 250px;
     }
 
     .research-tool-tagline {
       font-size: 0.9rem;
       color: var(--text-muted);
       line-height: 1.55;
+      width: 100%;
     }
 
     .research-tool-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      flex-shrink: 0;
     }
 
     .tool-tag {
@@ -1016,17 +1020,17 @@
   <!-- TOOL 1: SOP Retrieval -->
   <div class="research-tool" id="sop-retrieval">
     <div class="research-tool-header">
-      <div class="research-tool-title-block">
+      <div class="research-tool-name-row">
         <div class="research-tool-name">🔍 SOP Retrieval System</div>
-        <div class="research-tool-tagline">
-          Semantic search over GMP procedural documents with an AI layer that EXPLAINS why each result appeared,
-          SURFACES related procedures, and KEEPS interpretive alternatives open.
-        </div>
-      </div>
-      <div class="research-tool-meta">
+        <div class="research-tool-meta">
         <span class="tool-tag layer-1">Layer 1 · Accessibility (Foundation)</span>
         <span class="tool-tag ongoing">● Ongoing</span>
       </div>
+      </div>
+      <div class="research-tool-tagline">
+          Semantic search over GMP procedural documents with an AI layer that EXPLAINS why each result appeared,
+          SURFACES related procedures, and KEEPS interpretive alternatives open.
+        </div>
     </div>
 
     <div class="tool-dual-view">
@@ -1110,18 +1114,18 @@
   <!-- TOOL 2a: Document Navigation Tool (Traceability Layer) -->
   <div class="research-tool" id="document-navigation">
     <div class="research-tool-header">
-      <div class="research-tool-title-block">
+      <div class="research-tool-name-row">
         <div class="research-tool-name">🔗 Document Navigation Tool <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">(Traceability Layer)</span></div>
-        <div class="research-tool-tagline">
-          External graph-based visibility layer that makes implicit cross-document relationships navigable.
-          A four-record chain viewer (Deviation → CAPA → Change Control → SOP) surfaces linkage gaps as observable structural patterns.
-        </div>
-      </div>
-      <div class="research-tool-meta">
+        <div class="research-tool-meta">
         <span class="tool-tag layer-2">Layer 2 · Structure · Study 1</span>
         <span class="tool-tag paired">◆ Paired system</span>
         <span class="tool-tag ongoing">● Ongoing</span>
       </div>
+      </div>
+      <div class="research-tool-tagline">
+          External graph-based visibility layer that makes implicit cross-document relationships navigable.
+          A four-record chain viewer (Deviation → CAPA → Change Control → SOP) surfaces linkage gaps as observable structural patterns.
+        </div>
     </div>
 
     <div class="tool-dual-view">
@@ -1213,18 +1217,18 @@
   <!-- TOOL 2b: Navigation Behavior Tracker -->
   <div class="research-tool" id="navigation-behavior-tracker">
     <div class="research-tool-header">
-      <div class="research-tool-title-block">
+      <div class="research-tool-name-row">
         <div class="research-tool-name">🔄 Navigation Behavior Tracker <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">(Cognitive Navigation Explorer)</span></div>
-        <div class="research-tool-tagline">
-          Behavioral tracking layer that operationalizes <em>loopback behavior</em> — return visits to previously seen documents — as an
-          empirical indicator of document-structural friction, not usability failure. Records navigation paths, visit counts, and cross-reference jumps.
-        </div>
-      </div>
-      <div class="research-tool-meta">
+        <div class="research-tool-meta">
         <span class="tool-tag layer-2">Layer 2 · Structure · Study 2</span>
         <span class="tool-tag paired">◆ Paired system</span>
         <span class="tool-tag ongoing">● Ongoing</span>
       </div>
+      </div>
+      <div class="research-tool-tagline">
+          Behavioral tracking layer that operationalizes <em>loopback behavior</em> — return visits to previously seen documents — as an
+          empirical indicator of document-structural friction, not usability failure. Records navigation paths, visit counts, and cross-reference jumps.
+        </div>
     </div>
 
     <div class="tool-dual-view">
@@ -1314,17 +1318,17 @@
   <!-- TOOL 3: Review Dashboard -->
   <div class="research-tool" id="review-dashboard">
     <div class="research-tool-header">
-      <div class="research-tool-title-block">
+      <div class="research-tool-name-row">
         <div class="research-tool-name">📋 Review Dashboard</div>
-        <div class="research-tool-tagline">
-          A six-tab observability layer over review workflows, plus a TF-IDF pattern detection layer.
-          Makes coordination burden visible <em>before</em> it becomes a formal deviation.
-        </div>
-      </div>
-      <div class="research-tool-meta">
+        <div class="research-tool-meta">
         <span class="tool-tag layer-3">Layer 3 · Coordination</span>
         <span class="tool-tag ongoing">● Ongoing</span>
       </div>
+      </div>
+      <div class="research-tool-tagline">
+          A six-tab observability layer over review workflows, plus a TF-IDF pattern detection layer.
+          Makes coordination burden visible <em>before</em> it becomes a formal deviation.
+        </div>
     </div>
 
     <div class="tool-dual-view">
@@ -1408,17 +1412,17 @@
   <!-- TOOL 4: RCA Scaffolder -->
   <div class="research-tool" id="rca-scaffolder">
     <div class="research-tool-header">
-      <div class="research-tool-title-block">
+      <div class="research-tool-name-row">
         <div class="research-tool-name">🔬 RCA Scaffolder</div>
-        <div class="research-tool-tagline">
-          AI as <em>comparison enforcer</em>: organizes investigation into five stages that require explicit comparison
-          before closure, with an AI layer that detects premature convergence and reopens the comparison space.
-        </div>
-      </div>
-      <div class="research-tool-meta">
+        <div class="research-tool-meta">
         <span class="tool-tag layer-4">Layer 4 · Reasoning</span>
         <span class="tool-tag ongoing">● Ongoing</span>
       </div>
+      </div>
+      <div class="research-tool-tagline">
+          AI as <em>comparison enforcer</em>: organizes investigation into five stages that require explicit comparison
+          before closure, with an AI layer that detects premature convergence and reopens the comparison space.
+        </div>
     </div>
 
     <div class="tool-dual-view">
