@@ -950,7 +950,7 @@
     adoption. Drawing on four years of embedded practice in pharmaceutical Good Manufacturing Practice (GMP)
     quality control, I study how regulated organizations structure responsibility <em>before</em> failures occur,
     and what design choices support or erode those structures as AI enters regulated workflows.
-    My work spans <strong>14+ papers</strong> and <strong>8 production tools</strong> used by a ~50-person quality
+    My work spans <strong>14+ papers</strong> and <strong>9 production tools</strong> used by a ~50-person quality
     team at a GMP-regulated manufacturing site.
   </p>
 
@@ -971,7 +971,7 @@
     A four-stage theory of how organizations produce responsibility. Click each stage — or watch the auto-demo below.
   </p>
 
-  <div class="lifecycle">
+  <div class="lifecycle" id="lifecycleSection">
     <div class="lifecycle-stages">
       <div class="lifecycle-stage active" data-stage="aac">
         <div class="lifecycle-stage-code">STAGE 1 · AAC</div>
@@ -1089,7 +1089,7 @@
           </div>
           <div class="mapping-item" data-pair="navigation" data-type="tool" data-idx="3">
             <strong>🔗 Document Navigation Tool</strong><br>
-            <span style="font-size: 0.75rem; color: var(--text-light);">Cross-doc linking interface</span>
+            <span style="font-size: 0.75rem; color: var(--text-light);">Two-component system: traceability + behavior tracking</span>
           </div>
         </div>
       </div>
@@ -1217,7 +1217,7 @@
 
 <script>
   // ========================================
-  // LIFECYCLE INTERACTION + AUTO DEMO
+  // LIFECYCLE INTERACTION + AUTO DEMO (triggered when section enters viewport)
   // ========================================
   const lifecycleData = {
     aac: {
@@ -1248,7 +1248,9 @@
 
   const stages = document.querySelectorAll('.lifecycle-stage');
   const lifecycleDetail = document.getElementById('lifecycle-detail');
+  const lifecycleSection = document.getElementById('lifecycleSection');
   let autoDemoStopped = false;
+  let autoDemoStarted = false;
 
   function showStage(key) {
     stages.forEach(s => s.classList.remove('active'));
@@ -1267,8 +1269,10 @@
     `;
   }
 
+  // Initial state: show stage 1
   showStage('aac');
 
+  // Click handler
   stages.forEach(stage => {
     stage.addEventListener('click', () => {
       autoDemoStopped = true;
@@ -1276,17 +1280,45 @@
     });
   });
 
-  // Auto demo: cycle through stages on first view (if user hasn't clicked yet)
-  const stageOrder = ['aac', 'cf', 'rc', 'pac'];
-  let autoIdx = 0;
-  setTimeout(function autoAdvance() {
-    if (autoDemoStopped) return;
-    autoIdx = (autoIdx + 1) % 4;
-    showStage(stageOrder[autoIdx]);
-    if (autoIdx < 3) {
-      setTimeout(autoAdvance, 2200);
+  // Auto demo: starts when user scrolls the section INTO view (not on page load)
+  function startAutoDemo() {
+    if (autoDemoStarted || autoDemoStopped) return;
+    autoDemoStarted = true;
+
+    // Reset to stage 1 in case user saw stale state
+    showStage('aac');
+
+    const stageOrder = ['aac', 'cf', 'rc', 'pac'];
+    let autoIdx = 0;
+
+    function advance() {
+      if (autoDemoStopped) return;
+      autoIdx++;
+      if (autoIdx >= stageOrder.length) return; // Stop after PAC (Stage 4)
+      showStage(stageOrder[autoIdx]);
+      setTimeout(advance, 2200);
     }
-  }, 2500);
+
+    // First advance after 2 seconds (give user time to read stage 1)
+    setTimeout(advance, 2000);
+  }
+
+  // IntersectionObserver: trigger when section is visible
+  if ('IntersectionObserver' in window) {
+    const lifecycleObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+          startAutoDemo();
+          lifecycleObserver.unobserve(entry.target); // Run only once
+        }
+      });
+    }, { threshold: 0.4 });
+
+    lifecycleObserver.observe(lifecycleSection);
+  } else {
+    // Fallback for old browsers
+    setTimeout(startAutoDemo, 2500);
+  }
 
   // ========================================
   // FOUR-LAYER FRAMEWORK
@@ -1308,7 +1340,7 @@
       title: "Structure — Revealing cross-document connections",
       desc: "The invisible work of connecting documents across regulated systems. Identifies the human as 'missing infrastructure' in cross-document accountability gaps. Star &amp; Ruhleder lineage.",
       paper: "<em>When Documents Don't Connect: Traceability Burden and Loopback Behavior in GMP Document Navigation</em> (SSRN)",
-      tool: "Document Navigation Tool"
+      tool: "Document Navigation Tool (two-component: traceability layer + behavior tracker)"
     },
     accessibility: {
       title: "Accessibility — Reaching procedural knowledge when needed",
