@@ -356,6 +356,11 @@
       color: var(--green);
       border: 1px solid var(--green);
     }
+    .tool-tag.paired {
+      background: var(--bg);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
 
     /* TWO COLUMN: deployment + prototype */
     .tool-dual-view {
@@ -547,6 +552,30 @@
       transform: translateX(3px);
     }
 
+    /* PAIRED NOTE — shared between companion tools */
+    .paired-note {
+      margin-top: -20px;
+      margin-bottom: 20px;
+      padding: 10px 16px;
+      background: var(--surface);
+      border: 1px dashed var(--accent);
+      border-radius: 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .paired-note::before {
+      content: "↕";
+      color: var(--accent);
+      font-size: 14px;
+      font-family: inherit;
+    }
+
     /* ============================================
        INTERNAL TOOL CARD (simpler)
        ============================================ */
@@ -704,20 +733,21 @@
       I build tools on two tracks. <strong>Research prototypes</strong> are evaluated in user studies and published as HCI papers.
       <strong>Production systems</strong> operate at a GMP-regulated pharmaceutical manufacturing site as unvalidated productivity layers.
       Together, these tools are <strong>concrete test cases for how AI can be integrated into regulated work without eroding accountability</strong> —
-      each one grounding a paper on how to preserve human judgment while systems scale. For four of my HCI papers, both forms exist:
-      a deployed production tool grounding the research, and a synthetic-data prototype that made the user study externally evaluable.
+      each one grounding a paper on how to preserve human judgment while systems scale. For the four HCI papers, deployed production tools
+      ground the research; synthetic-data prototypes make the user studies externally evaluable. The Navigation paper is grounded in two
+      companion tools (Traceability Layer + Behavior Tracker), bringing the deployed system count to nine.
     </p>
-    <p class="page-meta">4 research prototypes · 4 internal tools · N=20 per study · ~50 team members</p>
+    <p class="page-meta">5 research prototype systems · 4 internal tools · 9 deployed total · N=20 per study · ~50 team members</p>
   </div>
 
   <!-- STATS -->
   <div class="stats-row">
     <div class="stat-box">
-      <div class="stat-value">8</div>
-      <div class="stat-label">Tools Total</div>
+      <div class="stat-value">9</div>
+      <div class="stat-label">Deployed Systems</div>
     </div>
     <div class="stat-box">
-      <div class="stat-value">4</div>
+      <div class="stat-value">5</div>
       <div class="stat-label">User Studies</div>
     </div>
     <div class="stat-box">
@@ -743,11 +773,12 @@
   <p class="section-label">Part 1 — Research-Linked Systems</p>
   <h2 class="section-title">Four-Layer Framework · Deployed + Studied</h2>
   <p class="section-intro">
-    Each tool below exists in two forms: a production system deployed at the GMP site, and a research prototype built on synthetic data
-    and evaluated in an N=20 user study. The research prototypes let me make claims about the design principles externally evaluable
-    without exposing proprietary content. All four are published as standalone HCI papers.
-    Collectively, they articulate the <strong>four-layer framework — accessibility, structure, coordination, reasoning — that organizes
-    accountability infrastructure in AI-integrated regulated work</strong>.
+    The systems below exist in two forms: production deployments at the GMP site, and research prototypes built on synthetic data
+    and evaluated in N=20 user studies. The research prototypes let me make claims about the design principles externally evaluable
+    without exposing proprietary content. They ground <strong>four HCI papers</strong> across the four-layer framework —
+    accessibility, structure, coordination, reasoning — that organizes accountability infrastructure in AI-integrated regulated work.
+    The Structure layer is unusual: it comprises <strong>two companion systems</strong> (a Traceability Layer and a Behavior Tracker)
+    that jointly ground the Navigation paper, bringing the total to five research-linked systems across four papers.
   </p>
 
   <!-- TOOL 1: SOP Retrieval -->
@@ -844,18 +875,19 @@
     </a>
   </div>
 
-  <!-- TOOL 2: Document Navigation -->
+  <!-- TOOL 2a: Document Navigation Tool (Traceability Layer) -->
   <div class="research-tool" id="document-navigation">
     <div class="research-tool-header">
       <div class="research-tool-title-block">
-        <div class="research-tool-name">🔗 Document Navigation Tool</div>
+        <div class="research-tool-name">🔗 Document Navigation Tool <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">(Traceability Layer)</span></div>
         <div class="research-tool-tagline">
-          Makes implicit cross-document relationships navigable. Two studies: a Traceability Explorer and a
-          Cognitive Navigation Explorer that operationalizes <em>loopback behavior</em> as a structural friction signal.
+          External graph-based visibility layer that makes implicit cross-document relationships navigable.
+          A four-record chain viewer (Deviation → CAPA → Change Control → SOP) surfaces linkage gaps as observable structural patterns.
         </div>
       </div>
       <div class="research-tool-meta">
-        <span class="tool-tag layer-2">Layer 2 · Structure</span>
+        <span class="tool-tag layer-2">Layer 2 · Structure · Study 1</span>
+        <span class="tool-tag paired">◆ Paired system</span>
         <span class="tool-tag ongoing">● Ongoing</span>
       </div>
     </div>
@@ -883,7 +915,8 @@
           </svg>
         </div>
         <div class="dual-col-desc">
-          Deployed cross-document linking interface over the facility's quality documentation network.
+          Deployed cross-document linking interface with metadata mapping over the facility's quality documentation network.
+          Surfaces broken and missing linkages without modifying validated source files.
         </div>
       </div>
 
@@ -893,17 +926,17 @@
           Research Prototype · N=20
         </div>
         <div class="prototype-figure">
-          <img src="figures/fig_nav_chain.jpg" alt="Traceability Explorer Chain Viewer showing the full documentation chain for a deviation record, with 150 records indexed, 31 unlinked deviations, 103 broken downstream links, and 21 traceability risks surfaced">
+          <img src="figures/fig_nav_chain.jpg" alt="Traceability Explorer Chain Viewer showing the full documentation chain for deviation DEV-2025-001 (Deviation → CAPA → Change Control → SOP Reference), with 150 records indexed, 31 unlinked deviations, 103 broken downstream links, and 21 traceability risks surfaced">
         </div>
         <div class="dual-col-desc">
-          <em>Traceability Explorer + Cognitive Navigation Explorer.</em> 150-record synthetic corpus.
+          <em>Traceability Explorer Chain Viewer.</em> 150-record synthetic corpus.
           Identified 31 missing CAPA links, 103 broken downstream links, 21 lifecycle mismatches.
         </div>
       </div>
     </div>
 
     <div class="findings-box">
-      <div class="findings-label">🧪 Study Findings — Two Studies</div>
+      <div class="findings-label">🧪 Study 1 Findings — Traceability Visibility</div>
       <div class="findings-grid">
         <div class="finding-stat">
           <div class="finding-value">7→4 min</div>
@@ -914,27 +947,133 @@
           <div class="finding-label">completed target pathways</div>
         </div>
         <div class="finding-stat">
+          <div class="finding-value">5.0/5</div>
+          <div class="finding-label">ease of use</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">20/20</div>
+          <div class="finding-label">adoption intent</div>
+        </div>
+      </div>
+      <div class="finding-highlight">
+        <strong>Central finding — Linkage visibility redistributes epistemic access:</strong> Participants singled out personnel handover
+        as the most consequential use case — "every time someone leaves the team, the first three months of their replacement is basically
+        archaeology." Making linkage structure visible doesn't just reduce reconstruction time; it externalizes the map of the document
+        system that currently lives only in experienced practitioners' implicit knowledge.
+      </div>
+    </div>
+
+    <a href="papers.html#navigation-paper" class="tool-paper-link">
+      <span class="tool-paper-link-icon">📄 Paper (shared)</span>
+      <div>
+        <div class="tool-paper-link-title">When Documents Don't Connect: Traceability Burden and Loopback Behavior in GMP Document Navigation</div>
+        <div class="tool-paper-link-venue">Working paper · SSRN · Study 1 of 2</div>
+      </div>
+      <span class="tool-paper-link-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- Paired note between Traceability and Behavior Tracker -->
+  <div class="paired-note">
+    These two systems jointly ground the Navigation paper: Study 1 evaluates the Traceability Layer above; Study 2 evaluates the Behavior Tracker below.
+  </div>
+
+  <!-- TOOL 2b: Navigation Behavior Tracker -->
+  <div class="research-tool" id="navigation-behavior-tracker">
+    <div class="research-tool-header">
+      <div class="research-tool-title-block">
+        <div class="research-tool-name">🔄 Navigation Behavior Tracker <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">(Cognitive Navigation Explorer)</span></div>
+        <div class="research-tool-tagline">
+          Behavioral tracking layer that operationalizes <em>loopback behavior</em> — return visits to previously seen documents — as an
+          empirical indicator of document-structural friction, not usability failure. Records navigation paths, visit counts, and cross-reference jumps.
+        </div>
+      </div>
+      <div class="research-tool-meta">
+        <span class="tool-tag layer-2">Layer 2 · Structure · Study 2</span>
+        <span class="tool-tag paired">◆ Paired system</span>
+        <span class="tool-tag ongoing">● Ongoing</span>
+      </div>
+    </div>
+
+    <div class="tool-dual-view">
+      <div class="dual-col">
+        <div class="dual-col-header">
+          <div class="dual-col-header-dot production"></div>
+          Production Deployment
+        </div>
+        <div class="production-illustration">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Navigation path with loopback visualization -->
+            <circle cx="20" cy="30" r="6" fill="currentColor" opacity="0.7"/>
+            <circle cx="55" cy="20" r="6" fill="currentColor" opacity="0.7"/>
+            <circle cx="80" cy="50" r="6" fill="currentColor" opacity="0.7"/>
+            <circle cx="55" cy="75" r="6" fill="currentColor" opacity="0.7"/>
+            <circle cx="20" cy="60" r="6" fill="currentColor" opacity="0.7"/>
+            <!-- Forward arrows (blue-ish) -->
+            <line x1="26" y1="30" x2="49" y2="22" stroke="#2563EB" stroke-width="1.8" opacity="0.8"/>
+            <line x1="61" y1="22" x2="74" y2="48" stroke="#2563EB" stroke-width="1.8" opacity="0.8"/>
+            <line x1="78" y1="56" x2="59" y2="71" stroke="#2563EB" stroke-width="1.8" opacity="0.8"/>
+            <!-- Loopback arrow (red dashed) -->
+            <path d="M 50 76 Q 30 80, 22 66" stroke="#dc2626" stroke-width="2" fill="none" opacity="0.9" stroke-dasharray="3 2"/>
+            <!-- Loopback indicator circle (red, visit #2) -->
+            <circle cx="20" cy="60" r="10" fill="none" stroke="#dc2626" stroke-width="2" opacity="0.6" stroke-dasharray="2 2"/>
+            <text x="20" y="92" font-family="monospace" font-size="7" font-weight="bold" text-anchor="middle" fill="#dc2626" opacity="0.9">loopback</text>
+          </svg>
+        </div>
+        <div class="dual-col-desc">
+          Deployed passive behavioral logger that captures navigation paths, visit frequency, and loopback patterns during
+          real investigation workflows. External observation layer; no modification to source documents.
+        </div>
+      </div>
+
+      <div class="dual-col">
+        <div class="dual-col-header">
+          <div class="dual-col-header-dot research"></div>
+          Research Prototype · N=20
+        </div>
+        <div class="prototype-figure">
+          <img src="figures/fig_nav_loopback.jpg" alt="Cognitive Navigation Analysis dashboard for Participant P01 showing 3 total navigations (1 forward, 1 cross-reference, 1 loopback), navigation path network with color-coded arrows, document visit count bar chart with ELISA Test Method visited twice (red loopback bar), average time per document, and full navigation sequence log">
+        </div>
+        <div class="dual-col-desc">
+          <em>Cognitive Navigation Analysis dashboard.</em> Standardized OOS investigation scenario across 7 GMP documents.
+          Navigation path network, visit counts, sequence log. Red arrows = loopbacks; blue = forward; orange = cross-reference.
+        </div>
+      </div>
+    </div>
+
+    <div class="findings-box">
+      <div class="findings-label">🧪 Study 2 Findings — Loopback as Structural Signal</div>
+      <div class="findings-grid">
+        <div class="finding-stat">
           <div class="finding-value">~5</div>
           <div class="finding-label">loopbacks per session (mean)</div>
+        </div>
+        <div class="finding-stat">
+          <div class="finding-value">20/20</div>
+          <div class="finding-label">sessions with loopback behavior</div>
         </div>
         <div class="finding-stat">
           <div class="finding-value">2–3 vs 7–10</div>
           <div class="finding-label">loopbacks: senior vs junior</div>
         </div>
+        <div class="finding-stat">
+          <div class="finding-value">5.0/5</div>
+          <div class="finding-label">usability across all measures</div>
+        </div>
       </div>
       <div class="finding-highlight">
-        <strong>Central finding — Loopback as structural signal:</strong> Less experienced practitioners averaged
-        <strong>3× more loopbacks</strong> than senior practitioners. Participants consistently attributed navigation difficulty
-        to document structure, not interface design — establishing loopback frequency as an empirical indicator of
-        document-structural friction, not a usability failure.
+        <strong>Central finding — Experience asymmetry is a design gap, not a training gap:</strong> Less experienced practitioners
+        averaged <strong>3× more loopbacks</strong> than senior practitioners. Participants consistently attributed navigation difficulty
+        to document structure, not interface design. This establishes loopback frequency as an empirical indicator of
+        document-structural friction — a tractable diagnostic metric collectable without instrumenting validated systems.
       </div>
     </div>
 
     <a href="papers.html#navigation-paper" class="tool-paper-link">
-      <span class="tool-paper-link-icon">📄 Paper</span>
+      <span class="tool-paper-link-icon">📄 Paper (shared)</span>
       <div>
         <div class="tool-paper-link-title">When Documents Don't Connect: Traceability Burden and Loopback Behavior in GMP Document Navigation</div>
-        <div class="tool-paper-link-venue">Working paper · SSRN</div>
+        <div class="tool-paper-link-venue">Working paper · SSRN · Study 2 of 2</div>
       </div>
       <span class="tool-paper-link-arrow">→</span>
     </a>
