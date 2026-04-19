@@ -170,7 +170,12 @@
       border-radius: 50%;
       object-fit: cover;
       flex-shrink: 0;
-      object-position: top center;
+      object-position: center 20%;
+      image-rendering: -webkit-optimize-contrast;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .profile-text h1 {
@@ -923,7 +928,7 @@
 <main>
 
   <div class="profile-row">
-    <img src="SoraKim.jpg" alt="Sora Kim" class="profile-img">
+    <img src="SoraKim.jpg" alt="Sora Kim" class="profile-img" width="170" height="170">
     <div class="profile-text">
       <h1>Sora Kim</h1>
       <p class="tagline">
