@@ -1165,12 +1165,7 @@
   <div class="page-header">
     <h1 class="page-title">Tools</h1>
     <p class="page-subtitle">
-      I build tools on two tracks. <strong>Research prototypes</strong> are evaluated in user studies and published as HCI papers.
-      <strong>Production systems</strong> operate at a GMP-regulated pharmaceutical manufacturing site as unvalidated productivity layers.
-      Together, these tools are <strong>concrete test cases for how AI can be integrated into regulated work without eroding accountability</strong> —
-      each one grounding a paper on how to preserve human judgment while systems scale. For the four HCI papers, deployed production tools
-      ground the research; synthetic-data prototypes make the user studies externally evaluable. The Navigation paper is grounded in two
-      companion tools (Traceability Layer + Behavior Tracker), bringing the deployed system count to nine.
+      Nine tools, two tracks. <strong>Production systems</strong> run at a GMP-regulated pharmaceutical site, used daily by the ~50-person team I work with. <strong>Research prototypes</strong> rebuild each system on synthetic data so the design claims can be evaluated externally through N=20 user studies. Five of the production tools are paired with research prototypes and ground the <a href="papers.html" style="color: var(--blue);">HCI papers</a> — one per layer of the four-layer framework (the Navigation paper is grounded in two companion tools). The other four are internal productivity tools without a research component.
     </p>
     <p class="page-meta">5 research prototype systems · 4 internal tools · 9 deployed total · N=20 per study · ~50 team members</p>
   </div>
@@ -1208,12 +1203,7 @@
   <p class="section-label">Part 1 — Research-Linked Systems</p>
   <h2 class="section-title">Four-Layer Framework · Deployed + Studied</h2>
   <p class="section-intro">
-    The systems below exist in two forms: production deployments at the GMP site, and research prototypes built on synthetic data
-    and evaluated in N=20 user studies. The research prototypes let me make claims about the design principles externally evaluable
-    without exposing proprietary content. They ground <strong>four HCI papers</strong> across the four-layer framework —
-    accessibility, structure, coordination, reasoning — that organizes accountability infrastructure in AI-integrated regulated work.
-    The Structure layer is unusual: it comprises <strong>two companion systems</strong> (a Traceability Layer and a Behavior Tracker)
-    that jointly ground the Navigation paper, bringing the total to five research-linked systems across four papers.
+    The framework organizes accountability infrastructure into four layers — <strong>accessibility, structure, coordination, reasoning</strong> — each addressing a distinct way AI can either support or collapse judgment in regulated work. The Structure layer is unusual in that it takes two companion tools to ground: a Traceability Layer that surfaces cross-document linkage, and a Behavior Tracker that captures loopback patterns during investigation.
   </p>
 
   <!-- ============================================
@@ -1791,9 +1781,7 @@
   <p class="section-label">Part 2 — Internal Productivity Tools</p>
   <h2 class="section-title">Operational Systems · No User Study</h2>
   <p class="section-intro">
-    Four additional tools built for internal efficiency at the GMP site. These were developed without a research design or
-    user study — the goal was operational utility, not external evaluation. Included here because they are part of the
-    four-year deployment record and contribute to the <em>embedded practitioner-researcher</em> profile.
+    Four tools built to prevent specific patterns of deviation the team kept running into — missed deadlines, expired reagents, formatting errors that slow review. No user studies; the goal was operational. But the shape is the same as the research-linked work: move accountability upstream so mistakes don't become formal deviations downstream.
   </p>
 
   <!-- QC Stability Dashboard -->
@@ -1819,8 +1807,7 @@
       <div class="internal-info">
         <div class="internal-name">📊 QC Stability Dashboard</div>
         <div class="internal-tagline">
-          Deadline-tracking interface for stability testing programs. Tracks 25-day testing windows and coordinates
-          schedule across multiple programs. A primary planning surface for time-sensitive QC work.
+          Stability tests have a 25 working-day window — miss it, that's a due-date deviation. With 40+ studies opening a month, it's easy to lose track. The dashboard surfaces every open study with its deadline so managers can see what's at risk at a glance — shifting deviation prevention upstream, before the window closes.
         </div>
         <div class="internal-meta-row">
           <span class="tool-tag internal">Internal productivity tool</span>
@@ -1847,8 +1834,7 @@
       <div class="internal-info">
         <div class="internal-name">📝 Veeva Vault Change Control Assistant</div>
         <div class="internal-tagline">
-          Workflow support for electronic change control submissions through Veeva Vault QMS. Guides users through
-          required fields, flags common compliance issues, reduces submission errors.
+          In GMP work, any change to a procedure, system, or equipment has to go through a formal approval process called change control — each one tracked with an ID, a due date, and a description. Most pharma sites run this through Veeva Vault, the industry-standard quality management system. Veeva's native interface shows the IDs but hides the due dates and descriptions behind extra clicks, which makes deadlines easy to miss. This external layer pulls that context back into view.
         </div>
         <div class="internal-meta-row">
           <span class="tool-tag internal">Workflow support</span>
@@ -1874,8 +1860,7 @@
       <div class="internal-info">
         <div class="internal-name">🧪 Reagent Inventory &amp; Expiry Tool</div>
         <div class="internal-tagline">
-          Automated expiry tracking and pre-expiry alerts for QC reagents. Moves reagent management from reactive
-          deviation handling to proactive accountability — expired reagents are a common root cause for QC deviations.
+          The lab uses several hundred reagents, and expired or out-of-stock ones are a common reason tests get delayed — which then becomes a deviation. Sends email alerts at 3 months and 1 month before expiry, with reorder thresholds tuned per reagent (3 units for overseas orders, 1 for easily sourced). Keeps the cascade from starting.
         </div>
         <div class="internal-meta-row">
           <span class="tool-tag internal">Inventory system</span>
@@ -1907,8 +1892,7 @@
       <div class="internal-info">
         <div class="internal-name">🤖 Document Auto-Review AI</div>
         <div class="internal-tagline">
-          Format and compliance pre-check for procedural documents. Flags formatting, numbering, and terminology
-          issues before formal review — reduces reviewer burden, keeps final interpretation with the human reviewer.
+          Document formatting across the team is inconsistent, and reviewers end up spending real time on the same format/terminology issues again and again. I trained an AI on approved documents so drafts can get a pre-review pass — the AI flags what to fix before it reaches a human. Clears the noise so reviewers can focus on substantive judgment.
         </div>
         <div class="internal-meta-row">
           <span class="tool-tag internal">AI pre-check</span>
