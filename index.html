@@ -195,8 +195,8 @@
     }
 
     .profile-img {
-      width: 170px;
-      height: 170px;
+      width: 210px;
+      height: 210px;
       border-radius: 50%;
       object-fit: cover;
       flex-shrink: 0;
@@ -1512,7 +1512,7 @@
         gap: 20px;
         margin-bottom: 22px;
       }
-      .profile-img { width: 136px; height: 136px; }
+      .profile-img { width: 168px; height: 168px; }
       .social { justify-content: center; }
       .profile-text h1 { font-size: 1.6rem; }
       .thesis { font-size: 13px; padding: 16px 18px; }
@@ -1571,7 +1571,7 @@
 
   <!-- PROFILE ROW -->
   <div class="profile-row">
-    <img src="SoraKim.jpg" alt="Sora Kim" class="profile-img" width="170" height="170">
+    <img src="SoraKim.jpg" alt="Sora Kim" class="profile-img" width="210" height="210">
     <div class="profile-text">
       <h1>Sora Kim</h1>
       <p class="tagline">
@@ -2115,14 +2115,12 @@
   glossaryClose.addEventListener('click', closeGlossary);
   glossaryBackdrop.addEventListener('click', closeGlossary);
 
-  // ESC key closes glossary
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && glossaryModal.classList.contains('open')) {
       closeGlossary();
     }
   });
 
-  // Accordion for entries
   glossaryEntries.forEach(entry => {
     const header = entry.querySelector('.glossary-entry-header');
     header.addEventListener('click', () => {
@@ -2130,8 +2128,6 @@
     });
   });
 
-  // Optional: links from body text (for future inline linking)
-  // Usage: <span class="gloss-link" data-term="gmp">GMP</span>
   document.querySelectorAll('.gloss-link').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
@@ -2142,7 +2138,6 @@
         if (entry) {
           entry.classList.add('expanded');
           entry.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          // Brief highlight
           entry.style.background = 'rgba(124, 58, 237, 0.1)';
           setTimeout(() => { entry.style.background = ''; }, 1500);
         }
@@ -2151,7 +2146,7 @@
   });
 
   // ========================================
-  // LIFECYCLE INTERACTION + AUTO DEMO (triggered when section enters viewport)
+  // LIFECYCLE INTERACTION + AUTO DEMO
   // ========================================
   const lifecycleData = {
     aac: {
@@ -2216,10 +2211,8 @@
     if (autoDemoStarted || autoDemoStopped) return;
     autoDemoStarted = true;
     showStage('aac');
-
     const stageOrder = ['aac', 'cf', 'rc', 'pac'];
     let autoIdx = 0;
-
     function advance() {
       if (autoDemoStopped) return;
       autoIdx++;
@@ -2227,7 +2220,6 @@
       showStage(stageOrder[autoIdx]);
       setTimeout(advance, 2200);
     }
-
     setTimeout(advance, 2000);
   }
 
@@ -2240,14 +2232,13 @@
         }
       });
     }, { threshold: 0.4 });
-
     lifecycleObserver.observe(lifecycleSection);
   } else {
     setTimeout(startAutoDemo, 2500);
   }
 
   // ========================================
-  // FOUR-LAYER FRAMEWORK (updated with responsibility framing)
+  // FOUR-LAYER FRAMEWORK
   // ========================================
   const layerData = {
     reasoning: {
@@ -2319,27 +2310,20 @@
     mappingSvg.innerHTML = '';
     const rect = mappingContainer.getBoundingClientRect();
     mappingSvg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
-
     const papers = document.querySelectorAll('.mapping-item[data-type="paper"]');
-    const tools = document.querySelectorAll('.mapping-item[data-type="tool"]');
-
     papers.forEach(paperEl => {
       const pair = paperEl.dataset.pair;
       const toolEl = document.querySelector(`.mapping-item[data-type="tool"][data-pair="${pair}"]`);
       if (!toolEl) return;
-
       const pRect = paperEl.getBoundingClientRect();
       const tRect = toolEl.getBoundingClientRect();
       const containerRect = mappingContainer.getBoundingClientRect();
-
       const x1 = pRect.right - containerRect.left;
       const y1 = pRect.top + pRect.height / 2 - containerRect.top;
       const x2 = tRect.left - containerRect.left;
       const y2 = tRect.top + tRect.height / 2 - containerRect.top;
-
       const midX = (x1 + x2) / 2;
       const path = `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`;
-
       const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       line.setAttribute('d', path);
       line.setAttribute('class', 'mapping-line' + (highlightedPair === pair ? ' active' : ''));
@@ -2359,7 +2343,6 @@
       });
       drawCurves(pair);
     });
-
     item.addEventListener('mouseleave', () => {
       mappingItems.forEach(other => {
         other.classList.remove('highlighted');
@@ -2367,7 +2350,6 @@
       });
       drawCurves();
     });
-
     item.addEventListener('click', () => {
       const pair = item.dataset.pair;
       const isHighlighted = item.classList.contains('highlighted');
@@ -2497,12 +2479,10 @@
   function renderNetwork(letterId) {
     const data = fdaData[letterId];
     fdaSvg.innerHTML = '';
-
     data.edges.forEach(edge => {
       const fromNode = data.nodes.find(n => n.id === edge.from);
       const toNode = data.nodes.find(n => n.id === edge.to);
       if (!fromNode || !toNode) return;
-
       const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
       line.setAttribute('x1', fromNode.x);
       line.setAttribute('y1', fromNode.y);
@@ -2512,11 +2492,9 @@
       line.style.strokeWidth = 1 + edge.weight * 3;
       fdaSvg.appendChild(line);
     });
-
     data.nodes.forEach(node => {
       const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       g.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       circle.setAttribute('cx', node.x);
       circle.setAttribute('cy', node.y);
@@ -2529,26 +2507,21 @@
         circle.setAttribute('stroke-width', '3');
         circle.setAttribute('stroke-dasharray', '4 2');
       }
-
       const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       label.setAttribute('x', node.x);
       label.setAttribute('y', node.y + node.size + 14);
       label.setAttribute('class', 'fda-node-label');
       label.textContent = node.id;
-
       g.appendChild(circle);
       g.appendChild(label);
       fdaSvg.appendChild(g);
-
       g.style.opacity = '0';
       setTimeout(() => {
         g.style.opacity = '1';
         g.style.transition += ', opacity 0.5s';
       }, 50);
     });
-
     fdaInfo.innerHTML = `<strong>${data.title}</strong><br>${data.summary}`;
-
     fdaStats.innerHTML = `
       <div class="fda-stat">
         <div class="fda-stat-value">${data.stats.firmIn}</div>
@@ -2578,3 +2551,4 @@
 
 </body>
 </html>
+
