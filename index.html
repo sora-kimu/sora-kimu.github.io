@@ -56,7 +56,7 @@
 
     /* PROFILE ROW */
     .profile-row { display: flex; align-items: center; gap: 28px; margin-bottom: 32px; }
-    .profile-img { width: 210px; height: 210px; border-radius: 50%; object-fit: cover; flex-shrink: 0; object-position: center 20%; -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); }
+    .profile-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; flex-shrink: 0; object-position: center 20%; -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); }
     .profile-text h1 { font-size: 1.85rem; font-weight: 800; line-height: 1.15; margin-bottom: 10px; letter-spacing: -0.025em; }
     .profile-text .tagline { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
     .social { display: flex; gap: 16px; margin-top: 14px; flex-wrap: wrap; }
@@ -325,11 +325,12 @@
 <main>
 
   <div class="profile-row">
-    <img src="SoraKim.jpg" alt="Sora Kim" class="profile-img" width="210" height="210">
+    <img src="SoraKim.jpg" alt="Sora Kim" class="profile-img" width="180" height="180">
     <div class="profile-text">
       <h1>Sora Kim</h1>
       <p class="tagline">
         Practitioner-researcher · Pharmaceutical GMP, Seoul<br>
+        <strong>Research on accountability infrastructure · AI in regulated work</strong><br>
         Applying to PhD programs · Fall 2027
       </p>
       <div class="social">
@@ -368,8 +369,11 @@
     </p>
     <div class="positioning-detail">
       <p>There are real reasons to want AI in regulated industries — fewer overwhelmed workers, more thorough investigations, faster access to the right documents. But the same systems that produce those benefits also reshape how responsibility gets distributed, stabilized, and sometimes closed too early.</p>
-      <p>My research program, <strong>Accountability-Aware AI</strong>, studies that reshaping. The theoretical core is a 4-stage accountability lifecycle (AAC → CF → RC → PAC) tracing how responsibility is structurally produced in regulated organizations. Five HCI studies ground each layer of the design framework in a deployed tool. Computational analysis of 50 FDA Warning Letters tests the theory at scale.</p>
+      <p>My research program on <strong>accountability infrastructure</strong> asks: how does AI integration reshape the production of organizational responsibility? The theoretical core is a 4-stage accountability lifecycle (AAC → CF → RC → PAC) tracing how responsibility is structurally produced in regulated organizations. Five HCI studies ground each layer of the design framework in a deployed tool. Computational analysis of 50 FDA Warning Letters tests the theory at scale.</p>
       <p>The design work follows from the theory, not the other way around. And the longer-term question is design itself: what does it look like to build AI systems that are genuinely accountability-aware — not just compliant, but structurally honest about how responsibility gets made.</p>
+      <p style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--border);font-size:0.88rem;">
+        <strong>Orientation:</strong> This work is practitioner-oriented. My audience is the people who actually build and use these tools inside organizations — not ethicists or philosophers. Performance and accountability are not opposed in my framing; they are entangled. Organizations adopt AI anyway, so I focus on how they adopt it <em>without</em> eroding the accountability structures that make regulated work legible in the first place.
+      </p>
     </div>
   </div>
 
@@ -379,16 +383,17 @@
   </p>
 
   <p class="bio">
-    I'm not here to argue that AI should or shouldn't enter regulated work — that decision is already made. What I work on is the <em>how</em>: how responsibility gets produced structurally in regulated organizations, how AI reshapes that production once it's integrated, and what careful design looks like when the thing being designed is already in motion. The longer-term question is design itself: what does it look like to build AI systems that are genuinely accountability-aware — not just compliant, but structurally honest about how responsibility gets made.
+    I'm not here to argue that AI should or shouldn't enter regulated work — that decision is already made. What I work on is the <em>how</em>: how responsibility gets produced structurally in regulated organizations, how AI reshapes that production once it's integrated, and what careful design looks like when the thing being designed is already in motion. My contribution is organizational theory paired with deployment insight. In doctoral work, I expect to collaborate with CS researchers on algorithmic aspects and with organizational scholars on fieldwork methods.
   </p>
 
   <!-- KEYWORDS -->
   <div class="keywords">
-    <span class="kw">🤖 Accountability-Aware AI</span>
-    <span class="kw">🔍 Sociotechnical Systems</span>
-    <span class="kw">🏭 Regulated Work · GMP</span>
+    <span class="kw">🏗 Accountability Infrastructure</span>
+    <span class="kw">🤖 AI in Regulated Work</span>
+    <span class="kw">🏭 Pharmaceutical GMP</span>
     <span class="kw">🧠 Judgment Preservation</span>
-    <span class="kw">⚖️ Accountability Infrastructure</span>
+    <span class="kw">🏢 Technology Adoption</span>
+    <span class="kw">🛠 Tool Deployment</span>
   </div>
 
   <!-- LIFECYCLE -->
@@ -618,6 +623,28 @@
       <div class="glossary-entry-body">
         <div class="glossary-entry-def">Design principle for AI-integrated regulated work: systems should support practitioner judgment rather than replace it. AI functions as comparison enforcer, friction surface, and interpretive scaffold — not as attribution closer or decision maker.</div>
         <div class="glossary-entry-context"><span class="glossary-entry-context-label">Contrast with</span>Automation-focused AI design ("replace human decision-making") and explanation-focused AI design ("justify AI's decision").<div class="glossary-entry-lineage"><span class="glossary-entry-lineage-label">operationalized in:</span>Four-layer framework (<em>Accountability Infrastructure Design</em>, TOCHI target)</div></div>
+      </div>
+    </div>
+    <div class="glossary-entry" data-term="lifecycle">
+      <div class="glossary-entry-header"><span class="glossary-entry-toggle">▸</span><span class="glossary-entry-term">4-Stage Accountability Lifecycle<span class="glossary-entry-term-full">AAC → CF → RC → PAC</span></span></div>
+      <div class="glossary-entry-body">
+        <div class="glossary-entry-def">Theoretical framework tracing how responsibility is produced across time in regulated organizations. Four stages: <strong>AAC</strong> (Anticipated Accountability Convergence — how organizations structure responsibility <em>before</em> action), <strong>CF</strong> (Cognitive Friction — how procedural documents distribute interpretive burden), <strong>RC</strong> (Responsibility Convergence — how investigative systems stabilize attribution after events), and <strong>PAC</strong> (Premature Accountability Convergence — how AI accelerates closure of interpretive possibility).</div>
+        <div class="glossary-entry-context"><span class="glossary-entry-context-label">Status</span>All four stages currently under review at organization theory journals (AMR, Organization, Organization Science, Information and Organization).</div>
+      </div>
+    </div>
+    <div class="glossary-section-label">Research Traditions</div>
+    <div class="glossary-entry" data-term="hci">
+      <div class="glossary-entry-header"><span class="glossary-entry-toggle">▸</span><span class="glossary-entry-term">HCI<span class="glossary-entry-term-full">Human-Computer Interaction</span></span></div>
+      <div class="glossary-entry-body">
+        <div class="glossary-entry-def">Field studying how people interact with computational systems, combining user research, design, and empirical evaluation. Primary venues: CHI, CSCW, DIS, TOCHI.</div>
+        <div class="glossary-entry-context"><span class="glossary-entry-context-label">In this research</span>HCI provides the design framework and empirical methods (N=20 think-aloud studies, prototype evaluation) for the tool deployment program.</div>
+      </div>
+    </div>
+    <div class="glossary-entry" data-term="sts">
+      <div class="glossary-entry-header"><span class="glossary-entry-toggle">▸</span><span class="glossary-entry-term">STS<span class="glossary-entry-term-full">Science and Technology Studies</span></span></div>
+      <div class="glossary-entry-body">
+        <div class="glossary-entry-def">Interdisciplinary field studying how scientific knowledge and technological systems are socially produced and embedded in organizations. Draws on ethnomethodology, actor-network theory, and infrastructure studies.</div>
+        <div class="glossary-entry-context"><span class="glossary-entry-context-label">In this research</span>STS provides the theoretical vocabulary for the 4-stage lifecycle and the conceptual framework for understanding accountability as produced rather than assigned.</div>
       </div>
     </div>
   </div>
