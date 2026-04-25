@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAY ONE: GMP — A pixel game by Sora Kim</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+<meta name="description" content="DAY ONE: GMP — a retro pixel-art onboarding game teaching newcomers Good Manufacturing Practice basics through 5 first-day scenarios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0a0e1a;
+    --bg-mid: #1a2540;
+    --bg-light: #2a3560;
+    --text: #e8f4a0;
+    --accent: #4ade80;
+    --warning: #fbbf24;
+    --danger: #f87171;
+    --highlight: #fde047;
+    --border: #4a5580;
+    --pixel: 4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; }
+  body {
+    background: var(--bg-deep);
+    color: var(--text);
+    font-family: 'Press Start 2P', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+  .crt-screen {
+    width: 100%;
+    max-width: 880px;
+    aspect-ratio: 4/3;
+    background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+    border: 4px solid var(--border);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(74, 222, 128, 0.15), inset 0 0 30px rgba(0,0,0,0.5);
+  }
+  .crt-screen::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 3px);
+    z-index: 100;
+  }
+  .crt-screen::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.3) 100%);
+    z-index: 99;
+  }
+  .scene { width: 100%; height: 100%; position: absolute; inset: 0; display: flex; flex-direction: column; padding: 24px; }
+  .scene.hidden { display: none; }
+
+  /* TITLE SCREEN */
+  .title-scene { justify-content: center; align-items: center; text-align: center; }
+  .title-logo { font-size: clamp(20px, 5vw, 42px); color: var(--accent); margin-bottom: 16px; letter-spacing: 0.05em; text-shadow: 4px 4px 0 var(--bg-deep), 0 0 20px rgba(74,222,128,0.4); animation: pulse 2s infinite; }
+  .title-subtitle { font-size: clamp(8px, 1.4vw, 11px); color: var(--text); margin-bottom: 8px; line-height: 1.8; }
+  .title-byline { font-size: clamp(7px, 1.2vw, 9px); color: var(--warning); margin-bottom: 32px; }
+  .title-press { font-size: clamp(9px, 1.6vw, 13px); color: var(--highlight); animation: blink 1.2s infinite; cursor: pointer; }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+  @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+
+  /* INTRO SCENE */
+  .intro-scene { justify-content: center; align-items: center; text-align: left; padding: 40px; }
+  .intro-text { font-size: clamp(8px, 1.3vw, 11px); line-height: 2; color: var(--text); margin-bottom: 16px; max-width: 600px; }
+  .intro-text strong { color: var(--accent); }
+
+  /* SCENARIO SCREEN */
+  .scenario-scene { padding: 16px; }
+  .scenario-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border: 2px solid var(--border); background: rgba(0,0,0,0.3); margin-bottom: 12px; flex-shrink: 0; }
+  .scenario-time { font-size: clamp(7px, 1.1vw, 10px); color: var(--warning); }
+  .scenario-progress { font-size: clamp(7px, 1.1vw, 10px); color: var(--text); }
+  .scenario-score { font-size: clamp(7px, 1.1vw, 10px); color: var(--highlight); }
+
+  .scene-area { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; min-height: 0; }
+  .pixel-art-area { flex: 0 0 35%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border: 2px solid var(--border); position: relative; overflow: hidden; }
+  .pixel-canvas { width: 100%; height: 100%; }
+
+  .dialog-box { border: 3px solid var(--accent); background: rgba(10, 14, 26, 0.95); padding: 14px 18px; min-height: 60px; position: relative; overflow: hidden; }
+  .dialog-name { font-size: clamp(7px, 1vw, 9px); color: var(--accent); margin-bottom: 8px; letter-spacing: 0.05em; }
+  .dialog-text { font-size: clamp(6px, 0.85vw, 8.5px); line-height: 2; color: var(--text); word-break: break-word; }
+  .dialog-prompt { position: absolute; right: 8px; bottom: 6px; color: var(--highlight); font-size: clamp(7px, 1vw, 10px); animation: blink 1s infinite; }
+
+  .choices-area { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 4px; }
+  .choice-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(6px, 0.8vw, 8px);
+    background: var(--bg-mid);
+    color: var(--text);
+    border: 2px solid var(--border);
+    padding: 12px 14px;
+    cursor: pointer;
+    line-height: 1.9;
+    text-align: left;
+    transition: all 0.1s;
+    image-rendering: pixelated;
+    word-break: break-word;
+    min-height: 60px;
+  }
+  .choice-btn:hover, .choice-btn:focus {
+    background: var(--bg-light);
+    border-color: var(--highlight);
+    color: var(--highlight);
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 0 var(--bg-deep);
+  }
+  .choice-btn.correct { background: rgba(74, 222, 128, 0.2); border-color: var(--accent); color: var(--accent); }
+  .choice-btn.wrong { background: rgba(248, 113, 113, 0.2); border-color: var(--danger); color: var(--danger); }
+  .choice-btn.disabled { pointer-events: none; opacity: 0.5; }
+
+  /* FEEDBACK */
+  .feedback-box { margin-top: 8px; padding: 12px 14px; border: 2px dashed var(--border); background: rgba(0,0,0,0.3); }
+  .feedback-result { font-size: clamp(7px, 1vw, 10px); margin-bottom: 8px; letter-spacing: 0.05em; }
+  .feedback-result.correct { color: var(--accent); }
+  .feedback-result.wrong { color: var(--danger); }
+  .feedback-text { font-size: clamp(6px, 0.85vw, 8.5px); line-height: 2; color: var(--text); word-break: break-word; }
+  .feedback-text strong { color: var(--highlight); }
+  .next-btn-row { display: flex; justify-content: flex-end; margin-top: 8px; }
+  .next-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(7px, 1vw, 9px);
+    background: var(--accent);
+    color: var(--bg-deep);
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+  .next-btn:hover { background: var(--highlight); transform: translateY(-2px); box-shadow: 0 3px 0 var(--bg-deep); }
+
+  /* ENDING */
+  .end-scene { justify-content: center; align-items: center; text-align: center; padding: 40px; }
+  .end-title { font-size: clamp(16px, 4vw, 32px); color: var(--accent); margin-bottom: 24px; text-shadow: 4px 4px 0 var(--bg-deep); }
+  .end-score { font-size: clamp(10px, 2vw, 16px); color: var(--highlight); margin-bottom: 20px; }
+  .end-rank { font-size: clamp(9px, 1.6vw, 13px); color: var(--text); margin-bottom: 28px; line-height: 1.8; max-width: 480px; }
+  .end-rank strong { color: var(--accent); }
+  .end-summary { font-size: clamp(7px, 1.1vw, 9px); color: var(--text); line-height: 2; max-width: 520px; margin-bottom: 24px; text-align: left; }
+  .end-summary li { margin-bottom: 4px; padding-left: 16px; position: relative; }
+  .end-summary li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+  .end-buttons { display: flex; gap: 12px; }
+  .end-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(7px, 1.1vw, 10px);
+    background: var(--bg-mid);
+    color: var(--text);
+    border: 2px solid var(--accent);
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+  .end-btn:hover { background: var(--accent); color: var(--bg-deep); transform: translateY(-2px); box-shadow: 0 3px 0 var(--bg-deep); }
+
+  /* CONTROL HINT */
+  .controls-hint { margin-top: 16px; font-size: clamp(7px, 1vw, 9px); color: var(--text); opacity: 0.6; text-align: center; line-height: 1.8; }
+
+  /* HEADER */
+  .game-meta { text-align: center; margin-bottom: 20px; max-width: 800px; }
+  .game-meta h1 { font-size: clamp(10px, 1.6vw, 13px); color: var(--accent); margin-bottom: 8px; }
+  .game-meta p { font-size: clamp(8px, 1.2vw, 10px); color: var(--text); line-height: 1.8; opacity: 0.85; }
+  .game-meta a { color: var(--highlight); text-decoration: none; }
+  .game-meta a:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .scenario-scene { padding: 10px; }
+    .pixel-art-area { flex: 0 0 25%; }
+    .choices-area { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="game-meta">
+  <h1>DAY ONE: GMP</h1>
+  <p>A pixel-art onboarding game for newcomers entering pharmaceutical GMP environments.<br>5 scenarios · ~15 min · by <a href="index.html">Sora Kim</a></p>
+  <p style="margin-top:8px;"><a href="dayone-gmp-en.html" style="color:var(--highlight);">▸ EN</a> &nbsp;·&nbsp; <a href="dayone-gmp-ko.html">한국어</a></p>
+</div>
+
+<div class="crt-screen" id="screen">
+
+  <!-- TITLE SCREEN -->
+  <div class="scene title-scene" id="scene-title">
+    <div class="title-logo">DAY ONE:<br>GMP</div>
+    <div class="title-subtitle">A PIXEL ONBOARDING GAME</div>
+    <div class="title-subtitle">FOR PHARMACEUTICAL NEWCOMERS</div>
+    <div class="title-byline" style="margin-top:24px;">v1.0 · BY SORA KIM · 2026</div>
+    <div class="title-press" id="start-btn">▸ PRESS START ◂</div>
+  </div>
+
+  <!-- INTRO SCENE -->
+  <div class="scene intro-scene hidden" id="scene-intro">
+    <div class="intro-text">
+      Today is <strong>your first day</strong> at a pharmaceutical GMP site.
+    </div>
+    <div class="intro-text">
+      You will encounter <strong>5 situations</strong> across one workday.<br>
+      Each one teaches a core principle of <strong>Good Manufacturing Practice</strong>.
+    </div>
+    <div class="intro-text" style="color: var(--warning);">
+      Choose carefully. There is no game over —<br>
+      but every choice teaches you something.
+    </div>
+    <div class="intro-text" style="color: var(--accent); margin-top:16px;">
+      ▸ Are you ready, JUN?
+    </div>
+    <button class="next-btn" id="intro-next" style="margin-top:20px; align-self:flex-start;">▸ START DAY 1</button>
+  </div>
+
+  <!-- SCENARIO SCREEN -->
+  <div class="scene scenario-scene hidden" id="scene-scenario">
+    <div class="scenario-header">
+      <span class="scenario-time" id="sc-time">09:00 AM</span>
+      <span class="scenario-progress" id="sc-progress">SCENARIO 1 / 5</span>
+      <span class="scenario-score" id="sc-score">SCORE: 0</span>
+    </div>
+    <div class="scene-area">
+      <div class="pixel-art-area">
+        <canvas class="pixel-canvas" id="pixel-canvas" width="160" height="100"></canvas>
+      </div>
+      <div class="dialog-box">
+        <div class="dialog-name" id="sc-speaker">JUN</div>
+        <div class="dialog-text" id="sc-dialog">...</div>
+      </div>
+      <div class="choices-area" id="sc-choices"></div>
+      <div class="feedback-box hidden" id="sc-feedback">
+        <div class="feedback-result" id="sc-result"></div>
+        <div class="feedback-text" id="sc-explanation"></div>
+        <div class="next-btn-row">
+          <button class="next-btn" id="sc-next">▸ CONTINUE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENDING SCREEN -->
+  <div class="scene end-scene hidden" id="scene-end">
+    <div class="end-title">DAY 1 COMPLETE!</div>
+    <div class="end-score" id="end-score-display">FINAL SCORE: 0 / 100</div>
+    <div class="end-rank" id="end-rank-text">...</div>
+    <ul class="end-summary">
+      <li>Gowning &amp; entry control protect product integrity</li>
+      <li>Material verification prevents downstream errors</li>
+      <li>SOPs must be located before action — never bypass</li>
+      <li>Deviations must be reported, not hidden</li>
+      <li>ALCOA: Attributable, Legible, Contemporaneous, Original, Accurate</li>
+    </ul>
+    <div class="end-buttons">
+      <button class="end-btn" id="end-retry">▸ PLAY AGAIN</button>
+      <button class="end-btn" id="end-back" onclick="window.location.href='index.html'">▸ BACK TO SITE</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="controls-hint">
+  Click choices · Click ▸ CONTINUE to advance · Best on desktop
+</div>
+
+<script>
+// ===== PIXEL ART RENDERING =====
+const PALETTE = {
+  bg: '#0a0e1a', bg2: '#1a2540', mid: '#2a3560',
+  text: '#e8f4a0', skin: '#f5d5a8', hair: '#3a2818',
+  white: '#f8f8f8', blue: '#5b8bc9', green: '#4ade80',
+  red: '#f87171', yellow: '#fde047', gray: '#8a93b3',
+  brown: '#8b6f47', dark: '#1a1f30'
+};
+
+function drawScene(ctx, sceneId) {
+  ctx.imageSmoothingEnabled = false;
+  ctx.fillStyle = PALETTE.bg;
+  ctx.fillRect(0, 0, 160, 100);
+
+  switch(sceneId) {
+    case 1: drawGowningScene(ctx); break;
+    case 2: drawLabScene(ctx); break;
+    case 3: drawDocSearchScene(ctx); break;
+    case 4: drawSpillScene(ctx); break;
+    case 5: drawSignoffScene(ctx); break;
+    default: drawCharacter(ctx, 70, 50);
+  }
+}
+
+function drawCharacter(ctx, x, y, color = PALETTE.green) {
+  // Head
+  ctx.fillStyle = PALETTE.skin;
+  ctx.fillRect(x+3, y, 6, 6);
+  // Hair
+  ctx.fillStyle = PALETTE.hair;
+  ctx.fillRect(x+2, y, 8, 2);
+  ctx.fillRect(x+2, y+2, 1, 1);
+  ctx.fillRect(x+9, y+2, 1, 1);
+  // Eyes
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(x+4, y+3, 1, 1);
+  ctx.fillRect(x+7, y+3, 1, 1);
+  // Body
+  ctx.fillStyle = color;
+  ctx.fillRect(x+2, y+6, 8, 8);
+  // Arms
+  ctx.fillStyle = PALETTE.skin;
+  ctx.fillRect(x+1, y+7, 1, 5);
+  ctx.fillRect(x+10, y+7, 1, 5);
+  // Legs
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(x+3, y+14, 2, 4);
+  ctx.fillRect(x+7, y+14, 2, 4);
+}
+
+// SCENE 1: Gowning area
+function drawGowningScene(ctx) {
+  // Floor
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(0, 75, 160, 25);
+  // Floor tiles
+  ctx.fillStyle = PALETTE.dark;
+  for (let i = 0; i < 160; i += 16) {
+    ctx.fillRect(i, 80, 1, 20);
+  }
+  ctx.fillRect(0, 90, 160, 1);
+
+  // Wall
+  ctx.fillStyle = PALETTE.bg2;
+  ctx.fillRect(0, 0, 160, 75);
+
+  // Door (cleanroom entry)
+  ctx.fillStyle = PALETTE.mid;
+  ctx.fillRect(110, 20, 30, 55);
+  ctx.fillStyle = PALETTE.blue;
+  ctx.fillRect(112, 22, 26, 51);
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(120, 28, 10, 4); // sign
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(123, 29, 4, 2); // sign text mock
+
+  // Lockers
+  ctx.fillStyle = PALETTE.brown;
+  ctx.fillRect(15, 25, 14, 50);
+  ctx.fillRect(32, 25, 14, 50);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(15, 25, 14, 1);
+  ctx.fillRect(32, 25, 14, 1);
+  ctx.fillRect(22, 30, 1, 5);
+  ctx.fillRect(39, 30, 1, 5);
+
+  // Hanging gowns
+  ctx.fillStyle = PALETTE.white;
+  ctx.fillRect(52, 28, 8, 18);
+  ctx.fillRect(64, 28, 8, 18);
+  ctx.fillRect(76, 28, 8, 18);
+  // Hangers
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(54, 27, 1, 2);
+  ctx.fillRect(66, 27, 1, 2);
+  ctx.fillRect(78, 27, 1, 2);
+
+  // Character (Jun, in normal clothes, looking at gowns)
+  drawCharacter(ctx, 88, 56, PALETTE.blue);
+
+  // Question mark
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(96, 48, 2, 2);
+  ctx.fillRect(95, 49, 1, 1);
+  ctx.fillRect(98, 49, 1, 1);
+  ctx.fillRect(97, 50, 1, 1);
+  ctx.fillRect(96, 52, 2, 1);
+}
+
+// SCENE 2: Lab with reagents
+function drawLabScene(ctx) {
+  // Floor
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(0, 75, 160, 25);
+  // Wall
+  ctx.fillStyle = PALETTE.bg2;
+  ctx.fillRect(0, 0, 160, 75);
+
+  // Lab bench
+  ctx.fillStyle = PALETTE.brown;
+  ctx.fillRect(0, 55, 100, 20);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(0, 55, 100, 2);
+
+  // Reagent bottles on bench
+  // Bottle 1
+  ctx.fillStyle = PALETTE.blue;
+  ctx.fillRect(10, 38, 8, 17);
+  ctx.fillStyle = PALETTE.white;
+  ctx.fillRect(11, 44, 6, 4);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(12, 36, 4, 3);
+  // Label red (expired)
+  ctx.fillStyle = PALETTE.red;
+  ctx.fillRect(11, 50, 6, 3);
+
+  // Bottle 2
+  ctx.fillStyle = PALETTE.green;
+  ctx.fillRect(28, 40, 8, 15);
+  ctx.fillStyle = PALETTE.white;
+  ctx.fillRect(29, 45, 6, 4);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(30, 38, 4, 3);
+
+  // Bottle 3
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(46, 36, 8, 19);
+  ctx.fillStyle = PALETTE.white;
+  ctx.fillRect(47, 43, 6, 4);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(48, 34, 4, 3);
+
+  // Cabinet
+  ctx.fillStyle = PALETTE.brown;
+  ctx.fillRect(110, 20, 40, 55);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(110, 20, 40, 1);
+  ctx.fillRect(130, 20, 1, 55);
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(118, 40, 2, 2);
+  ctx.fillRect(140, 40, 2, 2);
+
+  // Character holding bottle (in lab coat)
+  drawCharacter(ctx, 70, 56, PALETTE.white);
+
+  // Magnifying glass / inspection icon
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(82, 60, 4, 4);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(85, 64, 2, 2);
+}
+
+// SCENE 3: Document search
+function drawDocSearchScene(ctx) {
+  // Floor
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(0, 75, 160, 25);
+  // Wall
+  ctx.fillStyle = PALETTE.bg2;
+  ctx.fillRect(0, 0, 160, 75);
+
+  // Bookshelves with binders
+  ctx.fillStyle = PALETTE.brown;
+  ctx.fillRect(0, 15, 60, 60);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(0, 15, 60, 1);
+  ctx.fillRect(0, 35, 60, 1);
+  ctx.fillRect(0, 55, 60, 1);
+
+  // Binders
+  const binderColors = [PALETTE.red, PALETTE.blue, PALETTE.green, PALETTE.yellow, PALETTE.white];
+  for (let row = 0; row < 3; row++) {
+    for (let col = 0; col < 8; col++) {
+      ctx.fillStyle = binderColors[(row * 8 + col) % binderColors.length];
+      ctx.fillRect(2 + col * 7, 17 + row * 20, 5, 17);
+      ctx.fillStyle = PALETTE.dark;
+      ctx.fillRect(3 + col * 7, 19 + row * 20, 3, 1);
+    }
+  }
+
+  // Character at computer (in lab coat)
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(90, 50, 35, 25);
+  ctx.fillStyle = PALETTE.bg;
+  ctx.fillRect(92, 52, 31, 20);
+  // Screen text mock
+  ctx.fillStyle = PALETTE.green;
+  ctx.fillRect(95, 56, 20, 1);
+  ctx.fillRect(95, 60, 15, 1);
+  ctx.fillRect(95, 64, 18, 1);
+  // Search box highlight
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(95, 68, 25, 2);
+
+  drawCharacter(ctx, 105, 58, PALETTE.white);
+
+  // Question mark
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(140, 35, 2, 2);
+  ctx.fillRect(139, 36, 1, 1);
+  ctx.fillRect(142, 36, 1, 1);
+  ctx.fillRect(141, 37, 1, 1);
+  ctx.fillRect(140, 39, 2, 1);
+}
+
+// SCENE 4: Spill / deviation
+function drawSpillScene(ctx) {
+  // Floor
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(0, 75, 160, 25);
+  // Wall
+  ctx.fillStyle = PALETTE.bg2;
+  ctx.fillRect(0, 0, 160, 75);
+
+  // Lab bench
+  ctx.fillStyle = PALETTE.brown;
+  ctx.fillRect(20, 55, 80, 20);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(20, 55, 80, 2);
+
+  // Spilled bottle (tipped over)
+  ctx.fillStyle = PALETTE.blue;
+  ctx.fillRect(40, 50, 14, 7);
+  ctx.fillStyle = PALETTE.white;
+  ctx.fillRect(46, 48, 4, 3);
+
+  // Spill (red liquid)
+  ctx.fillStyle = PALETTE.red;
+  ctx.fillRect(36, 75, 30, 4);
+  ctx.fillRect(34, 77, 34, 3);
+  ctx.fillRect(38, 73, 26, 2);
+  // Drips
+  ctx.fillRect(40, 80, 2, 2);
+  ctx.fillRect(50, 80, 2, 2);
+  ctx.fillRect(60, 80, 2, 2);
+
+  // Warning sign
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(110, 25, 25, 25);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(120, 30, 5, 10);
+  ctx.fillRect(120, 42, 5, 3);
+
+  // Character (in lab coat, looking shocked)
+  drawCharacter(ctx, 75, 56, PALETTE.white);
+
+  // Exclamation
+  ctx.fillStyle = PALETTE.red;
+  ctx.fillRect(85, 48, 2, 5);
+  ctx.fillRect(85, 54, 2, 1);
+}
+
+// SCENE 5: Sign-off / documentation
+function drawSignoffScene(ctx) {
+  // Floor
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(0, 75, 160, 25);
+  // Wall
+  ctx.fillStyle = PALETTE.bg2;
+  ctx.fillRect(0, 0, 160, 75);
+
+  // Desk
+  ctx.fillStyle = PALETTE.brown;
+  ctx.fillRect(20, 55, 120, 20);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(20, 55, 120, 2);
+
+  // Document on desk
+  ctx.fillStyle = PALETTE.white;
+  ctx.fillRect(50, 45, 40, 12);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(53, 48, 30, 1);
+  ctx.fillRect(53, 51, 25, 1);
+  ctx.fillRect(53, 54, 28, 1);
+
+  // Pen
+  ctx.fillStyle = PALETTE.blue;
+  ctx.fillRect(95, 50, 12, 2);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(94, 50, 1, 2);
+
+  // Computer
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(105, 30, 30, 25);
+  ctx.fillStyle = PALETTE.bg;
+  ctx.fillRect(107, 32, 26, 20);
+  ctx.fillStyle = PALETTE.green;
+  ctx.fillRect(110, 36, 18, 1);
+  ctx.fillRect(110, 40, 14, 1);
+  ctx.fillRect(110, 44, 16, 1);
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(110, 48, 10, 2);
+
+  // Character at desk (lab coat)
+  drawCharacter(ctx, 30, 56, PALETTE.white);
+}
+
+// ===== GAME DATA =====
+const SCENARIOS = [
+  {
+    time: "09:00 AM",
+    speaker: "JUN",
+    dialog: "First day! I'm at the gowning area. Gowns are hanging here, but people seem to put them on in different orders. What should I do?",
+    sceneId: 1,
+    choices: [
+      { text: "Put on the gown — others will correct me if I'm wrong.", correct: false, points: 0 },
+      { text: "Find the gowning SOP and follow the documented sequence.", correct: true, points: 20 },
+      { text: "Skip gowning — I'm just observing today.", correct: false, points: 0 },
+      { text: "Copy whoever looks most senior nearby.", correct: false, points: 0 }
+    ],
+    correctIndex: 1,
+    explanation: "Gowning is a <strong>validated procedure</strong> — order matters because it controls contamination. Always follow the gowning SOP. Improvising is itself a deviation. <strong>'Just observing'</strong> is not an exemption: anyone entering must gown per SOP."
+  },
+  {
+    time: "10:00 AM",
+    speaker: "JUN",
+    dialog: "Setting up my first task. One of the reagents has a faded label and the expiry date is hard to read. What now?",
+    sceneId: 2,
+    choices: [
+      { text: "Use it — if it was on the shelf, it must be okay.", correct: false, points: 0 },
+      { text: "Quarantine the bottle and notify QC. Don't use until verified.", correct: true, points: 20 },
+      { text: "Cross out the old date and write today's date.", correct: false, points: 0 },
+      { text: "Use a different bottle and put this one back.", correct: false, points: 0 }
+    ],
+    correctIndex: 1,
+    explanation: "Materials with <strong>unclear status must be quarantined</strong> until QC verifies. Modifying labels is <strong>data integrity violation</strong> under GMP. Putting it back without flagging means the next person hits the same problem — or worse, uses it."
+  },
+  {
+    time: "11:30 AM",
+    speaker: "JUN",
+    dialog: "I need to do a procedure I've never done. The document system has hundreds of files and I can't find the right SOP. Time pressure...",
+    sceneId: 3,
+    choices: [
+      { text: "Ask a colleague how they do it and follow that.", correct: false, points: 0 },
+      { text: "Search by name; if not found, ask QA and document the gap.", correct: true, points: 20 },
+      { text: "Open the closest-named SOP and start — close enough.", correct: false, points: 0 },
+      { text: "Skip the procedure today. Try again tomorrow.", correct: false, points: 5 }
+    ],
+    correctIndex: 1,
+    explanation: "Performing a procedure <strong>without the correct SOP</strong> is unauthorized — even if a colleague's method seems fine. Right move: <strong>structured search → escalate if not found → document the gap</strong>. The SOP-finding difficulty itself is a system problem worth surfacing."
+  },
+  {
+    time: "02:00 PM",
+    speaker: "JUN",
+    dialog: "I just knocked over a reagent bottle. Small spill on the bench. Nobody saw it. My shift ends in two hours.",
+    sceneId: 4,
+    choices: [
+      { text: "Clean it quickly. No harm done.", correct: false, points: 0 },
+      { text: "Stop work, contain the spill, report the deviation now.", correct: true, points: 20 },
+      { text: "Clean it up and mention it tomorrow if relevant.", correct: false, points: 0 },
+      { text: "Note it in my personal notebook to remember.", correct: false, points: 5 }
+    ],
+    correctIndex: 1,
+    explanation: "<strong>All deviations must be reported, regardless of size or whether anyone saw.</strong> The deviation system isn't about blame — it's about <strong>traceability</strong>. Hidden spills can affect samples or future work in unpredictable ways. <strong>Stop → contain → report</strong> is the rule."
+  },
+  {
+    time: "04:30 PM",
+    speaker: "JUN",
+    dialog: "End of day. Signing off my batch record. I forgot one timepoint — I'm pretty sure it was 23.4. The form needs a signature now.",
+    sceneId: 5,
+    choices: [
+      { text: "Write 23.4 with current timestamp. Sign and submit.", correct: false, points: 0 },
+      { text: "Don't sign. Mark missing, document why, report to QA.", correct: true, points: 20 },
+      { text: "Write 23.4 with the original timepoint and sign.", correct: false, points: 0 },
+      { text: "Ask a teammate to sign for me — they saw me work.", correct: false, points: 0 }
+    ],
+    correctIndex: 1,
+    explanation: "<strong>ALCOA</strong> is the foundation of GMP data integrity: <strong>Attributable, Legible, Contemporaneous, Original, Accurate</strong>. Backfilling from memory violates 'Contemporaneous' and 'Original'. Backdating violates 'Attributable'. Correct move: <strong>document what's missing and why</strong>. The system handles gaps — only if they're declared, not hidden."
+  }
+];
+
+// ===== GAME STATE =====
+let currentScenario = 0;
+let totalScore = 0;
+let answered = false;
+
+const screen = document.getElementById('screen');
+const scTitle = document.getElementById('scene-title');
+const scIntro = document.getElementById('scene-intro');
+const scScenario = document.getElementById('scene-scenario');
+const scEnd = document.getElementById('scene-end');
+
+function showScene(scene) {
+  [scTitle, scIntro, scScenario, scEnd].forEach(s => s.classList.add('hidden'));
+  scene.classList.remove('hidden');
+}
+
+document.getElementById('start-btn').addEventListener('click', () => {
+  showScene(scIntro);
+});
+
+document.getElementById('intro-next').addEventListener('click', () => {
+  currentScenario = 0;
+  totalScore = 0;
+  loadScenario();
+});
+
+function loadScenario() {
+  const sc = SCENARIOS[currentScenario];
+  answered = false;
+  document.getElementById('sc-time').textContent = sc.time;
+  document.getElementById('sc-progress').textContent = `SCENARIO ${currentScenario + 1} / ${SCENARIOS.length}`;
+  document.getElementById('sc-score').textContent = `SCORE: ${totalScore}`;
+  document.getElementById('sc-speaker').textContent = sc.speaker;
+  document.getElementById('sc-dialog').textContent = sc.dialog;
+
+  // Render pixel art
+  const canvas = document.getElementById('pixel-canvas');
+  const ctx = canvas.getContext('2d');
+  drawScene(ctx, sc.sceneId);
+
+  // Render choices
+  const choicesEl = document.getElementById('sc-choices');
+  choicesEl.innerHTML = '';
+  sc.choices.forEach((choice, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = `${String.fromCharCode(65 + idx)}. ${choice.text}`;
+    btn.addEventListener('click', () => handleChoice(idx, btn));
+    choicesEl.appendChild(btn);
+  });
+
+  // Hide feedback
+  document.getElementById('sc-feedback').classList.add('hidden');
+
+  showScene(scScenario);
+}
+
+function handleChoice(idx, btn) {
+  if (answered) return;
+  answered = true;
+  const sc = SCENARIOS[currentScenario];
+  const choice = sc.choices[idx];
+
+  // Disable all buttons, mark correct/wrong
+  document.querySelectorAll('.choice-btn').forEach((b, i) => {
+    b.classList.add('disabled');
+    if (i === sc.correctIndex) b.classList.add('correct');
+    else if (i === idx) b.classList.add('wrong');
+  });
+
+  // Update score
+  totalScore += choice.points;
+  document.getElementById('sc-score').textContent = `SCORE: ${totalScore}`;
+
+  // Show feedback
+  const fb = document.getElementById('sc-feedback');
+  const result = document.getElementById('sc-result');
+  const explanation = document.getElementById('sc-explanation');
+
+  if (choice.correct) {
+    result.textContent = `▸ CORRECT! +${choice.points} POINTS`;
+    result.className = 'feedback-result correct';
+  } else {
+    result.textContent = `▸ NOT QUITE. (+${choice.points} points)`;
+    result.className = 'feedback-result wrong';
+  }
+  explanation.innerHTML = sc.explanation;
+  fb.classList.remove('hidden');
+}
+
+document.getElementById('sc-next').addEventListener('click', () => {
+  currentScenario++;
+  if (currentScenario >= SCENARIOS.length) {
+    showEnding();
+  } else {
+    loadScenario();
+  }
+});
+
+function showEnding() {
+  document.getElementById('end-score-display').textContent = `FINAL SCORE: ${totalScore} / 100`;
+  let rank, rankText;
+  if (totalScore >= 90) {
+    rank = "GMP-READY ROOKIE";
+    rankText = `<strong>${rank}</strong><br>You've internalized the foundations. Welcome to the floor.`;
+  } else if (totalScore >= 60) {
+    rank = "ON THE RIGHT PATH";
+    rankText = `<strong>${rank}</strong><br>You got the core right. Review the scenarios you missed — those are real situations you'll face.`;
+  } else if (totalScore >= 30) {
+    rank = "STILL LEARNING";
+    rankText = `<strong>${rank}</strong><br>GMP is about systems, not memory. Replay and pay attention to <em>why</em> each correct choice is correct.`;
+  } else {
+    rank = "DAY 1 - TAKE 2?";
+    rankText = `<strong>${rank}</strong><br>That's okay. The point of this game is to encounter these decisions <em>before</em> you face them on the real floor.`;
+  }
+  document.getElementById('end-rank-text').innerHTML = rankText;
+  showScene(scEnd);
+}
+
+document.getElementById('end-retry').addEventListener('click', () => {
+  currentScenario = 0;
+  totalScore = 0;
+  showScene(scTitle);
+});
+
+// Allow click anywhere on title to start
+scTitle.addEventListener('click', (e) => {
+  if (e.target.id !== 'start-btn') {
+    document.getElementById('start-btn').click();
+  }
+});
+</script>
+
+</body>
+</html>

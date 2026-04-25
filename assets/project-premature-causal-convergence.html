@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premature Convergence under Closure Pressure — Project · Sora Kim</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+<meta name="description" content="Keeping Comparison Open: how reasoning develops before closure in regulated investigations. Study 1 — timed reflection pilot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#ffffff; --text:#111111; --text-muted:#555555; --text-light:#888888; --border:#e5e5e5; --surface:#fafafa; --surface-hover:#f0f0f0; --blue:#2563EB; --accent:#7c3aed; --warning:#dc2626; --green:#059669; --orange:#f59e0b; --layer-1:#dbeafe; --layer-2:#ddd6fe; --layer-3:#fbcfe8; --layer-4:#fed7aa; }
+  :root[data-theme="dark"] { --bg:#111111; --text:#f0f0f0; --text-muted:#aaaaaa; --text-light:#666666; --border:#2a2a2a; --surface:#1a1a1a; --surface-hover:#242424; --blue:#60a5fa; --accent:#a78bfa; --warning:#f87171; --green:#34d399; --orange:#fbbf24; --layer-1:#1e3a5f; --layer-2:#3b2f6b; --layer-3:#5f2a4a; --layer-4:#5f3a1a; }
+  @media (prefers-color-scheme:dark) { :root:not([data-theme="light"]) { --bg:#111111; --text:#f0f0f0; --text-muted:#aaaaaa; --text-light:#666666; --border:#2a2a2a; --surface:#1a1a1a; --surface-hover:#242424; --blue:#60a5fa; --accent:#a78bfa; --warning:#f87171; --green:#34d399; --orange:#fbbf24; --layer-1:#1e3a5f; --layer-2:#3b2f6b; --layer-3:#5f2a4a; --layer-4:#5f3a1a; } }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; transition:background 0.2s,color 0.2s; }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:18px 40px; border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--bg); z-index:100; }
+  .nav-name { font-family:'DM Mono',monospace; font-size:14px; font-weight:500; color:var(--text); text-decoration:none;  white-space: nowrap;}
+  .nav-links { display:flex; gap:28px; list-style:none; }
+  .nav-links a { font-family:'DM Mono',monospace; font-size:12px; color:var(--text-muted); text-decoration:none; letter-spacing:0.04em; }
+  .nav-links a:hover, .nav-links a.active { color:var(--blue); }
+  .theme-toggle { background:none; border:1px solid var(--border); border-radius:20px; padding:4px 10px; font-size:14px; cursor:pointer; color:var(--text); }
+  main { max-width:880px; margin:0 auto; padding:56px 40px 80px; }
+  .breadcrumb { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-light); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:16px; }
+  .breadcrumb a { color:var(--text-light); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--blue); }
+  .layer-indicator { display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; align-items:center; }
+  .layer-pill { padding:6px 12px; border-radius:20px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.06em; color:var(--text-light); background:var(--surface); border:1px solid var(--border); }
+  .layer-pill.active { background:var(--layer-4); color:var(--text); border-color:var(--accent); font-weight:600; }
+  .layer-pill.active::before { content:"● "; color:var(--accent); }
+  .study-pill { padding:4px 10px; border-radius:4px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.06em; color:var(--accent); background:var(--surface); border:1px solid var(--accent); margin-left:auto; }
+  .page-title { font-size:2.2rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:14px; }
+  .page-subtitle { font-size:1.1rem; color:var(--text-muted); line-height:1.6; margin-bottom:24px; }
+  .meta-row { display:flex; gap:18px; flex-wrap:wrap; font-family:'DM Mono',monospace; font-size:12px; color:var(--text-light); letter-spacing:0.04em; padding-bottom:28px; border-bottom:1px solid var(--border); margin-bottom:32px; }
+  .definition-callout { padding:18px 22px; background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:8px; margin-bottom:32px; }
+  .definition-callout-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:8px; }
+  .definition-callout-title { font-weight:600; margin-bottom:6px; font-size:0.95rem; }
+  .definition-callout-text { font-size:0.88rem; color:var(--text-muted); line-height:1.6; }
+  .definition-callout-text strong { color:var(--text); }
+  .process-diagram { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-bottom:40px; padding:18px; background:var(--surface); border:1px solid var(--border); border-radius:12px; }
+  .process-step { text-align:center; padding:14px 8px; position:relative; transition:all 0.2s; border-radius:8px; }
+  .process-step:hover { background:var(--bg); }
+  .process-step:not(:last-child)::after { content:"→"; position:absolute; right:-8px; top:50%; transform:translateY(-50%); color:var(--text-light); font-size:18px; }
+  .process-step-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-light); letter-spacing:0.08em; margin-bottom:6px; }
+  .process-step-name { font-weight:600; font-size:0.85rem; }
+  .process-step-detail { font-size:0.75rem; color:var(--text-muted); margin-top:4px; }
+  @media (max-width:700px) { .process-diagram { grid-template-columns:1fr 1fr; gap:8px; } .process-step:nth-child(2)::after { display:none; } }
+  .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:14px; margin-bottom:40px; }
+  .stat-box { padding:18px 14px; background:var(--surface); border:1px solid var(--border); border-radius:10px; transition:all 0.2s; }
+  .stat-box:hover { border-color:var(--blue); transform:translateY(-2px); box-shadow:0 4px 12px rgba(37,99,235,0.08); }
+  .stat-value { font-size:1.6rem; font-weight:700; color:var(--blue); margin-bottom:4px; font-family:'DM Mono',monospace; }
+  .stat-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-light); margin-bottom:8px; }
+  .stat-note { font-size:0.78rem; color:var(--text-muted); line-height:1.5; }
+  .accordion-section { margin-bottom:16px; border:1px solid var(--border); border-radius:12px; overflow:hidden; transition:all 0.2s; }
+  .accordion-section.open { border-color:var(--accent); }
+  .accordion-header { display:flex; justify-content:space-between; align-items:center; padding:18px 22px; cursor:pointer; background:var(--bg); transition:background 0.2s; }
+  .accordion-header:hover { background:var(--surface); }
+  .accordion-header-left { display:flex; align-items:center; gap:14px; }
+  .accordion-num { font-family:'DM Mono',monospace; font-size:12px; color:var(--accent); font-weight:600; letter-spacing:0.06em; }
+  .accordion-title { font-size:1.1rem; font-weight:700; }
+  .accordion-toggle { font-family:'DM Mono',monospace; font-size:12px; color:var(--text-light); transition:transform 0.2s; }
+  .accordion-section.open .accordion-toggle { transform:rotate(180deg); }
+  .accordion-body { padding:0 22px; max-height:0; overflow:hidden; transition:max-height 0.3s ease,padding 0.3s ease; }
+  .accordion-section.open .accordion-body { padding:4px 22px 22px; max-height:5000px; }
+  .accordion-body p { color:var(--text); margin-bottom:14px; font-size:0.96rem; }
+  .accordion-body p.muted { color:var(--text-muted); }
+  .quote { padding:16px 20px; background:var(--surface); border-left:3px solid var(--accent); border-radius:0 6px 6px 0; font-style:italic; color:var(--text-muted); margin:16px 0; font-size:0.95rem; }
+  .callout { padding:14px 18px; background:var(--surface); border:1px solid var(--border); border-radius:8px; margin:16px 0; font-size:0.9rem; }
+  .callout strong { color:var(--text); }
+  ul.bulleted { padding-left:0; list-style:none; margin:12px 0; }
+  ul.bulleted li { padding-left:20px; position:relative; margin-bottom:8px; color:var(--text-muted); font-size:0.92rem; line-height:1.6; }
+  ul.bulleted li::before { content:"→"; position:absolute; left:0; color:var(--accent); font-weight:600; }
+  .timepoint-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:18px 0; }
+  .timepoint-card { padding:16px; background:var(--surface); border:1px solid var(--border); border-radius:10px; transition:all 0.2s; }
+  .timepoint-card:hover { border-color:var(--accent); }
+  .timepoint-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:0.08em; font-weight:600; margin-bottom:6px; }
+  .timepoint-time { font-size:1.1rem; font-weight:700; margin-bottom:8px; font-family:'DM Mono',monospace; color:var(--blue); }
+  .timepoint-desc { font-size:0.85rem; color:var(--text-muted); line-height:1.5; }
+  @media (max-width:700px) { .timepoint-grid { grid-template-columns:1fr; } }
+  .findings-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:16px 0; }
+  .finding-cell { padding:14px; background:var(--surface); border:1px solid var(--border); border-radius:8px; text-align:center; transition:all 0.2s; }
+  .finding-cell:hover { border-color:var(--blue); }
+  .finding-cell-value { font-size:1.2rem; font-weight:700; font-family:'DM Mono',monospace; color:var(--blue); margin-bottom:4px; }
+  .finding-cell-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.06em; color:var(--text-light); text-transform:uppercase; }
+  .caveat-ref { padding:14px 18px; background:var(--surface); border-left:3px solid var(--blue); border-radius:0 6px 6px 0; font-size:0.85rem; color:var(--text-muted); margin:18px 0; line-height:1.6; }
+  .caveat-ref strong { color:var(--text); }
+  .caveat-ref a { color:var(--blue); text-decoration:none; }
+  .caveat-ref a:hover { text-decoration:underline; }
+  .paper-link-box { display:flex; align-items:center; gap:14px; padding:18px 20px; background:var(--surface); border:1px solid var(--border); border-radius:10px; text-decoration:none; color:var(--text); transition:all 0.2s; margin:16px 0; }
+  .paper-link-box:hover { border-color:var(--accent); background:var(--surface-hover); transform:translateY(-2px); }
+  .paper-link-icon { font-size:1.2rem; flex-shrink:0; }
+  .paper-link-title { font-weight:600; margin-bottom:4px; }
+  .paper-link-meta { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-light); }
+  .paper-link-arrow { margin-left:auto; color:var(--text-light); }
+  .nav-footer { display:flex; justify-content:space-between; align-items:center; margin-top:60px; padding-top:24px; border-top:1px solid var(--border); font-family:'DM Mono',monospace; font-size:12px; }
+  .nav-footer a { color:var(--text-muted); text-decoration:none; letter-spacing:0.04em; }
+  .nav-footer a:hover { color:var(--blue); }
+  footer { max-width:880px; margin:0 auto; padding:30px 40px 40px; font-family:'DM Mono',monospace; font-size:11px; color:var(--text-light); letter-spacing:0.04em; text-align:center; }
+  @media (max-width:720px) { nav { padding:14px 20px; } .nav-links { gap:18px; } main { padding:32px 20px 56px; } .page-title { font-size:1.6rem; } footer { padding:30px 20px; } }
+
+    @media (max-width: 480px) {
+      nav { padding: 12px 14px; }
+      .nav-name { font-size: 11px; gap: 4px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 10px; }
+      .theme-toggle { padding: 3px 7px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-name">🐚 Sora Kim</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="papers.html">Papers</a></li>
+    <li><a href="tools.html" class="active">Tools</a></li>
+    <li><a href="teaching.html">Teaching</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
+<script>
+  const toggle = document.getElementById('themeToggle'), root = document.documentElement, saved = localStorage.getItem('theme');
+  if (saved === 'dark') { root.setAttribute('data-theme','dark'); toggle.textContent='☀️'; }
+  else if (saved === 'light') { root.setAttribute('data-theme','light'); toggle.textContent='🌙'; }
+  toggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) { root.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); toggle.textContent='🌙'; }
+    else { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
+  });
+</script>
+
+<main>
+  <div class="breadcrumb"><a href="tools.html">Tools</a> / Premature Convergence under Closure Pressure</div>
+  <div class="layer-indicator">
+    <span class="layer-pill">Layer 1 · Accessibility</span>
+    <span class="layer-pill">Layer 2 · Structure</span>
+    <span class="layer-pill">Layer 3 · Coordination</span>
+    <span class="layer-pill active">Layer 4 · Reasoning</span>
+    <span class="study-pill">Study 1 of 2</span>
+  </div>
+
+  <h1 class="page-title">Premature Convergence under Closure Pressure</h1>
+  <p class="page-subtitle">
+    Under closure pressure, initial explanations often converged on a single cause before broader contributors could be considered. With additional time, procedural, contextual, and organizational contributors began to appear. This pilot establishes that early closure reflects environmental pressure rather than fixed cognitive limitation.
+  </p>
+
+  <div class="meta-row">
+    <span>📋 Pilot study</span>
+    <span>👥 N=20 GMP practitioners</span>
+    <span>⏱ Three-timepoint reflection</span>
+    <span>🔬 No prototype intervention</span>
+  </div>
+
+  <div class="definition-callout">
+    <div class="definition-callout-label">📖 Background</div>
+    <div class="definition-callout-title">What is RCA — and what is "PAC"?</div>
+    <div class="definition-callout-text">
+      <strong>Root Cause Analysis (RCA)</strong> is the formal process used to explain why a deviation occurred in <strong>GMP (Good Manufacturing Practice)</strong> environments — FDA-enforced pharmaceutical production standards. It is often treated as a neutral reasoning task, but in practice deviation investigations unfold under expectations of speed, closure, and documentation readiness. Investigators may document a root cause before fully examining procedural, contextual, or organizational contributors.
+      <br><br>
+      <strong>PAC (Premature Accountability Convergence)</strong> is the concept this research uses to describe what happens when investigation reasoning narrows toward an individual actor — typically the most proximate operator — before procedural, contextual, and organizational contributors have been examined. PAC reframes early closure as a <em>system-design problem</em>, not just a cognitive failing.
+    </div>
+  </div>
+
+  <div class="process-diagram">
+    <div class="process-step"><div class="process-step-num">01</div><div class="process-step-name">Problem</div><div class="process-step-detail">Closure pressure narrows reasoning</div></div>
+    <div class="process-step"><div class="process-step-num">02</div><div class="process-step-name">Method</div><div class="process-step-detail">Three-timepoint protocol</div></div>
+    <div class="process-step"><div class="process-step-num">03</div><div class="process-step-name">Findings</div><div class="process-step-detail">Reasoning broadens with time</div></div>
+    <div class="process-step"><div class="process-step-num">04</div><div class="process-step-name">Reveal</div><div class="process-step-detail">Convergence is environmental</div></div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-box"><div class="stat-label">Initial convergence</div><div class="stat-value">15 / 20</div><div class="stat-note">Single-cause, person-centered explanation at the initial timepoint (t=0).</div></div>
+    <div class="stat-box"><div class="stat-label">Confidence at t=0</div><div class="stat-value">1.0 / 5</div><div class="stat-note">Across all participants regardless of experience — early convergence reflects pressure, not certainty.</div></div>
+    <div class="stat-box"><div class="stat-label">Revised at +5 min</div><div class="stat-value">8 / 20</div><div class="stat-note">Substantively revised reasoning when given additional unstructured time.</div></div>
+    <div class="stat-box"><div class="stat-label">Broadened by +10 min</div><div class="stat-value">18 / 20</div><div class="stat-note">Expanded explanation or expressed greater uncertainty — without any structured support.</div></div>
+  </div>
+
+  <div class="caveat-ref">
+    <strong>⚖ On the counter-intuitive low confidence score (1.0/5):</strong> Unlike the high satisfaction scores elsewhere in this research program, this confidence rating is a substantively meaningful low value — investigators converged on single-cause explanations while rating their own confidence at 1.0/5. This dissociation between convergence and certainty is the central empirical finding of the study, not a methodological weakness. <a href="tools.html">See full caveat on Tools page →</a>
+  </div>
+
+  <div class="accordion-section open">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">01</span><span class="accordion-title">The problem — closure pressure shapes reasoning</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>Root Cause Analysis is intended as a neutral investigative reasoning task. In practice, deviation investigations unfold under expectations of speed, closure, and documentation readiness.</p>
+      <p>Investigators may document a root cause before fully examining procedural, contextual, or organizational contributors. This pilot observes this early-stage reasoning process directly, before any interface intervention.</p>
+      <p>Reasoning continues to develop — but documentation demands commitment <em>before</em> comparison has fully unfolded.</p>
+      <p class="muted">In regulated environments:</p>
+      <ul class="bulleted">
+        <li>Early explanations are not just cognitive — they quickly become documented, audited, and consequential</li>
+        <li>Closure pressure favors fast attribution over broad exploration</li>
+        <li>Standard forms underrepresent alternative causal pathways</li>
+        <li>Reasoning is often documented late, after convergence has already occurred</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">02</span><span class="accordion-title">The method — three-timepoint reflection protocol</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>Participants (N=20) received the same investigation-style case and explained the cause at three timepoints: immediately, after five minutes, and after ten minutes. The goal was to observe whether additional time changed the breadth, direction, or confidence of reasoning.</p>
+      <div class="timepoint-grid">
+        <div class="timepoint-card">
+          <div class="timepoint-num">TIMEPOINT 01</div>
+          <div class="timepoint-time">0 min</div>
+          <div class="timepoint-desc">Immediate explanation based on first interpretation of the case.</div>
+        </div>
+        <div class="timepoint-card">
+          <div class="timepoint-num">TIMEPOINT 02</div>
+          <div class="timepoint-time">+5 min</div>
+          <div class="timepoint-desc">Continued reflection without prompts or interventions, allowing alternative contributors to emerge.</div>
+        </div>
+        <div class="timepoint-card">
+          <div class="timepoint-num">TIMEPOINT 03</div>
+          <div class="timepoint-time">+10 min</div>
+          <div class="timepoint-desc">Final reasoning state recorded to assess whether causal breadth changed further over time.</div>
+        </div>
+      </div>
+      <div class="callout"><strong>Rationale.</strong> Intentionally conducted <em>without</em> a prototype interface — establishing an empirical baseline for whether reasoning broadens over short intervals before any design intervention attempts to support it.</div>
+      <div class="callout"><strong>Implication.</strong> If reasoning naturally broadens with time, premature closure in investigation settings reflects <strong>environmental pressure rather than fixed cognitive limitation</strong> — making it a system-design problem, not just a cognitive one.</div>
+      <div class="callout"><strong>Limitation.</strong> Same participant pool as Study 2 (scaffold), which ensures consistent GMP baseline but introduces potential carry-over effects. Results are observational and exploratory rather than statistically generalizable.</div>
+    </div>
+  </div>
+
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">03</span><span class="accordion-title">What this revealed</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>15 of 20 participants produced single-cause, person-centered explanations at the initial timepoint — with confidence averaging 1 out of 5 across all participants regardless of experience level. Early convergence did not reflect epistemic certainty; <strong>it reflected institutional pressure to produce a documented explanation quickly</strong>.</p>
+      <p>By ten minutes, 18 of 20 participants had broadened their explanation or expressed explicit uncertainty. 8 of 20 revised substantially at the +5 minute mark.</p>
+      <div class="findings-grid">
+        <div class="finding-cell"><div class="finding-cell-value">15/20</div><div class="finding-cell-label">Single-cause @ t=0</div></div>
+        <div class="finding-cell"><div class="finding-cell-value">1.0/5</div><div class="finding-cell-label">Confidence @ t=0</div></div>
+        <div class="finding-cell"><div class="finding-cell-value">8/20</div><div class="finding-cell-label">Revised @ +5 min</div></div>
+        <div class="finding-cell"><div class="finding-cell-value">18/20</div><div class="finding-cell-label">Broadened @ +10 min</div></div>
+      </div>
+      <div class="quote">
+        "I knew I was guessing at first. But the form needed an answer."
+      </div>
+      <p class="muted"><strong>Empirical implication:</strong> Reasoning breadth is time-sensitive. Early explanations can underrepresent systemic contributors. Closure pressure can distort causal interpretation.</p>
+      <p class="muted"><strong>Design implication:</strong> Investigation environments need structured support before closure. Reasoning scaffolds receive preliminary empirical support, not only conceptual motivation. Time-sensitive convergence is a UX problem.</p>
+    </div>
+  </div>
+
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">04</span><span class="accordion-title">Why this matters for Layer 4</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>The dissociation between <strong>convergence</strong> and <strong>certainty</strong> is the empirical anchor of the Layer 4 design problem. If investigators converge prematurely while rating their confidence at 1 out of 5, convergence cannot be attributed to epistemic certainty — it has to be attributed to the documentation environment itself.</p>
+      <p>This is what makes "Premature Accountability Convergence" (PAC) a design target rather than a cognitive failing. The reasoning system is not broken; the timing structure of investigation closure is.</p>
+      <p><strong>Companion: Study 2</strong> — translates this finding into an interface intervention: an AI-supported reasoning scaffold designed to keep multiple causal hypotheses visible long enough to delay premature convergence, without automating the conclusion or flattening uncertainty.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;">
+    <a href="papers.html#rca-paper" class="paper-link-box">
+      <span class="paper-link-icon">📄</span>
+      <div>
+        <div class="paper-link-title">Keeping Comparison Open: Interface Scaffolding Against Premature Accountability Convergence in Regulated Investigations</div>
+        <div class="paper-link-meta">Working paper · Layer 4 of 4 · Study 1 of 2</div>
+      </div>
+      <span class="paper-link-arrow">→</span>
+    </a>
+    <a href="project-rca-reasoning-scaffolder.html" class="paper-link-box">
+      <span class="paper-link-icon">🔬</span>
+      <div>
+        <div class="paper-link-title">Companion: Expanding Causal Reasoning under Closure Pressure</div>
+        <div class="paper-link-meta">Study 2 of 2 — AI scaffolding intervention</div>
+      </div>
+      <span class="paper-link-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="nav-footer">
+    <a href="project-feedback-dashboard.html">← Layer 3</a>
+    <a href="project-rca-reasoning-scaffolder.html">Study 2 →</a>
+  </div>
+</main>
+
+<footer>© 2026 Sora Kim · sorakim.lab@gmail.com</footer>
+
+<script>
+  function toggleAccordion(header) { header.parentElement.classList.toggle('open'); }
+</script>
+</body>
+</html>

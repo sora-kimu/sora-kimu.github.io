@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expanding Causal Reasoning under Closure Pressure — Project · Sora Kim</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+<meta name="description" content="Keeping Comparison Open: AI-supported reasoning scaffold against premature accountability convergence. Study 2 — interface intervention.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#ffffff; --text:#111111; --text-muted:#555555; --text-light:#888888; --border:#e5e5e5; --surface:#fafafa; --surface-hover:#f0f0f0; --blue:#2563EB; --accent:#7c3aed; --warning:#dc2626; --green:#059669; --orange:#f59e0b; --layer-1:#dbeafe; --layer-2:#ddd6fe; --layer-3:#fbcfe8; --layer-4:#fed7aa; }
+  :root[data-theme="dark"] { --bg:#111111; --text:#f0f0f0; --text-muted:#aaaaaa; --text-light:#666666; --border:#2a2a2a; --surface:#1a1a1a; --surface-hover:#242424; --blue:#60a5fa; --accent:#a78bfa; --warning:#f87171; --green:#34d399; --orange:#fbbf24; --layer-1:#1e3a5f; --layer-2:#3b2f6b; --layer-3:#5f2a4a; --layer-4:#5f3a1a; }
+  @media (prefers-color-scheme:dark) { :root:not([data-theme="light"]) { --bg:#111111; --text:#f0f0f0; --text-muted:#aaaaaa; --text-light:#666666; --border:#2a2a2a; --surface:#1a1a1a; --surface-hover:#242424; --blue:#60a5fa; --accent:#a78bfa; --warning:#f87171; --green:#34d399; --orange:#fbbf24; --layer-1:#1e3a5f; --layer-2:#3b2f6b; --layer-3:#5f2a4a; --layer-4:#5f3a1a; } }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; transition:background 0.2s,color 0.2s; }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:18px 40px; border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--bg); z-index:100; }
+  .nav-name { font-family:'DM Mono',monospace; font-size:14px; font-weight:500; color:var(--text); text-decoration:none;  white-space: nowrap;}
+  .nav-links { display:flex; gap:28px; list-style:none; }
+  .nav-links a { font-family:'DM Mono',monospace; font-size:12px; color:var(--text-muted); text-decoration:none; letter-spacing:0.04em; }
+  .nav-links a:hover, .nav-links a.active { color:var(--blue); }
+  .theme-toggle { background:none; border:1px solid var(--border); border-radius:20px; padding:4px 10px; font-size:14px; cursor:pointer; color:var(--text); }
+  main { max-width:880px; margin:0 auto; padding:56px 40px 80px; }
+  .breadcrumb { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-light); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:16px; }
+  .breadcrumb a { color:var(--text-light); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--blue); }
+  .layer-indicator { display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; align-items:center; }
+  .layer-pill { padding:6px 12px; border-radius:20px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.06em; color:var(--text-light); background:var(--surface); border:1px solid var(--border); }
+  .layer-pill.active { background:var(--layer-4); color:var(--text); border-color:var(--accent); font-weight:600; }
+  .layer-pill.active::before { content:"● "; color:var(--accent); }
+  .study-pill { padding:4px 10px; border-radius:4px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.06em; color:var(--accent); background:var(--surface); border:1px solid var(--accent); margin-left:auto; }
+  .page-title { font-size:2.2rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:14px; }
+  .page-subtitle { font-size:1.1rem; color:var(--text-muted); line-height:1.6; margin-bottom:24px; }
+  .meta-row { display:flex; gap:18px; flex-wrap:wrap; font-family:'DM Mono',monospace; font-size:12px; color:var(--text-light); letter-spacing:0.04em; padding-bottom:28px; border-bottom:1px solid var(--border); margin-bottom:32px; }
+  .definition-callout { padding:18px 22px; background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:8px; margin-bottom:32px; }
+  .definition-callout-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:8px; }
+  .definition-callout-title { font-weight:600; margin-bottom:6px; font-size:0.95rem; }
+  .definition-callout-text { font-size:0.88rem; color:var(--text-muted); line-height:1.6; }
+  .definition-callout-text strong { color:var(--text); }
+  .process-diagram { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-bottom:40px; padding:18px; background:var(--surface); border:1px solid var(--border); border-radius:12px; }
+  .process-step { text-align:center; padding:14px 8px; position:relative; transition:all 0.2s; border-radius:8px; }
+  .process-step:hover { background:var(--bg); }
+  .process-step:not(:last-child)::after { content:"→"; position:absolute; right:-8px; top:50%; transform:translateY(-50%); color:var(--text-light); font-size:18px; }
+  .process-step-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-light); letter-spacing:0.08em; margin-bottom:6px; }
+  .process-step-name { font-weight:600; font-size:0.85rem; }
+  .process-step-detail { font-size:0.75rem; color:var(--text-muted); margin-top:4px; }
+  @media (max-width:700px) { .process-diagram { grid-template-columns:1fr 1fr; gap:8px; } .process-step:nth-child(2)::after { display:none; } }
+  .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:14px; margin-bottom:40px; }
+  .stat-box { padding:18px 14px; background:var(--surface); border:1px solid var(--border); border-radius:10px; transition:all 0.2s; }
+  .stat-box:hover { border-color:var(--blue); transform:translateY(-2px); box-shadow:0 4px 12px rgba(37,99,235,0.08); }
+  .stat-value { font-size:1.6rem; font-weight:700; color:var(--blue); margin-bottom:4px; font-family:'DM Mono',monospace; }
+  .stat-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-light); margin-bottom:8px; }
+  .stat-note { font-size:0.78rem; color:var(--text-muted); line-height:1.5; }
+  .accordion-section { margin-bottom:16px; border:1px solid var(--border); border-radius:12px; overflow:hidden; transition:all 0.2s; }
+  .accordion-section.open { border-color:var(--accent); }
+  .accordion-header { display:flex; justify-content:space-between; align-items:center; padding:18px 22px; cursor:pointer; background:var(--bg); transition:background 0.2s; }
+  .accordion-header:hover { background:var(--surface); }
+  .accordion-header-left { display:flex; align-items:center; gap:14px; }
+  .accordion-num { font-family:'DM Mono',monospace; font-size:12px; color:var(--accent); font-weight:600; letter-spacing:0.06em; }
+  .accordion-title { font-size:1.1rem; font-weight:700; }
+  .accordion-toggle { font-family:'DM Mono',monospace; font-size:12px; color:var(--text-light); transition:transform 0.2s; }
+  .accordion-section.open .accordion-toggle { transform:rotate(180deg); }
+  .accordion-body { padding:0 22px; max-height:0; overflow:hidden; transition:max-height 0.3s ease,padding 0.3s ease; }
+  .accordion-section.open .accordion-body { padding:4px 22px 22px; max-height:5000px; }
+  .accordion-body p { color:var(--text); margin-bottom:14px; font-size:0.96rem; }
+  .accordion-body p.muted { color:var(--text-muted); }
+  .quote { padding:16px 20px; background:var(--surface); border-left:3px solid var(--accent); border-radius:0 6px 6px 0; font-style:italic; color:var(--text-muted); margin:16px 0; font-size:0.95rem; }
+  .callout { padding:14px 18px; background:var(--surface); border:1px solid var(--border); border-radius:8px; margin:16px 0; font-size:0.9rem; }
+  .callout strong { color:var(--text); }
+  ul.bulleted { padding-left:0; list-style:none; margin:12px 0; }
+  ul.bulleted li { padding-left:20px; position:relative; margin-bottom:8px; color:var(--text-muted); font-size:0.92rem; line-height:1.6; }
+  ul.bulleted li::before { content:"→"; position:absolute; left:0; color:var(--accent); font-weight:600; }
+  .video-block { margin:18px 0; padding:18px; background:var(--surface); border:1px solid var(--border); border-radius:10px; }
+  .video-block video { width:100%; border-radius:6px; display:block; margin-bottom:10px; }
+  .video-caption { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.06em; color:var(--text-light); text-transform:uppercase; margin-bottom:6px; }
+  .video-desc { font-size:0.86rem; color:var(--text-muted); line-height:1.6; }
+  .findings-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:16px 0; }
+  .finding-cell { padding:14px; background:var(--surface); border:1px solid var(--border); border-radius:8px; text-align:center; transition:all 0.2s; }
+  .finding-cell:hover { border-color:var(--blue); }
+  .finding-cell-value { font-size:1.2rem; font-weight:700; font-family:'DM Mono',monospace; color:var(--blue); margin-bottom:4px; }
+  .finding-cell-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.06em; color:var(--text-light); text-transform:uppercase; }
+  .comparison-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0; }
+  .comparison-col { padding:18px; background:var(--surface); border:1px solid var(--border); border-radius:10px; }
+  .comparison-col.worked { border-left:3px solid var(--green); }
+  .comparison-col.friction { border-left:3px solid var(--orange); }
+  .comparison-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; font-weight:600; margin-bottom:12px; }
+  .comparison-col.worked .comparison-label { color:var(--green); }
+  .comparison-col.friction .comparison-label { color:var(--orange); }
+  .comparison-col ul { padding-left:0; list-style:none; }
+  .comparison-col li { padding-left:18px; position:relative; margin-bottom:8px; font-size:0.88rem; color:var(--text-muted); line-height:1.5; }
+  .comparison-col.worked li::before { content:"✓"; position:absolute; left:0; color:var(--green); font-weight:700; }
+  .comparison-col.friction li::before { content:"⚠"; position:absolute; left:0; color:var(--orange); }
+  @media (max-width:700px) { .comparison-grid { grid-template-columns:1fr; } }
+  .stages-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin:16px 0; }
+  .stage-card { padding:12px 8px; background:var(--bg); border:1px solid var(--border); border-radius:6px; text-align:center; transition:all 0.2s; }
+  .stage-card:hover { border-color:var(--accent); }
+  .stage-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); font-weight:600; margin-bottom:4px; }
+  .stage-name { font-weight:600; font-size:0.78rem; line-height:1.3; }
+  @media (max-width:700px) { .stages-grid { grid-template-columns:repeat(2,1fr); } }
+  .caveat-ref { padding:14px 18px; background:var(--surface); border-left:3px solid var(--blue); border-radius:0 6px 6px 0; font-size:0.85rem; color:var(--text-muted); margin:18px 0; line-height:1.6; }
+  .caveat-ref strong { color:var(--text); }
+  .caveat-ref a { color:var(--blue); text-decoration:none; }
+  .caveat-ref a:hover { text-decoration:underline; }
+  .paper-link-box { display:flex; align-items:center; gap:14px; padding:18px 20px; background:var(--surface); border:1px solid var(--border); border-radius:10px; text-decoration:none; color:var(--text); transition:all 0.2s; margin:16px 0; }
+  .paper-link-box:hover { border-color:var(--accent); background:var(--surface-hover); transform:translateY(-2px); }
+  .paper-link-icon { font-size:1.2rem; flex-shrink:0; }
+  .paper-link-title { font-weight:600; margin-bottom:4px; }
+  .paper-link-meta { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-light); }
+  .paper-link-arrow { margin-left:auto; color:var(--text-light); }
+  .nav-footer { display:flex; justify-content:space-between; align-items:center; margin-top:60px; padding-top:24px; border-top:1px solid var(--border); font-family:'DM Mono',monospace; font-size:12px; }
+  .nav-footer a { color:var(--text-muted); text-decoration:none; letter-spacing:0.04em; }
+  .nav-footer a:hover { color:var(--blue); }
+  footer { max-width:880px; margin:0 auto; padding:30px 40px 40px; font-family:'DM Mono',monospace; font-size:11px; color:var(--text-light); letter-spacing:0.04em; text-align:center; }
+  @media (max-width:720px) { nav { padding:14px 20px; } .nav-links { gap:18px; } main { padding:32px 20px 56px; } .page-title { font-size:1.6rem; } footer { padding:30px 20px; } }
+
+    @media (max-width: 480px) {
+      nav { padding: 12px 14px; }
+      .nav-name { font-size: 11px; gap: 4px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 10px; }
+      .theme-toggle { padding: 3px 7px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-name">🐚 Sora Kim</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="papers.html">Papers</a></li>
+    <li><a href="tools.html" class="active">Tools</a></li>
+    <li><a href="teaching.html">Teaching</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
+<script>
+  const toggle = document.getElementById('themeToggle'), root = document.documentElement, saved = localStorage.getItem('theme');
+  if (saved === 'dark') { root.setAttribute('data-theme','dark'); toggle.textContent='☀️'; }
+  else if (saved === 'light') { root.setAttribute('data-theme','light'); toggle.textContent='🌙'; }
+  toggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) { root.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); toggle.textContent='🌙'; }
+    else { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
+  });
+</script>
+
+<main>
+  <div class="breadcrumb"><a href="tools.html">Tools</a> / Expanding Causal Reasoning under Closure Pressure</div>
+  <div class="layer-indicator">
+    <span class="layer-pill">Layer 1 · Accessibility</span>
+    <span class="layer-pill">Layer 2 · Structure</span>
+    <span class="layer-pill">Layer 3 · Coordination</span>
+    <span class="layer-pill active">Layer 4 · Reasoning</span>
+    <span class="study-pill">Study 2 of 2</span>
+  </div>
+
+  <h1 class="page-title">Expanding Causal Reasoning — AI as Comparison Enforcer</h1>
+  <p class="page-subtitle">
+    Initial RCA reasoning often narrows quickly under closure pressure. This scaffold was designed to keep multiple hypotheses visible long enough to delay premature convergence — testing whether interface scaffolding can keep causal reasoning open without automating the conclusion, flattening uncertainty, or displacing human judgment.
+  </p>
+
+  <div class="meta-row">
+    <span>📋 Pilot study</span>
+    <span>👥 N=20 GMP practitioners</span>
+    <span>🤖 AI as comparison enforcer</span>
+    <span>🛠 Streamlit + Python</span>
+  </div>
+
+  <div class="definition-callout">
+    <div class="definition-callout-label">📖 Background</div>
+    <div class="definition-callout-title">What is "AI as comparison enforcer" — and why RCA?</div>
+    <div class="definition-callout-text">
+      <strong>RCA (Root Cause Analysis)</strong> is the formal investigation process in <strong>GMP (Good Manufacturing Practice)</strong> environments — FDA-enforced pharmaceutical production standards — used to explain why a deviation occurred. <strong>PAC (Premature Accountability Convergence)</strong> describes a recurring pattern in this process: investigation reasoning narrows toward an individual actor before procedural, contextual, and organizational contributors have been examined.
+      <br><br>
+      Most AI integrations in regulated work treat AI as an <strong>explanation generator</strong> — producing candidate causes for the analyst to evaluate. This scaffold reverses the role: AI here functions as a <strong>comparison enforcer</strong>. Rather than generating attributions, it detects when reasoning is converging too early and surfaces alternative pathways the analyst has not yet considered. The conclusion remains human; AI's job is to keep the comparison space open until the human is ready to close it.
+    </div>
+  </div>
+
+  <div class="process-diagram">
+    <div class="process-step"><div class="process-step-num">01</div><div class="process-step-name">Problem</div><div class="process-step-detail">Closure pressure narrows reasoning</div></div>
+    <div class="process-step"><div class="process-step-num">02</div><div class="process-step-name">Scaffold</div><div class="process-step-detail">5-stage reasoning flow</div></div>
+    <div class="process-step"><div class="process-step-num">03</div><div class="process-step-name">Study</div><div class="process-step-detail">N=20 comparative evaluation</div></div>
+    <div class="process-step"><div class="process-step-num">04</div><div class="process-step-name">Reveal</div><div class="process-step-detail">Person → systemic shift</div></div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-box"><div class="stat-label">Causal breadth</div><div class="stat-value">18 / 20</div><div class="stat-note">Produced broader causal accounts than Study 1 baseline.</div></div>
+    <div class="stat-box"><div class="stat-label">Attribution shift</div><div class="stat-value">15 / 20</div><div class="stat-note">Reconsidered initial attribution after scaffolded comparison.</div></div>
+    <div class="stat-box"><div class="stat-label">Person → systemic</div><div class="stat-value">12 / 15</div><div class="stat-note">Of the 15 who reconsidered, 12 shifted from person-centered to systemic or procedural explanations.</div></div>
+    <div class="stat-box"><div class="stat-label">Usability</div><div class="stat-value">5.0 / 5</div><div class="stat-note">Mean ease of use and perceived reasoning support both averaged 5.0/5.</div></div>
+  </div>
+
+  <div class="caveat-ref">
+    <strong>⚖ On the high satisfaction scores:</strong> These ratings (5.0/5) likely reflect a baseline novelty effect — GMP environments have lacked HCI-grounded tooling, so practitioner-centered design appears strikingly different from existing systems. <a href="tools.html">See full caveat on Tools page →</a>
+  </div>
+
+  <div class="accordion-section open">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">01</span><span class="accordion-title">The problem — investigation pressure shapes reasoning</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>Root Cause Analysis in GMP investigations is intended to explain why a deviation occurred, but closure pressure often narrows reasoning before alternatives are explored. This project examines a pattern consistent with <strong>Premature Accountability Convergence (PAC)</strong>: investigation reasoning narrowing toward an individual actor before procedural, contextual, and organizational contributors have been examined.</p>
+      <p>The point is not only cognitive bias, but how interface and workflow design shape the reasoning process itself.</p>
+      <p class="muted">Investigation pressure points:</p>
+      <ul class="bulleted">
+        <li>Closure pressure favors fast accountability over broad exploration</li>
+        <li>Standard forms underrepresent alternative causal pathways</li>
+        <li>Reasoning is documented late, after convergence has already occurred</li>
+        <li>Interface structure reinforces single-path explanation habits</li>
+      </ul>
+      <p>If investigation environments structure reasoning, later accountability judgments may partly reflect interaction conditions. The question is not only who is blamed, but how the system made one explanatory path easier to follow than others.</p>
+    </div>
+  </div>
+
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">02</span><span class="accordion-title">The scaffold — five-stage reasoning flow</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>An external RCA interface that preserves causal breadth during deviation investigations. The goal is not to automate conclusions — it is to scaffold reasoning so practitioners encounter alternatives before they commit to a single explanation.</p>
+      <div class="stages-grid">
+        <div class="stage-card"><div class="stage-num">STAGE 01</div><div class="stage-name">Intake</div></div>
+        <div class="stage-card"><div class="stage-num">STAGE 02</div><div class="stage-name">Hypothesis</div></div>
+        <div class="stage-card"><div class="stage-num">STAGE 03</div><div class="stage-name">PAC Analysis</div></div>
+        <div class="stage-card"><div class="stage-num">STAGE 04</div><div class="stage-name">Structured Reasoning</div></div>
+        <div class="stage-card"><div class="stage-num">STAGE 05</div><div class="stage-name">Pre-Closure Check</div></div>
+      </div>
+      <div class="callout"><strong>Stage 03 — PAC Analysis.</strong> Rule-based PAC detection flags individual-blame language and surfaces alternative pathways. AI is integrated as a <em>reasoning expansion layer</em> — not to generate answers, but to reopen consideration when convergence risk appears.</div>
+      <div class="video-block">
+        <div class="video-caption">▸ RCA Scaffolder · five-stage flow</div>
+        <video src="assets/rc-1.mp4" controls muted></video>
+        <div class="video-desc">Walk-through of the five-stage reasoning flow: intake → hypothesis generation → PAC detection → structured reasoning → pre-closure check.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">03</span><span class="accordion-title">Pilot study — N=20 comparative evaluation</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>Comparative evaluation with N=20 GMP practitioners using a think-aloud protocol. Participants' initial causal interpretations were compared with their post-scaffold reasoning to observe whether structured support changed breadth of explanation, confidence, and closure timing.</p>
+      <div class="findings-grid">
+        <div class="finding-cell"><div class="finding-cell-value">N=20</div><div class="finding-cell-label">GMP practitioners</div></div>
+        <div class="finding-cell"><div class="finding-cell-value">18/20</div><div class="finding-cell-label">Broader accounts</div></div>
+        <div class="finding-cell"><div class="finding-cell-value">15/20</div><div class="finding-cell-label">Reconsidered</div></div>
+        <div class="finding-cell"><div class="finding-cell-value">12/15</div><div class="finding-cell-label">Person → systemic</div></div>
+        <div class="finding-cell"><div class="finding-cell-value">5.0/5</div><div class="finding-cell-label">Usability</div></div>
+      </div>
+      <div class="callout"><strong>Central observation.</strong> Of 20 participants, 18 produced broader causal accounts than they did at baseline (Study 1). 15 reconsidered their initial attribution; of those 15, 12 shifted from person-centered to systemic or procedural explanations. The remaining 3 maintained a person-centered primary cause but added systemic contributors.</div>
+      <div class="callout"><strong>Limitations.</strong> Same participant pool as Study 1 ensures consistent GMP baseline but introduces potential carry-over effects. The analytical testing context was chosen specifically because its multi-instrument, multi-step structure makes systemic contributors plausible alongside individual ones — a design choice that may have facilitated systemic reattribution beyond what a simpler deviation scenario would. Same-team recruitment may have inflated usability ratings.</div>
+      <div class="comparison-grid">
+        <div class="comparison-col worked">
+          <div class="comparison-label">✓ What worked</div>
+          <ul>
+            <li>Five-stage flow slowed closure without blocking conclusions</li>
+            <li>PAC detection surfaced individual-blame language explicitly</li>
+            <li>AI reopening questions felt non-prescriptive</li>
+            <li>Reattribution to systemic causes did not collapse confidence</li>
+          </ul>
+        </div>
+        <div class="comparison-col friction">
+          <div class="comparison-label">⚠ Remaining friction</div>
+          <ul>
+            <li>Carry-over from Study 1 cannot be fully ruled out</li>
+            <li>Multi-instrument case may have favored systemic reattribution</li>
+            <li>Long-term adoption untested — adoption intent ≠ adoption</li>
+            <li>Real RCA workflows often allow less than 10 minutes for reasoning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">04</span><span class="accordion-title">What this revealed</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>The Layer 4 design move is to position AI as a <em>comparison enforcer</em> — detecting premature closure and reopening alternative pathways — rather than an explanation generator. This is a counter-design to typical AI integration in regulated work, which treats AI as a recommendation source.</p>
+      <div class="quote">
+        "I had already decided on the answer — but the system kept asking what else could have caused it. So I had to actually look."
+      </div>
+      <p>The reattribution finding (12 of 15 shifting from person-centered to systemic explanations) is consistent with the Study 1 finding that early convergence reflects environmental pressure rather than epistemic certainty. Together, the two studies argue that <strong>premature accountability convergence is a system-design problem</strong>, not a cognitive failing — and that interface scaffolding can productively delay closure without flattening human judgment.</p>
+      <p>All 20 participants reflected that their real-world investigation practice rarely allows ten minutes of focused causal reasoning — and more importantly, that the explanation they select in practice is not simply the most plausible one but the most documentable one. The scaffold's contribution is creating the time and structure for plausibility to enter the documentation.</p>
+      <p><strong>Companion: Study 1</strong> — establishes the empirical baseline (without intervention) showing that reasoning naturally broadens with time, motivating the scaffold as a structured way to provide that time inside investigation workflows.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;">
+    <a href="papers.html#rca-paper" class="paper-link-box">
+      <span class="paper-link-icon">📄</span>
+      <div>
+        <div class="paper-link-title">Keeping Comparison Open: Interface Scaffolding Against Premature Accountability Convergence in Regulated Investigations</div>
+        <div class="paper-link-meta">Working paper · Layer 4 of 4 · Study 2 of 2</div>
+      </div>
+      <span class="paper-link-arrow">→</span>
+    </a>
+    <a href="project-premature-causal-convergence.html" class="paper-link-box">
+      <span class="paper-link-icon">🔬</span>
+      <div>
+        <div class="paper-link-title">Companion: Premature Convergence under Closure Pressure</div>
+        <div class="paper-link-meta">Study 1 of 2 — timed reflection pilot, no intervention</div>
+      </div>
+      <span class="paper-link-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="nav-footer">
+    <a href="project-premature-causal-convergence.html">← Study 1</a>
+    <a href="tools.html">Tools →</a>
+  </div>
+</main>
+
+<footer>© 2026 Sora Kim · sorakim.lab@gmail.com</footer>
+
+<script>
+  function toggleAccordion(header) { header.parentElement.classList.toggle('open'); }
+</script>
+</body>
+</html>

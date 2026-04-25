@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review Friction Visibility — Project · Sora Kim</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+<meta name="description" content="Friction Before Failure: Making Review Burden Visible in Regulated Document Work. Six-tab dashboard + TF-IDF clustering, N=20.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#ffffff; --text:#111111; --text-muted:#555555; --text-light:#888888; --border:#e5e5e5; --surface:#fafafa; --surface-hover:#f0f0f0; --blue:#2563EB; --accent:#7c3aed; --warning:#dc2626; --green:#059669; --orange:#f59e0b; --layer-1:#dbeafe; --layer-2:#ddd6fe; --layer-3:#fbcfe8; --layer-4:#fed7aa; }
+  :root[data-theme="dark"] { --bg:#111111; --text:#f0f0f0; --text-muted:#aaaaaa; --text-light:#666666; --border:#2a2a2a; --surface:#1a1a1a; --surface-hover:#242424; --blue:#60a5fa; --accent:#a78bfa; --warning:#f87171; --green:#34d399; --orange:#fbbf24; --layer-1:#1e3a5f; --layer-2:#3b2f6b; --layer-3:#5f2a4a; --layer-4:#5f3a1a; }
+  @media (prefers-color-scheme:dark) { :root:not([data-theme="light"]) { --bg:#111111; --text:#f0f0f0; --text-muted:#aaaaaa; --text-light:#666666; --border:#2a2a2a; --surface:#1a1a1a; --surface-hover:#242424; --blue:#60a5fa; --accent:#a78bfa; --warning:#f87171; --green:#34d399; --orange:#fbbf24; --layer-1:#1e3a5f; --layer-2:#3b2f6b; --layer-3:#5f2a4a; --layer-4:#5f3a1a; } }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; transition:background 0.2s,color 0.2s; }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:18px 40px; border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--bg); z-index:100; }
+  .nav-name { font-family:'DM Mono',monospace; font-size:14px; font-weight:500; color:var(--text); text-decoration:none;  white-space: nowrap;}
+  .nav-links { display:flex; gap:28px; list-style:none; }
+  .nav-links a { font-family:'DM Mono',monospace; font-size:12px; color:var(--text-muted); text-decoration:none; letter-spacing:0.04em; }
+  .nav-links a:hover, .nav-links a.active { color:var(--blue); }
+  .theme-toggle { background:none; border:1px solid var(--border); border-radius:20px; padding:4px 10px; font-size:14px; cursor:pointer; color:var(--text); }
+  main { max-width:880px; margin:0 auto; padding:56px 40px 80px; }
+  .breadcrumb { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-light); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:16px; }
+  .breadcrumb a { color:var(--text-light); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--blue); }
+  .layer-indicator { display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; }
+  .layer-pill { padding:6px 12px; border-radius:20px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.06em; color:var(--text-light); background:var(--surface); border:1px solid var(--border); }
+  .layer-pill.active { background:var(--layer-3); color:var(--text); border-color:var(--accent); font-weight:600; }
+  .layer-pill.active::before { content:"● "; color:var(--accent); }
+  .page-title { font-size:2.2rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:14px; }
+  .page-subtitle { font-size:1.1rem; color:var(--text-muted); line-height:1.6; margin-bottom:24px; }
+  .meta-row { display:flex; gap:18px; flex-wrap:wrap; font-family:'DM Mono',monospace; font-size:12px; color:var(--text-light); letter-spacing:0.04em; padding-bottom:28px; border-bottom:1px solid var(--border); margin-bottom:32px; }
+  .definition-callout { padding:18px 22px; background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:8px; margin-bottom:32px; }
+  .definition-callout-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:8px; }
+  .definition-callout-title { font-weight:600; margin-bottom:6px; font-size:0.95rem; }
+  .definition-callout-text { font-size:0.88rem; color:var(--text-muted); line-height:1.6; }
+  .definition-callout-text strong { color:var(--text); }
+  .process-diagram { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-bottom:40px; padding:18px; background:var(--surface); border:1px solid var(--border); border-radius:12px; }
+  .process-step { text-align:center; padding:14px 8px; position:relative; transition:all 0.2s; border-radius:8px; }
+  .process-step:hover { background:var(--bg); }
+  .process-step:not(:last-child)::after { content:"→"; position:absolute; right:-8px; top:50%; transform:translateY(-50%); color:var(--text-light); font-size:18px; }
+  .process-step-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--text-light); letter-spacing:0.08em; margin-bottom:6px; }
+  .process-step-name { font-weight:600; font-size:0.85rem; }
+  .process-step-detail { font-size:0.75rem; color:var(--text-muted); margin-top:4px; }
+  @media (max-width:700px) { .process-diagram { grid-template-columns:1fr 1fr; gap:8px; } .process-step:nth-child(2)::after { display:none; } }
+  .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:14px; margin-bottom:40px; }
+  .stat-box { padding:18px 14px; background:var(--surface); border:1px solid var(--border); border-radius:10px; transition:all 0.2s; }
+  .stat-box:hover { border-color:var(--blue); transform:translateY(-2px); box-shadow:0 4px 12px rgba(37,99,235,0.08); }
+  .stat-value { font-size:1.6rem; font-weight:700; color:var(--blue); margin-bottom:4px; font-family:'DM Mono',monospace; }
+  .stat-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-light); margin-bottom:8px; }
+  .stat-note { font-size:0.78rem; color:var(--text-muted); line-height:1.5; }
+  .accordion-section { margin-bottom:16px; border:1px solid var(--border); border-radius:12px; overflow:hidden; transition:all 0.2s; }
+  .accordion-section.open { border-color:var(--accent); }
+  .accordion-header { display:flex; justify-content:space-between; align-items:center; padding:18px 22px; cursor:pointer; background:var(--bg); transition:background 0.2s; }
+  .accordion-header:hover { background:var(--surface); }
+  .accordion-header-left { display:flex; align-items:center; gap:14px; }
+  .accordion-num { font-family:'DM Mono',monospace; font-size:12px; color:var(--accent); font-weight:600; letter-spacing:0.06em; }
+  .accordion-title { font-size:1.1rem; font-weight:700; }
+  .accordion-toggle { font-family:'DM Mono',monospace; font-size:12px; color:var(--text-light); transition:transform 0.2s; }
+  .accordion-section.open .accordion-toggle { transform:rotate(180deg); }
+  .accordion-body { padding:0 22px; max-height:0; overflow:hidden; transition:max-height 0.3s ease,padding 0.3s ease; }
+  .accordion-section.open .accordion-body { padding:4px 22px 22px; max-height:6000px; }
+  .accordion-body p { color:var(--text); margin-bottom:14px; font-size:0.96rem; }
+  .accordion-body p.muted { color:var(--text-muted); }
+  .quote { padding:16px 20px; background:var(--surface); border-left:3px solid var(--accent); border-radius:0 6px 6px 0; font-style:italic; color:var(--text-muted); margin:16px 0; font-size:0.95rem; }
+  .callout { padding:14px 18px; background:var(--surface); border:1px solid var(--border); border-radius:8px; margin:16px 0; font-size:0.9rem; }
+  .callout strong { color:var(--text); }
+  ul.bulleted { padding-left:0; list-style:none; margin:12px 0; }
+  ul.bulleted li { padding-left:20px; position:relative; margin-bottom:8px; color:var(--text-muted); font-size:0.92rem; line-height:1.6; }
+  ul.bulleted li::before { content:"→"; position:absolute; left:0; color:var(--accent); font-weight:600; }
+  .image-block { margin:18px 0; padding:18px; background:var(--surface); border:1px solid var(--border); border-radius:10px; }
+  .image-block img { width:100%; border-radius:6px; display:block; margin-bottom:10px; }
+  .image-caption { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.06em; color:var(--text-light); text-transform:uppercase; margin-bottom:6px; }
+  .image-desc { font-size:0.86rem; color:var(--text-muted); line-height:1.6; }
+  .findings-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:16px 0; }
+  .finding-cell { padding:14px; background:var(--surface); border:1px solid var(--border); border-radius:8px; text-align:center; transition:all 0.2s; }
+  .finding-cell:hover { border-color:var(--blue); }
+  .finding-cell-value { font-size:1.2rem; font-weight:700; font-family:'DM Mono',monospace; color:var(--blue); margin-bottom:4px; }
+  .finding-cell-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.06em; color:var(--text-light); text-transform:uppercase; }
+  .comparison-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0; }
+  .comparison-col { padding:18px; background:var(--surface); border:1px solid var(--border); border-radius:10px; }
+  .comparison-col.worked { border-left:3px solid var(--green); }
+  .comparison-col.friction { border-left:3px solid var(--orange); }
+  .comparison-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; font-weight:600; margin-bottom:12px; }
+  .comparison-col.worked .comparison-label { color:var(--green); }
+  .comparison-col.friction .comparison-label { color:var(--orange); }
+  .comparison-col ul { padding-left:0; list-style:none; }
+  .comparison-col li { padding-left:18px; position:relative; margin-bottom:8px; font-size:0.88rem; color:var(--text-muted); line-height:1.5; }
+  .comparison-col.worked li::before { content:"✓"; position:absolute; left:0; color:var(--green); font-weight:700; }
+  .comparison-col.friction li::before { content:"⚠"; position:absolute; left:0; color:var(--orange); }
+  @media (max-width:700px) { .comparison-grid { grid-template-columns:1fr; } }
+  .caveat-ref { padding:14px 18px; background:var(--surface); border-left:3px solid var(--blue); border-radius:0 6px 6px 0; font-size:0.85rem; color:var(--text-muted); margin:18px 0; line-height:1.6; }
+  .caveat-ref strong { color:var(--text); }
+  .caveat-ref a { color:var(--blue); text-decoration:none; }
+  .caveat-ref a:hover { text-decoration:underline; }
+  .paper-link-box { display:flex; align-items:center; gap:14px; padding:18px 20px; background:var(--surface); border:1px solid var(--border); border-radius:10px; text-decoration:none; color:var(--text); transition:all 0.2s; margin:16px 0; }
+  .paper-link-box:hover { border-color:var(--accent); background:var(--surface-hover); transform:translateY(-2px); }
+  .paper-link-icon { font-size:1.2rem; flex-shrink:0; }
+  .paper-link-title { font-weight:600; margin-bottom:4px; }
+  .paper-link-meta { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-light); }
+  .paper-link-arrow { margin-left:auto; color:var(--text-light); }
+  .nav-footer { display:flex; justify-content:space-between; align-items:center; margin-top:60px; padding-top:24px; border-top:1px solid var(--border); font-family:'DM Mono',monospace; font-size:12px; }
+  .nav-footer a { color:var(--text-muted); text-decoration:none; letter-spacing:0.04em; }
+  .nav-footer a:hover { color:var(--blue); }
+  footer { max-width:880px; margin:0 auto; padding:30px 40px 40px; font-family:'DM Mono',monospace; font-size:11px; color:var(--text-light); letter-spacing:0.04em; text-align:center; }
+  .tabs-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin:14px 0; }
+  .tab-card { padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; transition:all 0.2s; }
+  .tab-card:hover { border-color:var(--accent); }
+  .tab-card-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:0.06em; font-weight:600; margin-bottom:4px; }
+  .tab-card-name { font-weight:600; font-size:0.86rem; margin-bottom:4px; }
+  .tab-card-desc { font-size:0.78rem; color:var(--text-muted); line-height:1.5; }
+  @media (max-width:720px) { nav { padding:14px 20px; } .nav-links { gap:18px; } main { padding:32px 20px 56px; } .page-title { font-size:1.6rem; } footer { padding:30px 20px; } }
+
+    @media (max-width: 480px) {
+      nav { padding: 12px 14px; }
+      .nav-name { font-size: 11px; gap: 4px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 10px; }
+      .theme-toggle { padding: 3px 7px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-name">🐚 Sora Kim</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="papers.html">Papers</a></li>
+    <li><a href="tools.html" class="active">Tools</a></li>
+    <li><a href="teaching.html">Teaching</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
+<script>
+  const toggle = document.getElementById('themeToggle'), root = document.documentElement, saved = localStorage.getItem('theme');
+  if (saved === 'dark') { root.setAttribute('data-theme','dark'); toggle.textContent='☀️'; }
+  else if (saved === 'light') { root.setAttribute('data-theme','light'); toggle.textContent='🌙'; }
+  toggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) { root.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); toggle.textContent='🌙'; }
+    else { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
+  });
+</script>
+
+<main>
+  <div class="breadcrumb"><a href="tools.html">Tools</a> / Review Friction Visibility</div>
+  <div class="layer-indicator">
+    <span class="layer-pill">Layer 1 · Accessibility</span>
+    <span class="layer-pill">Layer 2 · Structure</span>
+    <span class="layer-pill active">Layer 3 · Coordination</span>
+    <span class="layer-pill">Layer 4 · Reasoning</span>
+  </div>
+
+  <h1 class="page-title">Review Friction Visibility — Six-Tab Dashboard</h1>
+  <p class="page-subtitle">
+    Review friction in regulated work accumulates invisibly across feedback cycles, becoming visible only after delays have already escalated. This project makes that accumulation observable earlier — without collapsing reviewer judgment into automated outputs.
+  </p>
+
+  <div class="meta-row">
+    <span>📋 Pilot study</span>
+    <span>👥 N=20 GMP practitioners</span>
+    <span>📊 Six-tab dashboard + TF-IDF</span>
+    <span>🛠 Streamlit + Python</span>
+  </div>
+
+  <div class="definition-callout">
+    <div class="definition-callout-label">📖 Background</div>
+    <div class="definition-callout-title">What is review friction in GMP?</div>
+    <div class="definition-callout-text">
+      In <strong>GMP (Good Manufacturing Practice)</strong> environments, every <strong>deviation</strong>, <strong>CAPA</strong> (Corrective and Preventive Action), or change control document passes through multiple <strong>QA</strong> (Quality Assurance) and <strong>QC</strong> (Quality Control) reviewers before closure. Each round produces feedback comments that submitters must address — often through repeated revision loops. Teams know a document is "still under review," but rarely have visibility into <em>what type</em> of comments are driving the delay, where bottlenecks are forming, or whether a loop is escalating across rounds.
+      <br><br>
+      <strong>TF-IDF (Term Frequency–Inverse Document Frequency)</strong> is a classical NLP method for surfacing distinctive terms in a document relative to a corpus. Here it is used as a clustering layer to identify recurring issue patterns across review history — surfacing observability signals for reviewer interpretation rather than recommending actions.
+    </div>
+  </div>
+
+  <div class="process-diagram">
+    <div class="process-step"><div class="process-step-num">01</div><div class="process-step-name">Problem</div><div class="process-step-detail">Hidden delay accumulation</div></div>
+    <div class="process-step"><div class="process-step-num">02</div><div class="process-step-name">Dashboard</div><div class="process-step-detail">Six-tab observability</div></div>
+    <div class="process-step"><div class="process-step-num">03</div><div class="process-step-name">Pattern Layer</div><div class="process-step-detail">TF-IDF clustering</div></div>
+    <div class="process-step"><div class="process-step-num">04</div><div class="process-step-name">Reveal</div><div class="process-step-detail">Legibility ≠ endorsement</div></div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-box"><div class="stat-label">Reduced asymmetry</div><div class="stat-value">20 / 20</div><div class="stat-note">All participants anticipated reduced accountability asymmetry from friction visibility.</div></div>
+    <div class="stat-box"><div class="stat-label">Checklist usability</div><div class="stat-value">5.0 / 5</div><div class="stat-note">Pre-review checklist — immediate legibility, no conceptual reorientation required.</div></div>
+    <div class="stat-box"><div class="stat-label">Pattern detection</div><div class="stat-value">5.0 / 5</div><div class="stat-note">TF-IDF clustering layer — required initial orientation but reached equivalent rating.</div></div>
+    <div class="stat-box"><div class="stat-label">Adoption intent</div><div class="stat-value">20 / 20</div><div class="stat-note">All 20 expressed adoption intent across both components.</div></div>
+  </div>
+
+  <div class="caveat-ref">
+    <strong>⚖ On the high satisfaction scores:</strong> These ratings (5.0/5) likely reflect a baseline novelty effect — GMP environments have lacked HCI-grounded tooling, so practitioner-centered design appears strikingly different from existing systems. <a href="tools.html">See full caveat on Tools page →</a>
+  </div>
+
+  <div class="accordion-section open">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">01</span><span class="accordion-title">The problem — review friction accumulates invisibly</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>In regulated environments, document review is critical but opaque. Deviation, CAPA, and related records pass through multiple reviewers — yet visibility into feedback burden, timing, and revision-loop formation is limited.</p>
+      <p>Teams know a document is "still under review," but not what type of comments are driving the delay, where bottlenecks are forming, or whether a loop is escalating across rounds.</p>
+      <p class="muted">Observed pain points:</p>
+      <ul class="bulleted">
+        <li>Repeated revision loops difficult to observe as patterns</li>
+        <li>Feedback burden uneven across reviewers but hard to see</li>
+        <li>Small wording comments generated multi-day back-and-forth</li>
+        <li>Review process felt slow but source of friction remained unclear</li>
+      </ul>
+      <p>The core problem is not delay itself — it is the lack of a shared operational view of that delay.</p>
+    </div>
+  </div>
+
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">02</span><span class="accordion-title">The dashboard — six tabs of observability</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>An interactive Python/Streamlit dashboard built on a synthetic review-workflow dataset (100 records: comment categories, review rounds, severity, turnaround time, reopening, reviewer role, document type). Each tab surfaces a different facet of review burden as observability tools, not decision-automation.</p>
+
+      <div class="tabs-grid">
+        <div class="tab-card"><div class="tab-card-num">TAB 01</div><div class="tab-card-name">Overview</div><div class="tab-card-desc">Comment category distribution · severity breakdown · avg turnaround by role</div></div>
+        <div class="tab-card"><div class="tab-card-num">TAB 02</div><div class="tab-card-name">Heatmap</div><div class="tab-card-desc">Revision density across review rounds and document types</div></div>
+        <div class="tab-card"><div class="tab-card-num">TAB 03</div><div class="tab-card-name">Checklist</div><div class="tab-card-desc">Pre-review checklist for submitter self-assessment</div></div>
+        <div class="tab-card"><div class="tab-card-num">TAB 04</div><div class="tab-card-name">Classifier</div><div class="tab-card-desc">Rule-based comment categorization</div></div>
+        <div class="tab-card"><div class="tab-card-num">TAB 05</div><div class="tab-card-name">Document Journey</div><div class="tab-card-desc">Revision trace across review rounds for individual documents</div></div>
+        <div class="tab-card"><div class="tab-card-num">TAB 06</div><div class="tab-card-name">Reviewer Sim</div><div class="tab-card-desc">Hypothetical reviewer load distribution simulation</div></div>
+      </div>
+
+      <div class="image-block">
+        <div class="image-caption">▸ Tab 01 · overview</div>
+        <img src="assets/review-dashboard-1.png" alt="Dashboard overview tab">
+        <div class="image-desc">Comment category distribution and turnaround by role surface uneven feedback burden across reviewer positions.</div>
+      </div>
+      <div class="image-block">
+        <div class="image-caption">▸ Tab 02 · revision heatmap</div>
+        <img src="assets/review-dashboard-2.png" alt="Revision heatmap">
+        <div class="image-desc">Density visualization across review rounds — clusters of high revision rate indicate friction points before delays escalate.</div>
+      </div>
+      <div class="image-block">
+        <div class="image-caption">▸ Tab 03–04 · checklist + classifier</div>
+        <img src="assets/review-dashboard-3.png" alt="Checklist and classifier tabs">
+        <div class="image-desc">Pre-review checklist supports immediate self-assessment; rule-based classifier categorizes comment types.</div>
+      </div>
+      <div class="image-block">
+        <div class="image-caption">▸ Tab 05–06 · document journey + reviewer simulation</div>
+        <img src="assets/review-dashboard-4.png" alt="Journey and simulation tabs">
+        <div class="image-desc">Document journey tracing surfaces revision loops across rounds; reviewer simulation explores load distribution scenarios.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">03</span><span class="accordion-title">The pattern detection layer — TF-IDF clustering</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>An additional layer using TF-IDF similarity clustering to identify recurring issue patterns across review history — multi-factor revision burden scoring and pattern summaries. This functions as an observability tool, not a decision-automation system: it surfaces clusters for reviewer interpretation rather than recommending actions.</p>
+      <div class="image-block">
+        <div class="image-caption">▸ Pattern detection · TF-IDF clustering</div>
+        <img src="assets/review-dashboard-5.png" alt="Pattern detection layer">
+        <div class="image-desc">Recurring issue clusters surfaced via TF-IDF similarity. Reviewers retain interpretive control — the system identifies patterns, not actions.</div>
+      </div>
+      <div class="image-block">
+        <div class="image-caption">▸ AI orientation layer (conceptual)</div>
+        <img src="assets/review-dashboard-ai.png" alt="AI orientation layer">
+        <div class="image-desc">Conceptual extension: the AI orientation layer explains <em>what kind</em> of cluster emerged and why, without claiming what action to take.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">04</span><span class="accordion-title">Pilot study — N=20 evaluation</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>Prototype evaluation session with N=20 QA/QC-experienced participants. Findings show role-differentiated utility across submitter and reviewer positions, with all participants anticipating reduced accountability asymmetry from friction visibility.</p>
+      <div class="findings-grid">
+        <div class="finding-cell"><div class="finding-cell-value">N=20</div><div class="finding-cell-label">QA/QC practitioners</div></div>
+        <div class="finding-cell"><div class="finding-cell-value">20/20</div><div class="finding-cell-label">Reduced asymmetry</div></div>
+        <div class="finding-cell"><div class="finding-cell-value">5.0/5</div><div class="finding-cell-label">Checklist usability</div></div>
+        <div class="finding-cell"><div class="finding-cell-value">5.0/5</div><div class="finding-cell-label">Pattern detection</div></div>
+        <div class="finding-cell"><div class="finding-cell-value">20/20</div><div class="finding-cell-label">Adoption intent</div></div>
+      </div>
+      <div class="callout"><strong>Key dissociation finding.</strong> Both components received equivalent final ratings (5.0/5) and equivalent adoption intent (20/20), but they arrived at those ratings through different pathways: the checklist via immediate legibility, the TF-IDF clustering via post-orientation interpretive trust.</div>
+      <div class="callout"><strong>Limitations.</strong> Same-team recruitment may have inflated usability ratings. Synthetic 100-record dataset is smaller than real review archives. Findings are observational and exploratory — they identify a productive distinction (immediate legibility ≠ endorsement) rather than a controlled effect size.</div>
+      <div class="comparison-grid">
+        <div class="comparison-col worked">
+          <div class="comparison-label">✓ What worked</div>
+          <ul>
+            <li>Six-tab structure made friction observable across multiple facets</li>
+            <li>Checklist legible without explanation</li>
+            <li>Pattern detection reached equivalent trust after orientation</li>
+            <li>Both components anticipated to reduce reviewer-submitter asymmetry</li>
+          </ul>
+        </div>
+        <div class="comparison-col friction">
+          <div class="comparison-label">⚠ Remaining friction</div>
+          <ul>
+            <li>TF-IDF clustering required initial interpretive orientation</li>
+            <li>Synthetic data smaller than real review archives</li>
+            <li>Adoption intent ≠ adoption — long-term use untested</li>
+            <li>Reviewer simulation tab least developed conceptually</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-section">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-header-left"><span class="accordion-num">05</span><span class="accordion-title">What this revealed</span></div>
+      <span class="accordion-toggle">▼</span>
+    </div>
+    <div class="accordion-body">
+      <p>The strongest finding is a <strong>dissociation</strong>: immediate legibility ≠ endorsement. The checklist supported immediate comprehension and required no conceptual reorientation; the TF-IDF clustering layer required initial orientation to interpret in a way the dashboard's other components did not. Both ultimately reached 5.0/5 — but through distinct cognitive pathways.</p>
+      <div class="quote">
+        "Visibility tools must address not only interface design but the conceptual work of making patterns interpretable to practitioners who have not previously had this kind of view."
+      </div>
+      <p>The Layer 3 design move is to make coordination friction observable <em>before</em> it escalates into formal deviation — distributing review burden visibly rather than letting it accumulate invisibly. Productive tension: the more a system preserves human judgment by withholding recommendations, the more it requires conceptual orientation to use.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;">
+    <a href="papers.html#friction-paper" class="paper-link-box">
+      <span class="paper-link-icon">📄</span>
+      <div>
+        <div class="paper-link-title">Friction Before Failure: Making Review Burden Visible in Regulated Document Work</div>
+        <div class="paper-link-meta">Working paper · Layer 3 of 4 · Regulatory HCI</div>
+      </div>
+      <span class="paper-link-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="nav-footer">
+    <a href="project-cognitive-navigation-explorer.html">← Layer 2</a>
+    <a href="project-premature-causal-convergence.html">Layer 4 →</a>
+  </div>
+</main>
+
+<footer>© 2026 Sora Kim · sorakim.lab@gmail.com</footer>
+
+<script>
+  function toggleAccordion(header) { header.parentElement.classList.toggle('open'); }
+</script>
+</body>
+</html>

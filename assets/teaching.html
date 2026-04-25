@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teaching · Sora Kim</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+<meta name="description" content="Educational artifacts for regulated work — open-access AI literacy cookbook and pixel-art GMP onboarding game.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --text: #111111; --text-muted: #555555; --text-light: #888888;
+    --border: #e5e5e5; --surface: #fafafa; --surface-hover: #f0f0f0;
+    --blue: #2563EB; --accent: #7c3aed; --warning: #dc2626; --green: #059669; --orange: #f59e0b;
+  }
+  :root[data-theme="dark"] {
+    --bg: #111111; --text: #f0f0f0; --text-muted: #aaaaaa; --text-light: #666666;
+    --border: #2a2a2a; --surface: #1a1a1a; --surface-hover: #242424;
+    --blue: #60a5fa; --accent: #a78bfa; --warning: #f87171; --green: #34d399; --orange: #fbbf24;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111111; --text: #f0f0f0; --text-muted: #aaaaaa; --text-light: #666666;
+      --border: #2a2a2a; --surface: #1a1a1a; --surface-hover: #242424;
+      --blue: #60a5fa; --accent: #a78bfa; --warning: #f87171; --green: #34d399; --orange: #fbbf24;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; transition: background 0.2s, color 0.2s; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 40px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav-name { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none;  white-space: nowrap;}
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; }
+  .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+  .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px; font-size: 14px; cursor: pointer; color: var(--text); transition: all 0.15s; }
+  main { max-width: 880px; margin: 0 auto; padding: 56px 40px 80px; }
+
+  .page-header { margin-bottom: 32px; }
+  .page-title { font-size: 2rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .page-subtitle { font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+  .page-subtitle strong { color: var(--text); }
+  .page-meta { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-light); letter-spacing: 0.04em; }
+
+  .intro-callout { padding: 18px 22px; background: var(--surface); border-left: 3px solid var(--blue); border-radius: 0 8px 8px 0; margin-bottom: 48px; font-size: 0.93rem; color: var(--text-muted); line-height: 1.75; }
+  .intro-callout strong { color: var(--text); }
+
+  /* ARTIFACT CARD */
+  .artifact { margin-bottom: 56px; padding: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; transition: all 0.2s; }
+  .artifact:hover { border-color: var(--accent); }
+  .artifact-header { display: flex; gap: 28px; margin-bottom: 24px; align-items: flex-start; flex-wrap: wrap; }
+  .artifact-thumb { width: 200px; flex-shrink: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--bg); transition: all 0.2s; }
+  .artifact-thumb:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+  .artifact-thumb img { width: 100%; height: auto; display: block; }
+  .artifact-info { flex: 1; min-width: 240px; }
+  .artifact-tag { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+  .artifact-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .artifact-subtitle { font-size: 1rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.6; }
+  .artifact-meta { display: flex; gap: 14px; flex-wrap: wrap; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-light); letter-spacing: 0.04em; }
+  .artifact-meta span { display: inline-flex; align-items: center; gap: 4px; }
+
+  .artifact-body { padding-top: 20px; border-top: 1px solid var(--border); }
+  .artifact-desc { font-size: 0.95rem; color: var(--text); line-height: 1.7; margin-bottom: 20px; }
+  .artifact-desc strong { color: var(--text); }
+  .artifact-desc em { color: var(--text-muted); }
+
+  .toc-list { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 24px; }
+  .toc-item { display: flex; align-items: flex-start; gap: 14px; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; transition: all 0.15s; }
+  .toc-item:hover { border-color: var(--accent); transform: translateX(4px); }
+  .toc-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 600; flex-shrink: 0; min-width: 60px; letter-spacing: 0.04em; }
+  .toc-content { flex: 1; }
+  .toc-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
+  .toc-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* DOWNLOAD/PLAY BUTTONS */
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+  .action-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 18px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .action-btn:hover { border-color: var(--accent); background: var(--surface-hover); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(124, 58, 237, 0.1); }
+  .action-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .action-btn.primary:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .action-btn-icon { font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--text-light); }
+  .action-btn.primary .action-btn-icon { color: rgba(255,255,255,0.7); }
+  .action-btn-meta { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--text-light); letter-spacing: 0.04em; text-transform: uppercase; }
+  .action-btn.primary .action-btn-meta { color: rgba(255,255,255,0.7); }
+
+  /* SCREENSHOTS GALLERY */
+  .game-screenshots { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 20px 0; }
+  .screenshot-frame { padding: 6px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; transition: all 0.2s; }
+  .screenshot-frame:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .screenshot-frame img { width: 100%; height: auto; display: block; border-radius: 4px; }
+  .screenshot-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-light); text-align: center; margin-top: 6px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* CLOSING */
+  .closing { padding: 28px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-top: 40px; }
+  .closing-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+  .closing-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; }
+  .closing-text { font-size: 0.93rem; color: var(--text-muted); line-height: 1.75; }
+  .closing-text strong { color: var(--text); }
+
+  footer { max-width: 880px; margin: 0 auto; padding: 30px 40px 40px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-light); letter-spacing: 0.04em; text-align: center; }
+
+  @media (max-width: 720px) {
+    nav { padding: 14px 20px; }
+    .nav-links { gap: 18px; }
+    main { padding: 32px 20px 56px; }
+    .page-title { font-size: 1.5rem; }
+    .artifact { padding: 22px; }
+    .artifact-thumb { width: 100%; max-width: 280px; margin: 0 auto; }
+    .artifact-header { flex-direction: column; align-items: center; text-align: center; }
+    .artifact-info { text-align: left; width: 100%; }
+    footer { padding: 30px 20px; }
+  }
+
+    @media (max-width: 480px) {
+      nav { padding: 12px 14px; }
+      .nav-name { font-size: 11px; gap: 4px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 10px; }
+      .theme-toggle { padding: 3px 7px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">🐚 Sora Kim</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="papers.html">Papers</a></li>
+    <li><a href="tools.html">Tools</a></li>
+    <li><a href="teaching.html" class="active">Teaching</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+</nav>
+
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') { root.setAttribute('data-theme','dark'); toggle.textContent='☀️'; }
+  else if (saved === 'light') { root.setAttribute('data-theme','light'); toggle.textContent='🌙'; }
+  toggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) { root.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); toggle.textContent='🌙'; }
+    else { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
+  });
+</script>
+
+<main>
+
+  <div class="page-header">
+    <h1 class="page-title">Teaching</h1>
+    <p class="page-subtitle">
+      Open-access educational artifacts for regulated work — designed to make GMP environments and AI tooling navigable for newcomers and practitioners.
+    </p>
+    <p class="page-meta">2 artifacts · open access · EN + KO</p>
+  </div>
+
+  <div class="intro-callout">
+    Within the <strong>Regulatory HCI</strong> research program, the same design principles that improve practitioner working conditions also produce educational artifacts as a natural extension. Tools that make accountability legible, scaffolds that preserve judgment, and interfaces that explain rather than automate — these are pedagogical gestures as much as design moves. The two artifacts below take that further: they exist outside any single workplace, freely available, written for the people regulated environments most often leave to figure things out alone.
+  </div>
+
+  <!-- ARTIFACT 1: COOKBOOK -->
+  <div class="artifact">
+    <div class="artifact-header">
+      <a href="assets/cookbook-en.pdf" target="_blank" class="artifact-thumb">
+        <img src="assets/cookbook-en-cover.png" alt="Cookbook cover">
+      </a>
+      <div class="artifact-info">
+        <div class="artifact-tag">📘 AI Literacy Guide · PDF</div>
+        <h2 class="artifact-title">Claude, 이렇게 씁니다.<br><span style="font-size:1rem;font-weight:500;color:var(--text-muted);">How to Actually Use Claude — A GMP Quality Lab AI Literacy Series</span></h2>
+        <p class="artifact-subtitle">A practitioner-facing guide to using AI productively and safely in pharmaceutical GMP environments.</p>
+        <div class="artifact-meta">
+          <span>📄 15 pages</span>
+          <span>🌐 EN + KO</span>
+          <span>📂 Open access</span>
+          <span>🏢 GMP audience</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="artifact-body">
+      <p class="artifact-desc">
+        Most AI guidance for regulated industries either treats AI as a generic productivity tool or as a regulatory liability — rarely as something that needs <strong>practitioner-level fluency</strong>. This cookbook fills that gap. It addresses what Claude is and isn't (capabilities, hallucination, when to escalate), <strong>what to never share</strong> (credentials, proprietary system data, raw GMP records), and <strong>how to write prompts</strong> for SOPs, deviation reports, CAPA, translation, and document review. The final chapter is a quick-reference card of starter lines for situations practitioners actually encounter. Designed for first-time Claude users and for managers building team workflows.
+      </p>
+
+      <div class="toc-list">
+        <div class="toc-item">
+          <span class="toc-num">CH 01</span>
+          <div class="toc-content">
+            <div class="toc-title">What Claude Is — and Isn't</div>
+            <div class="toc-desc">Capabilities · hallucination · limitations · escalation to supervisors</div>
+          </div>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">CH 02</span>
+          <div class="toc-content">
+            <div class="toc-title">Security &amp; Data Integrity</div>
+            <div class="toc-desc">No credentials · Veeva/LIMS/NAS · anonymization · ALCOA+</div>
+          </div>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">CH 03</span>
+          <div class="toc-content">
+            <div class="toc-title">Document Writing in Practice</div>
+            <div class="toc-desc">SOP · deviation reports · CAPA · translation · review prompts</div>
+          </div>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">CH 04</span>
+          <div class="toc-content">
+            <div class="toc-title">Workflow Automation for Managers</div>
+            <div class="toc-desc">Tool requests · checklists · meeting notes · deviation classifiers</div>
+          </div>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">QUICK</span>
+          <div class="toc-content">
+            <div class="toc-title">Prompt Quick Reference Card</div>
+            <div class="toc-desc">Starter lines by situation — copy and paste</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a href="assets/cookbook-en.pdf" download class="action-btn primary">
+          <span class="action-btn-icon">▸</span>
+          <span>
+            <div>Download (English)</div>
+            <div class="action-btn-meta">PDF · 15 pages · 776 KB</div>
+          </span>
+        </a>
+        <a href="assets/cookbook-ko.pdf" download class="action-btn primary">
+          <span class="action-btn-icon">▸</span>
+          <span>
+            <div>다운로드 (한국어)</div>
+            <div class="action-btn-meta">PDF · 15페이지 · 1.8 MB</div>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARTIFACT 2: GAME -->
+  <div class="artifact">
+    <div class="artifact-header">
+      <a href="dayone-gmp-en.html" class="artifact-thumb">
+        <img src="assets/dayone-title.png" alt="DAY ONE: GMP — title screen">
+      </a>
+      <div class="artifact-info">
+        <div class="artifact-tag">🎮 Pixel-Art Game · Web</div>
+        <h2 class="artifact-title">DAY ONE: GMP<br><span style="font-size:1rem;font-weight:500;color:var(--text-muted);">첫째 날: GMP — A Pixel Onboarding Game</span></h2>
+        <p class="artifact-subtitle">A retro pixel-art game for newcomers entering pharmaceutical GMP environments. Five workday scenarios teach the core principles of regulated practice.</p>
+        <div class="artifact-meta">
+          <span>🕹 5 scenarios</span>
+          <span>⏱ ~15 minutes</span>
+          <span>🌐 EN + KO</span>
+          <span>📂 Open access</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="artifact-body">
+      <p class="artifact-desc">
+        Most GMP onboarding takes the form of slide decks and SOP read-throughs — passive exposure to procedures the trainee won't internalize until they encounter them in real situations, often <em>under pressure</em>. <strong>DAY ONE: GMP</strong> reverses that order. The newcomer character (Jun) walks through one workday, encountering five decision points where compliance reasoning has to happen <em>before</em> formal documentation begins: gowning, material control, SOP retrieval, deviation reporting, and end-of-day sign-off. Each choice teaches something — there's no game over, but the explanation after each decision connects the situation to the underlying principle (<strong>ALCOA</strong>, deviation reporting obligations, the structural meaning of "validated procedure").
+      </p>
+
+      <div class="game-screenshots">
+        <div class="screenshot-frame">
+          <img src="assets/dayone-title.png" alt="Game title screen">
+          <div class="screenshot-label">Title screen</div>
+        </div>
+        <div class="screenshot-frame">
+          <img src="assets/dayone-intro.png" alt="Game intro">
+          <div class="screenshot-label">Intro · meet Jun</div>
+        </div>
+        <div class="screenshot-frame">
+          <img src="assets/dayone-scenario.png" alt="Scenario 1">
+          <div class="screenshot-label">Scenario 1 · gowning</div>
+        </div>
+      </div>
+
+      <div class="toc-list">
+        <div class="toc-item">
+          <span class="toc-num">09:00</span>
+          <div class="toc-content">
+            <div class="toc-title">Gowning Area</div>
+            <div class="toc-desc">Why the order of gowning is itself a validated procedure</div>
+          </div>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">10:00</span>
+          <div class="toc-content">
+            <div class="toc-title">Material Verification</div>
+            <div class="toc-desc">A faded reagent label — the discipline of quarantine over convenience</div>
+          </div>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">11:30</span>
+          <div class="toc-content">
+            <div class="toc-title">SOP Retrieval Under Pressure</div>
+            <div class="toc-desc">When the document system fails the practitioner — escalate, don't improvise</div>
+          </div>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">14:00</span>
+          <div class="toc-content">
+            <div class="toc-title">Deviation Reporting</div>
+            <div class="toc-desc">A small spill nobody saw — why traceability beats discretion</div>
+          </div>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">16:30</span>
+          <div class="toc-content">
+            <div class="toc-title">End-of-Day Sign-Off</div>
+            <div class="toc-desc">A missing data point — ALCOA principles in practice</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a href="dayone-gmp-en.html" class="action-btn primary">
+          <span class="action-btn-icon">▸</span>
+          <span>
+            <div>Play (English)</div>
+            <div class="action-btn-meta">Web · ~15 min</div>
+          </span>
+        </a>
+        <a href="dayone-gmp-ko.html" class="action-btn primary">
+          <span class="action-btn-icon">▸</span>
+          <span>
+            <div>플레이 (한국어)</div>
+            <div class="action-btn-meta">웹 · 약 15분</div>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <div class="closing-label">⚖ Why these matter</div>
+    <h3 class="closing-title">Education as a research output</h3>
+    <p class="closing-text">
+      Within Regulatory HCI, the gap between formal compliance training and the cognitive work practitioners actually do is a <strong>research finding</strong> — observable in SOP retrieval friction, in early-stage deviation reasoning, in the dissociation between confidence and convergence in root cause analysis. These artifacts translate that finding into <strong>practitioner-facing infrastructure</strong>: not a curriculum, but tools that meet newcomers and practitioners where they actually are. They are part of the same program as the <a href="papers.html" style="color:var(--blue);">papers</a> and the <a href="tools.html" style="color:var(--blue);">deployed systems</a>.
+    </p>
+  </div>
+
+</main>
+
+<footer>© 2026 Sora Kim · sorakim.lab@gmail.com</footer>
+
+</body>
+</html>
