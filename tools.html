@@ -61,6 +61,9 @@
     .stat-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-light); letter-spacing: 0.08em; text-transform: uppercase; }
     .disclaimer { padding: 14px 18px; background: var(--surface); border-left: 3px solid var(--orange); border-radius: 6px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 40px; font-style: italic; }
     .disclaimer strong { color: var(--text); font-style: normal; }
+    .research-caveat { padding: 18px 22px; background: var(--surface); border-left: 3px solid var(--blue); border-radius: 6px; font-size: 0.86rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 16px; }
+    .research-caveat strong { color: var(--text); }
+    .research-caveat-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--blue); text-transform: uppercase; font-weight: 600; margin-bottom: 10px; }
     .section-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); margin-bottom: 8px; margin-top: 64px; }
     .section-label:first-of-type { margin-top: 0; }
     .section-title { font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 10px; letter-spacing: -0.01em; }
@@ -226,6 +229,12 @@
     <div class="stat-box"><div class="stat-value">5</div><div class="stat-label">User Studies</div></div>
     <div class="stat-box"><div class="stat-value">~50</div><div class="stat-label">Team Members</div></div>
     <div class="stat-box"><div class="stat-value">~4</div><div class="stat-label">Years Embedded</div></div>
+  </div>
+
+  <div class="research-caveat">
+    <div class="research-caveat-label">⚖ ON THE EVALUATION SCORES</div>
+    <p>User satisfaction scores across all five studies (4.5&ndash;5.0/5.0) should be interpreted with caution. GMP and similarly regulated environments have historically lacked HCI-grounded tooling &mdash; most digital systems in these domains are validation-driven rather than user-centered. The high satisfaction scores likely reflect a <strong>baseline novelty effect</strong>: any tooling designed with practitioner reasoning, accountability conditions, and interaction patterns in mind appears strikingly different from the systems practitioners currently use day-to-day.</p>
+    <p style="margin-top:10px;"><strong>This itself signals the research opportunity.</strong> Pharmaceutical GMP environments are severely under-represented in HCI and information science literature, despite employing hundreds of thousands of regulated knowledge workers globally. The pattern across these studies is not that the tools are exceptional &mdash; it is that the empirical baseline against which they are evaluated is far below where comparable knowledge work has been studied. This motivates the broader research program rather than threatening it.</p>
   </div>
 
   <div class="disclaimer">
@@ -568,13 +577,18 @@
       <div class="finding-highlight"><strong>Central finding:</strong> At the initial timepoint, 15/20 participants produced single-cause person-centered explanations with confidence ratings averaging 1/5 — indicating that early convergence reflects institutional pressure, not epistemic certainty. Structured comparison scaffolding broadened reasoning without destabilizing epistemic grounding.</div>
     </div>
     <a href="papers.html#rca-paper" class="tool-paper-link">
-      <span class="tool-paper-link-icon">📄 Paper</span>
-      <div><div class="tool-paper-link-title">Keeping Comparison Open: Interface Scaffolding Against Premature Accountability Convergence in Regulated Investigations</div><div class="tool-paper-link-venue">Working paper</div></div>
+      <span class="tool-paper-link-icon">📄 Paper (shared)</span>
+      <div><div class="tool-paper-link-title">Keeping Comparison Open: Interface Scaffolding Against Premature Accountability Convergence in Regulated Investigations</div><div class="tool-paper-link-venue">Working paper · 2-study design</div></div>
+      <span class="tool-paper-link-arrow">→</span>
+    </a>
+    <a href="project-premature-causal-convergence.html" class="tool-paper-link">
+      <span class="tool-paper-link-icon">🔬 Project</span>
+      <div><div class="tool-paper-link-title">Premature Convergence under Closure Pressure — Project page</div><div class="tool-paper-link-venue">Study 1 · timed reflection pilot, three timepoints</div></div>
       <span class="tool-paper-link-arrow">→</span>
     </a>
     <a href="project-rca-reasoning-scaffolder.html" class="tool-paper-link">
       <span class="tool-paper-link-icon">🔬 Project</span>
-      <div><div class="tool-paper-link-title">Expanding Causal Reasoning under Closure Pressure — Project page</div><div class="tool-paper-link-venue">AI scaffolding, three-timepoint reflection</div></div>
+      <div><div class="tool-paper-link-title">Expanding Causal Reasoning under Closure Pressure — Project page</div><div class="tool-paper-link-venue">Study 2 · AI scaffolding intervention, five-stage interface</div></div>
       <span class="tool-paper-link-arrow">→</span>
     </a>
   </div>
