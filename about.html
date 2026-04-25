@@ -34,7 +34,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 18px; line-height: 1.7; transition: background 0.2s, color 0.2s; }
     nav { padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 10; }
-    .nav-name { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: 0.04em; }
+    .nav-name { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: 0.04em;  white-space: nowrap;}
     .nav-links { display: flex; gap: 28px; list-style: none; }
     .nav-links a { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; }
     .nav-links a:hover, .nav-links a.active { color: var(--blue); }
@@ -69,6 +69,14 @@
       nav { padding: 14px 20px; } .nav-links { gap: 18px; }
       main { padding: 40px 20px 60px; } .greeting { font-size: 1.25rem; }
     }
+  
+    @media (max-width: 480px) {
+      nav { padding: 12px 14px; }
+      .nav-name { font-size: 11px; gap: 4px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 10px; }
+      .theme-toggle { padding: 3px 7px; font-size: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -79,6 +87,7 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="papers.html">Papers</a></li>
     <li><a href="tools.html">Tools</a></li>
+    <li><a href="teaching.html">Teaching</a></li>
     <li><a href="about.html" class="active">About</a></li>
   </ul>
   <button class="theme-toggle" id="themeToggle">🌙</button>
@@ -107,16 +116,14 @@
     </p>
     <p>
       I'm a practitioner-researcher in <strong>pharmaceutical GMP quality control</strong>
-      in South Korea. My research program studies
-      <strong>accountability infrastructure</strong> — how responsibility gets
-      produced in regulated work, and what happens to that production when AI
-      enters the workflow. The methods draw on organizational theory, STS, HCI, and computational text analysis, but the core question is organizational: <em>how do accountability structures get built, reshaped, and sometimes quietly closed off?</em>
+      in South Korea. I work on <strong>Regulatory HCI</strong> — how regulated work environments shape practitioner cognition, decision-making, and the production of accountability, and how design choices in those environments can both improve working conditions and make accountability structures clearer (especially as AI enters the workflow). The methods draw on organizational theory, STS, HCI, and computational text analysis, but the core question is structural: <em>how do regulated environments quietly determine what workers can see, do, decide, and be held accountable for?</em>
     </p>
     <p>
       AI integration into regulated work isn't a question of whether anymore —
       it's happening. What I actually spend time on is the <em>how</em>: how organizations
-      adopt AI without losing the accountability structures that make regulated work legible
-      in the first place. Most of my days are spent between studying those dynamics
+      adopt AI without eroding the accountability structures that make regulated work legible
+      in the first place — and without making the people doing the work invisible in the process.
+      Most of my days are spent between studying those dynamics
       and building tools that try to take them seriously.
     </p>
     <p>
@@ -145,7 +152,7 @@
       no one to ask. It was fine. I'm fine. We don't talk about it.)
     </p>
     <p>
-      What it turned into: a four-stage accountability lifecycle theory, nine production tools deployed at a GMP-regulated site (with N=20 user studies on five of them), a computational analysis of FDA Warning Letters, and <strong>14 papers</strong> — four currently under review at organization theory journals, the rest working papers spanning design, computational methods, and theoretical synthesis. I also designed and continue to iterate on an AI integration training program for my QC team, with a differentiated curriculum for managers (building AI-assisted tools) and operators (AI-assisted document work). Teaching people to use AI inside a regulated workflow has sharpened the questions I want to pursue next — especially how organizations adopt AI without eroding the accountability structures that make regulated work legible in the first place.
+      What it turned into: a four-stage accountability lifecycle theory, nine production tools deployed at a GMP-regulated site (with N=20 user studies on five of them), a computational analysis of FDA Warning Letters, and <strong>10 papers</strong> — four currently under review at organization theory journals, the rest working papers spanning design, computational methods, and theoretical synthesis. I also designed and continue to iterate on an <strong>AI integration training program</strong> for my QC team, and turned that work into two open-access educational artifacts: a practitioner-facing AI literacy cookbook and a pixel-art GMP onboarding game. Teaching people to use AI inside a regulated workflow has sharpened the questions I want to pursue next — especially how organizations adopt AI without eroding the accountability structures that make regulated work legible in the first place.
     </p>
     <p>
       <strong>Which is exactly why I want a PhD.</strong> Working this way taught
@@ -154,7 +161,7 @@
       you've needed — and completely blind to the ones you haven't.
       <strong>I want proper methodological training from people who've been doing
       this for decades</strong>, not another self-taught workaround that gets me
-      80% of the way there. I've also written 14 papers without anyone to tell me
+      80% of the way there. I've also written 10 papers without anyone to tell me
       when a draft is actually done, which means I've spent a lot of time guessing
       at the ceiling of "good enough," and occasionally re-inventing things that
       already had names. But honestly, the hardest part hasn't been any of that.
@@ -178,10 +185,10 @@
       Alongside the research, I designed and run an <strong>AI integration training program</strong> for my QC team (~50 people), with differentiated curriculum for <strong>managers</strong> (building AI-assisted tools) and <strong>operators</strong> (AI-assisted document work). The split matters: what counts as "good AI adoption" looks completely different depending on where you sit in the hierarchy, and collapsing those perspectives tends to produce training that helps neither.
     </p>
     <p>
-      Teaching people to use AI inside a regulated workflow turned out to sharpen my research questions more than any reading list did. Watching managers struggle with <em>when to trust an output</em> and operators struggle with <em>when to override a suggestion</em> made the accountability infrastructure questions concrete in a way that wasn't going to come from theory alone.
+      Teaching people to use AI inside a regulated workflow turned out to sharpen my research questions more than any reading list did. Watching managers struggle with <em>when to trust an output</em> and operators struggle with <em>when to override a suggestion</em> made the Regulatory HCI questions concrete in a way that wasn't going to come from theory alone.
     </p>
     <p>
-      A practitioner-facing <strong>cookbook on AI adoption in regulated work</strong> is in progress — aimed at the people actually making these decisions inside organizations, not the ethics conversation around them. I'll link it here when it's public.
+      That work has produced two open-access educational artifacts: <strong>"Claude, 이렇게 씁니다."</strong> — a 15-page AI literacy cookbook for GMP teams (EN + KO), and <strong>DAY ONE: GMP</strong> — a pixel-art onboarding game where a newcomer character walks through five first-day GMP scenarios. Both are aimed at the people actually doing this work inside organizations, not the ethics conversation around them. <a href="teaching.html" style="color:var(--accent);">Both are public →</a>
     </p>
   </div>
 
@@ -227,7 +234,7 @@
   <div class="section">
     <p class="section-label">Say hi 🙌</p>
     <p>
-      I love talking about accountability infrastructure, regulated work, AI in
+      I love talking about Regulatory HCI, regulated work, AI in
       organizations, PhD applications — or honestly, just café recommendations in
       your city. If you're a researcher working on anything adjacent, I'd
       genuinely love to hear from you. That intellectual-community thing I
@@ -245,10 +252,6 @@
       <div class="contact-item">
         <span class="contact-label">GitHub</span>
         <a href="https://github.com/sorakim-lab" target="_blank" rel="noopener noreferrer">sorakim-lab</a>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">SSRN</span>
-        <a href="https://ssrn.com/author=10648616" target="_blank" rel="noopener noreferrer">Author page</a>
       </div>
       <div class="contact-item">
         <span class="contact-label">ORCID</span>

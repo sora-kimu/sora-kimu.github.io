@@ -40,7 +40,7 @@
 
     /* NAV */
     nav { padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 100; }
-    .nav-name { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: 0.04em; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-name { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: 0.04em; display: flex; align-items: center; gap: 6px; transition: color 0.2s;  white-space: nowrap;}
     .nav-name:hover { color: var(--accent); }
     .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px; font-size: 14px; cursor: pointer; color: var(--text); transition: border-color 0.2s; }
     .theme-toggle:hover { border-color: var(--blue); }
@@ -293,6 +293,14 @@
       .glossary-modal { width: 94%; max-height: 88vh; border-radius: 12px; }
       .glossary-header { padding: 20px 22px 16px; }
       .glossary-body { padding: 12px 22px 20px; }
+    }
+  
+    @media (max-width: 480px) {
+      nav { padding: 12px 14px; }
+      .nav-name { font-size: 11px; gap: 4px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 10px; }
+      .theme-toggle { padding: 3px 7px; font-size: 12px; }
     }
   </style>
 </head>
