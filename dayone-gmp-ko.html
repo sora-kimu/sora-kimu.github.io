@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>첫째 날: GMP — Sora Kim의 픽셀 게임</title>
+<meta name="description" content="첫째 날: GMP — 신입 GMP 종사자를 위한 레트로 픽셀 아트 온보딩 게임. 5개 시나리오로 GMP 기본을 배운다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.1/DungGeunMo.woff" as="font" crossorigin>
+<style>
+  @font-face {
+    font-family: 'DungGeunMo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.1/DungGeunMo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  :root {
+    --bg-deep: #0a0e1a;
+    --bg-mid: #1a2540;
+    --bg-light: #2a3560;
+    --text: #e8f4a0;
+    --accent: #4ade80;
+    --warning: #fbbf24;
+    --danger: #f87171;
+    --highlight: #fde047;
+    --border: #4a5580;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; }
+  body {
+    background: var(--bg-deep);
+    color: var(--text);
+    font-family: 'DungGeunMo', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+  .crt-screen {
+    width: 100%;
+    max-width: 880px;
+    aspect-ratio: 4/3;
+    background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+    border: 4px solid var(--border);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(74, 222, 128, 0.15), inset 0 0 30px rgba(0,0,0,0.5);
+  }
+  .crt-screen::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 3px);
+    z-index: 100;
+  }
+  .crt-screen::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.3) 100%);
+    z-index: 99;
+  }
+  .scene { width: 100%; height: 100%; position: absolute; inset: 0; display: flex; flex-direction: column; padding: 24px; }
+  .scene.hidden { display: none; }
+
+  /* TITLE SCREEN */
+  .title-scene { justify-content: center; align-items: center; text-align: center; }
+  .title-logo { font-size: clamp(28px, 6vw, 56px); color: var(--accent); margin-bottom: 16px; letter-spacing: 0.05em; text-shadow: 4px 4px 0 var(--bg-deep), 0 0 20px rgba(74,222,128,0.4); animation: pulse 2s infinite; line-height: 1.2; }
+  .title-subtitle { font-size: clamp(12px, 1.8vw, 16px); color: var(--text); margin-bottom: 8px; line-height: 1.8; }
+  .title-byline { font-size: clamp(10px, 1.4vw, 13px); color: var(--warning); margin-bottom: 32px; }
+  .title-press { font-size: clamp(14px, 2.2vw, 20px); color: var(--highlight); animation: blink 1.2s infinite; cursor: pointer; }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+  @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+
+  /* INTRO SCENE */
+  .intro-scene { justify-content: center; align-items: center; text-align: left; padding: 40px; }
+  .intro-text { font-size: clamp(13px, 1.8vw, 18px); line-height: 1.9; color: var(--text); margin-bottom: 16px; max-width: 600px; }
+  .intro-text strong { color: var(--accent); }
+
+  /* SCENARIO SCREEN */
+  .scenario-scene { padding: 16px; }
+  .scenario-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border: 2px solid var(--border); background: rgba(0,0,0,0.3); margin-bottom: 12px; flex-shrink: 0; }
+  .scenario-time { font-size: clamp(11px, 1.5vw, 14px); color: var(--warning); }
+  .scenario-progress { font-size: clamp(11px, 1.5vw, 14px); color: var(--text); }
+  .scenario-score { font-size: clamp(11px, 1.5vw, 14px); color: var(--highlight); }
+
+  .scene-area { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; min-height: 0; }
+  .pixel-art-area { flex: 0 0 35%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border: 2px solid var(--border); position: relative; overflow: hidden; }
+  .pixel-canvas { width: 100%; height: 100%; }
+
+  .dialog-box { border: 3px solid var(--accent); background: rgba(10, 14, 26, 0.95); padding: 14px 18px; min-height: 60px; position: relative; overflow: hidden; }
+  .dialog-name { font-size: clamp(11px, 1.5vw, 14px); color: var(--accent); margin-bottom: 8px; letter-spacing: 0.05em; }
+  .dialog-text { font-size: clamp(13px, 1.8vw, 17px); line-height: 1.7; color: var(--text); word-break: keep-all; }
+  .dialog-prompt { position: absolute; right: 8px; bottom: 6px; color: var(--highlight); font-size: clamp(11px, 1.5vw, 14px); animation: blink 1s infinite; }
+
+  .choices-area { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 4px; }
+  .choice-btn {
+    font-family: 'DungGeunMo', monospace;
+    font-size: clamp(11px, 1.5vw, 15px);
+    background: var(--bg-mid);
+    color: var(--text);
+    border: 2px solid var(--border);
+    padding: 12px 14px;
+    cursor: pointer;
+    line-height: 1.7;
+    text-align: left;
+    transition: all 0.1s;
+    image-rendering: pixelated;
+    word-break: keep-all;
+    min-height: 60px;
+  }
+  .choice-btn:hover, .choice-btn:focus {
+    background: var(--bg-light);
+    border-color: var(--highlight);
+    color: var(--highlight);
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 0 var(--bg-deep);
+  }
+  .choice-btn.correct { background: rgba(74, 222, 128, 0.2); border-color: var(--accent); color: var(--accent); }
+  .choice-btn.wrong { background: rgba(248, 113, 113, 0.2); border-color: var(--danger); color: var(--danger); }
+  .choice-btn.disabled { pointer-events: none; opacity: 0.5; }
+
+  .feedback-box { margin-top: 8px; padding: 12px 14px; border: 2px dashed var(--border); background: rgba(0,0,0,0.3); }
+  .feedback-result { font-size: clamp(13px, 1.7vw, 16px); margin-bottom: 8px; letter-spacing: 0.05em; }
+  .feedback-result.correct { color: var(--accent); }
+  .feedback-result.wrong { color: var(--danger); }
+  .feedback-text { font-size: clamp(12px, 1.6vw, 15px); line-height: 1.8; color: var(--text); word-break: keep-all; }
+  .feedback-text strong { color: var(--highlight); }
+  .next-btn-row { display: flex; justify-content: flex-end; margin-top: 8px; }
+  .next-btn {
+    font-family: 'DungGeunMo', monospace;
+    font-size: clamp(12px, 1.5vw, 15px);
+    background: var(--accent);
+    color: var(--bg-deep);
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+  .next-btn:hover { background: var(--highlight); transform: translateY(-2px); box-shadow: 0 3px 0 var(--bg-deep); }
+
+  /* ENDING */
+  .end-scene { justify-content: center; align-items: center; text-align: center; padding: 40px; }
+  .end-title { font-size: clamp(24px, 5vw, 44px); color: var(--accent); margin-bottom: 24px; text-shadow: 4px 4px 0 var(--bg-deep); }
+  .end-score { font-size: clamp(16px, 2.4vw, 22px); color: var(--highlight); margin-bottom: 20px; }
+  .end-rank { font-size: clamp(13px, 1.9vw, 17px); color: var(--text); margin-bottom: 28px; line-height: 1.8; max-width: 480px; word-break: keep-all; }
+  .end-rank strong { color: var(--accent); }
+  .end-summary { font-size: clamp(11px, 1.5vw, 14px); color: var(--text); line-height: 1.9; max-width: 520px; margin-bottom: 24px; text-align: left; word-break: keep-all; }
+  .end-summary li { margin-bottom: 6px; padding-left: 16px; position: relative; list-style: none; }
+  .end-summary li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+  .end-buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .end-btn {
+    font-family: 'DungGeunMo', monospace;
+    font-size: clamp(12px, 1.6vw, 15px);
+    background: var(--bg-mid);
+    color: var(--text);
+    border: 2px solid var(--accent);
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+  .end-btn:hover { background: var(--accent); color: var(--bg-deep); transform: translateY(-2px); box-shadow: 0 3px 0 var(--bg-deep); }
+
+  .controls-hint { margin-top: 16px; font-size: clamp(11px, 1.4vw, 13px); color: var(--text); opacity: 0.6; text-align: center; line-height: 1.8; }
+
+  .game-meta { text-align: center; margin-bottom: 20px; max-width: 800px; }
+  .game-meta h1 { font-size: clamp(15px, 2.2vw, 20px); color: var(--accent); margin-bottom: 8px; }
+  .game-meta p { font-size: clamp(12px, 1.5vw, 15px); color: var(--text); line-height: 1.8; opacity: 0.85; word-break: keep-all; }
+  .game-meta a { color: var(--highlight); text-decoration: none; }
+  .game-meta a:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .scenario-scene { padding: 10px; }
+    .pixel-art-area { flex: 0 0 25%; }
+    .choices-area { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="game-meta">
+  <h1>첫째 날: GMP</h1>
+  <p>제약 GMP 환경에 처음 들어선 신입을 위한 픽셀 아트 온보딩 게임.<br>5개 시나리오 · 약 15분 · <a href="index.html">Sora Kim</a></p>
+  <p style="margin-top:8px;"><a href="dayone-gmp-en.html">▸ EN</a> &nbsp;·&nbsp; <a href="dayone-gmp-ko.html" style="color:var(--highlight);">한국어</a></p>
+</div>
+
+<div class="crt-screen" id="screen">
+
+  <!-- TITLE SCREEN -->
+  <div class="scene title-scene" id="scene-title">
+    <div class="title-logo">첫째 날<br>GMP</div>
+    <div class="title-subtitle">제약 GMP 신입을 위한</div>
+    <div class="title-subtitle">픽셀 온보딩 게임</div>
+    <div class="title-byline" style="margin-top:24px;">v1.0 · BY SORA KIM · 2026</div>
+    <div class="title-press" id="start-btn">▸ 시작하기 ◂</div>
+  </div>
+
+  <!-- INTRO SCENE -->
+  <div class="scene intro-scene hidden" id="scene-intro">
+    <div class="intro-text">
+      오늘은 <strong>제약 GMP 사이트에서의 첫 출근일</strong>입니다.
+    </div>
+    <div class="intro-text">
+      하루 동안 <strong>5가지 상황</strong>을 마주하게 됩니다.<br>
+      각 상황은 <strong>GMP의 핵심 원칙</strong>을 가르칩니다.
+    </div>
+    <div class="intro-text" style="color: var(--warning);">
+      신중하게 선택하세요. 게임 오버는 없지만 ―<br>
+      모든 선택이 무언가를 가르칩니다.
+    </div>
+    <div class="intro-text" style="color: var(--accent); margin-top:16px;">
+      ▸ 준비됐나요, 준?
+    </div>
+    <button class="next-btn" id="intro-next" style="margin-top:20px; align-self:flex-start;">▸ 첫째 날 시작</button>
+  </div>
+
+  <!-- SCENARIO SCREEN -->
+  <div class="scene scenario-scene hidden" id="scene-scenario">
+    <div class="scenario-header">
+      <span class="scenario-time" id="sc-time">오전 9:00</span>
+      <span class="scenario-progress" id="sc-progress">시나리오 1 / 5</span>
+      <span class="scenario-score" id="sc-score">점수: 0</span>
+    </div>
+    <div class="scene-area">
+      <div class="pixel-art-area">
+        <canvas class="pixel-canvas" id="pixel-canvas" width="160" height="100"></canvas>
+      </div>
+      <div class="dialog-box">
+        <div class="dialog-name" id="sc-speaker">준</div>
+        <div class="dialog-text" id="sc-dialog">...</div>
+      </div>
+      <div class="choices-area" id="sc-choices"></div>
+      <div class="feedback-box hidden" id="sc-feedback">
+        <div class="feedback-result" id="sc-result"></div>
+        <div class="feedback-text" id="sc-explanation"></div>
+        <div class="next-btn-row">
+          <button class="next-btn" id="sc-next">▸ 다음으로</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENDING SCREEN -->
+  <div class="scene end-scene hidden" id="scene-end">
+    <div class="end-title">첫째 날 완료!</div>
+    <div class="end-score" id="end-score-display">최종 점수: 0 / 100</div>
+    <div class="end-rank" id="end-rank-text">...</div>
+    <ul class="end-summary">
+      <li>가운 착의·출입 통제는 제품 무결성을 지킨다</li>
+      <li>원자재 검증은 하류 오류를 막는다</li>
+      <li>SOP는 행동 전에 찾아야 한다 ― 우회 금지</li>
+      <li>일탈은 보고하는 것 ― 숨기는 것이 아니다</li>
+      <li>ALCOA: 귀속성·가독성·동시성·원본성·정확성</li>
+    </ul>
+    <div class="end-buttons">
+      <button class="end-btn" id="end-retry">▸ 다시 하기</button>
+      <button class="end-btn" id="end-back" onclick="window.location.href='index.html'">▸ 사이트로</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="controls-hint">
+  선택지 클릭 · ▸ 다음으로 클릭하여 진행 · 데스크톱 권장
+</div>
+
+<script>
+// ===== PIXEL ART RENDERING =====
+const PALETTE = {
+  bg: '#0a0e1a', bg2: '#1a2540', mid: '#2a3560',
+  text: '#e8f4a0', skin: '#f5d5a8', hair: '#3a2818',
+  white: '#f8f8f8', blue: '#5b8bc9', green: '#4ade80',
+  red: '#f87171', yellow: '#fde047', gray: '#8a93b3',
+  brown: '#8b6f47', dark: '#1a1f30'
+};
+
+function drawScene(ctx, sceneId) {
+  ctx.imageSmoothingEnabled = false;
+  ctx.fillStyle = PALETTE.bg;
+  ctx.fillRect(0, 0, 160, 100);
+  switch(sceneId) {
+    case 1: drawGowningScene(ctx); break;
+    case 2: drawLabScene(ctx); break;
+    case 3: drawDocSearchScene(ctx); break;
+    case 4: drawSpillScene(ctx); break;
+    case 5: drawSignoffScene(ctx); break;
+    default: drawCharacter(ctx, 70, 50);
+  }
+}
+
+function drawCharacter(ctx, x, y, color = PALETTE.green) {
+  ctx.fillStyle = PALETTE.skin;
+  ctx.fillRect(x+3, y, 6, 6);
+  ctx.fillStyle = PALETTE.hair;
+  ctx.fillRect(x+2, y, 8, 2);
+  ctx.fillRect(x+2, y+2, 1, 1);
+  ctx.fillRect(x+9, y+2, 1, 1);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(x+4, y+3, 1, 1);
+  ctx.fillRect(x+7, y+3, 1, 1);
+  ctx.fillStyle = color;
+  ctx.fillRect(x+2, y+6, 8, 8);
+  ctx.fillStyle = PALETTE.skin;
+  ctx.fillRect(x+1, y+7, 1, 5);
+  ctx.fillRect(x+10, y+7, 1, 5);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(x+3, y+14, 2, 4);
+  ctx.fillRect(x+7, y+14, 2, 4);
+}
+
+function drawGowningScene(ctx) {
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(0, 75, 160, 25);
+  ctx.fillStyle = PALETTE.dark;
+  for (let i = 0; i < 160; i += 16) ctx.fillRect(i, 80, 1, 20);
+  ctx.fillRect(0, 90, 160, 1);
+  ctx.fillStyle = PALETTE.bg2;
+  ctx.fillRect(0, 0, 160, 75);
+  ctx.fillStyle = PALETTE.mid;
+  ctx.fillRect(110, 20, 30, 55);
+  ctx.fillStyle = PALETTE.blue;
+  ctx.fillRect(112, 22, 26, 51);
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(120, 28, 10, 4);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(123, 29, 4, 2);
+  ctx.fillStyle = PALETTE.brown;
+  ctx.fillRect(15, 25, 14, 50);
+  ctx.fillRect(32, 25, 14, 50);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(15, 25, 14, 1);
+  ctx.fillRect(32, 25, 14, 1);
+  ctx.fillRect(22, 30, 1, 5);
+  ctx.fillRect(39, 30, 1, 5);
+  ctx.fillStyle = PALETTE.white;
+  ctx.fillRect(52, 28, 8, 18);
+  ctx.fillRect(64, 28, 8, 18);
+  ctx.fillRect(76, 28, 8, 18);
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(54, 27, 1, 2);
+  ctx.fillRect(66, 27, 1, 2);
+  ctx.fillRect(78, 27, 1, 2);
+  drawCharacter(ctx, 88, 56, PALETTE.blue);
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(96, 48, 2, 2);
+  ctx.fillRect(95, 49, 1, 1);
+  ctx.fillRect(98, 49, 1, 1);
+  ctx.fillRect(97, 50, 1, 1);
+  ctx.fillRect(96, 52, 2, 1);
+}
+
+function drawLabScene(ctx) {
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(0, 75, 160, 25);
+  ctx.fillStyle = PALETTE.bg2;
+  ctx.fillRect(0, 0, 160, 75);
+  ctx.fillStyle = PALETTE.brown;
+  ctx.fillRect(0, 55, 100, 20);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(0, 55, 100, 2);
+  ctx.fillStyle = PALETTE.blue;
+  ctx.fillRect(10, 38, 8, 17);
+  ctx.fillStyle = PALETTE.white;
+  ctx.fillRect(11, 44, 6, 4);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(12, 36, 4, 3);
+  ctx.fillStyle = PALETTE.red;
+  ctx.fillRect(11, 50, 6, 3);
+  ctx.fillStyle = PALETTE.green;
+  ctx.fillRect(28, 40, 8, 15);
+  ctx.fillStyle = PALETTE.white;
+  ctx.fillRect(29, 45, 6, 4);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(30, 38, 4, 3);
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(46, 36, 8, 19);
+  ctx.fillStyle = PALETTE.white;
+  ctx.fillRect(47, 43, 6, 4);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(48, 34, 4, 3);
+  ctx.fillStyle = PALETTE.brown;
+  ctx.fillRect(110, 20, 40, 55);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(110, 20, 40, 1);
+  ctx.fillRect(130, 20, 1, 55);
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(118, 40, 2, 2);
+  ctx.fillRect(140, 40, 2, 2);
+  drawCharacter(ctx, 70, 56, PALETTE.white);
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(82, 60, 4, 4);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(85, 64, 2, 2);
+}
+
+function drawDocSearchScene(ctx) {
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(0, 75, 160, 25);
+  ctx.fillStyle = PALETTE.bg2;
+  ctx.fillRect(0, 0, 160, 75);
+  ctx.fillStyle = PALETTE.brown;
+  ctx.fillRect(0, 15, 60, 60);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(0, 15, 60, 1);
+  ctx.fillRect(0, 35, 60, 1);
+  ctx.fillRect(0, 55, 60, 1);
+  const binderColors = [PALETTE.red, PALETTE.blue, PALETTE.green, PALETTE.yellow, PALETTE.white];
+  for (let row = 0; row < 3; row++) {
+    for (let col = 0; col < 8; col++) {
+      ctx.fillStyle = binderColors[(row * 8 + col) % binderColors.length];
+      ctx.fillRect(2 + col * 7, 17 + row * 20, 5, 17);
+      ctx.fillStyle = PALETTE.dark;
+      ctx.fillRect(3 + col * 7, 19 + row * 20, 3, 1);
+    }
+  }
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(90, 50, 35, 25);
+  ctx.fillStyle = PALETTE.bg;
+  ctx.fillRect(92, 52, 31, 20);
+  ctx.fillStyle = PALETTE.green;
+  ctx.fillRect(95, 56, 20, 1);
+  ctx.fillRect(95, 60, 15, 1);
+  ctx.fillRect(95, 64, 18, 1);
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(95, 68, 25, 2);
+  drawCharacter(ctx, 105, 58, PALETTE.white);
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(140, 35, 2, 2);
+  ctx.fillRect(139, 36, 1, 1);
+  ctx.fillRect(142, 36, 1, 1);
+  ctx.fillRect(141, 37, 1, 1);
+  ctx.fillRect(140, 39, 2, 1);
+}
+
+function drawSpillScene(ctx) {
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(0, 75, 160, 25);
+  ctx.fillStyle = PALETTE.bg2;
+  ctx.fillRect(0, 0, 160, 75);
+  ctx.fillStyle = PALETTE.brown;
+  ctx.fillRect(20, 55, 80, 20);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(20, 55, 80, 2);
+  ctx.fillStyle = PALETTE.blue;
+  ctx.fillRect(40, 50, 14, 7);
+  ctx.fillStyle = PALETTE.white;
+  ctx.fillRect(46, 48, 4, 3);
+  ctx.fillStyle = PALETTE.red;
+  ctx.fillRect(36, 75, 30, 4);
+  ctx.fillRect(34, 77, 34, 3);
+  ctx.fillRect(38, 73, 26, 2);
+  ctx.fillRect(40, 80, 2, 2);
+  ctx.fillRect(50, 80, 2, 2);
+  ctx.fillRect(60, 80, 2, 2);
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(110, 25, 25, 25);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(120, 30, 5, 10);
+  ctx.fillRect(120, 42, 5, 3);
+  drawCharacter(ctx, 75, 56, PALETTE.white);
+  ctx.fillStyle = PALETTE.red;
+  ctx.fillRect(85, 48, 2, 5);
+  ctx.fillRect(85, 54, 2, 1);
+}
+
+function drawSignoffScene(ctx) {
+  ctx.fillStyle = PALETTE.gray;
+  ctx.fillRect(0, 75, 160, 25);
+  ctx.fillStyle = PALETTE.bg2;
+  ctx.fillRect(0, 0, 160, 75);
+  ctx.fillStyle = PALETTE.brown;
+  ctx.fillRect(20, 55, 120, 20);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(20, 55, 120, 2);
+  ctx.fillStyle = PALETTE.white;
+  ctx.fillRect(50, 45, 40, 12);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(53, 48, 30, 1);
+  ctx.fillRect(53, 51, 25, 1);
+  ctx.fillRect(53, 54, 28, 1);
+  ctx.fillStyle = PALETTE.blue;
+  ctx.fillRect(95, 50, 12, 2);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(94, 50, 1, 2);
+  ctx.fillStyle = PALETTE.dark;
+  ctx.fillRect(105, 30, 30, 25);
+  ctx.fillStyle = PALETTE.bg;
+  ctx.fillRect(107, 32, 26, 20);
+  ctx.fillStyle = PALETTE.green;
+  ctx.fillRect(110, 36, 18, 1);
+  ctx.fillRect(110, 40, 14, 1);
+  ctx.fillRect(110, 44, 16, 1);
+  ctx.fillStyle = PALETTE.yellow;
+  ctx.fillRect(110, 48, 10, 2);
+  drawCharacter(ctx, 30, 56, PALETTE.white);
+}
+
+// ===== GAME DATA =====
+const SCENARIOS = [
+  {
+    time: "오전 9:00",
+    speaker: "준",
+    dialog: "첫 출근! 가운 착의실에 도착했어. 가운들이 걸려 있는데, 사람마다 입는 순서가 달라 보여. 어떻게 해야 하지?",
+    sceneId: 1,
+    choices: [
+      { text: "그냥 가운을 입자 ― 틀리면 누군가 알려주겠지.", correct: false, points: 0 },
+      { text: "가운 착의 SOP를 먼저 찾아서 절차대로 따른다.", correct: true, points: 20 },
+      { text: "오늘은 견학이니까 착의는 건너뛴다.", correct: false, points: 0 },
+      { text: "가장 선임으로 보이는 분을 따라한다.", correct: false, points: 0 }
+    ],
+    correctIndex: 1,
+    explanation: "가운 착의는 <strong>밸리데이션된 절차</strong>입니다 ― 순서가 오염 통제 방식을 결정하기 때문이에요. 항상 가운 착의 SOP를 따르세요. 즉흥적인 절차는 그 자체로 일탈입니다. <strong>'그냥 견학'</strong>은 예외가 아닙니다 ― 입실하는 모든 사람은 SOP대로 가운을 착의해야 합니다."
+  },
+  {
+    time: "오전 10:00",
+    speaker: "준",
+    dialog: "첫 작업 준비 중. 시약 한 병의 라벨이 흐려져서 유효기간이 잘 안 보여. 어떡하지?",
+    sceneId: 2,
+    choices: [
+      { text: "사용한다 ― 선반에 있었으면 괜찮은 거다.", correct: false, points: 0 },
+      { text: "병을 격리하고 QC에 알린다. 검증 전까지 사용 금지.", correct: true, points: 20 },
+      { text: "이전 날짜를 지우고 오늘 날짜를 적는다.", correct: false, points: 0 },
+      { text: "다른 병을 쓰고 이건 다시 제자리에 둔다.", correct: false, points: 0 }
+    ],
+    correctIndex: 1,
+    explanation: "<strong>상태가 불분명한 원자재는 즉시 격리</strong>해야 하며, QC 검증 전까지 사용 금지입니다. 라벨 수정은 GMP 하에서 <strong>데이터 무결성 위반</strong>이며 위조에 해당합니다. 플래그 없이 다시 두면 다음 사람이 같은 문제를 마주하거나 ― 더 나쁘게는 그대로 사용할 수 있습니다."
+  },
+  {
+    time: "오전 11:30",
+    speaker: "준",
+    dialog: "처음 해보는 절차를 수행해야 해. 문서 시스템에 파일이 수백 개고 SOP를 못 찾겠어. 시간도 빠듯한데...",
+    sceneId: 3,
+    choices: [
+      { text: "동료에게 평소 어떻게 하는지 물어보고 따라한다.", correct: false, points: 0 },
+      { text: "이름으로 검색 → 못 찾으면 QA에 문의 후 갭 기록.", correct: true, points: 20 },
+      { text: "비슷한 이름의 SOP를 열고 시작한다 ― 거의 비슷할 거다.", correct: false, points: 0 },
+      { text: "오늘은 그냥 건너뛴다. 내일 다시 시도.", correct: false, points: 5 }
+    ],
+    correctIndex: 1,
+    explanation: "<strong>올바른 SOP 없이 절차 수행</strong>은 비인가 작업입니다 ― 동료의 방식이 괜찮아 보여도 마찬가지. 올바른 행동: <strong>구조적 검색 → 못 찾으면 에스컬레이션 → 갭 기록</strong>. SOP를 못 찾는 것 자체가 시스템 차원의 문제이며 보고 가치가 있습니다."
+  },
+  {
+    time: "오후 2:00",
+    speaker: "준",
+    dialog: "방금 시약병을 떨어뜨렸어. 작업대에 작은 spillage가 있고 아무도 못 봤어. 퇴근까지 두 시간 남았는데...",
+    sceneId: 4,
+    choices: [
+      { text: "빨리 닦아낸다. 별일 아니다.", correct: false, points: 0 },
+      { text: "작업 중단, 오염 봉쇄, 일탈 즉시 보고.", correct: true, points: 20 },
+      { text: "일단 닦고 내일 중요해 보이면 그때 말한다.", correct: false, points: 0 },
+      { text: "내 노트에만 적어둔다 ― 나중에 기억하려고.", correct: false, points: 5 }
+    ],
+    correctIndex: 1,
+    explanation: "<strong>모든 일탈은 크기나 목격 여부와 상관없이 보고해야 합니다.</strong> 일탈 시스템은 비난이 아니라 <strong>추적성</strong>을 위한 것입니다. 숨겨진 spillage는 시료, 장비, 또는 후속 작업에 예측 불가능한 영향을 줄 수 있습니다. <strong>중단 → 봉쇄 → 보고</strong>가 원칙입니다."
+  },
+  {
+    time: "오후 4:30",
+    speaker: "준",
+    dialog: "퇴근 시간. 배치 기록에 사인해야 하는데 한 시점 데이터를 깜빡했어. 23.4였던 것 같아. 폼은 지금 사인해서 마감해야 해.",
+    sceneId: 5,
+    choices: [
+      { text: "23.4를 현재 시각으로 기입하고 사인한다.", correct: false, points: 0 },
+      { text: "사인 보류. 누락 표시 + 사유 기록 + QA 보고.", correct: true, points: 20 },
+      { text: "23.4를 원래 시각으로 기입하고 사인한다.", correct: false, points: 0 },
+      { text: "팀원에게 대신 사인해달라고 한다 ― 같이 봤으니까.", correct: false, points: 0 }
+    ],
+    correctIndex: 1,
+    explanation: "<strong>ALCOA</strong>는 GMP 데이터 무결성의 근간입니다: <strong>귀속성·가독성·동시성·원본성·정확성</strong>. 기억에 의존한 후기 기입은 '동시성'과 '원본성' 위반. 시점 조작은 '귀속성' 위반. 타인 사인도 '귀속성' 위반. 올바른 행동: <strong>누락 사항과 사유를 기록</strong>. 시스템은 갭을 다룰 수 있습니다 ― 단, 선언했을 때만요."
+  }
+];
+
+// ===== GAME STATE =====
+let currentScenario = 0;
+let totalScore = 0;
+let answered = false;
+
+const screen = document.getElementById('screen');
+const scTitle = document.getElementById('scene-title');
+const scIntro = document.getElementById('scene-intro');
+const scScenario = document.getElementById('scene-scenario');
+const scEnd = document.getElementById('scene-end');
+
+function showScene(scene) {
+  [scTitle, scIntro, scScenario, scEnd].forEach(s => s.classList.add('hidden'));
+  scene.classList.remove('hidden');
+}
+
+document.getElementById('start-btn').addEventListener('click', () => {
+  showScene(scIntro);
+});
+
+document.getElementById('intro-next').addEventListener('click', () => {
+  currentScenario = 0;
+  totalScore = 0;
+  loadScenario();
+});
+
+function loadScenario() {
+  const sc = SCENARIOS[currentScenario];
+  answered = false;
+  document.getElementById('sc-time').textContent = sc.time;
+  document.getElementById('sc-progress').textContent = `시나리오 ${currentScenario + 1} / ${SCENARIOS.length}`;
+  document.getElementById('sc-score').textContent = `점수: ${totalScore}`;
+  document.getElementById('sc-speaker').textContent = sc.speaker;
+  document.getElementById('sc-dialog').textContent = sc.dialog;
+
+  const canvas = document.getElementById('pixel-canvas');
+  const ctx = canvas.getContext('2d');
+  drawScene(ctx, sc.sceneId);
+
+  const choicesEl = document.getElementById('sc-choices');
+  choicesEl.innerHTML = '';
+  sc.choices.forEach((choice, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = `${String.fromCharCode(65 + idx)}. ${choice.text}`;
+    btn.addEventListener('click', () => handleChoice(idx, btn));
+    choicesEl.appendChild(btn);
+  });
+
+  document.getElementById('sc-feedback').classList.add('hidden');
+  showScene(scScenario);
+}
+
+function handleChoice(idx, btn) {
+  if (answered) return;
+  answered = true;
+  const sc = SCENARIOS[currentScenario];
+  const choice = sc.choices[idx];
+
+  document.querySelectorAll('.choice-btn').forEach((b, i) => {
+    b.classList.add('disabled');
+    if (i === sc.correctIndex) b.classList.add('correct');
+    else if (i === idx) b.classList.add('wrong');
+  });
+
+  totalScore += choice.points;
+  document.getElementById('sc-score').textContent = `점수: ${totalScore}`;
+
+  const fb = document.getElementById('sc-feedback');
+  const result = document.getElementById('sc-result');
+  const explanation = document.getElementById('sc-explanation');
+
+  if (choice.correct) {
+    result.textContent = `▸ 정답! +${choice.points}점`;
+    result.className = 'feedback-result correct';
+  } else {
+    result.textContent = `▸ 아쉬움. (+${choice.points}점)`;
+    result.className = 'feedback-result wrong';
+  }
+  explanation.innerHTML = sc.explanation;
+  fb.classList.remove('hidden');
+}
+
+document.getElementById('sc-next').addEventListener('click', () => {
+  currentScenario++;
+  if (currentScenario >= SCENARIOS.length) {
+    showEnding();
+  } else {
+    loadScenario();
+  }
+});
+
+function showEnding() {
+  document.getElementById('end-score-display').textContent = `최종 점수: ${totalScore} / 100`;
+  let rank, rankText;
+  if (totalScore >= 90) {
+    rank = "GMP 준비 완료 신입";
+    rankText = `<strong>${rank}</strong><br>핵심 원칙을 체득했습니다. 작업 현장에 환영합니다.`;
+  } else if (totalScore >= 60) {
+    rank = "올바른 길 위에";
+    rankText = `<strong>${rank}</strong><br>핵심은 잡았습니다. 놓친 시나리오를 다시 보세요 ― 실제로 마주할 상황입니다.`;
+  } else if (totalScore >= 30) {
+    rank = "아직 학습 중";
+    rankText = `<strong>${rank}</strong><br>GMP는 암기가 아니라 시스템입니다. 다시 플레이하면서 <em>왜</em> 그 선택이 정답인지 살펴보세요.`;
+  } else {
+    rank = "첫째 날, 다시?";
+    rankText = `<strong>${rank}</strong><br>괜찮습니다. 이 게임의 목적은 실제 현장에서 마주하기 <em>전에</em> 이런 결정을 경험해 보는 것입니다.`;
+  }
+  document.getElementById('end-rank-text').innerHTML = rankText;
+  showScene(scEnd);
+}
+
+document.getElementById('end-retry').addEventListener('click', () => {
+  currentScenario = 0;
+  totalScore = 0;
+  showScene(scTitle);
+});
+
+scTitle.addEventListener('click', (e) => {
+  if (e.target.id !== 'start-btn') {
+    document.getElementById('start-btn').click();
+  }
+});
+</script>
+
+</body>
+</html>
