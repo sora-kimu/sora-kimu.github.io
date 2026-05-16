@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procedure Retrieval — Sora Kim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --bg-soft: #fafafa;
+      --text: #1a1a1a;
+      --text-muted: #4a4a4a;
+      --text-faint: #888;
+      --accent: #1e3a5f;
+      --accent-soft: rgba(30, 58, 95, 0.08);
+      --accent-warm: #b85d36;
+      --accent-warm-soft: rgba(184, 93, 54, 0.10);
+      --border: #ddd;
+      --border-soft: #e8e8e8;
+      --card-bg: #fff;
+      --mockup-bg: #fafafa;
+      --mockup-stroke: #c0c0c0;
+      --mockup-fill: #e8e8e8;
+      --quote-bg: #efefef;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #1a1a1a; --bg-soft: #202020;
+        --text: #f0f0f0; --text-muted: #b8b8b8; --text-faint: #888;
+        --accent: #7ba9d8; --accent-soft: rgba(123, 169, 216, 0.14);
+        --accent-warm: #d99b6e; --accent-warm-soft: rgba(217, 155, 110, 0.14);
+        --border: #333; --border-soft: #2a2a2a;
+        --card-bg: #232323;
+        --mockup-bg: #1f1f1f; --mockup-stroke: #444; --mockup-fill: #2a2a2a;
+        --quote-bg: #262626;
+      }
+    }
+    [data-theme="dark"] {
+      --bg: #1a1a1a; --bg-soft: #202020;
+      --text: #f0f0f0; --text-muted: #b8b8b8; --text-faint: #888;
+      --accent: #7ba9d8; --accent-soft: rgba(123, 169, 216, 0.14);
+      --accent-warm: #d99b6e; --accent-warm-soft: rgba(217, 155, 110, 0.14);
+      --border: #333; --border-soft: #2a2a2a;
+      --card-bg: #232323;
+      --mockup-bg: #1f1f1f; --mockup-stroke: #444; --mockup-fill: #2a2a2a;
+      --quote-bg: #262626;
+    }
+    [data-theme="light"] {
+      --bg: #f5f5f5; --bg-soft: #fafafa;
+      --text: #1a1a1a; --text-muted: #4a4a4a; --text-faint: #888;
+      --accent: #1e3a5f; --accent-soft: rgba(30, 58, 95, 0.08);
+      --accent-warm: #b85d36; --accent-warm-soft: rgba(184, 93, 54, 0.10);
+      --border: #ddd; --border-soft: #e8e8e8;
+      --card-bg: #fff;
+      --mockup-bg: #fafafa; --mockup-stroke: #c0c0c0; --mockup-fill: #e8e8e8;
+      --quote-bg: #efefef;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { overflow-x: hidden; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      font-size: 17px; line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background 0.2s, color 0.2s;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); }
+
+    nav {
+      max-width: 1100px; margin: 0 auto;
+      padding: 24px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; position: relative;
+    }
+    @media (max-width: 768px) { nav { padding: 18px 20px; } }
+    .nav-name {
+      font-size: 20px; font-weight: 700; color: var(--text);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+      letter-spacing: -0.02em;
+    }
+    .nav-name .shell { font-size: 22px; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a {
+      font-size: 15px; font-weight: 400; color: var(--text);
+      text-decoration: none; padding-bottom: 2px;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.active { border-bottom: 2px solid var(--text); font-weight: 500; }
+    .theme-toggle, .menu-toggle {
+      background: none; border: 1px solid var(--border);
+      width: 34px; height: 34px; border-radius: 50%;
+      cursor: pointer; padding: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.15s, color 0.15s;
+      color: var(--text);
+    }
+    .theme-toggle { font-size: 14px; }
+    .theme-toggle:hover, .menu-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .menu-toggle { display: none; }
+    .menu-toggle svg {
+      width: 16px; height: 16px;
+      stroke: var(--text); stroke-width: 1.8;
+      fill: none; stroke-linecap: round;
+    }
+    @media (max-width: 820px) {
+      .menu-toggle { display: inline-flex; }
+      .nav-links {
+        position: absolute; top: 100%; right: 20px;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px; padding: 12px;
+        flex-direction: column; gap: 4px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        min-width: 180px; z-index: 100;
+        display: none;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 14px; border-radius: 6px; font-size: 15px; }
+      .nav-links a:hover { background: var(--bg-soft); }
+      .nav-links a.active { border-bottom: none; background: var(--accent-soft); color: var(--accent); }
+    }
+
+    main {
+      max-width: 740px; margin: 0 auto;
+      padding: 40px 40px 100px;
+    }
+    @media (max-width: 640px) { main { padding: 24px 20px 64px; } }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--text-faint);
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    .hero { margin-bottom: 72px; }
+    @media (max-width: 640px) { .hero { margin-bottom: 48px; } }
+
+    .hero-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .hero-meta .dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5.5vw, 2.9rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      color: var(--text);
+      margin-bottom: 24px;
+      max-width: 660px;
+    }
+
+    .hero-tagline {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 40px;
+      max-width: 620px;
+      font-weight: 400;
+    }
+    @media (max-width: 640px) { .hero-tagline { font-size: 1.05rem; margin-bottom: 32px; } }
+
+    .mockup-wrap {
+      background: var(--mockup-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      padding: 48px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+    @media (max-width: 640px) { .mockup-wrap { padding: 28px 18px; border-radius: 12px; } }
+    .mockup-wrap svg {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+    }
+
+    .section { margin-top: 88px; }
+    @media (max-width: 640px) { .section { margin-top: 56px; } }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.028em;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 28px;
+      max-width: 620px;
+    }
+    @media (max-width: 640px) { .section-title { font-size: 1.4rem; margin-bottom: 22px; } }
+
+    .prose {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--text);
+    }
+    @media (max-width: 640px) { .prose { font-size: 0.98rem; line-height: 1.8; } }
+    .prose p { margin-bottom: 22px; }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong { font-weight: 600; }
+    .prose em { font-style: italic; }
+
+    .pull-quote {
+      background: var(--quote-bg);
+      border-left: 3px solid var(--accent);
+      padding: 22px 28px;
+      margin: 28px 0;
+      border-radius: 0 10px 10px 0;
+      font-size: 1.02rem;
+      color: var(--text);
+      line-height: 1.65;
+      font-style: italic;
+    }
+    @media (max-width: 640px) { .pull-quote { padding: 18px 20px; font-size: 0.98rem; } }
+    .pull-quote-attr {
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-faint);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .reframe-box {
+      background: var(--accent-soft);
+      border-radius: 14px;
+      padding: 32px 36px;
+      margin: 32px 0;
+    }
+    @media (max-width: 640px) { .reframe-box { padding: 24px 24px; } }
+    .reframe-label {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .reframe-text {
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.55;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .reframe-text .strike {
+      text-decoration: line-through;
+      color: var(--text-faint);
+      font-weight: 400;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .reframe-text .new {
+      color: var(--accent);
+      display: block;
+    }
+
+    /* Phase wrapper — to separate Phase 1 (prototype) and Phase 2 (AI extension) */
+    .phase {
+      margin-top: 36px;
+      padding: 36px 38px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+    }
+    @media (max-width: 640px) { .phase { padding: 28px 24px; } }
+    .phase-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      padding: 5px 10px;
+      background: var(--accent-soft);
+      border-radius: 4px;
+    }
+    .phase-label.conceptual {
+      color: var(--accent-warm);
+      background: var(--accent-warm-soft);
+    }
+    .phase-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.022em;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+    @media (max-width: 640px) { .phase-title { font-size: 1.15rem; } }
+    .phase-desc {
+      font-size: 0.97rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+    .phase-desc p { margin-bottom: 16px; }
+    .phase-desc p:last-child { margin-bottom: 0; }
+    .phase-desc strong { font-weight: 600; }
+    .phase-desc em { font-style: italic; }
+
+    /* AI principles — 3 cards for EXPLAINS / SURFACES / KEEPS */
+    .ai-principles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 24px 0 8px;
+    }
+    @media (max-width: 700px) {
+      .ai-principles { grid-template-columns: 1fr; gap: 12px; }
+    }
+    .principle {
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+    .principle-verb {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      margin-bottom: 8px;
+    }
+    .principle-desc {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .principle-desc strong { font-weight: 600; }
+
+    .audience-callout {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin: 28px 0;
+      background: var(--card-bg);
+    }
+    @media (max-width: 640px) { .audience-callout { padding: 22px 24px; } }
+    .audience-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 12px;
+    }
+    .audience-text {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 32px 0;
+    }
+    @media (max-width: 540px) { .results-grid { grid-template-columns: 1fr; } }
+    .result-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 24px 26px;
+    }
+    .result-num {
+      font-size: 1.95rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .result-num .unit {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-faint);
+      margin-left: 4px;
+    }
+    .result-label {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .result-label strong { color: var(--text); font-weight: 600; }
+
+    .reflection-box {
+      background: var(--accent-warm-soft);
+      border-radius: 14px;
+      padding: 32px 36px;
+      margin: 32px 0;
+      border-left: 4px solid var(--accent-warm);
+    }
+    @media (max-width: 640px) { .reflection-box { padding: 24px 24px; } }
+    .reflection-label {
+      font-size: 11px;
+      color: var(--accent-warm);
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .reflection-text {
+      font-size: 1.02rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+    .reflection-text p { margin-bottom: 16px; }
+    .reflection-text p:last-child { margin-bottom: 0; }
+    .reflection-text strong { font-weight: 600; }
+    .reflection-text em { font-style: italic; }
+
+    .surprise-box {
+      background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent-warm-soft) 100%);
+      border-radius: 14px;
+      padding: 36px 40px;
+      margin: 36px 0;
+      position: relative;
+    }
+    @media (max-width: 640px) { .surprise-box { padding: 28px 24px; } }
+    .surprise-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .surprise-label::before {
+      content: '✦';
+      color: var(--accent-warm);
+      font-size: 14px;
+    }
+    .surprise-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.022em;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+    @media (max-width: 640px) { .surprise-title { font-size: 1.18rem; } }
+    .surprise-text {
+      font-size: 1.02rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+    .surprise-text p { margin-bottom: 16px; }
+    .surprise-text p:last-child { margin-bottom: 0; }
+    .surprise-text strong { font-weight: 600; }
+    .surprise-text em { font-style: italic; }
+
+    .takeaway-list { margin: 32px 0; }
+    .takeaway {
+      display: flex;
+      gap: 18px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .takeaway:last-child { border-bottom: none; }
+    @media (max-width: 640px) { .takeaway { padding: 20px 0; gap: 14px; } }
+    .takeaway-num {
+      flex-shrink: 0;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--accent);
+      width: 28px;
+      padding-top: 1px;
+    }
+    .takeaway-text {
+      flex: 1;
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: var(--text);
+    }
+    .takeaway-text strong { font-weight: 600; }
+    .takeaway-text em { font-style: italic; }
+
+    .bottom-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-soft);
+    }
+    .action-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .action-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .action-btn.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .action-btn.primary:hover {
+      background: var(--text);
+      border-color: var(--text);
+      color: var(--bg);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 13.5px;
+      color: var(--text-faint);
+      border-top: 1px solid var(--border-soft);
+      margin-top: 40px;
+    }
+    footer a {
+      color: var(--text-faint);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name"><span class="shell">🐚</span> Sora Kim</a>
+  <div class="nav-right">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="papers.html">Papers</a></li>
+      <li><a href="tools.html" class="active">Tools</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="learning.html">Learning</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main>
+
+  <a href="tools.html" class="back-link">← All tools</a>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-meta"><span class="dot"></span>Layer 1 · Accessibility · Design prototype</div>
+    <h1>Procedure Retrieval</h1>
+    <p class="hero-tagline">
+      A semantic search layer over a regulated archive — not just to find procedures faster, but to expand the range of procedures a practitioner considers reachable, comparable, and usable in the first place.
+    </p>
+
+    <div class="mockup-wrap">
+      <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
+        <!-- Search bar -->
+        <rect x="60" y="30" width="360" height="42" rx="6" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="1.2"/>
+        <circle cx="82" cy="51" r="7" fill="none" stroke="var(--accent)" stroke-width="2"/>
+        <line x1="87" y1="56" x2="93" y2="62" stroke="var(--accent)" stroke-width="2"/>
+        <line x1="106" y1="51" x2="240" y2="51" stroke="var(--mockup-stroke)" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="110" y="55" font-size="11" font-family="Inter, sans-serif" fill="var(--text-faint)">environmental monitoring sampling</text>
+
+        <!-- Results stack -->
+        <rect x="60" y="90" width="360" height="38" rx="5" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+        <rect x="68" y="98" width="4" height="22" fill="var(--accent)"/>
+        <text x="80" y="106" font-size="11" font-family="Inter, sans-serif" fill="var(--text)" font-weight="700">SOP-001 · Environmental Monitoring</text>
+        <text x="80" y="120" font-size="9.5" font-family="Inter, sans-serif" fill="var(--text-faint)">Strong match · category · title · body</text>
+        <rect x="370" y="100" width="42" height="20" rx="3" fill="var(--accent)"/>
+        <text x="380" y="114" font-size="10" font-family="Inter, sans-serif" fill="#fff" font-weight="700">95%</text>
+
+        <rect x="60" y="138" width="360" height="38" rx="5" fill="var(--card-bg)" stroke="var(--border-soft)" stroke-width="1"/>
+        <rect x="68" y="146" width="4" height="22" fill="var(--accent)" opacity="0.5"/>
+        <text x="80" y="154" font-size="11" font-family="Inter, sans-serif" fill="var(--text)" font-weight="600">SOP-002 · Cleanroom Particle Counting</text>
+        <text x="80" y="168" font-size="9.5" font-family="Inter, sans-serif" fill="var(--text-faint)">Related procedure · adjacent scope</text>
+        <rect x="370" y="148" width="42" height="20" rx="3" fill="var(--accent)" opacity="0.55"/>
+        <text x="380" y="162" font-size="10" font-family="Inter, sans-serif" fill="#fff" font-weight="700">68%</text>
+
+        <rect x="60" y="186" width="360" height="38" rx="5" fill="var(--card-bg)" stroke="var(--border-soft)" stroke-width="1"/>
+        <rect x="68" y="194" width="4" height="22" fill="var(--accent)" opacity="0.3"/>
+        <text x="80" y="202" font-size="11" font-family="Inter, sans-serif" fill="var(--text)" font-weight="600">SOP-018 · Sampling Plan — Quarterly</text>
+        <text x="80" y="216" font-size="9.5" font-family="Inter, sans-serif" fill="var(--text-faint)">Related procedure · same product line</text>
+        <rect x="370" y="196" width="42" height="20" rx="3" fill="var(--accent)" opacity="0.35"/>
+        <text x="380" y="210" font-size="10" font-family="Inter, sans-serif" fill="#fff" font-weight="700">52%</text>
+
+        <!-- "Why this result" tag floating right of first result -->
+        <rect x="305" y="80" width="58" height="14" rx="3" fill="var(--card-bg)" stroke="var(--accent-warm)" stroke-width="0.8"/>
+        <text x="310" y="90" font-size="8" font-family="Inter, sans-serif" fill="var(--accent-warm)" font-weight="700">EXPLAINS</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section class="section">
+    <div class="section-eyebrow">The problem</div>
+    <h2 class="section-title">When you can't reach the procedure, the procedure doesn't exist.</h2>
+    <div class="prose">
+      <p>
+        Standard operating procedures in pharmaceutical manufacturing are legally binding documents. They define how processes must be performed, what counts as acceptable deviation, and what actions can be defended after the fact. They're among the most consequential documents in regulated work.
+      </p>
+
+      <p>
+        Their <em>practical</em> force, though, depends on something the regulations don't address: <strong>whether they're reachable at the moment action is required</strong>. Archives sit as scanned PDFs that block keyword search. Titles are too similar to distinguish. Time pressure makes trial-and-error retrieval expensive. Faced with these conditions, practitioners don't simply fail to comply. They work from memory, defer action, or ask a colleague.
+      </p>
+
+      <p>
+        Prior research has documented this substitution behavior — one study found that 18.4% of clinical trial staff sought a colleague's guidance rather than retrieving the relevant procedure. But the diagnosis usually stops at "improve the search." This work asked something different: <em>what does retrieval design actually change about how practitioners interpret and act?</em>
+      </p>
+
+      <div class="pull-quote">
+        "Dying of busyness while procedure search is also work."
+        <span class="pull-quote-attr">— Participant, describing daily retrieval burden</span>
+      </div>
+
+      <div class="pull-quote">
+        "When you spend time just finding the right procedure, you are already tired before you even start reading it."
+        <span class="pull-quote-attr">— Participant, on the downstream effect on judgment</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE APPROACH -->
+  <section class="section">
+    <div class="section-eyebrow">The approach</div>
+    <h2 class="section-title">Retrieval isn't downstream of work. It shapes what work becomes thinkable.</h2>
+    <div class="prose">
+      <p>
+        The dominant framing of procedure retrieval is utilitarian: faster search = less wasted time. I reframed it as something more consequential — <strong>an upstream condition on interpretation</strong>. Before a practitioner reads a procedure, compares it to another, or decides whether to act on it, they have already spent effort navigating whether the relevant procedure is even reachable. That navigation isn't preparation for the work. It's part of the work — and it shapes which procedures the practitioner ever encounters at all.
+      </p>
+
+      <div class="reframe-box">
+        <div class="reframe-label">The design question shifts</div>
+        <p class="reframe-text">
+          <span class="strike">How do we help practitioners find procedures faster?</span>
+          <span class="new">How does retrieval design shape what practitioners consider available to use?</span>
+        </p>
+      </div>
+
+      <p>
+        That reframing came with the same constraint I keep meeting in regulated work: <strong>the validated archive cannot be modified</strong>. Source documents are part of a formally validated system; restructuring them isn't on the table. So the retrieval layer had to operate <em>externally</em> — reading the archive, indexing it, surfacing it — without touching anything underneath.
+      </p>
+    </div>
+
+    <div class="reflection-box">
+      <div class="reflection-label">A note on what this changed for me</div>
+      <div class="reflection-text">
+        <p>
+          Working on this layer made me see how often retrieval gets discussed as a solved problem. "Just add search" is the standard response. But once I started watching practitioners work, it became clear that <strong>retrieval design is interpretation design</strong>. The set of procedures a practitioner can actually reach shapes the set of procedures they can compare, justify using, and act on with confidence. The interface isn't downstream support for work — it sets the conditions under which work becomes thinkable.
+        </p>
+        <p>
+          That realization is what eventually pulled me toward an <em>AI support layer</em> as an extension. Once I saw that retrieval was an interpretive act, the next question became: can AI extend the cues available to practitioners <em>without</em> taking over interpretation? This is the same principle I bring to the AI literacy materials I write for my team — AI as something that expands the interpretive surface, not something that resolves it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT I BUILT -->
+  <section class="section">
+    <div class="section-eyebrow">What I built</div>
+    <h2 class="section-title">A retrieval layer — and then an AI support layer extending it.</h2>
+    <div class="prose">
+      <p>
+        The work proceeded in two phases. The first was the prototype I evaluated with practitioners. The second was a conceptual extension that addressed a residual problem the prototype made visible: interpretive ambiguity beyond retrieval itself.
+      </p>
+    </div>
+
+    <!-- PHASE 1 -->
+    <div class="phase">
+      <span class="phase-label">Phase 1 · Built &amp; evaluated</span>
+      <h3 class="phase-title">Keyword-searchable retrieval layer</h3>
+      <div class="phase-desc">
+        <p>
+          An external retrieval layer over a corpus of 500 synthetic procedures modeled on real regulated archives. Practitioners could enter <em>task terms</em> — what they were trying to do — rather than document titles or identifiers they had to remember in advance.
+        </p>
+        <p>
+          Each result surfaced contextual cues to help narrow the search space <strong>before</strong> opening any document: document identifiers, category labels, match-strength indicators, and short text snippets. The goal was to make the comparison space visible at the retrieval stage, so that selection decisions could be informed rather than guessed.
+        </p>
+        <p>
+          Throughout, the layer operated externally — reading the archive, never modifying it. No changes to validated source documents. No automated compliance decisions.
+        </p>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase">
+      <span class="phase-label conceptual">Phase 2 · Conceptual extension</span>
+      <h3 class="phase-title">AI support layer for interpretive burden</h3>
+      <div class="phase-desc">
+        <p>
+          The retrieval prototype reduced navigational burden. It didn't address what came next: the interpretive burden of deciding which retrieved procedure was the right one, how its scope related to adjacent procedures, and where ambiguity in its language might produce inconsistent application. Participants who successfully located procedures still reported uncertainty.
+        </p>
+        <p>
+          I designed an AI support layer organized around three explicit principles, made visible in the interface itself:
+        </p>
+
+        <div class="ai-principles">
+          <div class="principle">
+            <div class="principle-verb">Explains</div>
+            <div class="principle-desc"><strong>why a result appeared.</strong> Score breakdown by keyword, title, section, and body match — so practitioners can evaluate whether the basis for retrieval is relevant to their task.</div>
+          </div>
+          <div class="principle">
+            <div class="principle-verb">Surfaces</div>
+            <div class="principle-desc"><strong>related procedures.</strong> Adjacent documents from cross-reference mappings, so the comparison space is available without practitioners having to reconstruct it.</div>
+          </div>
+          <div class="principle">
+            <div class="principle-verb">Keeps</div>
+            <div class="principle-desc"><strong>alternative interpretations visible.</strong> Rule-based notes flag where similar tasks are governed by overlapping procedures — without resolving the ambiguity.</div>
+          </div>
+        </div>
+
+        <p style="margin-top: 22px;">
+          The interface makes the design constraint explicit: <em>"this note keeps alternative interpretations visible. It does not replace reading or make compliance decisions."</em> Empty results are reframed as <em>signal</em> rather than failure — information about archive structure, not evidence of user error.
+        </p>
+        <p>
+          This layer was a design direction rather than a separately evaluated prototype. It instantiates the judgment-preservation principle that governs every tool in this framework: AI expands the cues available to practitioners without producing outputs that function as quality decisions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO THIS IS FOR -->
+  <section class="section">
+    <div class="section-eyebrow">Who this is for</div>
+    <h2 class="section-title">An intervention at the moment before reading begins.</h2>
+    <div class="prose">
+      <p>
+        This tool is designed for the <strong>moment before</strong> — before a practitioner opens a procedure, before they compare it to another, before they decide it applies. That moment currently absorbs hidden labor: archive memorization, naming-convention learning, asking-a-colleague, working-from-memory. The retrieval layer meets practitioners at that moment and changes what's reachable.
+      </p>
+
+      <div class="audience-callout">
+        <div class="audience-label">More precisely</div>
+        <div class="audience-text">
+          Practitioners consulting procedures in regulated manufacturing — at the point of action, under time pressure, where the cost of unreachable documents currently falls on memory and informal mediation. Less experienced practitioners benefit most: they're the ones currently bearing the highest cost of archive-naming opacity, because they haven't had years to internalize which terms map to which procedures. Senior practitioners benefit too — the layer externalizes some of the disambiguation labor they currently provide informally to newer staff.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section">
+    <div class="section-eyebrow">Results</div>
+    <h2 class="section-title">Faster retrieval, willing reuse, and a finding the design didn't predict.</h2>
+    <div class="prose">
+      <p>
+        Twenty experienced practitioners worked through realistic procedure-retrieval tasks using the prototype:
+      </p>
+
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-num">6 → 1<span class="unit">min</span></div>
+          <div class="result-label">average <strong>exploratory retrieval time</strong>, reduced from approximately six minutes under current conditions to approximately one minute with the prototype.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-num">18<span class="unit">/ 20</span></div>
+          <div class="result-label">rated the system <strong>intuitive overall</strong>. The two exceptions attributed hesitation to result-discrimination difficulty in the synthetic corpus, not to interface design.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-num">4.5<span class="unit">/ 5</span></div>
+          <div class="result-label">average rating for <strong>result cues</strong> — identifiers, category labels, match indicators, contextual snippets — as useful in narrowing the search space.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-num">20<span class="unit">/ 20</span></div>
+          <div class="result-label">expressed <strong>willingness to reuse</strong> the system in live archive conditions.</div>
+        </div>
+      </div>
+
+      <p>
+        These numbers were expected. What wasn't fully expected was what participants described next.
+      </p>
+    </div>
+  </section>
+
+  <!-- DEEPER FINDING -->
+  <section class="section">
+    <div class="section-eyebrow">The deeper finding</div>
+
+    <div class="surprise-box">
+      <div class="surprise-label">When access changes, behavior changes</div>
+      <h3 class="surprise-title">Retrieval design reshapes the behavioral repertoire — not just the search time.</h3>
+      <div class="surprise-text">
+        <p>
+          When asked what changed for them under the prototype, participants described a pattern that the design hadn't been built to address. Under current archive conditions, the practical difficulty of locating unfamiliar procedures leads practitioners to operate within a <strong>personally known subset</strong> of the archive — consulting procedures they've used before rather than searching for procedures that might be more directly applicable.
+        </p>
+
+        <p>
+          The procedures they don't reach aren't simply harder to find. They're <em>operationally invisible</em>: not part of the set of actions a practitioner considers available, comparable, or defensible. When the cost of retrieval is high, the archive shrinks — silently, individually, to whatever each practitioner can carry in memory.
+        </p>
+
+        <p>
+          The prototype made a wider procedural landscape accessible, and participants reported that this changed more than navigational ease. It changed <strong>what they felt able to consider, compare, and defend using</strong>. Accessibility interventions don't just accelerate pre-existing workflow. They reshape the behavioral repertoire within which interpretation occurs.
+        </p>
+
+        <p>
+          And the cost of inaccessible documents isn't distributed evenly. Senior practitioners described informal disambiguation labor they routinely provide to newer staff — explaining which procedure name maps to which equipment, why two similarly-named procedures aren't interchangeable. That labor is invisible to the quality system, but it's real, recurring, and concentrated on whoever has been around long enough to know. <strong>Making retrieval easier moves some of that labor from senior practitioners into the design layer</strong> — where it can be addressed structurally rather than carried personally.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAKEAWAY -->
+  <section class="section">
+    <div class="section-eyebrow">Takeaway</div>
+    <h2 class="section-title">Accessibility is a design condition on interpretation — and a fairness condition on practice.</h2>
+    <div class="prose">
+      <p>Three things this work shows:</p>
+
+      <div class="takeaway-list">
+        <div class="takeaway">
+          <div class="takeaway-num">01</div>
+          <div class="takeaway-text">
+            <strong>Retrieval design shapes interpretation, not just efficiency.</strong> The set of procedures a practitioner can reach defines the set of procedures they can compare and act on. Reducing retrieval burden doesn't just save time — it expands the procedural landscape within which judgment occurs. That's a design effect on what work becomes thinkable, not just on how long it takes.
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <div class="takeaway-num">02</div>
+          <div class="takeaway-text">
+            <strong>Judgment-preserving AI is a coherent design direction, not just a constraint.</strong> The AI support layer organized around <em>explains</em>, <em>surfaces</em>, and <em>keeps</em> shows what AI can do in regulated work without crossing into compliance decisions: extend the interpretive surface without resolving it. The constraint isn't a limitation on what AI can do here — it's the design specification.
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <div class="takeaway-num">03</div>
+          <div class="takeaway-text">
+            <strong>Accessibility redistributes labor.</strong> The cost of inaccessible documentation currently falls on memory, informal mediation, and the disambiguation labor senior practitioners absorb. Making the archive structurally legible — externalizing the naming conventions, the cross-references, the interpretive cues — moves that cost out of individuals and into the system. This is the equity dimension of design in regulated work, and it sits at the foundation of every other layer.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM ACTIONS -->
+  <div class="bottom-actions">
+    <a class="action-btn primary" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20From%20Retrieval%20to%20Reasoning">Request full paper ↗</a>
+    <a class="action-btn" href="tools.html">← All tools</a>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 <a href="index.html">Sora Kim</a> · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
+</footer>
+
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') { root.setAttribute('data-theme','light'); toggle.textContent='🌙'; }
+  else if (saved === 'dark') { root.setAttribute('data-theme','dark'); toggle.textContent='☀️'; }
+  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { toggle.textContent='☀️'; }
+  toggle.addEventListener('click', () => {
+    const cur = root.getAttribute('data-theme');
+    if (cur === 'dark') { root.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); toggle.textContent='🌙'; }
+    else if (cur === 'light') { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
+    else { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
+  });
+
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navLinks.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+      navLinks.classList.remove('open');
+    }
+  });
+</script>
+
+</body>
+</html>
