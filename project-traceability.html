@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cross-Reference Burden — Sora Kim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --bg-soft: #fafafa;
+      --text: #1a1a1a;
+      --text-muted: #4a4a4a;
+      --text-faint: #888;
+      --accent: #1e3a5f;
+      --accent-soft: rgba(30, 58, 95, 0.08);
+      --accent-warm: #b85d36;
+      --accent-warm-soft: rgba(184, 93, 54, 0.10);
+      --border: #ddd;
+      --border-soft: #e8e8e8;
+      --card-bg: #fff;
+      --mockup-bg: #fafafa;
+      --mockup-stroke: #c0c0c0;
+      --mockup-fill: #e8e8e8;
+      --quote-bg: #efefef;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #1a1a1a; --bg-soft: #202020;
+        --text: #f0f0f0; --text-muted: #b8b8b8; --text-faint: #888;
+        --accent: #7ba9d8; --accent-soft: rgba(123, 169, 216, 0.14);
+        --accent-warm: #d99b6e; --accent-warm-soft: rgba(217, 155, 110, 0.14);
+        --border: #333; --border-soft: #2a2a2a;
+        --card-bg: #232323;
+        --mockup-bg: #1f1f1f; --mockup-stroke: #444; --mockup-fill: #2a2a2a;
+        --quote-bg: #262626;
+      }
+    }
+    [data-theme="dark"] {
+      --bg: #1a1a1a; --bg-soft: #202020;
+      --text: #f0f0f0; --text-muted: #b8b8b8; --text-faint: #888;
+      --accent: #7ba9d8; --accent-soft: rgba(123, 169, 216, 0.14);
+      --accent-warm: #d99b6e; --accent-warm-soft: rgba(217, 155, 110, 0.14);
+      --border: #333; --border-soft: #2a2a2a;
+      --card-bg: #232323;
+      --mockup-bg: #1f1f1f; --mockup-stroke: #444; --mockup-fill: #2a2a2a;
+      --quote-bg: #262626;
+    }
+    [data-theme="light"] {
+      --bg: #f5f5f5; --bg-soft: #fafafa;
+      --text: #1a1a1a; --text-muted: #4a4a4a; --text-faint: #888;
+      --accent: #1e3a5f; --accent-soft: rgba(30, 58, 95, 0.08);
+      --accent-warm: #b85d36; --accent-warm-soft: rgba(184, 93, 54, 0.10);
+      --border: #ddd; --border-soft: #e8e8e8;
+      --card-bg: #fff;
+      --mockup-bg: #fafafa; --mockup-stroke: #c0c0c0; --mockup-fill: #e8e8e8;
+      --quote-bg: #efefef;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { overflow-x: hidden; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      font-size: 17px; line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background 0.2s, color 0.2s;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); }
+
+    nav {
+      max-width: 1100px; margin: 0 auto;
+      padding: 24px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; position: relative;
+    }
+    @media (max-width: 768px) { nav { padding: 18px 20px; } }
+    .nav-name {
+      font-size: 20px; font-weight: 700; color: var(--text);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+      letter-spacing: -0.02em;
+    }
+    .nav-name .shell { font-size: 22px; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a {
+      font-size: 15px; font-weight: 400; color: var(--text);
+      text-decoration: none; padding-bottom: 2px;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.active { border-bottom: 2px solid var(--text); font-weight: 500; }
+    .theme-toggle, .menu-toggle {
+      background: none; border: 1px solid var(--border);
+      width: 34px; height: 34px; border-radius: 50%;
+      cursor: pointer; padding: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.15s, color 0.15s;
+      color: var(--text);
+    }
+    .theme-toggle { font-size: 14px; }
+    .theme-toggle:hover, .menu-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .menu-toggle { display: none; }
+    .menu-toggle svg {
+      width: 16px; height: 16px;
+      stroke: var(--text); stroke-width: 1.8;
+      fill: none; stroke-linecap: round;
+    }
+    @media (max-width: 820px) {
+      .menu-toggle { display: inline-flex; }
+      .nav-links {
+        position: absolute; top: 100%; right: 20px;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px; padding: 12px;
+        flex-direction: column; gap: 4px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        min-width: 180px; z-index: 100;
+        display: none;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 14px; border-radius: 6px; font-size: 15px; }
+      .nav-links a:hover { background: var(--bg-soft); }
+      .nav-links a.active { border-bottom: none; background: var(--accent-soft); color: var(--accent); }
+    }
+
+    main {
+      max-width: 740px; margin: 0 auto;
+      padding: 40px 40px 100px;
+    }
+    @media (max-width: 640px) { main { padding: 24px 20px 64px; } }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--text-faint);
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    .hero { margin-bottom: 72px; }
+    @media (max-width: 640px) { .hero { margin-bottom: 48px; } }
+
+    .hero-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .hero-meta .dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5.5vw, 2.9rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      color: var(--text);
+      margin-bottom: 24px;
+      max-width: 660px;
+    }
+
+    .hero-tagline {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 40px;
+      max-width: 620px;
+      font-weight: 400;
+    }
+    @media (max-width: 640px) { .hero-tagline { font-size: 1.05rem; margin-bottom: 32px; } }
+
+    .mockup-wrap {
+      background: var(--mockup-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      padding: 48px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+    @media (max-width: 640px) { .mockup-wrap { padding: 28px 18px; border-radius: 12px; } }
+    .mockup-wrap svg {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+    }
+
+    .section { margin-top: 88px; }
+    @media (max-width: 640px) { .section { margin-top: 56px; } }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.028em;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 28px;
+      max-width: 620px;
+    }
+    @media (max-width: 640px) { .section-title { font-size: 1.4rem; margin-bottom: 22px; } }
+
+    .prose {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--text);
+    }
+    @media (max-width: 640px) { .prose { font-size: 0.98rem; line-height: 1.8; } }
+    .prose p { margin-bottom: 22px; }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong { font-weight: 600; }
+    .prose em { font-style: italic; }
+
+    .pull-quote {
+      background: var(--quote-bg);
+      border-left: 3px solid var(--accent);
+      padding: 22px 28px;
+      margin: 28px 0;
+      border-radius: 0 10px 10px 0;
+      font-size: 1.02rem;
+      color: var(--text);
+      line-height: 1.65;
+      font-style: italic;
+    }
+    @media (max-width: 640px) { .pull-quote { padding: 18px 20px; font-size: 0.98rem; } }
+    .pull-quote-attr {
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-faint);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .reframe-box {
+      background: var(--accent-soft);
+      border-radius: 14px;
+      padding: 32px 36px;
+      margin: 32px 0;
+    }
+    @media (max-width: 640px) { .reframe-box { padding: 24px 24px; } }
+    .reframe-label {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .reframe-text {
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.55;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .reframe-text .strike {
+      text-decoration: line-through;
+      color: var(--text-faint);
+      font-weight: 400;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .reframe-text .new {
+      color: var(--accent);
+      display: block;
+    }
+
+    /* Component / 3-tab list */
+    .component-list {
+      list-style: none;
+      margin: 32px 0;
+      border-top: 1px solid var(--border-soft);
+    }
+    .component {
+      display: flex;
+      gap: 22px;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    @media (max-width: 640px) { .component { gap: 16px; padding: 22px 0; } }
+    .component-num {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .component-content { flex: 1; min-width: 0; }
+    .component-name {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .component-desc {
+      font-size: 0.97rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+    .component-desc em { font-style: italic; }
+    .component-desc strong { color: var(--text); font-weight: 600; }
+
+    .audience-callout {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin: 28px 0;
+      background: var(--card-bg);
+    }
+    @media (max-width: 640px) { .audience-callout { padding: 22px 24px; } }
+    .audience-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 12px;
+    }
+    .audience-text {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 32px 0;
+    }
+    @media (max-width: 540px) { .results-grid { grid-template-columns: 1fr; } }
+    .result-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 24px 26px;
+    }
+    .result-num {
+      font-size: 1.95rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .result-num .unit {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-faint);
+      margin-left: 4px;
+    }
+    .result-label {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .result-label strong { color: var(--text); font-weight: 600; }
+
+    /* Stats discovered — pre-results, what the graph analysis surfaced */
+    .stats-discovered {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 28px 0;
+    }
+    @media (max-width: 640px) {
+      .stats-discovered { grid-template-columns: 1fr; gap: 12px; }
+    }
+    .stat-disc {
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 20px 22px;
+      text-align: left;
+    }
+    .stat-disc-num {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--accent-warm);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-disc-label {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .stat-disc-label strong { color: var(--text); font-weight: 600; }
+
+    .reflection-box {
+      background: var(--accent-warm-soft);
+      border-radius: 14px;
+      padding: 32px 36px;
+      margin: 32px 0;
+      border-left: 4px solid var(--accent-warm);
+    }
+    @media (max-width: 640px) { .reflection-box { padding: 24px 24px; } }
+    .reflection-label {
+      font-size: 11px;
+      color: var(--accent-warm);
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .reflection-text {
+      font-size: 1.02rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+    .reflection-text p { margin-bottom: 16px; }
+    .reflection-text p:last-child { margin-bottom: 0; }
+    .reflection-text strong { font-weight: 600; }
+    .reflection-text em { font-style: italic; }
+
+    /* Epistemic access surprise box */
+    .surprise-box {
+      background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent-warm-soft) 100%);
+      border-radius: 14px;
+      padding: 36px 40px;
+      margin: 36px 0;
+      position: relative;
+    }
+    @media (max-width: 640px) { .surprise-box { padding: 28px 24px; } }
+    .surprise-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .surprise-label::before {
+      content: '✦';
+      color: var(--accent-warm);
+      font-size: 14px;
+    }
+    .surprise-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.022em;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+    @media (max-width: 640px) { .surprise-title { font-size: 1.18rem; } }
+    .surprise-text {
+      font-size: 1.02rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+    .surprise-text p { margin-bottom: 16px; }
+    .surprise-text p:last-child { margin-bottom: 0; }
+    .surprise-text strong { font-weight: 600; }
+    .surprise-text em { font-style: italic; }
+
+    .takeaway-list { margin: 32px 0; }
+    .takeaway {
+      display: flex;
+      gap: 18px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .takeaway:last-child { border-bottom: none; }
+    @media (max-width: 640px) { .takeaway { padding: 20px 0; gap: 14px; } }
+    .takeaway-num {
+      flex-shrink: 0;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--accent);
+      width: 28px;
+      padding-top: 1px;
+    }
+    .takeaway-text {
+      flex: 1;
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: var(--text);
+    }
+    .takeaway-text strong { font-weight: 600; }
+    .takeaway-text em { font-style: italic; }
+
+    .bottom-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-soft);
+    }
+    .action-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .action-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .action-btn.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .action-btn.primary:hover {
+      background: var(--text);
+      border-color: var(--text);
+      color: var(--bg);
+    }
+
+    .related-link {
+      display: block;
+      padding: 18px 22px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.15s, transform 0.15s;
+      margin-top: 14px;
+    }
+    .related-link:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .related-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .related-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 13.5px;
+      color: var(--text-faint);
+      border-top: 1px solid var(--border-soft);
+      margin-top: 40px;
+    }
+    footer a {
+      color: var(--text-faint);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name"><span class="shell">🐚</span> Sora Kim</a>
+  <div class="nav-right">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="papers.html">Papers</a></li>
+      <li><a href="tools.html" class="active">Tools</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="learning.html">Learning</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main>
+
+  <a href="tools.html" class="back-link">← All tools</a>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-meta"><span class="dot"></span>Layer 2 · Structure · Design prototype</div>
+    <h1>Cross-Reference Burden</h1>
+    <p class="hero-tagline">
+      A graph-based viewer that makes inter-document references navigable — surfacing the chain of connections that practitioners otherwise reconstruct by hand, document by document, from memory.
+    </p>
+
+    <div class="mockup-wrap">
+      <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
+        <!-- Center document (current) -->
+        <rect x="200" y="115" width="80" height="40" rx="6" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/>
+        <line x1="210" y1="130" x2="270" y2="130" stroke="var(--card-bg)" stroke-width="1.4"/>
+        <line x1="210" y1="138" x2="262" y2="138" stroke="var(--card-bg)" stroke-width="1.4" opacity="0.7"/>
+        <line x1="210" y1="146" x2="254" y2="146" stroke="var(--card-bg)" stroke-width="1.4" opacity="0.5"/>
+
+        <!-- Connected documents (top-left, top-right, bottom-left, bottom-right) -->
+        <!-- Top-left: linked -->
+        <rect x="50" y="40" width="80" height="40" rx="6" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="1.5"/>
+        <line x1="60" y1="55" x2="120" y2="55" stroke="var(--text-faint)" stroke-width="1.4"/>
+        <line x1="60" y1="63" x2="112" y2="63" stroke="var(--text-faint)" stroke-width="1.2" opacity="0.6"/>
+        <line x1="60" y1="71" x2="105" y2="71" stroke="var(--text-faint)" stroke-width="1.2" opacity="0.4"/>
+
+        <!-- Top-right: BROKEN link (dashed + warning) -->
+        <rect x="350" y="40" width="80" height="40" rx="6" fill="var(--card-bg)" stroke="var(--accent-warm)" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <line x1="360" y1="55" x2="420" y2="55" stroke="var(--text-faint)" stroke-width="1.2" opacity="0.4"/>
+        <line x1="360" y1="63" x2="410" y2="63" stroke="var(--text-faint)" stroke-width="1" opacity="0.3"/>
+        <circle cx="424" cy="48" r="8" fill="var(--accent-warm)"/>
+        <text x="420" y="52" font-size="11" font-family="Inter, sans-serif" fill="#fff" font-weight="800">!</text>
+
+        <!-- Bottom-left: linked -->
+        <rect x="50" y="190" width="80" height="40" rx="6" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="1.5"/>
+        <line x1="60" y1="205" x2="120" y2="205" stroke="var(--text-faint)" stroke-width="1.4"/>
+        <line x1="60" y1="213" x2="112" y2="213" stroke="var(--text-faint)" stroke-width="1.2" opacity="0.6"/>
+        <line x1="60" y1="221" x2="105" y2="221" stroke="var(--text-faint)" stroke-width="1.2" opacity="0.4"/>
+
+        <!-- Bottom-right: MISSING link (faded + label) -->
+        <rect x="350" y="190" width="80" height="40" rx="6" fill="var(--card-bg)" stroke="var(--text-faint)" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.5"/>
+        <text x="368" y="216" font-size="10" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600">Not linked</text>
+
+        <!-- Lines connecting -->
+        <g stroke="var(--accent)" stroke-width="1.8" fill="none">
+          <line x1="130" y1="60" x2="200" y2="125"/>
+          <line x1="130" y1="210" x2="200" y2="145"/>
+        </g>
+        <g stroke="var(--accent-warm)" stroke-width="1.8" stroke-dasharray="5 4" fill="none">
+          <line x1="280" y1="125" x2="350" y2="60"/>
+        </g>
+        <g stroke="var(--text-faint)" stroke-width="1.5" stroke-dasharray="3 3" fill="none" opacity="0.5">
+          <line x1="280" y1="145" x2="350" y2="210"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section class="section">
+    <div class="section-eyebrow">The problem</div>
+    <h2 class="section-title">Documents reference each other through text — but no one can see the network.</h2>
+    <div class="prose">
+      <p>
+        A single deviation investigation in pharmaceutical manufacturing may require navigating across standard operating procedures, analytical method protocols, validation records, change-control documents, and specification files. Each of these references others — but only through textual citations, never through navigable links. The reader has to follow the references one at a time, in their head, document by document.
+      </p>
+
+      <p>
+        When those references are complete and current, traceability is possible. When they're missing, outdated, or structurally ambiguous, <strong>the burden of reconstructing pathways falls entirely on the practitioner</strong>. In effect, the practitioner becomes the missing infrastructure between documents — quietly stitching together the linkage that the system itself doesn't provide.
+      </p>
+
+      <p>
+        This labor doesn't appear in any quality record. It isn't represented in any audit trail. It just happens, every day, distributed across whoever happens to be reading the documents at the time.
+      </p>
+
+      <p>
+        A graph analysis of a 150-record synthetic corpus modeled on real GMP documentation surfaced the scale of this:
+      </p>
+
+      <div class="stats-discovered">
+        <div class="stat-disc">
+          <div class="stat-disc-num">31</div>
+          <div class="stat-disc-label"><strong>missing follow-up action links</strong> across the corpus</div>
+        </div>
+        <div class="stat-disc">
+          <div class="stat-disc-num">103</div>
+          <div class="stat-disc-label"><strong>broken downstream links</strong> — references pointing at documents that no longer exist or have moved</div>
+        </div>
+        <div class="stat-disc">
+          <div class="stat-disc-num">21</div>
+          <div class="stat-disc-label"><strong>lifecycle mismatches</strong> — closed records linked to follow-up actions that remain open</div>
+        </div>
+      </div>
+
+      <p>
+        Each of these is invisible from inside any individual document. Each one is a small failure of structure that someone, somewhere, will end up bridging with their own memory and experience.
+      </p>
+    </div>
+  </section>
+
+  <!-- THE APPROACH -->
+  <section class="section">
+    <div class="section-eyebrow">The approach</div>
+    <h2 class="section-title">Traceability isn't a property of documents. It's a condition of interaction.</h2>
+    <div class="prose">
+      <p>
+        Most discussion of traceability in regulated environments treats it as a documentation property — whether references exist, whether audit trails can be reconstructed after the fact. I reframed it as something different: <strong>a condition of interaction</strong>. When document relationships are only partially visible, practitioners navigate through incomplete structure, and the labor of completing it falls on them in the moment they're trying to do their work.
+      </p>
+
+      <div class="reframe-box">
+        <div class="reframe-label">The design question shifts</div>
+        <p class="reframe-text">
+          <span class="strike">Do the references exist in the documents?</span>
+          <span class="new">Is the linkage structure navigable from where the practitioner stands?</span>
+        </p>
+      </div>
+
+      <p>
+        That reframing came with a hard design constraint: <strong>the validated documents themselves cannot be modified</strong>. In regulated manufacturing, the source documents are part of a system that's been formally validated for compliance. Touching them isn't an option. So the design question became sharper: how do you make linkage structure navigable <em>without modifying anything underneath</em>?
+      </p>
+    </div>
+
+    <div class="reflection-box">
+      <div class="reflection-label">A note on what this changed for me</div>
+      <div class="reflection-text">
+        <p>
+          Working on this made me see something I'd been treating as normal: the practitioner is doing <strong>infrastructure work</strong>. Every day, the person reading the document is silently completing the missing parts of the document system. This is invisible labor — not represented anywhere, not credited anywhere, not paid attention to anywhere.
+        </p>
+        <p>
+          That framing shifted how I think about tools in regulated environments. The question isn't <em>how do I help the practitioner work faster</em>. It's <em>what infrastructure work is the practitioner currently absorbing, and can the tool externalize it?</em> Every tool I've built since has carried some version of that question.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT I BUILT -->
+  <section class="section">
+    <div class="section-eyebrow">What I built</div>
+    <h2 class="section-title">A graph-based explorer sitting on top of validated documents.</h2>
+    <div class="prose">
+      <p>
+        I built an external viewer that reads the validated document system, extracts its reference network, and makes that network navigable as a graph. The validated documents stay untouched. The viewer sits on top, organized into three tabs:
+      </p>
+
+      <ol class="component-list">
+        <li class="component">
+          <span class="component-num">1</span>
+          <div class="component-content">
+            <div class="component-name">Chain Viewer</div>
+            <p class="component-desc">
+              Shows the full documentation chain for any selected record — every linked document upstream and downstream, with missing and broken links flagged inline. The practitioner can see, in one view, what the reference network around this document looks like and where it's incomplete.
+            </p>
+          </div>
+        </li>
+
+        <li class="component">
+          <span class="component-num">2</span>
+          <div class="component-content">
+            <div class="component-name">Risk Summary</div>
+            <p class="component-desc">
+              Aggregates linkage problems across the entire dataset: missing follow-up links, broken downstream references, lifecycle mismatches. Surfaces structural problems at the system level — the kind of pattern that no individual document reveals on its own.
+            </p>
+          </div>
+        </li>
+
+        <li class="component">
+          <span class="component-num">3</span>
+          <div class="component-content">
+            <div class="component-name">Record Explorer</div>
+            <p class="component-desc">
+              The full corpus with filters by record type, status, and product. Missing references are visible as empty cells. The opacity of the data — what's there, what isn't — becomes immediately legible, instead of being hidden inside individual documents.
+            </p>
+          </div>
+        </li>
+      </ol>
+
+      <p>
+        Throughout, the viewer makes explicit what it does not do: it doesn't fix the references, modify the source files, or decide what should happen with the broken links. It surfaces. The judgment about what to do stays with the practitioner.
+      </p>
+    </div>
+  </section>
+
+  <!-- WHO THIS IS FOR -->
+  <section class="section">
+    <div class="section-eyebrow">Who this is for</div>
+    <h2 class="section-title">An intervention at one specific moment.</h2>
+    <div class="prose">
+      <p>
+        This tool is for the <strong>moment of investigation</strong>: when a practitioner has to traverse a chain of related documents to understand a deviation, evaluate a change, or trace a specification back to its source. That's where the linkage burden is currently absorbed — by whoever happens to be doing the work, with whatever memory and experience they happen to have.
+      </p>
+
+      <div class="audience-callout">
+        <div class="audience-label">More precisely</div>
+        <div class="audience-text">
+          Practitioners conducting investigations or audits in regulated manufacturing, at the moment they need to follow a reference chain across documents. Junior practitioners benefit most — they're the ones currently absorbing the highest cost of structural incompleteness, because they have the least implicit knowledge of where the network breaks. Senior practitioners benefit too, but differently: the tool externalizes a map they've already built privately over years of practice.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section">
+    <div class="section-eyebrow">Results</div>
+    <h2 class="section-title">Faster path reconstruction, full task completion, unanimous adoption intent.</h2>
+    <div class="prose">
+      <p>
+        Twenty experienced practitioners completed three task-based traceability scenarios using the viewer:
+      </p>
+
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-num">7 → 4<span class="unit">min</span></div>
+          <div class="result-label">average <strong>path reconstruction time</strong>, a reduction of roughly 30–60% per scenario.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-num">20<span class="unit">/ 20</span></div>
+          <div class="result-label">completed all <strong>target traceability pathways</strong> successfully.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-num">20<span class="unit">/ 20</span></div>
+          <div class="result-label">expressed <strong>adoption intent</strong>, with the strongest endorsement coming from less experienced participants.</div>
+        </div>
+        <div class="result-card">
+          <div class="result-num">3</div>
+          <div class="result-label">categories of <strong>structural linkage problem</strong> made systematically visible: missing links, broken references, lifecycle mismatches.</div>
+        </div>
+      </div>
+
+      <p>
+        The most informative finding wasn't the time savings — it was what participants said about <em>who</em> the savings mattered to. The reconstructed path was the same path experienced practitioners had been building in their heads for years. What changed was that less experienced practitioners could now build it too, on the first try.
+      </p>
+    </div>
+  </section>
+
+  <!-- EPISTEMIC ACCESS — SURPRISE BOX -->
+  <section class="section">
+    <div class="section-eyebrow">The deeper finding</div>
+
+    <div class="surprise-box">
+      <div class="surprise-label">Beyond efficiency — what visibility actually does</div>
+      <h3 class="surprise-title">Visibility redistributes epistemic access.</h3>
+      <div class="surprise-text">
+        <p>
+          The experience asymmetry surfaced in this work isn't a training gap. It's a <strong>design gap</strong>. Experienced practitioners have, over years of practice, internalized a private map of the document system — they know where the references break, which records to check, what the unwritten linkage looks like. The system itself doesn't provide this map. Practitioners build it privately, individually, and slowly.
+        </p>
+
+        <p>
+          When the linkage structure is made visible externally, that private map becomes a shared one. The reconstruction work that experienced practitioners had been doing in their heads — accumulating into tacit infrastructure — becomes available to everyone reading the document. Including practitioners who haven't had years to build the map themselves.
+        </p>
+
+        <p>
+          That's not just efficiency improvement. It's <strong>epistemic access redistribution</strong>. The tool externalizes infrastructure that was previously held inside the heads of senior practitioners, and makes it equally available to anyone working through the system. This is the design move I keep returning to: in regulated work, <em>making the implicit explicit isn't just a usability gain — it's a fairness move</em>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAKEAWAY -->
+  <section class="section">
+    <div class="section-eyebrow">Takeaway</div>
+    <h2 class="section-title">Traceability is interaction. Visibility is fairness.</h2>
+    <div class="prose">
+      <p>Three things this work shows:</p>
+
+      <div class="takeaway-list">
+        <div class="takeaway">
+          <div class="takeaway-num">01</div>
+          <div class="takeaway-text">
+            <strong>Traceability is a condition of interaction, not a property of documents.</strong> Whether the references exist is one question. Whether the network is navigable from where the practitioner stands is another — and it's the question that determines who ends up bearing the cost of structural incompleteness.
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <div class="takeaway-num">02</div>
+          <div class="takeaway-text">
+            <strong>The no-modification constraint is a design direction, not a limitation.</strong> In regulated environments, you can't touch the source documents. That constraint produces a specific kind of tool — one that reads, extracts, and surfaces structure without writing back. The constraint isn't an obstacle to the design. It <em>is</em> the design.
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <div class="takeaway-num">03</div>
+          <div class="takeaway-text">
+            <strong>Externalizing implicit infrastructure is a fairness move.</strong> Experienced practitioners hold maps of the document system that the system itself doesn't provide. Making those maps visible doesn't reduce expertise — it <em>redistributes access to it</em>. This is the equity dimension of design in regulated work, and it's the thread I follow through everything else I build here.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related tool -->
+  <section class="section">
+    <div class="section-eyebrow">Related</div>
+    <h2 class="section-title">The other half of Layer 2.</h2>
+    <div class="prose">
+      <p>
+        This tool answered one question: <em>how can the linkage structure be made navigable?</em> But it raised another: <em>how do practitioners actually move through documents when the structure is incomplete?</em> The next tool in this layer logs that behavior directly.
+      </p>
+
+      <a href="project-navigation-tracker.html" class="related-link">
+        <div class="related-label">Layer 2 · Structure</div>
+        <div class="related-title">Navigation Friction & Loopback Behavior →</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- BOTTOM ACTIONS -->
+  <div class="bottom-actions">
+    <a class="action-btn primary" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20When%20Documents%20Don%27t%20Connect">Request full paper ↗</a>
+    <a class="action-btn" href="tools.html">← All tools</a>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 <a href="index.html">Sora Kim</a> · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
+</footer>
+
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') { root.setAttribute('data-theme','light'); toggle.textContent='🌙'; }
+  else if (saved === 'dark') { root.setAttribute('data-theme','dark'); toggle.textContent='☀️'; }
+  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { toggle.textContent='☀️'; }
+  toggle.addEventListener('click', () => {
+    const cur = root.getAttribute('data-theme');
+    if (cur === 'dark') { root.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); toggle.textContent='🌙'; }
+    else if (cur === 'light') { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
+    else { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
+  });
+
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navLinks.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+      navLinks.classList.remove('open');
+    }
+  });
+</script>
+
+</body>
+</html>
