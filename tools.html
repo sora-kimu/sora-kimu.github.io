@@ -18,50 +18,96 @@
       --accent: #1e3a5f;
       --accent-soft: rgba(30, 58, 95, 0.08);
       --accent-warm: #b85d36;
+      --accent-warm-soft: rgba(184, 93, 54, 0.08);
       --accent-green: #3a6b4a;
+      --accent-green-soft: rgba(58, 107, 74, 0.08);
       --border: #ddd;
       --border-soft: #e8e8e8;
       --card-bg: #fff;
-      --mockup-bg: #fafafa;
-      --mockup-stroke: #c0c0c0;
-      --mockup-fill: #e8e8e8;
+
+      /* Mockup-specific colorful palette */
+      --m-bg: #fafafa;
+      --m-blue: #4a6cf7;
+      --m-blue-soft: #eef2ff;
+      --m-orange: #f59e6e;
+      --m-orange-soft: #fef3eb;
+      --m-green: #5dc78e;
+      --m-green-soft: #eaf8f0;
+      --m-purple: #9c7df5;
+      --m-purple-soft: #f2eeff;
+      --m-yellow: #f7c948;
+      --m-yellow-soft: #fef8e0;
+      --m-pink: #f06292;
+      --m-pink-soft: #fde6ef;
+      --m-red: #ef5a5a;
+      --m-red-soft: #fde8e8;
+      --m-stroke: #c7cdd6;
     }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
         --bg: #1a1a1a; --bg-soft: #202020;
         --text: #f0f0f0; --text-muted: #aaa; --text-faint: #777;
         --accent: #7ba9d8; --accent-soft: rgba(123, 169, 216, 0.12);
-        --accent-warm: #d99b6e; --accent-green: #7eb18e;
+        --accent-warm: #d99b6e; --accent-warm-soft: rgba(217, 155, 110, 0.12);
+        --accent-green: #7eb18e; --accent-green-soft: rgba(126, 177, 142, 0.12);
         --border: #333; --border-soft: #2a2a2a;
         --card-bg: #232323;
-        --mockup-bg: #1f1f1f; --mockup-stroke: #444; --mockup-fill: #2a2a2a;
+        --m-bg: #1f1f1f;
+        --m-blue: #7b94ff; --m-blue-soft: #2a3158;
+        --m-orange: #ffb88a; --m-orange-soft: #4a3324;
+        --m-green: #7dd9a8; --m-green-soft: #234032;
+        --m-purple: #b69cff; --m-purple-soft: #38304a;
+        --m-yellow: #ffd870; --m-yellow-soft: #4a3e1e;
+        --m-pink: #ff85a9; --m-pink-soft: #4a2a38;
+        --m-red: #ff7878; --m-red-soft: #4a2828;
+        --m-stroke: #444;
       }
     }
     [data-theme="dark"] {
       --bg: #1a1a1a; --bg-soft: #202020;
       --text: #f0f0f0; --text-muted: #aaa; --text-faint: #777;
       --accent: #7ba9d8; --accent-soft: rgba(123, 169, 216, 0.12);
-      --accent-warm: #d99b6e; --accent-green: #7eb18e;
+      --accent-warm: #d99b6e; --accent-warm-soft: rgba(217, 155, 110, 0.12);
+      --accent-green: #7eb18e; --accent-green-soft: rgba(126, 177, 142, 0.12);
       --border: #333; --border-soft: #2a2a2a;
       --card-bg: #232323;
-      --mockup-bg: #1f1f1f; --mockup-stroke: #444; --mockup-fill: #2a2a2a;
+      --m-bg: #1f1f1f;
+      --m-blue: #7b94ff; --m-blue-soft: #2a3158;
+      --m-orange: #ffb88a; --m-orange-soft: #4a3324;
+      --m-green: #7dd9a8; --m-green-soft: #234032;
+      --m-purple: #b69cff; --m-purple-soft: #38304a;
+      --m-yellow: #ffd870; --m-yellow-soft: #4a3e1e;
+      --m-pink: #ff85a9; --m-pink-soft: #4a2a38;
+      --m-red: #ff7878; --m-red-soft: #4a2828;
+      --m-stroke: #444;
     }
     [data-theme="light"] {
       --bg: #f5f5f5; --bg-soft: #fafafa;
       --text: #1a1a1a; --text-muted: #555; --text-faint: #888;
       --accent: #1e3a5f; --accent-soft: rgba(30, 58, 95, 0.08);
-      --accent-warm: #b85d36; --accent-green: #3a6b4a;
+      --accent-warm: #b85d36; --accent-warm-soft: rgba(184, 93, 54, 0.08);
+      --accent-green: #3a6b4a; --accent-green-soft: rgba(58, 107, 74, 0.08);
       --border: #ddd; --border-soft: #e8e8e8;
       --card-bg: #fff;
-      --mockup-bg: #fafafa; --mockup-stroke: #c0c0c0; --mockup-fill: #e8e8e8;
+      --m-bg: #fafafa;
+      --m-blue: #4a6cf7; --m-blue-soft: #eef2ff;
+      --m-orange: #f59e6e; --m-orange-soft: #fef3eb;
+      --m-green: #5dc78e; --m-green-soft: #eaf8f0;
+      --m-purple: #9c7df5; --m-purple-soft: #f2eeff;
+      --m-yellow: #f7c948; --m-yellow-soft: #fef8e0;
+      --m-pink: #f06292; --m-pink-soft: #fde6ef;
+      --m-red: #ef5a5a; --m-red-soft: #fde8e8;
+      --m-stroke: #c7cdd6;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { overflow-x: hidden; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg); color: var(--text);
-      font-size: 17px; line-height: 1.65;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       transition: background 0.2s, color 0.2s;
@@ -69,6 +115,7 @@
     }
     a { color: var(--accent); }
 
+    /* ============ NAV ============ */
     nav {
       max-width: 1100px; margin: 0 auto;
       padding: 24px 40px;
@@ -126,20 +173,22 @@
       .nav-links a.active { border-bottom: none; background: var(--accent-soft); color: var(--accent); }
     }
 
+    /* ============ MAIN ============ */
     main {
       max-width: 1100px; margin: 0 auto;
       padding: 56px 40px 80px;
     }
     @media (max-width: 640px) { main { padding: 36px 20px 56px; } }
 
+    /* Page header */
     .page-header {
-      margin-bottom: 56px;
+      margin-bottom: 32px;
       padding-bottom: 32px;
       border-bottom: 1px solid var(--border-soft);
       max-width: 720px;
     }
     @media (max-width: 640px) {
-      .page-header { margin-bottom: 36px; padding-bottom: 24px; }
+      .page-header { margin-bottom: 24px; padding-bottom: 24px; }
     }
     .page-eyebrow {
       font-size: 11px; font-weight: 600;
@@ -159,6 +208,34 @@
     @media (max-width: 640px) { .page-intro { font-size: 0.97rem; } }
     .page-intro strong { color: var(--text); font-weight: 600; }
 
+    /* Top note — mockup-only disclosure */
+    .top-note {
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 56px;
+      max-width: 720px;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+    @media (max-width: 640px) {
+      .top-note { padding: 16px 18px; margin-bottom: 36px; font-size: 0.9rem; }
+    }
+    .top-note strong { color: var(--text); font-weight: 600; }
+    .top-note-label {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      margin-right: 8px;
+      vertical-align: 1px;
+    }
+
+    /* Section */
     .section { margin-top: 72px; }
     .section:first-of-type { margin-top: 0; }
     .section-header {
@@ -181,23 +258,52 @@
     .section-subtitle {
       font-size: 0.95rem; color: var(--text-muted);
       line-height: 1.65;
+      margin-bottom: 20px;
     }
 
+    /* Section limitation note (design section only) */
+    .section-note {
+      background: var(--accent-soft);
+      border-radius: 10px;
+      padding: 18px 22px;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+    @media (max-width: 640px) { .section-note { padding: 16px 18px; font-size: 0.9rem; } }
+    .section-note strong { font-weight: 600; }
+    .section-note em { font-style: italic; color: var(--text-muted); }
+    .section-note-label {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-right: 8px;
+      vertical-align: 1px;
+    }
+
+    /* Tool grid */
     .tool-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
     }
-    @media (max-width: 820px) { .tool-grid { grid-template-columns: 1fr; gap: 16px; } }
+    @media (max-width: 820px) {
+      .tool-grid { grid-template-columns: 1fr; gap: 16px; }
+    }
 
     .tool-card {
       background: var(--card-bg);
       border: 1px solid var(--border-soft);
       border-radius: 12px;
-      text-decoration: none; color: var(--text);
+      text-decoration: none;
+      color: var(--text);
       transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
       overflow: hidden;
-      display: flex; flex-direction: column;
+      display: flex;
+      flex-direction: column;
     }
     .tool-card:hover {
       border-color: var(--accent);
@@ -205,15 +311,24 @@
       transform: translateY(-2px);
     }
 
+    /* Mockup container */
     .mockup {
-      background: var(--mockup-bg);
+      background: var(--m-bg);
       border-bottom: 1px solid var(--border-soft);
       aspect-ratio: 16 / 9;
-      display: flex; align-items: center; justify-content: center;
-      padding: 20px; overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      overflow: hidden;
     }
-    .mockup svg { width: 100%; height: 100%; max-width: 260px; }
+    .mockup svg {
+      width: 100%;
+      height: 100%;
+      max-width: 320px;
+    }
 
+    /* Card body */
     .tool-body { padding: 22px 24px 24px; }
     @media (max-width: 640px) { .tool-body { padding: 18px 20px 20px; } }
 
@@ -254,7 +369,8 @@
     footer {
       text-align: center; padding: 40px 20px;
       font-size: 13.5px; color: var(--text-muted);
-      border-top: 1px solid var(--border-soft); margin-top: 40px;
+      border-top: 1px solid var(--border-soft);
+      margin-top: 40px;
     }
     footer a {
       color: var(--text-muted);
@@ -293,6 +409,12 @@
     </p>
   </div>
 
+  <!-- Top note: mockup disclosure -->
+  <div class="top-note">
+    <span class="top-note-label">Note</span>
+    All visuals here are <strong>mockups</strong>. The tools themselves are real — designed, built, and deployed for daily use — but their actual interfaces sit inside a regulated manufacturing environment and can't be shown externally for confidentiality reasons. The mockups try to give an honest sense of what each tool does without revealing proprietary content. All operational tools also include reproduction guides and team training materials, so they remain maintainable after I leave.
+  </div>
+
   <!-- DESIGN PROTOTYPES -->
   <section class="section">
     <div class="section-header">
@@ -301,6 +423,10 @@
       <p class="section-subtitle">
         Five prototypes from a four-layer framework, each studied with twenty practitioners. One paper per layer; some layers have two complementary tools.
       </p>
+      <div class="section-note">
+        <span class="section-note-label">A note on the ratings</span>
+        The 4.5–5.0 / 5 scores these prototypes received reflect a <strong>domain effect</strong> more than a measurement claim. Participants were from the same team I work in, and pharmaceutical quality workflows have no existing analogue for the kinds of intervention these tools propose — meaning practitioners evaluated each tool against the absence of any structured support. The high ratings say less about the tools themselves than about how little design intervention this domain has received, which is, in many ways, the <em>larger finding</em>.
+      </div>
     </div>
 
     <div class="tool-grid">
@@ -308,20 +434,31 @@
       <!-- L1 Procedure Retrieval -->
       <a href="project-procedure-retrieval.html" class="tool-card">
         <div class="mockup">
-          <svg viewBox="0 0 240 135" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="22" width="200" height="22" rx="4" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="1"/>
-            <circle cx="32" cy="33" r="4" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
-            <line x1="35" y1="36" x2="40" y2="41" stroke="var(--accent)" stroke-width="1.5"/>
-            <line x1="48" y1="33" x2="120" y2="33" stroke="var(--mockup-stroke)" stroke-width="1" stroke-dasharray="2 2"/>
-            <rect x="20" y="58" width="200" height="14" rx="2" fill="var(--mockup-fill)"/>
-            <rect x="24" y="62" width="3" height="6" fill="var(--accent)"/>
-            <line x1="34" y1="63" x2="100" y2="63" stroke="var(--text-faint)" stroke-width="1"/>
-            <line x1="34" y1="67" x2="160" y2="67" stroke="var(--text-faint)" stroke-width="0.5" opacity="0.5"/>
-            <rect x="20" y="78" width="200" height="14" rx="2" fill="var(--mockup-fill)" opacity="0.7"/>
-            <line x1="24" y1="83" x2="90" y2="83" stroke="var(--text-faint)" stroke-width="1"/>
-            <line x1="24" y1="87" x2="150" y2="87" stroke="var(--text-faint)" stroke-width="0.5" opacity="0.5"/>
-            <rect x="20" y="98" width="200" height="14" rx="2" fill="var(--mockup-fill)" opacity="0.4"/>
-            <line x1="24" y1="103" x2="110" y2="103" stroke="var(--text-faint)" stroke-width="1" opacity="0.6"/>
+          <svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg">
+            <!-- Search bar -->
+            <rect x="20" y="20" width="240" height="32" rx="16" fill="var(--card-bg)" stroke="var(--m-stroke)" stroke-width="1"/>
+            <circle cx="38" cy="36" r="6" fill="none" stroke="var(--m-blue)" stroke-width="1.8"/>
+            <line x1="42" y1="40" x2="47" y2="45" stroke="var(--m-blue)" stroke-width="1.8" stroke-linecap="round"/>
+            <rect x="56" y="32" width="100" height="8" rx="2" fill="var(--m-blue-soft)"/>
+            <!-- Result 1 highlighted -->
+            <rect x="20" y="62" width="240" height="26" rx="8" fill="var(--m-blue-soft)" stroke="var(--m-blue)" stroke-width="1.2"/>
+            <circle cx="34" cy="75" r="4" fill="var(--m-blue)"/>
+            <rect x="46" y="69" width="120" height="5" rx="1.5" fill="var(--m-blue)" opacity="0.8"/>
+            <rect x="46" y="78" width="80" height="4" rx="1" fill="var(--m-blue)" opacity="0.4"/>
+            <rect x="220" y="70" width="32" height="14" rx="7" fill="var(--m-blue)"/>
+            <text x="226" y="80" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">95%</text>
+            <!-- Result 2 -->
+            <rect x="20" y="96" width="240" height="22" rx="8" fill="var(--card-bg)" stroke="var(--border-soft)" stroke-width="1"/>
+            <circle cx="34" cy="107" r="3.5" fill="var(--m-stroke)"/>
+            <rect x="46" y="103" width="90" height="4" rx="1" fill="var(--text-faint)"/>
+            <rect x="46" y="110" width="60" height="3" rx="1" fill="var(--text-faint)" opacity="0.5"/>
+            <rect x="226" y="102" width="26" height="12" rx="6" fill="var(--m-stroke)" opacity="0.5"/>
+            <!-- Result 3 -->
+            <rect x="20" y="126" width="240" height="22" rx="8" fill="var(--card-bg)" stroke="var(--border-soft)" stroke-width="1"/>
+            <circle cx="34" cy="137" r="3.5" fill="var(--m-stroke)" opacity="0.5"/>
+            <rect x="46" y="133" width="80" height="4" rx="1" fill="var(--text-faint)" opacity="0.7"/>
+            <rect x="46" y="140" width="55" height="3" rx="1" fill="var(--text-faint)" opacity="0.4"/>
+            <rect x="226" y="132" width="26" height="12" rx="6" fill="var(--m-stroke)" opacity="0.3"/>
           </svg>
         </div>
         <div class="tool-body">
@@ -335,30 +472,42 @@
       <!-- L2 Cross-Reference -->
       <a href="project-traceability.html" class="tool-card">
         <div class="mockup">
-          <svg viewBox="0 0 240 135" xmlns="http://www.w3.org/2000/svg">
-            <g fill="var(--mockup-fill)" stroke="var(--accent)" stroke-width="1.2">
-              <rect x="30" y="30" width="40" height="28" rx="3"/>
-              <rect x="100" y="20" width="40" height="28" rx="3"/>
-              <rect x="170" y="40" width="40" height="28" rx="3"/>
-              <rect x="70" y="80" width="40" height="28" rx="3"/>
-              <rect x="140" y="85" width="40" height="28" rx="3"/>
+          <svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg">
+            <!-- Connection lines (drawn first) -->
+            <g stroke-width="1.5" fill="none" stroke-linecap="round">
+              <line x1="78" y1="48" x2="118" y2="38" stroke="var(--m-blue)" opacity="0.6"/>
+              <line x1="142" y1="38" x2="182" y2="55" stroke="var(--m-blue)" opacity="0.6"/>
+              <line x1="58" y1="62" x2="98" y2="90" stroke="var(--m-purple)" opacity="0.6"/>
+              <line x1="130" y1="50" x2="168" y2="95" stroke="var(--m-orange)" opacity="0.5" stroke-dasharray="3 3"/>
+              <line x1="118" y1="105" x2="150" y2="110" stroke="var(--m-green)" opacity="0.6"/>
             </g>
-            <g stroke="var(--accent)" stroke-width="1" fill="none">
-              <line x1="70" y1="44" x2="100" y2="34"/>
-              <line x1="140" y1="34" x2="170" y2="54"/>
-              <line x1="50" y1="58" x2="90" y2="80"/>
-              <line x1="120" y1="48" x2="160" y2="85"/>
-              <line x1="110" y1="94" x2="140" y2="99"/>
-            </g>
-            <g stroke="var(--text-faint)" stroke-width="0.5" opacity="0.5">
-              <line x1="34" y1="38" x2="62" y2="38"/>
-              <line x1="34" y1="44" x2="56" y2="44"/>
-              <line x1="104" y1="28" x2="132" y2="28"/>
-              <line x1="104" y1="34" x2="126" y2="34"/>
-              <line x1="174" y1="48" x2="202" y2="48"/>
-              <line x1="174" y1="54" x2="196" y2="54"/>
-              <line x1="74" y1="88" x2="102" y2="88"/>
-              <line x1="144" y1="93" x2="172" y2="93"/>
+            <!-- Nodes (rounded rect, colorful) -->
+            <g>
+              <rect x="38" y="30" width="44" height="32" rx="10" fill="var(--m-blue-soft)" stroke="var(--m-blue)" stroke-width="1.3"/>
+              <circle cx="48" cy="40" r="3" fill="var(--m-blue)"/>
+              <rect x="54" y="38" width="22" height="3" rx="1" fill="var(--m-blue)" opacity="0.6"/>
+              <rect x="44" y="48" width="32" height="2.5" rx="1" fill="var(--m-blue)" opacity="0.3"/>
+              <rect x="44" y="53" width="24" height="2.5" rx="1" fill="var(--m-blue)" opacity="0.3"/>
+
+              <rect x="108" y="20" width="44" height="32" rx="10" fill="var(--m-purple-soft)" stroke="var(--m-purple)" stroke-width="1.3"/>
+              <circle cx="118" cy="30" r="3" fill="var(--m-purple)"/>
+              <rect x="124" y="28" width="22" height="3" rx="1" fill="var(--m-purple)" opacity="0.6"/>
+              <rect x="114" y="38" width="32" height="2.5" rx="1" fill="var(--m-purple)" opacity="0.3"/>
+              <rect x="114" y="43" width="24" height="2.5" rx="1" fill="var(--m-purple)" opacity="0.3"/>
+
+              <rect x="178" y="42" width="44" height="32" rx="10" fill="var(--m-green-soft)" stroke="var(--m-green)" stroke-width="1.3"/>
+              <circle cx="188" cy="52" r="3" fill="var(--m-green)"/>
+              <rect x="194" y="50" width="22" height="3" rx="1" fill="var(--m-green)" opacity="0.6"/>
+              <rect x="184" y="60" width="32" height="2.5" rx="1" fill="var(--m-green)" opacity="0.3"/>
+              <rect x="184" y="65" width="24" height="2.5" rx="1" fill="var(--m-green)" opacity="0.3"/>
+
+              <rect x="78" y="90" width="44" height="32" rx="10" fill="var(--m-orange-soft)" stroke="var(--m-orange)" stroke-width="1.3" stroke-dasharray="4 3"/>
+              <text x="89" y="111" font-size="9" font-family="Inter, sans-serif" fill="var(--m-orange)" font-weight="800">missing</text>
+
+              <rect x="148" y="98" width="44" height="32" rx="10" fill="var(--m-yellow-soft)" stroke="var(--m-yellow)" stroke-width="1.3"/>
+              <circle cx="158" cy="108" r="3" fill="var(--m-yellow)"/>
+              <rect x="164" y="106" width="22" height="3" rx="1" fill="#a37700" opacity="0.7"/>
+              <rect x="154" y="116" width="32" height="2.5" rx="1" fill="#a37700" opacity="0.4"/>
             </g>
           </svg>
         </div>
@@ -373,24 +522,33 @@
       <!-- L2 Navigation Friction -->
       <a href="project-navigation-tracker.html" class="tool-card">
         <div class="mockup">
-          <svg viewBox="0 0 240 135" xmlns="http://www.w3.org/2000/svg">
-            <g fill="none" stroke="var(--accent)" stroke-width="1.4">
-              <path d="M 30 80 Q 60 30, 100 60" stroke-linecap="round"/>
-              <path d="M 100 60 Q 130 90, 160 50"/>
-              <path d="M 160 50 Q 130 100, 100 65" stroke-dasharray="3 2" opacity="0.6"/>
-              <path d="M 100 65 Q 140 30, 200 55" stroke-linecap="round"/>
+          <svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg">
+            <!-- Path -->
+            <g fill="none" stroke-width="2" stroke-linecap="round">
+              <path d="M 30 110 Q 70 35, 120 75" stroke="var(--m-blue)"/>
+              <path d="M 120 75 Q 155 130, 190 60" stroke="var(--m-purple)"/>
+              <path d="M 190 60 Q 155 130, 120 80" stroke="var(--m-orange)" stroke-dasharray="4 3" opacity="0.7"/>
+              <path d="M 120 80 Q 175 30, 240 55" stroke="var(--m-green)"/>
             </g>
-            <circle cx="30" cy="80" r="5" fill="var(--accent)"/>
-            <circle cx="100" cy="60" r="5" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="1.5"/>
-            <text x="98" y="63" font-size="7" font-family="Inter, sans-serif" fill="var(--accent)" font-weight="700">2x</text>
-            <circle cx="160" cy="50" r="4" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="1.5"/>
-            <circle cx="100" cy="65" r="3" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.6"/>
-            <circle cx="200" cy="55" r="4" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="1.5"/>
-            <line x1="20" y1="115" x2="220" y2="115" stroke="var(--text-faint)" stroke-width="0.5"/>
-            <line x1="30" y1="113" x2="30" y2="117" stroke="var(--text-faint)" stroke-width="0.5"/>
-            <line x1="100" y1="113" x2="100" y2="117" stroke="var(--text-faint)" stroke-width="0.5"/>
-            <line x1="160" y1="113" x2="160" y2="117" stroke="var(--text-faint)" stroke-width="0.5"/>
-            <line x1="200" y1="113" x2="200" y2="117" stroke="var(--text-faint)" stroke-width="0.5"/>
+            <!-- Nodes -->
+            <circle cx="30" cy="110" r="7" fill="var(--m-blue)"/>
+            <!-- Loopback node — colorful pill -->
+            <rect x="106" y="68" width="28" height="20" rx="10" fill="var(--m-orange-soft)" stroke="var(--m-orange)" stroke-width="2"/>
+            <text x="113" y="82" font-size="10" font-family="Inter, sans-serif" fill="var(--m-orange)" font-weight="800">2×</text>
+            <circle cx="190" cy="60" r="6" fill="var(--card-bg)" stroke="var(--m-purple)" stroke-width="2"/>
+            <circle cx="240" cy="55" r="7" fill="var(--m-green)"/>
+
+            <!-- Loopback annotation pill -->
+            <rect x="140" y="20" width="100" height="22" rx="11" fill="var(--m-orange-soft)" stroke="var(--m-orange)" stroke-width="1"/>
+            <circle cx="153" cy="31" r="3" fill="var(--m-orange)"/>
+            <text x="161" y="34" font-size="8.5" font-family="Inter, sans-serif" fill="var(--m-orange)" font-weight="700">LOOPBACK</text>
+
+            <!-- Timeline ticks -->
+            <line x1="20" y1="140" x2="260" y2="140" stroke="var(--m-stroke)" stroke-width="0.5"/>
+            <circle cx="30" cy="140" r="2" fill="var(--m-blue)"/>
+            <circle cx="120" cy="140" r="2" fill="var(--m-orange)"/>
+            <circle cx="190" cy="140" r="2" fill="var(--m-purple)"/>
+            <circle cx="240" cy="140" r="2" fill="var(--m-green)"/>
           </svg>
         </div>
         <div class="tool-body">
@@ -404,26 +562,31 @@
       <!-- L3 Review Friction -->
       <a href="project-review-dashboard.html" class="tool-card">
         <div class="mockup">
-          <svg viewBox="0 0 240 135" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="20" width="200" height="14" fill="var(--mockup-fill)" rx="2"/>
-            <rect x="22" y="22" width="32" height="10" fill="var(--accent)" rx="1"/>
-            <rect x="58" y="23" width="28" height="8" fill="var(--text-faint)" rx="1" opacity="0.3"/>
-            <rect x="90" y="23" width="28" height="8" fill="var(--text-faint)" rx="1" opacity="0.3"/>
-            <rect x="122" y="23" width="28" height="8" fill="var(--text-faint)" rx="1" opacity="0.3"/>
-            <rect x="154" y="23" width="28" height="8" fill="var(--text-faint)" rx="1" opacity="0.3"/>
-            <rect x="186" y="23" width="28" height="8" fill="var(--text-faint)" rx="1" opacity="0.3"/>
-            <g fill="var(--accent)" opacity="0.85">
-              <rect x="30" y="92" width="14" height="22"/>
-              <rect x="52" y="78" width="14" height="36"/>
-              <rect x="74" y="62" width="14" height="52"/>
-              <rect x="96" y="86" width="14" height="28"/>
-              <rect x="118" y="70" width="14" height="44"/>
-              <rect x="140" y="52" width="14" height="62"/>
-              <rect x="162" y="88" width="14" height="26"/>
-              <rect x="184" y="74" width="14" height="40"/>
+          <svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg">
+            <!-- Tab bar -->
+            <rect x="20" y="20" width="240" height="22" rx="11" fill="var(--m-blue-soft)"/>
+            <rect x="22" y="22" width="56" height="18" rx="9" fill="var(--m-blue)"/>
+            <text x="32" y="34" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="700">Burden</text>
+            <text x="92" y="34" font-size="8" font-family="Inter, sans-serif" fill="var(--m-blue)" font-weight="600" opacity="0.7">Heatmap</text>
+            <text x="148" y="34" font-size="8" font-family="Inter, sans-serif" fill="var(--m-blue)" font-weight="600" opacity="0.5">Journey</text>
+            <text x="200" y="34" font-size="8" font-family="Inter, sans-serif" fill="var(--m-blue)" font-weight="600" opacity="0.5">Check</text>
+
+            <!-- Bar chart, colorful -->
+            <g>
+              <rect x="32" y="105" width="18" height="32" rx="4" fill="var(--m-blue)"/>
+              <rect x="58" y="85" width="18" height="52" rx="4" fill="var(--m-purple)"/>
+              <rect x="84" y="65" width="18" height="72" rx="4" fill="var(--m-green)"/>
+              <rect x="110" y="95" width="18" height="42" rx="4" fill="var(--m-yellow)"/>
+              <rect x="136" y="78" width="18" height="59" rx="4" fill="var(--m-pink)"/>
+              <rect x="162" y="55" width="18" height="82" rx="4" fill="var(--m-orange)"/>
+              <rect x="188" y="92" width="18" height="45" rx="4" fill="var(--m-blue)" opacity="0.7"/>
+              <rect x="214" y="80" width="18" height="57" rx="4" fill="var(--m-purple)" opacity="0.7"/>
             </g>
-            <rect x="140" y="48" width="14" height="3" fill="var(--accent-warm)"/>
-            <line x1="22" y1="114" x2="218" y2="114" stroke="var(--text-faint)" stroke-width="0.5"/>
+            <!-- Highlight marker on top bar -->
+            <circle cx="171" cy="50" r="5" fill="var(--m-red)"/>
+            <text x="167.5" y="53.5" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">!</text>
+
+            <line x1="24" y1="138" x2="240" y2="138" stroke="var(--m-stroke)" stroke-width="0.5"/>
           </svg>
         </div>
         <div class="tool-body">
@@ -437,36 +600,48 @@
       <!-- L4 Scaffolder -->
       <a href="project-rca-scaffolder.html" class="tool-card">
         <div class="mockup">
-          <svg viewBox="0 0 240 135" xmlns="http://www.w3.org/2000/svg">
-            <rect x="95" y="20" width="50" height="20" rx="3" fill="var(--accent)" opacity="0.85"/>
-            <line x1="98" y1="28" x2="142" y2="28" stroke="var(--card-bg)" stroke-width="0.7"/>
-            <line x1="98" y1="33" x2="135" y2="33" stroke="var(--card-bg)" stroke-width="0.7" opacity="0.6"/>
-            <g stroke="var(--accent)" stroke-width="1.2" fill="none">
-              <line x1="105" y1="40" x2="55" y2="65"/>
-              <line x1="120" y1="40" x2="120" y2="65"/>
-              <line x1="135" y1="40" x2="185" y2="65"/>
+          <svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg">
+            <!-- Root node (top) -->
+            <rect x="108" y="20" width="64" height="26" rx="13" fill="var(--m-blue)"/>
+            <circle cx="120" cy="33" r="3" fill="#fff"/>
+            <rect x="126" y="31" width="36" height="4" rx="1" fill="#fff" opacity="0.85"/>
+            <rect x="126" y="37" width="28" height="3" rx="1" fill="#fff" opacity="0.5"/>
+
+            <!-- Branches -->
+            <g stroke-width="1.5" fill="none" stroke-linecap="round">
+              <line x1="120" y1="46" x2="60" y2="72" stroke="var(--m-blue)" opacity="0.6"/>
+              <line x1="140" y1="46" x2="140" y2="72" stroke="var(--m-blue)" opacity="0.6"/>
+              <line x1="160" y1="46" x2="220" y2="72" stroke="var(--m-orange)" opacity="0.6" stroke-dasharray="3 3"/>
             </g>
-            <g>
-              <rect x="30" y="65" width="50" height="20" rx="3" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="1.2"/>
-              <line x1="34" y1="73" x2="74" y2="73" stroke="var(--text-faint)" stroke-width="0.7"/>
-              <line x1="34" y1="78" x2="66" y2="78" stroke="var(--text-faint)" stroke-width="0.7" opacity="0.6"/>
-              <rect x="95" y="65" width="50" height="20" rx="3" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="1.2"/>
-              <line x1="99" y1="73" x2="139" y2="73" stroke="var(--text-faint)" stroke-width="0.7"/>
-              <line x1="99" y1="78" x2="131" y2="78" stroke="var(--text-faint)" stroke-width="0.7" opacity="0.6"/>
-              <rect x="160" y="65" width="50" height="20" rx="3" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="3 2"/>
-              <text x="173" y="78" font-size="9" font-family="Inter, sans-serif" fill="var(--accent)" font-weight="700">+ alt</text>
-            </g>
-            <g stroke="var(--accent)" stroke-width="0.8" fill="none" opacity="0.5">
-              <line x1="55" y1="85" x2="45" y2="105"/>
-              <line x1="55" y1="85" x2="65" y2="105"/>
-              <line x1="120" y1="85" x2="110" y2="105"/>
-              <line x1="120" y1="85" x2="130" y2="105"/>
-            </g>
-            <g fill="var(--card-bg)" stroke="var(--accent)" stroke-width="0.8" opacity="0.5">
-              <circle cx="45" cy="110" r="3"/>
-              <circle cx="65" cy="110" r="3"/>
-              <circle cx="110" cy="110" r="3"/>
-              <circle cx="130" cy="110" r="3"/>
+
+            <!-- Hypothesis nodes — colorful pills -->
+            <rect x="34" y="72" width="56" height="24" rx="12" fill="var(--m-purple-soft)" stroke="var(--m-purple)" stroke-width="1.2"/>
+            <circle cx="44" cy="84" r="3" fill="var(--m-purple)"/>
+            <rect x="50" y="82" width="30" height="3" rx="1" fill="var(--m-purple)" opacity="0.7"/>
+            <rect x="50" y="88" width="22" height="2.5" rx="1" fill="var(--m-purple)" opacity="0.4"/>
+
+            <rect x="112" y="72" width="56" height="24" rx="12" fill="var(--m-green-soft)" stroke="var(--m-green)" stroke-width="1.2"/>
+            <circle cx="122" cy="84" r="3" fill="var(--m-green)"/>
+            <rect x="128" y="82" width="30" height="3" rx="1" fill="var(--m-green)" opacity="0.7"/>
+            <rect x="128" y="88" width="22" height="2.5" rx="1" fill="var(--m-green)" opacity="0.4"/>
+
+            <rect x="190" y="72" width="56" height="24" rx="12" fill="var(--m-orange-soft)" stroke="var(--m-orange)" stroke-width="1.4" stroke-dasharray="4 3"/>
+            <text x="205" y="88" font-size="10" font-family="Inter, sans-serif" fill="var(--m-orange)" font-weight="800">+ alt</text>
+
+            <!-- AI indicator on root -->
+            <rect x="174" y="14" width="32" height="14" rx="7" fill="var(--m-yellow)"/>
+            <text x="180" y="24" font-size="8" font-family="Inter, sans-serif" fill="#7d6300" font-weight="800">AI</text>
+
+            <!-- Secondary mini nodes -->
+            <g opacity="0.55">
+              <line x1="50" y1="96" x2="42" y2="118" stroke="var(--m-purple)" stroke-width="1"/>
+              <line x1="76" y1="96" x2="82" y2="118" stroke="var(--m-purple)" stroke-width="1"/>
+              <line x1="128" y1="96" x2="120" y2="118" stroke="var(--m-green)" stroke-width="1"/>
+              <line x1="154" y1="96" x2="160" y2="118" stroke="var(--m-green)" stroke-width="1"/>
+              <circle cx="42" cy="124" r="5" fill="var(--m-purple-soft)" stroke="var(--m-purple)" stroke-width="1"/>
+              <circle cx="82" cy="124" r="5" fill="var(--m-purple-soft)" stroke="var(--m-purple)" stroke-width="1"/>
+              <circle cx="120" cy="124" r="5" fill="var(--m-green-soft)" stroke="var(--m-green)" stroke-width="1"/>
+              <circle cx="160" cy="124" r="5" fill="var(--m-green-soft)" stroke="var(--m-green)" stroke-width="1"/>
             </g>
           </svg>
         </div>
@@ -496,28 +671,35 @@
       <!-- QC Operations Dashboard -->
       <a href="project-qc-operations-dashboard.html" class="tool-card">
         <div class="mockup">
-          <svg viewBox="0 0 240 135" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="22" width="60" height="32" rx="3" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="0.8"/>
-            <rect x="90" y="22" width="60" height="32" rx="3" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="0.8"/>
-            <rect x="160" y="22" width="60" height="32" rx="3" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="0.8"/>
-            <text x="28" y="38" font-size="11" font-weight="800" font-family="Inter, sans-serif" fill="var(--accent-green)">142</text>
-            <line x1="28" y1="44" x2="68" y2="44" stroke="var(--text-faint)" stroke-width="0.5"/>
-            <text x="98" y="38" font-size="11" font-weight="800" font-family="Inter, sans-serif" fill="var(--accent-green)">98%</text>
-            <line x1="98" y1="44" x2="138" y2="44" stroke="var(--text-faint)" stroke-width="0.5"/>
-            <text x="168" y="38" font-size="11" font-weight="800" font-family="Inter, sans-serif" fill="var(--accent-green)">3</text>
-            <line x1="168" y1="44" x2="208" y2="44" stroke="var(--text-faint)" stroke-width="0.5"/>
-            <polyline points="20,100 50,82 80,90 110,68 140,75 170,55 200,62 220,48" fill="none" stroke="var(--accent-green)" stroke-width="1.5"/>
-            <g fill="var(--accent-green)">
-              <circle cx="20" cy="100" r="2"/>
-              <circle cx="50" cy="82" r="2"/>
-              <circle cx="80" cy="90" r="2"/>
-              <circle cx="110" cy="68" r="2"/>
-              <circle cx="140" cy="75" r="2"/>
-              <circle cx="170" cy="55" r="2"/>
-              <circle cx="200" cy="62" r="2"/>
-              <circle cx="220" cy="48" r="2"/>
+          <svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg">
+            <!-- Metric cards row -->
+            <rect x="20" y="20" width="54" height="42" rx="10" fill="var(--m-blue-soft)"/>
+            <text x="28" y="34" font-size="7" font-family="Inter, sans-serif" fill="var(--m-blue)" font-weight="700" letter-spacing="0.05em">THIS MONTH</text>
+            <text x="28" y="52" font-size="18" font-family="Inter, sans-serif" fill="var(--m-blue)" font-weight="800" letter-spacing="-0.02em">142</text>
+
+            <rect x="80" y="20" width="54" height="42" rx="10" fill="var(--m-green-soft)"/>
+            <text x="88" y="34" font-size="7" font-family="Inter, sans-serif" fill="var(--m-green)" font-weight="700" letter-spacing="0.05em">PASS RATE</text>
+            <text x="88" y="52" font-size="16" font-family="Inter, sans-serif" fill="var(--m-green)" font-weight="800" letter-spacing="-0.02em">98<tspan font-size="10">%</tspan></text>
+
+            <rect x="140" y="20" width="54" height="42" rx="10" fill="var(--m-orange-soft)"/>
+            <text x="148" y="34" font-size="7" font-family="Inter, sans-serif" fill="var(--m-orange)" font-weight="700" letter-spacing="0.05em">DUE SOON</text>
+            <text x="148" y="52" font-size="18" font-family="Inter, sans-serif" fill="var(--m-orange)" font-weight="800" letter-spacing="-0.02em">7</text>
+
+            <rect x="200" y="20" width="54" height="42" rx="10" fill="var(--m-purple-soft)"/>
+            <text x="208" y="34" font-size="7" font-family="Inter, sans-serif" fill="var(--m-purple)" font-weight="700" letter-spacing="0.05em">ANALYSTS</text>
+            <text x="208" y="52" font-size="18" font-family="Inter, sans-serif" fill="var(--m-purple)" font-weight="800" letter-spacing="-0.02em">14</text>
+
+            <!-- Trend line -->
+            <polyline points="22,128 50,118 80,122 110,108 140,112 170,98 200,104 230,90 256,86"
+                      fill="none" stroke="var(--m-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <g fill="var(--m-green)">
+              <circle cx="22" cy="128" r="2.5"/>
+              <circle cx="80" cy="122" r="2.5"/>
+              <circle cx="140" cy="112" r="2.5"/>
+              <circle cx="200" cy="104" r="2.5"/>
+              <circle cx="256" cy="86" r="2.5"/>
             </g>
-            <line x1="20" y1="115" x2="220" y2="115" stroke="var(--text-faint)" stroke-width="0.5"/>
+            <line x1="22" y1="140" x2="256" y2="140" stroke="var(--m-stroke)" stroke-width="0.5"/>
           </svg>
         </div>
         <div class="tool-body">
@@ -531,38 +713,33 @@
       <!-- Change Control Tracker -->
       <a href="project-change-control-tracker.html" class="tool-card">
         <div class="mockup">
-          <svg viewBox="0 0 240 135" xmlns="http://www.w3.org/2000/svg">
-            <g>
-              <rect x="22" y="58" width="36" height="22" rx="11" fill="var(--accent-green)" opacity="0.85"/>
-              <text x="30" y="72" font-size="9" font-weight="700" font-family="Inter, sans-serif" fill="var(--card-bg)">Plan</text>
-            </g>
-            <line x1="58" y1="69" x2="68" y2="69" stroke="var(--accent-green)" stroke-width="1.5"/>
-            <g>
-              <rect x="68" y="58" width="36" height="22" rx="11" fill="var(--accent-green)" opacity="0.85"/>
-              <text x="73" y="72" font-size="9" font-weight="700" font-family="Inter, sans-serif" fill="var(--card-bg)">Draft</text>
-            </g>
-            <line x1="104" y1="69" x2="114" y2="69" stroke="var(--accent-green)" stroke-width="1.5"/>
-            <g>
-              <rect x="114" y="58" width="36" height="22" rx="11" fill="var(--accent-green)"/>
-              <text x="119" y="72" font-size="9" font-weight="800" font-family="Inter, sans-serif" fill="var(--card-bg)">Review</text>
-            </g>
-            <line x1="150" y1="69" x2="160" y2="69" stroke="var(--mockup-stroke)" stroke-width="1.5" stroke-dasharray="2 2"/>
-            <g>
-              <rect x="160" y="58" width="36" height="22" rx="11" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="1.2"/>
-              <text x="165" y="72" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="var(--text-faint)">Close</text>
-            </g>
-            <text x="119" y="98" font-size="8" font-family="Inter, sans-serif" fill="var(--accent-green)" font-weight="600">↓ here</text>
-            <text x="116" y="110" font-size="8" font-family="Inter, sans-serif" fill="var(--text-faint)">due 5/29</text>
-            <circle cx="40" cy="40" r="2.5" fill="var(--accent-green)"/>
-            <circle cx="86" cy="40" r="2.5" fill="var(--accent-green)"/>
-            <circle cx="132" cy="40" r="2.5" fill="var(--accent-green)"/>
-            <circle cx="178" cy="40" r="2.5" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="1"/>
+          <svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg">
+            <!-- Item 1 -->
+            <rect x="20" y="22" width="240" height="38" rx="10" fill="var(--m-orange-soft)" stroke="var(--m-orange)" stroke-width="1.2"/>
+            <text x="30" y="36" font-size="8" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600">CC-2025-042</text>
+            <text x="30" y="49" font-size="10" font-family="Inter, sans-serif" fill="var(--text)" font-weight="700">Method revision</text>
+            <rect x="200" y="33" width="50" height="16" rx="8" fill="var(--m-orange)"/>
+            <text x="208" y="44" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">due 4d</text>
+
+            <!-- Item 2 -->
+            <rect x="20" y="68" width="240" height="38" rx="10" fill="var(--m-blue-soft)" stroke="var(--m-blue)" stroke-width="1.2"/>
+            <text x="30" y="82" font-size="8" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600">CC-2025-038</text>
+            <text x="30" y="95" font-size="10" font-family="Inter, sans-serif" fill="var(--text)" font-weight="700">Specification update</text>
+            <rect x="200" y="79" width="50" height="16" rx="8" fill="var(--m-blue)"/>
+            <text x="208" y="90" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">due 9d</text>
+
+            <!-- Item 3 (closed/ready) -->
+            <rect x="20" y="114" width="240" height="32" rx="10" fill="var(--m-green-soft)" stroke="var(--m-green)" stroke-width="1.2"/>
+            <text x="30" y="128" font-size="8" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600">CC-2025-039</text>
+            <text x="30" y="140" font-size="10" font-family="Inter, sans-serif" fill="var(--text)" font-weight="700">Ready to close</text>
+            <rect x="208" y="124" width="42" height="16" rx="8" fill="var(--m-green)"/>
+            <text x="216" y="135" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">ready</text>
           </svg>
         </div>
         <div class="tool-body">
           <div class="tool-meta operational">Change Management</div>
           <h3 class="tool-name">Change Control Tracker</h3>
-          <p class="tool-desc">Tracks change controls across workflow stages — from plan definition through review to closure — with deadline visibility per stage.</p>
+          <p class="tool-desc">Surfaces what the validated system hides — titles, due dates, and the change actions inside each control, with their separate deadlines and extensions.</p>
           <div class="tool-status operational"><span class="dot"></span>Deployed to team</div>
         </div>
       </a>
@@ -570,43 +747,44 @@
       <!-- Reagent Inventory -->
       <a href="project-reagent-inventory.html" class="tool-card">
         <div class="mockup">
-          <svg viewBox="0 0 240 135" xmlns="http://www.w3.org/2000/svg">
-            <line x1="20" y1="58" x2="220" y2="58" stroke="var(--mockup-stroke)" stroke-width="1"/>
-            <line x1="20" y1="95" x2="220" y2="95" stroke="var(--mockup-stroke)" stroke-width="1"/>
+          <svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg">
+            <!-- Reagent rows -->
             <g>
-              <rect x="30" y="32" width="14" height="26" rx="2" fill="var(--accent-green)" opacity="0.7"/>
-              <rect x="34" y="28" width="6" height="6" fill="var(--accent-green)" opacity="0.9"/>
-              <rect x="55" y="36" width="14" height="22" rx="2" fill="var(--accent-green)" opacity="0.6"/>
-              <rect x="59" y="32" width="6" height="6" fill="var(--accent-green)" opacity="0.8"/>
-              <rect x="80" y="32" width="14" height="26" rx="2" fill="var(--accent-warm)" opacity="0.85"/>
-              <rect x="84" y="28" width="6" height="6" fill="var(--accent-warm)"/>
-              <text x="79" y="74" font-size="8" font-family="Inter, sans-serif" fill="var(--accent-warm)" font-weight="800">!</text>
-              <rect x="105" y="36" width="14" height="22" rx="2" fill="var(--accent-green)" opacity="0.5"/>
-              <rect x="109" y="32" width="6" height="6" fill="var(--accent-green)" opacity="0.7"/>
-              <rect x="130" y="34" width="14" height="24" rx="2" fill="var(--accent-green)" opacity="0.6"/>
-              <rect x="134" y="30" width="6" height="6" fill="var(--accent-green)" opacity="0.8"/>
-              <rect x="155" y="32" width="14" height="26" rx="2" fill="var(--accent-green)" opacity="0.7"/>
-              <rect x="159" y="28" width="6" height="6" fill="var(--accent-green)" opacity="0.9"/>
-              <rect x="180" y="36" width="14" height="22" rx="2" fill="var(--accent-green)" opacity="0.5"/>
-              <rect x="184" y="32" width="6" height="6" fill="var(--accent-green)" opacity="0.7"/>
+              <rect x="20" y="20" width="240" height="24" rx="8" fill="var(--card-bg)" stroke="var(--border-soft)" stroke-width="1"/>
+              <circle cx="32" cy="32" r="5" fill="var(--m-green)"/>
+              <rect x="44" y="28" width="70" height="3.5" rx="1" fill="var(--text)" opacity="0.85"/>
+              <rect x="44" y="34" width="50" height="2.5" rx="1" fill="var(--text-faint)" opacity="0.6"/>
+              <rect x="200" y="26" width="50" height="14" rx="7" fill="var(--m-green-soft)"/>
+              <text x="210" y="36" font-size="8" font-family="Inter, sans-serif" fill="var(--m-green)" font-weight="700">stock ok</text>
+
+              <rect x="20" y="50" width="240" height="24" rx="8" fill="var(--card-bg)" stroke="var(--border-soft)" stroke-width="1"/>
+              <circle cx="32" cy="62" r="5" fill="var(--m-orange)"/>
+              <rect x="44" y="58" width="60" height="3.5" rx="1" fill="var(--text)" opacity="0.85"/>
+              <rect x="44" y="64" width="45" height="2.5" rx="1" fill="var(--text-faint)" opacity="0.6"/>
+              <rect x="200" y="56" width="50" height="14" rx="7" fill="var(--m-orange-soft)"/>
+              <text x="208" y="66" font-size="8" font-family="Inter, sans-serif" fill="var(--m-orange)" font-weight="700">reorder</text>
+
+              <rect x="20" y="80" width="240" height="24" rx="8" fill="var(--card-bg)" stroke="var(--border-soft)" stroke-width="1"/>
+              <circle cx="32" cy="92" r="5" fill="var(--m-red)"/>
+              <rect x="44" y="88" width="65" height="3.5" rx="1" fill="var(--text)" opacity="0.85"/>
+              <rect x="44" y="94" width="48" height="2.5" rx="1" fill="var(--text-faint)" opacity="0.6"/>
+              <rect x="200" y="86" width="50" height="14" rx="7" fill="var(--m-red-soft)"/>
+              <text x="206" y="96" font-size="8" font-family="Inter, sans-serif" fill="var(--m-red)" font-weight="700">expiring</text>
             </g>
+
+            <!-- Email notification icon -->
             <g>
-              <rect x="30" y="69" width="14" height="26" rx="2" fill="var(--accent-green)" opacity="0.6"/>
-              <rect x="34" y="65" width="6" height="6" fill="var(--accent-green)" opacity="0.8"/>
-              <rect x="55" y="71" width="14" height="24" rx="2" fill="var(--accent-green)" opacity="0.5"/>
-              <rect x="59" y="67" width="6" height="6" fill="var(--accent-green)" opacity="0.7"/>
-              <rect x="80" y="69" width="14" height="26" rx="2" fill="var(--accent-green)" opacity="0.7"/>
-              <rect x="84" y="65" width="6" height="6" fill="var(--accent-green)" opacity="0.9"/>
-              <rect x="105" y="76" width="14" height="19" rx="2" fill="none" stroke="var(--mockup-stroke)" stroke-width="0.8" stroke-dasharray="2 2"/>
-              <rect x="130" y="69" width="14" height="26" rx="2" fill="var(--accent-green)" opacity="0.6"/>
-              <rect x="134" y="65" width="6" height="6" fill="var(--accent-green)" opacity="0.8"/>
+              <rect x="92" y="116" width="96" height="28" rx="14" fill="var(--m-blue-soft)" stroke="var(--m-blue)" stroke-width="1"/>
+              <circle cx="106" cy="130" r="6" fill="var(--m-blue)"/>
+              <path d="M 102 128 L 106 132 L 110 128" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+              <text x="118" y="134" font-size="9" font-family="Inter, sans-serif" fill="var(--m-blue)" font-weight="700">Auto-notify</text>
             </g>
           </svg>
         </div>
         <div class="tool-body">
           <div class="tool-meta operational">Lab Inventory</div>
           <h3 class="tool-name">Reagent Inventory & Expiry Tool</h3>
-          <p class="tool-desc">Tracks reagent stock, expiry dates, and reorder thresholds — flags expiring items before they become a deviation.</p>
+          <p class="tool-desc">Stock and expiry tracking with automatic email alerts — based on lead-time rules and expiry windows the team can configure.</p>
           <div class="tool-status operational"><span class="dot"></span>Deployed to team</div>
         </div>
       </a>
@@ -614,40 +792,50 @@
       <!-- Document Auto-Review -->
       <a href="project-document-review.html" class="tool-card">
         <div class="mockup">
-          <svg viewBox="0 0 240 135" xmlns="http://www.w3.org/2000/svg">
-            <rect x="40" y="20" width="100" height="95" rx="3" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="1"/>
-            <g stroke="var(--text-faint)" stroke-width="0.7" opacity="0.6">
-              <line x1="48" y1="32" x2="120" y2="32"/>
-              <line x1="48" y1="40" x2="132" y2="40"/>
-              <line x1="48" y1="48" x2="115" y2="48"/>
-              <line x1="48" y1="60" x2="130" y2="60"/>
-              <line x1="48" y1="68" x2="125" y2="68"/>
-              <line x1="48" y1="76" x2="118" y2="76"/>
-              <line x1="48" y1="88" x2="128" y2="88"/>
-              <line x1="48" y1="96" x2="120" y2="96"/>
+          <svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg">
+            <!-- Document -->
+            <rect x="34" y="20" width="120" height="118" rx="10" fill="var(--card-bg)" stroke="var(--m-stroke)" stroke-width="1"/>
+            <g stroke="var(--text-faint)" stroke-width="0.8" opacity="0.4">
+              <line x1="44" y1="34" x2="138" y2="34"/>
+              <line x1="44" y1="42" x2="144" y2="42"/>
+              <line x1="44" y1="50" x2="130" y2="50"/>
+              <line x1="44" y1="64" x2="140" y2="64"/>
+              <line x1="44" y1="72" x2="125" y2="72"/>
+              <line x1="44" y1="86" x2="142" y2="86"/>
+              <line x1="44" y1="94" x2="130" y2="94"/>
+              <line x1="44" y1="108" x2="138" y2="108"/>
+              <line x1="44" y1="116" x2="120" y2="116"/>
+              <line x1="44" y1="124" x2="135" y2="124"/>
             </g>
-            <rect x="60" y="38" width="40" height="3" fill="var(--accent-warm)" opacity="0.4"/>
-            <rect x="80" y="66" width="35" height="3" fill="var(--accent-warm)" opacity="0.4"/>
-            <rect x="155" y="32" width="65" height="20" rx="3" fill="var(--accent-green)" opacity="0.1" stroke="var(--accent-green)" stroke-width="1"/>
-            <text x="160" y="40" font-size="8" font-family="Inter, sans-serif" fill="var(--accent-green)" font-weight="800">AI</text>
-            <line x1="172" y1="40" x2="214" y2="40" stroke="var(--accent-green)" stroke-width="0.6" opacity="0.6"/>
-            <line x1="172" y1="46" x2="208" y2="46" stroke="var(--accent-green)" stroke-width="0.6" opacity="0.6"/>
-            <line x1="148" y1="42" x2="153" y2="42" stroke="var(--accent-green)" stroke-width="1"/>
-            <line x1="153" y1="42" x2="151" y2="40" stroke="var(--accent-green)" stroke-width="1"/>
-            <line x1="153" y1="42" x2="151" y2="44" stroke="var(--accent-green)" stroke-width="1"/>
-            <rect x="155" y="62" width="65" height="20" rx="3" fill="var(--accent-green)" opacity="0.1" stroke="var(--accent-green)" stroke-width="1"/>
-            <text x="160" y="70" font-size="8" font-family="Inter, sans-serif" fill="var(--accent-green)" font-weight="800">AI</text>
-            <line x1="172" y1="70" x2="214" y2="70" stroke="var(--accent-green)" stroke-width="0.6" opacity="0.6"/>
-            <line x1="172" y1="76" x2="210" y2="76" stroke="var(--accent-green)" stroke-width="0.6" opacity="0.6"/>
-            <line x1="148" y1="72" x2="153" y2="72" stroke="var(--accent-green)" stroke-width="1"/>
-            <line x1="153" y1="72" x2="151" y2="70" stroke="var(--accent-green)" stroke-width="1"/>
-            <line x1="153" y1="72" x2="151" y2="74" stroke="var(--accent-green)" stroke-width="1"/>
+            <!-- Highlights -->
+            <rect x="60" y="40" width="50" height="5" rx="1.5" fill="var(--m-yellow)" opacity="0.7"/>
+            <rect x="80" y="82" width="44" height="5" rx="1.5" fill="var(--m-yellow)" opacity="0.7"/>
+            <rect x="70" y="114" width="38" height="5" rx="1.5" fill="var(--m-orange)" opacity="0.6"/>
+
+            <!-- AI panel -->
+            <rect x="166" y="30" width="84" height="32" rx="10" fill="var(--m-purple-soft)" stroke="var(--m-purple)" stroke-width="1.2"/>
+            <rect x="174" y="38" width="20" height="14" rx="7" fill="var(--m-purple)"/>
+            <text x="180" y="48" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">AI</text>
+            <rect x="200" y="40" width="44" height="3" rx="1" fill="var(--m-purple)" opacity="0.7"/>
+            <rect x="200" y="46" width="36" height="2.5" rx="1" fill="var(--m-purple)" opacity="0.4"/>
+            <rect x="200" y="51" width="40" height="2.5" rx="1" fill="var(--m-purple)" opacity="0.4"/>
+
+            <rect x="166" y="74" width="84" height="32" rx="10" fill="var(--m-purple-soft)" stroke="var(--m-purple)" stroke-width="1.2"/>
+            <rect x="174" y="82" width="20" height="14" rx="7" fill="var(--m-purple)"/>
+            <text x="180" y="92" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">AI</text>
+            <rect x="200" y="84" width="44" height="3" rx="1" fill="var(--m-purple)" opacity="0.7"/>
+            <rect x="200" y="90" width="36" height="2.5" rx="1" fill="var(--m-purple)" opacity="0.4"/>
+            <rect x="200" y="95" width="40" height="2.5" rx="1" fill="var(--m-purple)" opacity="0.4"/>
+
+            <!-- Connection lines -->
+            <line x1="158" y1="46" x2="164" y2="46" stroke="var(--m-purple)" stroke-width="1.5"/>
+            <line x1="158" y1="90" x2="164" y2="90" stroke="var(--m-purple)" stroke-width="1.5"/>
           </svg>
         </div>
         <div class="tool-body">
           <div class="tool-meta operational">Document AI</div>
           <h3 class="tool-name">Document Auto-Review Assistant</h3>
-          <p class="tool-desc">Reads draft documents and surfaces formatting issues, missing references, and inconsistencies before reviewer handoff.</p>
+          <p class="tool-desc">Trained on master templates — highlights formatting issues, missing references, and inconsistencies in draft documents. Never auto-corrects; surfaces only.</p>
           <div class="tool-status operational"><span class="dot"></span>Deployed to team</div>
         </div>
       </a>
@@ -655,43 +843,52 @@
       <!-- Project Scheduling -->
       <a href="project-scheduling.html" class="tool-card">
         <div class="mockup">
-          <svg viewBox="0 0 240 135" xmlns="http://www.w3.org/2000/svg">
-            <g stroke="var(--mockup-stroke)" stroke-width="0.6" fill="none">
-              <line x1="30" y1="30" x2="210" y2="30"/>
-              <line x1="30" y1="50" x2="210" y2="50"/>
-              <line x1="30" y1="70" x2="210" y2="70"/>
-              <line x1="30" y1="90" x2="210" y2="90"/>
-              <line x1="30" y1="110" x2="210" y2="110"/>
-              <line x1="30" y1="30" x2="30" y2="110"/>
-              <line x1="66" y1="30" x2="66" y2="110"/>
-              <line x1="102" y1="30" x2="102" y2="110"/>
-              <line x1="138" y1="30" x2="138" y2="110"/>
-              <line x1="174" y1="30" x2="174" y2="110"/>
-              <line x1="210" y1="30" x2="210" y2="110"/>
+          <svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg">
+            <!-- 7-stage workflow -->
+            <g>
+              <circle cx="32" cy="50" r="11" fill="var(--m-blue)"/>
+              <text x="29" y="53" font-size="9" font-family="Inter, sans-serif" fill="#fff" font-weight="800">1</text>
+              <line x1="43" y1="50" x2="55" y2="50" stroke="var(--m-stroke)" stroke-width="1.5"/>
+
+              <circle cx="66" cy="50" r="11" fill="var(--m-purple)"/>
+              <text x="63" y="53" font-size="9" font-family="Inter, sans-serif" fill="#fff" font-weight="800">2</text>
+              <line x1="77" y1="50" x2="89" y2="50" stroke="var(--m-stroke)" stroke-width="1.5"/>
+
+              <circle cx="100" cy="50" r="11" fill="var(--m-green)"/>
+              <text x="97" y="53" font-size="9" font-family="Inter, sans-serif" fill="#fff" font-weight="800">3</text>
+              <line x1="111" y1="50" x2="123" y2="50" stroke="var(--m-stroke)" stroke-width="1.5"/>
+
+              <circle cx="134" cy="50" r="11" fill="var(--m-yellow)"/>
+              <text x="131" y="53" font-size="9" font-family="Inter, sans-serif" fill="#7d6300" font-weight="800">4</text>
+              <line x1="145" y1="50" x2="157" y2="50" stroke="var(--m-stroke)" stroke-width="1.5"/>
+
+              <circle cx="168" cy="50" r="11" fill="var(--m-orange)"/>
+              <text x="165" y="53" font-size="9" font-family="Inter, sans-serif" fill="#fff" font-weight="800">5</text>
+              <line x1="179" y1="50" x2="191" y2="50" stroke="var(--m-stroke)" stroke-width="1.5"/>
+
+              <circle cx="202" cy="50" r="11" fill="var(--card-bg)" stroke="var(--m-stroke)" stroke-width="1.5"/>
+              <text x="199" y="53" font-size="9" font-family="Inter, sans-serif" fill="var(--m-stroke)" font-weight="800">6</text>
+              <line x1="213" y1="50" x2="225" y2="50" stroke="var(--m-stroke)" stroke-width="1.5"/>
+
+              <circle cx="236" cy="50" r="11" fill="var(--card-bg)" stroke="var(--m-stroke)" stroke-width="1.5"/>
+              <text x="233" y="53" font-size="9" font-family="Inter, sans-serif" fill="var(--m-stroke)" font-weight="800">7</text>
             </g>
-            <rect x="34" y="34" width="28" height="12" rx="2" fill="var(--accent-green)" opacity="0.7"/>
-            <rect x="70" y="34" width="28" height="12" rx="2" fill="var(--accent-green)" opacity="0.5"/>
-            <rect x="142" y="34" width="28" height="12" rx="2" fill="var(--accent-green)" opacity="0.6"/>
-            <rect x="34" y="54" width="28" height="12" rx="2" fill="var(--accent-green)" opacity="0.5"/>
-            <rect x="106" y="54" width="28" height="12" rx="2" fill="var(--accent-green)" opacity="0.7"/>
-            <rect x="178" y="54" width="28" height="12" rx="2" fill="var(--accent-green)" opacity="0.6"/>
-            <rect x="70" y="74" width="28" height="12" rx="2" fill="var(--accent-green)" opacity="0.6"/>
-            <rect x="142" y="74" width="28" height="12" rx="2" fill="var(--accent-warm)" opacity="0.7"/>
-            <rect x="178" y="74" width="28" height="12" rx="2" fill="var(--accent-green)" opacity="0.5"/>
-            <rect x="34" y="94" width="28" height="12" rx="2" fill="var(--accent-green)" opacity="0.6"/>
-            <rect x="106" y="94" width="28" height="12" rx="2" fill="var(--accent-green)" opacity="0.5"/>
-            <rect x="142" y="94" width="28" height="12" rx="2" fill="var(--accent-green)" opacity="0.7"/>
-            <text x="44" y="22" font-size="8" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600">M</text>
-            <text x="80" y="22" font-size="8" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600">T</text>
-            <text x="116" y="22" font-size="8" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600">W</text>
-            <text x="152" y="22" font-size="8" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600">T</text>
-            <text x="188" y="22" font-size="8" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600">F</text>
+
+            <!-- Briefing card -->
+            <rect x="20" y="80" width="240" height="58" rx="10" fill="var(--m-blue-soft)" stroke="var(--m-blue)" stroke-width="1"/>
+            <text x="30" y="98" font-size="8" font-family="Inter, sans-serif" fill="var(--m-blue)" font-weight="700" letter-spacing="0.06em">☀️ TODAY'S BRIEFING</text>
+            <rect x="30" y="106" width="220" height="22" rx="6" fill="var(--card-bg)"/>
+            <circle cx="40" cy="117" r="3" fill="var(--m-orange)"/>
+            <rect x="48" y="113" width="80" height="3" rx="1" fill="var(--text)" opacity="0.85"/>
+            <rect x="48" y="119" width="120" height="2.5" rx="1" fill="var(--text-faint)" opacity="0.6"/>
+            <rect x="200" y="111" width="42" height="13" rx="6.5" fill="var(--m-orange)"/>
+            <text x="207" y="120" font-size="7" font-family="Inter, sans-serif" fill="#fff" font-weight="800">D-2</text>
           </svg>
         </div>
         <div class="tool-body">
           <div class="tool-meta operational">Project Management</div>
           <h3 class="tool-name">Project Scheduling Tool</h3>
-          <p class="tool-desc">For project managers — schedule, sequence, and balance projects across the team, with overload and conflict visibility built in.</p>
+          <p class="tool-desc">Daily morning briefing for project managers — surfaces who to check on and what to ask, derived from backward-calculated checkpoints. Includes pre-written team messages.</p>
           <div class="tool-status operational"><span class="dot"></span>Deployed to team</div>
         </div>
       </a>
@@ -699,49 +896,51 @@
       <!-- Task Manager -->
       <a href="project-task-manager.html" class="tool-card">
         <div class="mockup">
-          <svg viewBox="0 0 240 135" xmlns="http://www.w3.org/2000/svg">
-            <g>
-              <rect x="22" y="22" width="62" height="95" rx="3" fill="var(--mockup-fill)" opacity="0.6"/>
-              <text x="28" y="33" font-size="8" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="700">TODO</text>
-              <rect x="26" y="38" width="54" height="16" rx="2" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="0.6"/>
-              <line x1="30" y1="44" x2="62" y2="44" stroke="var(--text-faint)" stroke-width="0.7"/>
-              <line x1="30" y1="49" x2="56" y2="49" stroke="var(--text-faint)" stroke-width="0.5" opacity="0.5"/>
-              <rect x="26" y="58" width="54" height="16" rx="2" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="0.6"/>
-              <line x1="30" y1="64" x2="58" y2="64" stroke="var(--text-faint)" stroke-width="0.7"/>
-              <line x1="30" y1="69" x2="50" y2="69" stroke="var(--text-faint)" stroke-width="0.5" opacity="0.5"/>
-              <rect x="26" y="78" width="54" height="16" rx="2" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="0.6"/>
-              <line x1="30" y1="84" x2="60" y2="84" stroke="var(--text-faint)" stroke-width="0.7"/>
-              <line x1="30" y1="89" x2="54" y2="89" stroke="var(--text-faint)" stroke-width="0.5" opacity="0.5"/>
-            </g>
-            <g>
-              <rect x="89" y="22" width="62" height="95" rx="3" fill="var(--accent-green)" opacity="0.1"/>
-              <text x="95" y="33" font-size="8" font-family="Inter, sans-serif" fill="var(--accent-green)" font-weight="700">DOING</text>
-              <rect x="93" y="38" width="54" height="16" rx="2" fill="var(--card-bg)" stroke="var(--accent-green)" stroke-width="0.8"/>
-              <line x1="97" y1="44" x2="129" y2="44" stroke="var(--text)" stroke-width="0.7"/>
-              <line x1="97" y1="49" x2="123" y2="49" stroke="var(--text-faint)" stroke-width="0.5" opacity="0.6"/>
-              <rect x="93" y="58" width="54" height="16" rx="2" fill="var(--card-bg)" stroke="var(--accent-green)" stroke-width="0.8"/>
-              <line x1="97" y1="64" x2="125" y2="64" stroke="var(--text)" stroke-width="0.7"/>
-              <line x1="97" y1="69" x2="117" y2="69" stroke="var(--text-faint)" stroke-width="0.5" opacity="0.6"/>
-            </g>
-            <g>
-              <rect x="156" y="22" width="62" height="95" rx="3" fill="var(--mockup-fill)" opacity="0.6"/>
-              <text x="162" y="33" font-size="8" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="700">DONE</text>
-              <rect x="160" y="38" width="54" height="16" rx="2" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="0.6" opacity="0.7"/>
-              <line x1="164" y1="44" x2="194" y2="44" stroke="var(--text-faint)" stroke-width="0.7" opacity="0.6"/>
-              <line x1="164" y1="49" x2="188" y2="49" stroke="var(--text-faint)" stroke-width="0.5" opacity="0.4"/>
-              <rect x="160" y="58" width="54" height="16" rx="2" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="0.6" opacity="0.7"/>
-              <line x1="164" y1="64" x2="192" y2="64" stroke="var(--text-faint)" stroke-width="0.7" opacity="0.6"/>
-              <line x1="164" y1="69" x2="184" y2="69" stroke="var(--text-faint)" stroke-width="0.5" opacity="0.4"/>
-              <rect x="160" y="78" width="54" height="16" rx="2" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="0.6" opacity="0.7"/>
-              <line x1="164" y1="84" x2="190" y2="84" stroke="var(--text-faint)" stroke-width="0.7" opacity="0.6"/>
-              <line x1="164" y1="89" x2="180" y2="89" stroke="var(--text-faint)" stroke-width="0.5" opacity="0.4"/>
-            </g>
+          <svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg">
+            <!-- Metric cards row -->
+            <rect x="20" y="20" width="54" height="42" rx="10" fill="var(--m-blue-soft)"/>
+            <text x="28" y="34" font-size="7" font-family="Inter, sans-serif" fill="var(--m-blue)" font-weight="700" letter-spacing="0.05em">MY ITEMS</text>
+            <text x="28" y="52" font-size="18" font-family="Inter, sans-serif" fill="var(--m-blue)" font-weight="800" letter-spacing="-0.02em">12</text>
+
+            <rect x="80" y="20" width="54" height="42" rx="10" fill="var(--m-orange-soft)"/>
+            <text x="88" y="34" font-size="7" font-family="Inter, sans-serif" fill="var(--m-orange)" font-weight="700" letter-spacing="0.05em">DUE SOON</text>
+            <text x="88" y="52" font-size="18" font-family="Inter, sans-serif" fill="var(--m-orange)" font-weight="800" letter-spacing="-0.02em">3</text>
+
+            <rect x="140" y="20" width="54" height="42" rx="10" fill="var(--m-red-soft)"/>
+            <text x="148" y="34" font-size="7" font-family="Inter, sans-serif" fill="var(--m-red)" font-weight="700" letter-spacing="0.05em">OVERDUE</text>
+            <text x="148" y="52" font-size="18" font-family="Inter, sans-serif" fill="var(--m-red)" font-weight="800" letter-spacing="-0.02em">1</text>
+
+            <rect x="200" y="20" width="54" height="42" rx="10" fill="var(--m-green-soft)"/>
+            <text x="208" y="34" font-size="7" font-family="Inter, sans-serif" fill="var(--m-green)" font-weight="700" letter-spacing="0.05em">ASSIGNED</text>
+            <text x="208" y="52" font-size="18" font-family="Inter, sans-serif" fill="var(--m-green)" font-weight="800" letter-spacing="-0.02em">8</text>
+
+            <!-- Task rows -->
+            <rect x="20" y="72" width="234" height="22" rx="8" fill="var(--card-bg)" stroke="var(--border-soft)" stroke-width="1"/>
+            <circle cx="32" cy="83" r="4" fill="var(--m-orange)"/>
+            <rect x="42" y="79" width="100" height="3" rx="1" fill="var(--text)" opacity="0.85"/>
+            <rect x="42" y="85" width="70" height="2.5" rx="1" fill="var(--text-faint)" opacity="0.6"/>
+            <rect x="218" y="76" width="32" height="13" rx="6.5" fill="var(--m-red-soft)"/>
+            <text x="222" y="85" font-size="8" font-family="Inter, sans-serif" fill="var(--m-red)" font-weight="700">3d over</text>
+
+            <rect x="20" y="100" width="234" height="22" rx="8" fill="var(--card-bg)" stroke="var(--border-soft)" stroke-width="1"/>
+            <circle cx="32" cy="111" r="4" fill="var(--m-blue)"/>
+            <rect x="42" y="107" width="90" height="3" rx="1" fill="var(--text)" opacity="0.85"/>
+            <rect x="42" y="113" width="65" height="2.5" rx="1" fill="var(--text-faint)" opacity="0.6"/>
+            <rect x="222" y="104" width="28" height="13" rx="6.5" fill="var(--m-orange-soft)"/>
+            <text x="228" y="113" font-size="8" font-family="Inter, sans-serif" fill="var(--m-orange)" font-weight="700">D-2</text>
+
+            <rect x="20" y="128" width="234" height="22" rx="8" fill="var(--card-bg)" stroke="var(--border-soft)" stroke-width="1"/>
+            <circle cx="32" cy="139" r="4" fill="var(--m-green)"/>
+            <rect x="42" y="135" width="95" height="3" rx="1" fill="var(--text)" opacity="0.85"/>
+            <rect x="42" y="141" width="60" height="2.5" rx="1" fill="var(--text-faint)" opacity="0.6"/>
+            <rect x="218" y="132" width="32" height="13" rx="6.5" fill="var(--m-green-soft)"/>
+            <text x="223" y="141" font-size="8" font-family="Inter, sans-serif" fill="var(--m-green)" font-weight="700">D-12</text>
           </svg>
         </div>
         <div class="tool-body">
           <div class="tool-meta operational">Task Coordination</div>
           <h3 class="tool-name">Task Manager</h3>
-          <p class="tool-desc">Assigns daily tasks across the team and tracks them through completion — managers see workload at a glance, analysts self-track progress.</p>
+          <p class="tool-desc">Assigns daily tasks across the team and tracks them through completion — managers see workload, analysts see their own schedule and overdue items.</p>
           <div class="tool-status operational"><span class="dot"></span>Deployed to team</div>
         </div>
       </a>
@@ -749,45 +948,55 @@
       <!-- Document Translation -->
       <a href="project-document-translation.html" class="tool-card">
         <div class="mockup">
-          <svg viewBox="0 0 240 135" xmlns="http://www.w3.org/2000/svg">
-            <rect x="22" y="22" width="92" height="92" rx="3" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="0.8"/>
-            <text x="26" y="33" font-size="8" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="700">KO</text>
-            <g stroke="var(--text-faint)" stroke-width="0.7" opacity="0.6">
-              <line x1="28" y1="42" x2="106" y2="42"/>
-              <line x1="28" y1="48" x2="100" y2="48"/>
-              <line x1="28" y1="54" x2="96" y2="54"/>
-              <line x1="28" y1="64" x2="104" y2="64"/>
-              <line x1="28" y1="70" x2="98" y2="70"/>
-              <line x1="28" y1="80" x2="102" y2="80"/>
-              <line x1="28" y1="86" x2="94" y2="86"/>
-              <line x1="28" y1="92" x2="100" y2="92"/>
-              <line x1="28" y1="102" x2="98" y2="102"/>
-              <line x1="28" y1="108" x2="92" y2="108"/>
+          <svg viewBox="0 0 280 158" xmlns="http://www.w3.org/2000/svg">
+            <!-- KO doc -->
+            <rect x="20" y="22" width="106" height="114" rx="10" fill="var(--card-bg)" stroke="var(--m-stroke)" stroke-width="1"/>
+            <rect x="30" y="32" width="22" height="14" rx="7" fill="var(--m-blue-soft)"/>
+            <text x="36" y="42" font-size="8" font-family="Inter, sans-serif" fill="var(--m-blue)" font-weight="800">KO</text>
+            <g stroke="var(--text-faint)" stroke-width="0.7" opacity="0.5">
+              <line x1="30" y1="56" x2="116" y2="56"/>
+              <line x1="30" y1="63" x2="110" y2="63"/>
+              <line x1="30" y1="70" x2="116" y2="70"/>
+              <line x1="30" y1="82" x2="106" y2="82"/>
+              <line x1="30" y1="89" x2="116" y2="89"/>
+              <line x1="30" y1="96" x2="100" y2="96"/>
+              <line x1="30" y1="108" x2="116" y2="108"/>
+              <line x1="30" y1="115" x2="104" y2="115"/>
+              <line x1="30" y1="122" x2="112" y2="122"/>
             </g>
-            <line x1="118" y1="68" x2="128" y2="68" stroke="var(--accent-green)" stroke-width="1.4"/>
-            <polyline points="125,65 128,68 125,71" fill="none" stroke="var(--accent-green)" stroke-width="1.4"/>
-            <rect x="132" y="22" width="92" height="92" rx="3" fill="var(--card-bg)" stroke="var(--accent-green)" stroke-width="0.8"/>
-            <text x="136" y="33" font-size="8" font-family="Inter, sans-serif" fill="var(--accent-green)" font-weight="700">EN</text>
+            <!-- Highlight terms (consistent glossary) -->
+            <rect x="60" y="60" width="30" height="6" rx="2" fill="var(--m-purple)" opacity="0.35"/>
+            <rect x="50" y="86" width="32" height="6" rx="2" fill="var(--m-purple)" opacity="0.35"/>
+            <rect x="70" y="112" width="28" height="6" rx="2" fill="var(--m-purple)" opacity="0.35"/>
+
+            <!-- Arrow -->
+            <line x1="132" y1="79" x2="148" y2="79" stroke="var(--m-green)" stroke-width="2" stroke-linecap="round"/>
+            <polyline points="143,74 148,79 143,84" fill="none" stroke="var(--m-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- EN doc -->
+            <rect x="154" y="22" width="106" height="114" rx="10" fill="var(--card-bg)" stroke="var(--m-green)" stroke-width="1.2"/>
+            <rect x="164" y="32" width="22" height="14" rx="7" fill="var(--m-green-soft)"/>
+            <text x="170" y="42" font-size="8" font-family="Inter, sans-serif" fill="var(--m-green)" font-weight="800">EN</text>
             <g stroke="var(--text)" stroke-width="0.7">
-              <line x1="138" y1="42" x2="216" y2="42"/>
-              <line x1="138" y1="48" x2="210" y2="48"/>
-              <line x1="138" y1="54" x2="206" y2="54"/>
-              <line x1="138" y1="64" x2="214" y2="64"/>
-              <line x1="138" y1="70" x2="208" y2="70"/>
-              <line x1="138" y1="80" x2="212" y2="80"/>
-              <line x1="138" y1="86" x2="204" y2="86"/>
-              <line x1="138" y1="92" x2="210" y2="92"/>
-              <line x1="138" y1="102" x2="208" y2="102"/>
-              <line x1="138" y1="108" x2="202" y2="108"/>
+              <line x1="164" y1="56" x2="250" y2="56"/>
+              <line x1="164" y1="63" x2="244" y2="63"/>
+              <line x1="164" y1="70" x2="250" y2="70"/>
+              <line x1="164" y1="82" x2="240" y2="82"/>
+              <line x1="164" y1="89" x2="250" y2="89"/>
+              <line x1="164" y1="96" x2="234" y2="96"/>
+              <line x1="164" y1="108" x2="250" y2="108"/>
+              <line x1="164" y1="115" x2="238" y2="115"/>
+              <line x1="164" y1="122" x2="246" y2="122"/>
             </g>
-            <rect x="138" y="49" width="20" height="4" fill="var(--accent-green)" opacity="0.3"/>
-            <rect x="138" y="81" width="22" height="4" fill="var(--accent-green)" opacity="0.3"/>
+            <rect x="194" y="60" width="30" height="6" rx="2" fill="var(--m-purple)" opacity="0.35"/>
+            <rect x="184" y="86" width="32" height="6" rx="2" fill="var(--m-purple)" opacity="0.35"/>
+            <rect x="204" y="112" width="28" height="6" rx="2" fill="var(--m-purple)" opacity="0.35"/>
           </svg>
         </div>
         <div class="tool-body">
           <div class="tool-meta operational">Bilingual Production</div>
           <h3 class="tool-name">Bilingual Document Translation</h3>
-          <p class="tool-desc">Korean–English translation for regulated documents — keeps terminology consistent across the document family via a managed glossary.</p>
+          <p class="tool-desc">Korean–English translation with a managed glossary — keeps terminology consistent across the document family, so analysts don't translate the same Korean term five different ways.</p>
           <div class="tool-status operational"><span class="dot"></span>Deployed to team</div>
         </div>
       </a>
