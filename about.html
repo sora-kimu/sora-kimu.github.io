@@ -3,79 +3,189 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About · Sora Kim</title>
+  <title>About — Sora Kim</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
   <style>
     :root {
-      --bg: #ffffff; --text: #111111; --text-muted: #555555;
-      --text-light: #888888; --border: #e5e5e5; --surface: #fafafa; --blue: #2563EB;
-      --accent: #7c3aed;
+      --bg: #f5f5f5;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --accent: #1e3a5f;
+      --border: #ddd;
+      --button-bg: #e5e5e5;
+      --button-hover: #d5d5d5;
+      --tag-bg: #ebebeb;
+      --tag-border: #d8d8d8;
     }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
-        --bg: #111111; --text: #f0f0f0; --text-muted: #aaaaaa;
-        --text-light: #666666; --border: #2a2a2a; --surface: #1a1a1a; --blue: #60a5fa;
-        --accent: #a78bfa;
+        --bg: #1a1a1a;
+        --text: #f0f0f0;
+        --text-muted: #aaa;
+        --accent: #7ba9d8;
+        --border: #333;
+        --button-bg: #2a2a2a;
+        --button-hover: #3a3a3a;
+        --tag-bg: #262626;
+        --tag-border: #3a3a3a;
       }
     }
     [data-theme="dark"] {
-      --bg: #111111; --text: #f0f0f0; --text-muted: #aaaaaa;
-      --text-light: #666666; --border: #2a2a2a; --surface: #1a1a1a; --blue: #60a5fa;
-      --accent: #a78bfa;
+      --bg: #1a1a1a;
+      --text: #f0f0f0;
+      --text-muted: #aaa;
+      --accent: #7ba9d8;
+      --border: #333;
+      --button-bg: #2a2a2a;
+      --button-hover: #3a3a3a;
+      --tag-bg: #262626;
+      --tag-border: #3a3a3a;
     }
     [data-theme="light"] {
-      --bg: #ffffff; --text: #111111; --text-muted: #555555;
-      --text-light: #888888; --border: #e5e5e5; --surface: #fafafa; --blue: #2563EB;
-      --accent: #7c3aed;
+      --bg: #f5f5f5;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --accent: #1e3a5f;
+      --border: #ddd;
+      --button-bg: #e5e5e5;
+      --button-hover: #d5d5d5;
+      --tag-bg: #ebebeb;
+      --tag-border: #d8d8d8;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 18px; line-height: 1.7; transition: background 0.2s, color 0.2s; }
-    nav { padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 10; }
-    .nav-name { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: 0.04em;  white-space: nowrap;}
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; }
-    .nav-links a:hover, .nav-links a.active { color: var(--blue); }
-    .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px; font-size: 14px; cursor: pointer; color: var(--text); transition: all 0.15s; }
-    .theme-toggle:hover { border-color: var(--blue); }
-    main { max-width: 680px; margin: 0 auto; padding: 64px 32px 80px; }
-    .greeting { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px; line-height: 1.3; }
-    .thesis { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent); margin-bottom: 28px; padding: 12px 16px; background: var(--surface); border-left: 3px solid var(--accent); border-radius: 4px; line-height: 1.5; }
-    .section { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
-    .section:last-of-type { border-bottom: none; padding-bottom: 0; }
-    .section-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); margin-bottom: 16px; }
-    p { font-size: 0.97rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 14px; }
-    p:last-child { margin-bottom: 0; }
-    p strong { color: var(--text); font-weight: 600; }
-    .aside { font-size: 0.87rem; color: var(--text-light); font-style: italic; margin-top: -8px; margin-bottom: 14px; padding-left: 14px; border-left: 2px solid var(--border); }
-    .fun-list { display: flex; flex-direction: column; gap: 20px; margin-top: 8px; }
-    .fun-item { display: flex; align-items: flex-start; gap: 14px; }
-    .fun-emoji { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
-    .fun-text { font-size: 0.95rem; color: var(--text-muted); line-height: 1.75; }
-    .fun-text strong { color: var(--text); font-weight: 600; }
-    .contact-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
-    .contact-item { display: flex; align-items: center; gap: 12px; }
-    .contact-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-light); letter-spacing: 0.06em; text-transform: uppercase; min-width: 60px; }
-    .contact-item a { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--blue); text-decoration: none; }
-    .contact-item a:hover { text-decoration: underline; }
-    .cv-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--bg); background: var(--text); text-decoration: none; padding: 10px 20px; border-radius: 6px; transition: opacity 0.15s; }
-    .cv-btn:hover { opacity: 0.8; }
-    footer { border-top: 1px solid var(--border); text-align: center; padding: 24px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-light); }
-    footer a { color: var(--text-light); text-decoration: none; }
-    footer a:hover { color: var(--blue); }
-    @media (max-width: 600px) {
-      nav { padding: 14px 20px; } .nav-links { gap: 18px; }
-      main { padding: 40px 20px 60px; } .greeting { font-size: 1.25rem; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.2s, color 0.2s;
     }
-  
-    @media (max-width: 480px) {
-      nav { padding: 12px 14px; }
-      .nav-name { font-size: 11px; gap: 4px; }
-      .nav-links { gap: 12px; }
-      .nav-links a { font-size: 10px; }
-      .theme-toggle { padding: 3px 7px; font-size: 12px; }
+    a { color: var(--accent); }
+
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { nav { padding: 20px 24px; } }
+
+    .nav-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    @media (max-width: 640px) { .nav-right { gap: 12px; } }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    @media (max-width: 640px) { .nav-links { gap: 14px; } }
+    .nav-links a {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      padding-bottom: 2px;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.active {
+      border-bottom: 2px solid var(--text);
+      font-weight: 500;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+    }
+    @media (max-width: 640px) { main { padding: 40px 24px 60px; } }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+      color: var(--text);
+    }
+    @media (max-width: 640px) { h1 { font-size: 2rem; } }
+
+    .prose p {
+      font-size: 1.0rem;
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .prose a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+    .prose a:hover {
+      text-decoration-thickness: 2px;
+    }
+    .prose em {
+      font-style: italic;
+    }
+
+    .prose .section-gap {
+      margin-top: 32px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -83,189 +193,67 @@
 
 <nav>
   <a href="index.html" class="nav-name">🐚 Sora Kim</a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="papers.html">Papers</a></li>
-    <li><a href="tools.html">Tools</a></li>
-    <li><a href="teaching.html">Teaching</a></li>
-    <li><a href="about.html" class="active">About</a></li>
-  </ul>
-  <button class="theme-toggle" id="themeToggle">🌙</button>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="papers.html">Papers</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="learning.html">Learning</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+  </div>
 </nav>
+
+<main>
+  <h1>About</h1>
+
+  <div class="prose">
+    <p>
+      Hi! 🙌 My name is <strong>Sora</strong> — 소라 in Korean, which means <em>a sea shell</em>. That's why there's a 🐚 in the corner of every page on this site. (Subtle branding, I know.)
+    </p>
+
+    <p class="section-gap">
+      I'm a <strong>quality engineer</strong> at a GMP-regulated pharmaceutical manufacturing site in South Korea. These days my work is mostly about <strong>finding bottlenecks in the team's workflows, building tools to fix them, and teaching the team how to actually use AI in regulated work</strong> — which is where my twelve deployed tools and most of my current research come from.
+    </p>
+
+    <p class="section-gap">
+      Before this job, I spent <strong>two years in Boston</strong> studying English and <strong>a year and a half in Tokyo</strong> on a working holiday visa (also studying Japanese, also drinking way too much Starbucks). I work comfortably in Korean, English, and Japanese.
+    </p>
+
+    <p class="section-gap">
+      I like learning things on my own. During a gap year in 2021–2022, I taught myself R, Python, and the basics of deep learning — finishing the <strong>Johns Hopkins Data Science Specialization</strong>, the Johns Hopkins Genomic Data Science series, and the UC San Diego Bioinformatics specialization on Coursera, and building a PyTorch CNN for malaria blood-cell classification because apparently that's what I do for fun. These days I keep at it with AI and NLP through <strong>weekend projects</strong> — you can find what I'm currently building on the <a href="projects.html">Projects</a> page.
+    </p>
+
+    <p class="section-gap">
+      Outside of all this, I'm a serious coffee person. Three years as a <strong>barista</strong>, decent enough at rosetta latte art that I'll trust you with my opinion on yours, and an iced latte habit that does not negotiate with the weather. ☕
+    </p>
+
+    <p class="section-gap">
+      The best way to reach me is by <a href="mailto:sorakim.lab@gmail.com">email</a>.
+    </p>
+  </div>
+</main>
+
+<footer>
+  © 2026 <a href="index.html">Sora Kim</a> · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
+</footer>
 
 <script>
   const toggle = document.getElementById('themeToggle');
   const root = document.documentElement;
   const saved = localStorage.getItem('theme');
-  if (saved === 'dark') { root.setAttribute('data-theme','dark'); toggle.textContent='☀️'; }
-  else if (saved === 'light') { root.setAttribute('data-theme','light'); toggle.textContent='🌙'; }
+  if (saved === 'light') { root.setAttribute('data-theme','light'); toggle.textContent='🌙'; }
+  else if (saved === 'dark') { root.setAttribute('data-theme','dark'); toggle.textContent='☀️'; }
+  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { toggle.textContent='☀️'; }
   toggle.addEventListener('click', () => {
-    const isDark = root.getAttribute('data-theme') === 'dark';
-    if (isDark) { root.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); toggle.textContent='🌙'; }
+    const cur = root.getAttribute('data-theme');
+    if (cur === 'dark') { root.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); toggle.textContent='🌙'; }
+    else if (cur === 'light') { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
     else { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
   });
 </script>
-
-<main>
-
-  <div class="section">
-    <p class="greeting">Hi, I'm Sora! 😊🐚👋<br>
-      <span style="font-size:0.9rem;font-weight:400;color:var(--text-muted);">
-        (소라 means "conch shell" in Korean — yes, the 🐚 is literally my name.)
-      </span>
-    </p>
-    <p>
-      I'm a practitioner-researcher in <strong>pharmaceutical GMP quality control</strong>
-      in South Korea. I work on <strong>Regulatory HCI</strong> — how regulated work environments shape practitioner cognition, decision-making, and the production of accountability, and how design choices in those environments can both improve working conditions and make accountability structures clearer (especially as AI enters the workflow). The methods draw on organizational theory, STS, HCI, and computational text analysis, but the core question is structural: <em>how do regulated environments quietly determine what workers can see, do, decide, and be held accountable for?</em>
-    </p>
-    <p>
-      AI integration into regulated work isn't a question of whether anymore —
-      it's happening. What I actually spend time on is the <em>how</em>: how organizations
-      adopt AI without eroding the accountability structures that make regulated work legible
-      in the first place — and without making the people doing the work invisible in the process.
-      Most of my days are spent between studying those dynamics
-      and building tools that try to take them seriously.
-    </p>
-    <p>
-      The short version: I spend a lot of time thinking about why organizational
-      outcomes feel inevitable when they're actually designed that way — and what
-      happens when AI enters that design. It's a great conversation starter. At
-      parties. That I go to. Occasionally.
-    </p>
-  </div>
-
-  <div class="section">
-    <p class="section-label">How I got here (and why I want a PhD) 🙃</p>
-    <p>
-      The research grew on the side of a full-time QC role — no lab, no advisor,
-      no institutional scaffolding. It didn't start as a research program either.
-      It started with noticing things at work that seemed important and couldn't
-      find in the literature the way I wanted to read about them, so eventually
-      I started writing myself. Every time a new question came up, I'd go figure
-      out what method might answer it — googling, reading, learning the technique
-      from scratch, trying it, getting it wrong, trying again. That's how the
-      whole thing grew: <strong>question first, then method, then paper.</strong>
-      Not the usual direction.
-    </p>
-    <p class="aside">
-      (I once spent three weeks going in circles on a theoretical framework with
-      no one to ask. It was fine. I'm fine. We don't talk about it.)
-    </p>
-    <p>
-      What it turned into: a four-stage accountability lifecycle theory, nine production tools deployed at a GMP-regulated site (with N=20 user studies on five of them), a computational analysis of FDA Warning Letters, and <strong>10 papers</strong> — four currently under review at organization theory journals, the rest working papers spanning design, computational methods, and theoretical synthesis. I also designed and continue to iterate on an <strong>AI integration training program</strong> for my QC team, and turned that work into two open-access educational artifacts: a practitioner-facing AI literacy cookbook and a pixel-art GMP onboarding game. Teaching people to use AI inside a regulated workflow has sharpened the questions I want to pursue next — especially how organizations adopt AI without eroding the accountability structures that make regulated work legible in the first place.
-    </p>
-    <p>
-      <strong>Which is exactly why I want a PhD.</strong> Working this way taught
-      me a lot, but it also taught me what I'm missing. When you learn methods by
-      finding them yourself, one question at a time, you get fluent at the ones
-      you've needed — and completely blind to the ones you haven't.
-      <strong>I want proper methodological training from people who've been doing
-      this for decades</strong>, not another self-taught workaround that gets me
-      80% of the way there. I've also written 10 papers without anyone to tell me
-      when a draft is actually done, which means I've spent a lot of time guessing
-      at the ceiling of "good enough," and occasionally re-inventing things that
-      already had names. But honestly, the hardest part hasn't been any of that.
-      <strong>It's been the absence of intellectual community</strong> — no one
-      to argue with, no one to push back on an idea at 11pm, no one who cares
-      about the same strange questions you do. It's a kind of loneliness that's
-      hard to describe until you've spent a few years inside it, and it's the
-      part of a PhD I'm most looking forward to. Maybe more than anything else.
-    </p>
-    <p>
-      My research already draws on organizational theory, STS, tool design, and computational text analysis — but the scale and rigor I want to work at require methodological training I haven't yet had access to. Advanced quantitative methods, collaborative computational work, and access to empirical sites beyond the one I've been embedded in — these are the dimensions where doctoral training (and doctoral community) will extend what I can do. My strength is synthesis across theory, tools, and practice; what I need is the infrastructure to push each dimension further.
-    </p>
-    <p>
-      <strong>Applying Fall 2027.</strong> 🎯
-    </p>
-  </div>
-
-  <div class="section">
-    <p class="section-label">Teaching &amp; practice 📘</p>
-    <p>
-      Alongside the research, I designed and run an <strong>AI integration training program</strong> for my QC team (~50 people), with differentiated curriculum for <strong>managers</strong> (building AI-assisted tools) and <strong>operators</strong> (AI-assisted document work). The split matters: what counts as "good AI adoption" looks completely different depending on where you sit in the hierarchy, and collapsing those perspectives tends to produce training that helps neither.
-    </p>
-    <p>
-      Teaching people to use AI inside a regulated workflow turned out to sharpen my research questions more than any reading list did. Watching managers struggle with <em>when to trust an output</em> and operators struggle with <em>when to override a suggestion</em> made the Regulatory HCI questions concrete in a way that wasn't going to come from theory alone.
-    </p>
-    <p>
-      That work has produced two open-access educational artifacts: <strong>"Claude, 이렇게 씁니다."</strong> — a 15-page AI literacy cookbook for GMP teams (EN + KO), and <strong>DAY ONE: GMP</strong> — a pixel-art onboarding game where a newcomer character walks through five first-day GMP scenarios. Both are aimed at the people actually doing this work inside organizations, not the ethics conversation around them. <a href="teaching.html" style="color:var(--accent);">Both are public →</a>
-    </p>
-  </div>
-
-  <div class="section">
-    <p class="section-label">When I'm not doing that ✨</p>
-    <div class="fun-list">
-      <div class="fun-item">
-        <span class="fun-emoji">☕</span>
-        <div class="fun-text">
-          <strong>Café hopping</strong> — I spent three years as a barista, so I treat
-          this as legitimate fieldwork and I will not be taking questions. Strong opinions
-          about milk foam ratios. Have been known to travel somewhere specifically for
-          an iced latte (not americano — I'll die on this hill). Zero regrets.
-        </div>
-      </div>
-      <div class="fun-item">
-        <span class="fun-emoji">🎨</span>
-        <div class="fun-text">
-          <strong>Latte art</strong> — Rosetta-certified. I do rosettes and tulips
-          confidently. I also attempt swans. The swan situation is ongoing and I
-          remain optimistic.
-        </div>
-      </div>
-      <div class="fun-item">
-        <span class="fun-emoji">📚</span>
-        <div class="fun-text">
-          <strong>Reading everything</strong> — fiction, nonfiction, poetry, the
-          occasional cookbook. Genre is a suggestion, not a constraint. Very on-brand
-          for someone who studies how categories get constructed.
-        </div>
-      </div>
-      <div class="fun-item">
-        <span class="fun-emoji">🏃‍♀️</span>
-        <div class="fun-text">
-          <strong>Running (and now Pilates)</strong> — I've been running for a while.
-          I recently added Pilates. My body had opinions about this. We're in
-          negotiations.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <p class="section-label">Say hi 🙌</p>
-    <p>
-      I love talking about Regulatory HCI, regulated work, AI in
-      organizations, PhD applications — or honestly, just café recommendations in
-      your city. If you're a researcher working on anything adjacent, I'd
-      genuinely love to hear from you. That intellectual-community thing I
-      mentioned? This is me trying to build it.
-    </p>
-    <p>
-      Feel free to reach out — I don't bite. (I do sometimes reply with three
-      paragraphs when one would've been fine, but that's a separate issue.) 🤗
-    </p>
-    <div class="contact-list">
-      <div class="contact-item">
-        <span class="contact-label">Email</span>
-        <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">GitHub</span>
-        <a href="https://github.com/sorakim-lab" target="_blank" rel="noopener noreferrer">sorakim-lab</a>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">ORCID</span>
-        <a href="https://orcid.org/0009-0003-0856-4193" target="_blank" rel="noopener noreferrer">0009-0003-0856-4193</a>
-      </div>
-    </div>
-    <a href="SoraKim_CV.pdf" class="cv-btn">📎 Download CV</a>
-  </div>
-
-</main>
-
-<footer>
-  © 2026 Sora Kim · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
-</footer>
 
 </body>
 </html>
