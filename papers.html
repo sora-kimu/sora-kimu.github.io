@@ -6,328 +6,334 @@
   <title>Papers — Sora Kim</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
   <style>
     :root {
-      --bg: #f5f5f5;
-      --text: #1a1a1a;
-      --text-muted: #555;
-      --text-faint: #888;
-      --accent: #1e3a5f;
-      --accent-warm: #b85d36;
-      --border: #ddd;
-      --border-soft: #e8e8e8;
-      --button-bg: #e5e5e5;
-      --button-hover: #d5d5d5;
+      --bg: #f5f5f5; --bg-soft: #fafafa;
+      --text: #1a1a1a; --text-muted: #4a4a4a; --text-faint: #888;
+      --accent: #1e3a5f; --accent-soft: rgba(30, 58, 95, 0.08);
+      --accent-warm: #b85d36; --accent-warm-soft: rgba(184, 93, 54, 0.10);
+      --accent-green: #3a6b4a; --accent-green-soft: rgba(58, 107, 74, 0.10);
+      --border: #ddd; --border-soft: #e8e8e8;
       --card-bg: #fff;
-      --tag-bg: #ebebeb;
-      --tag-border: #d8d8d8;
     }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
-        --bg: #1a1a1a; --text: #f0f0f0; --text-muted: #aaa; --text-faint: #777;
-        --accent: #7ba9d8; --accent-warm: #d99b6e;
+        --bg: #1a1a1a; --bg-soft: #202020;
+        --text: #f0f0f0; --text-muted: #b8b8b8; --text-faint: #888;
+        --accent: #7ba9d8; --accent-soft: rgba(123, 169, 216, 0.14);
+        --accent-warm: #d99b6e; --accent-warm-soft: rgba(217, 155, 110, 0.14);
+        --accent-green: #7eb18e; --accent-green-soft: rgba(126, 177, 142, 0.14);
         --border: #333; --border-soft: #2a2a2a;
-        --button-bg: #2a2a2a; --button-hover: #3a3a3a;
-        --card-bg: #232323; --tag-bg: #262626; --tag-border: #3a3a3a;
+        --card-bg: #232323;
       }
     }
     [data-theme="dark"] {
-      --bg: #1a1a1a; --text: #f0f0f0; --text-muted: #aaa; --text-faint: #777;
-      --accent: #7ba9d8; --accent-warm: #d99b6e;
+      --bg: #1a1a1a; --bg-soft: #202020;
+      --text: #f0f0f0; --text-muted: #b8b8b8; --text-faint: #888;
+      --accent: #7ba9d8; --accent-soft: rgba(123, 169, 216, 0.14);
+      --accent-warm: #d99b6e; --accent-warm-soft: rgba(217, 155, 110, 0.14);
+      --accent-green: #7eb18e; --accent-green-soft: rgba(126, 177, 142, 0.14);
       --border: #333; --border-soft: #2a2a2a;
-      --button-bg: #2a2a2a; --button-hover: #3a3a3a;
-      --card-bg: #232323; --tag-bg: #262626; --tag-border: #3a3a3a;
+      --card-bg: #232323;
     }
     [data-theme="light"] {
-      --bg: #f5f5f5; --text: #1a1a1a; --text-muted: #555; --text-faint: #888;
-      --accent: #1e3a5f; --accent-warm: #b85d36;
+      --bg: #f5f5f5; --bg-soft: #fafafa;
+      --text: #1a1a1a; --text-muted: #4a4a4a; --text-faint: #888;
+      --accent: #1e3a5f; --accent-soft: rgba(30, 58, 95, 0.08);
+      --accent-warm: #b85d36; --accent-warm-soft: rgba(184, 93, 54, 0.10);
+      --accent-green: #3a6b4a; --accent-green-soft: rgba(58, 107, 74, 0.10);
       --border: #ddd; --border-soft: #e8e8e8;
-      --button-bg: #e5e5e5; --button-hover: #d5d5d5;
-      --card-bg: #fff; --tag-bg: #ebebeb; --tag-border: #d8d8d8;
+      --card-bg: #fff;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { overflow-x: hidden; }
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      font-size: 17px;
-      line-height: 1.65;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      font-size: 17px; line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       transition: background 0.2s, color 0.2s;
+      overflow-x: hidden;
     }
     a { color: var(--accent); }
 
     nav {
       max-width: 1100px; margin: 0 auto;
-      padding: 28px 40px;
-      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 24px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; position: relative;
     }
-    @media (max-width: 640px) { nav { padding: 20px 24px; } }
+    @media (max-width: 768px) { nav { padding: 18px 20px; } }
     .nav-name {
-      font-size: 22px; font-weight: 700; color: var(--text);
+      font-size: 20px; font-weight: 700; color: var(--text);
       text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+      letter-spacing: -0.02em;
     }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    @media (max-width: 640px) { .nav-right { gap: 12px; } }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    @media (max-width: 640px) { .nav-links { gap: 14px; } }
+    .nav-name .shell { font-size: 22px; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
     .nav-links a {
-      font-size: 16px; font-weight: 400; color: var(--text);
+      font-size: 15px; font-weight: 400; color: var(--text);
       text-decoration: none; padding-bottom: 2px;
+      transition: color 0.15s;
     }
     .nav-links a:hover { color: var(--accent); }
     .nav-links a.active { border-bottom: 2px solid var(--text); font-weight: 500; }
-    .theme-toggle {
+    .theme-toggle, .menu-toggle {
       background: none; border: 1px solid var(--border);
       width: 34px; height: 34px; border-radius: 50%;
-      cursor: pointer; font-size: 14px; color: var(--text);
+      cursor: pointer; padding: 0;
       display: inline-flex; align-items: center; justify-content: center;
-      padding: 0; transition: border-color 0.15s, color 0.15s;
+      flex-shrink: 0;
+      transition: border-color 0.15s, color 0.15s;
+      color: var(--text);
     }
-    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle { font-size: 14px; }
+    .theme-toggle:hover, .menu-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .menu-toggle { display: none; }
+    .menu-toggle svg {
+      width: 16px; height: 16px;
+      stroke: var(--text); stroke-width: 1.8;
+      fill: none; stroke-linecap: round;
+    }
+    @media (max-width: 820px) {
+      .menu-toggle { display: inline-flex; }
+      .nav-links {
+        position: absolute; top: 100%; right: 20px;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px; padding: 12px;
+        flex-direction: column; gap: 4px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        min-width: 180px; z-index: 100;
+        display: none;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 14px; border-radius: 6px; font-size: 15px; }
+      .nav-links a:hover { background: var(--bg-soft); }
+      .nav-links a.active { border-bottom: none; background: var(--accent-soft); color: var(--accent); }
+    }
 
     main {
-      max-width: 820px; margin: 0 auto;
-      padding: 60px 40px 100px;
+      max-width: 1100px; margin: 0 auto;
+      padding: 56px 40px 80px;
     }
-    @media (max-width: 640px) { main { padding: 40px 24px 60px; } }
+    @media (max-width: 640px) { main { padding: 36px 20px 56px; } }
 
+    /* Page header */
+    .page-header {
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border-soft);
+      max-width: 720px;
+    }
+    @media (max-width: 640px) {
+      .page-header { margin-bottom: 40px; padding-bottom: 24px; }
+    }
+    .page-eyebrow {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
     h1 {
-      font-size: 2.5rem; font-weight: 700;
-      letter-spacing: -0.02em; margin-bottom: 14px; color: var(--text);
+      font-size: clamp(2.2rem, 5.5vw, 3rem);
+      font-weight: 800; letter-spacing: -0.035em;
+      line-height: 1.05; color: var(--text);
+      margin-bottom: 18px;
     }
-    @media (max-width: 640px) { h1 { font-size: 2rem; } }
-
     .page-intro {
-      font-size: 1.0rem; color: var(--text-muted);
-      line-height: 1.7; margin-bottom: 64px; max-width: 680px;
+      font-size: 1rem; color: var(--text-muted);
+      line-height: 1.7; max-width: 640px;
     }
+    @media (max-width: 640px) { .page-intro { font-size: 0.97rem; } }
+    .page-intro strong { color: var(--text); font-weight: 600; }
+    .page-intro em { font-style: italic; }
 
-    /* Section header — strong visual break */
-    .section {
-      margin-top: 80px;
+    /* PDF request note */
+    .pdf-note {
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      padding: 16px 22px;
+      margin-top: 24px;
+      font-size: 0.93rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      max-width: 640px;
     }
-    .section:first-of-type {
-      margin-top: 0;
-    }
+    .pdf-note strong { color: var(--text); font-weight: 600; }
+    .pdf-note a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Section */
+    .section { margin-top: 72px; }
+    .section:first-of-type { margin-top: 0; }
+    .section-header { margin-bottom: 32px; max-width: 720px; }
     .section-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-      margin-bottom: 6px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 8px;
     }
-    .section-eyebrow.design { color: var(--accent); }
-    .section-eyebrow.computational { color: var(--accent-warm); }
+    .section-eyebrow.theory { color: var(--accent); }
+    .section-eyebrow.css { color: var(--accent-warm); }
+    .section-eyebrow.corpus { color: var(--accent-green); }
     .section-title {
-      font-size: 1.7rem; font-weight: 700;
-      letter-spacing: -0.02em; line-height: 1.2;
-      color: var(--text); margin-bottom: 12px;
+      font-size: 1.6rem; font-weight: 700;
+      letter-spacing: -0.025em; line-height: 1.2;
+      color: var(--text); margin-bottom: 10px;
     }
+    @media (max-width: 640px) { .section-title { font-size: 1.4rem; } }
     .section-subtitle {
       font-size: 0.95rem; color: var(--text-muted);
-      margin-bottom: 36px; line-height: 1.65;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-      max-width: 680px;
+      line-height: 1.65;
     }
+    .section-subtitle em { font-style: italic; }
 
-    /* Paper card — more space, clearer hierarchy */
+    /* Paper list */
+    .paper-list {
+      display: flex; flex-direction: column;
+      gap: 18px;
+    }
     .paper {
       background: var(--card-bg);
       border: 1px solid var(--border-soft);
-      border-radius: 10px;
-      padding: 28px 30px;
-      margin-bottom: 22px;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      border-radius: 12px;
+      padding: 28px 32px;
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
     }
+    @media (max-width: 640px) { .paper { padding: 22px 24px; } }
     .paper:hover {
-      border-color: var(--border);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      transform: translateY(-2px);
     }
-    @media (max-width: 640px) { .paper { padding: 22px 20px; margin-bottom: 16px; } }
-
-    /* Top row — tag + year, JetBrains Mono for tech feel */
     .paper-meta {
-      display: flex; align-items: center; gap: 12px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; color: var(--text-faint);
-      margin-bottom: 12px; flex-wrap: wrap;
-      letter-spacing: 0.02em;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 12px;
     }
-    .paper-tag {
-      color: var(--accent);
-      font-weight: 500;
+    .paper-meta.theory { color: var(--accent); }
+    .paper-meta.css { color: var(--accent-warm); }
+    .paper-meta .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      display: inline-block;
     }
-    .paper-tag.computational { color: var(--accent-warm); }
-    .paper-meta-sep {
-      color: var(--text-faint);
-      opacity: 0.4;
+    .paper-meta.theory .dot { background: var(--accent); }
+    .paper-meta.css .dot { background: var(--accent-warm); }
+    .paper-status {
+      font-size: 10.5px; font-weight: 600;
+      padding: 3px 9px; border-radius: 4px;
+      background: var(--bg-soft); color: var(--text-faint);
+      letter-spacing: 0.05em;
+      margin-left: auto;
     }
-    .paper-year { color: var(--text-faint); }
-
-    /* Title — bigger, more weight */
     .paper-title {
-      font-size: 1.18rem; font-weight: 700;
-      letter-spacing: -0.018em; line-height: 1.35;
+      font-size: 1.2rem; font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1.35;
       color: var(--text); margin-bottom: 14px;
     }
-    @media (max-width: 640px) { .paper-title { font-size: 1.05rem; } }
-
-    /* The new "summary" — different format per type */
-    .paper-highlight {
-      margin-bottom: 18px;
+    @media (max-width: 640px) { .paper-title { font-size: 1.08rem; line-height: 1.3; } }
+    .paper-abstract {
+      font-size: 0.95rem; line-height: 1.7;
+      color: var(--text-muted); margin-bottom: 16px;
     }
-
-    /* Design: design move (a sharp statement) + method line */
-    .design-move {
-      font-size: 1.0rem;
-      color: var(--text);
-      line-height: 1.5;
-      font-weight: 500;
-      margin-bottom: 8px;
-      letter-spacing: -0.005em;
-    }
-    .design-move em {
-      font-style: italic;
-      color: var(--accent);
-      font-weight: 600;
-    }
-    .design-method {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11.5px;
-      color: var(--text-muted);
-      letter-spacing: 0.01em;
-    }
-    .design-method .sep {
-      color: var(--text-faint);
-      opacity: 0.5;
-      margin: 0 6px;
-    }
-
-    /* Computational: key findings as data points */
-    .comp-findings {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .comp-finding {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      font-size: 0.93rem;
-      line-height: 1.5;
-    }
-    .comp-finding::before {
-      content: '→';
-      color: var(--accent-warm);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 500;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .comp-finding-text {
-      color: var(--text);
-    }
-    .comp-finding-text strong {
-      font-weight: 600;
-      color: var(--text);
-    }
-    .comp-finding-text code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.88em;
-      background: var(--tag-bg);
-      padding: 1px 6px;
-      border-radius: 3px;
-      color: var(--accent-warm);
-      font-weight: 500;
-    }
-
-    /* Actions */
-    .paper-actions {
-      display: flex; gap: 8px; flex-wrap: wrap;
-      padding-top: 16px;
+    .paper-abstract em { font-style: italic; }
+    .paper-meta-row {
+      display: flex; flex-wrap: wrap;
+      gap: 10px 16px; align-items: center;
+      padding-top: 14px;
       border-top: 1px solid var(--border-soft);
     }
-    .paper-btn {
-      background: none; border: 1px solid var(--border);
-      color: var(--text-muted); padding: 7px 13px;
-      border-radius: 6px; cursor: pointer;
-      font-size: 12.5px; font-weight: 500;
-      text-decoration: none; font-family: inherit;
+    .paper-repo {
+      font-size: 12.5px;
+      color: var(--text-faint);
       display: inline-flex; align-items: center; gap: 6px;
-      transition: all 0.15s;
     }
-    .paper-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
+    .paper-repo a {
+      color: var(--text-muted);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
     }
-    .paper-btn.primary {
-      background: var(--button-bg);
+    .paper-repo a:hover { color: var(--accent); }
+    .request-btn {
+      margin-left: auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
       color: var(--text);
-      border-color: var(--border);
+      padding: 7px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center; gap: 6px;
     }
-    .paper-btn.primary:hover {
-      background: var(--button-hover);
+    .request-btn:hover {
       border-color: var(--accent);
       color: var(--accent);
-    }
-    .paper-btn .chevron {
-      transition: transform 0.2s;
-      display: inline-block;
-      font-size: 10px;
-    }
-    .paper-btn.expanded .chevron {
-      transform: rotate(180deg);
+      transform: translateY(-1px);
     }
 
-    /* Abstract collapse */
-    .paper-abstract {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, margin-top 0.3s ease, padding-top 0.3s ease;
-      font-size: 0.92rem;
-      line-height: 1.7;
-      color: var(--text-muted);
+    /* Corpus section */
+    .corpus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
-    .paper-abstract.expanded {
-      max-height: 2000px;
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px dashed var(--border);
+    @media (max-width: 820px) { .corpus-grid { grid-template-columns: 1fr; } }
+    .corpus-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 24px 26px;
     }
-    .paper-abstract-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-      font-weight: 500;
-      margin-bottom: 10px;
+    .corpus-name {
+      font-size: 1.05rem; font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 8px;
     }
-    .paper-abstract p { margin-bottom: 10px; }
-    .paper-abstract p:last-child { margin-bottom: 0; }
-    .paper-abstract strong { font-weight: 600; color: var(--text); }
-    .paper-abstract em { font-style: italic; }
+    .corpus-stat {
+      display: inline-block;
+      font-size: 12px; font-weight: 600;
+      padding: 4px 10px; border-radius: 5px;
+      background: var(--accent-green-soft);
+      color: var(--accent-green);
+      margin-bottom: 12px;
+    }
+    .corpus-desc {
+      font-size: 0.92rem; color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .corpus-desc em { font-style: italic; }
 
     footer {
-      text-align: center; padding: 40px 24px;
-      font-size: 14px; color: var(--text-muted);
-      border-top: 1px solid var(--border); margin-top: 40px;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-soft);
+      margin-top: 56px;
     }
-    footer a { color: var(--text-muted); text-decoration: underline; }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-name">🐚 Sora Kim</a>
+  <a href="index.html" class="nav-name"><span class="shell">🐚</span> Sora Kim</a>
   <div class="nav-right">
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="papers.html" class="active">Papers</a></li>
@@ -336,285 +342,208 @@
       <li><a href="learning.html">Learning</a></li>
     </ul>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
   </div>
 </nav>
 
 <main>
-  <h1>Papers</h1>
-  <p class="page-intro">
-    Two threads of work in regulated environments: <strong>design research</strong> on AI tools deployed inside a pharmaceutical quality lab, and <strong>computational research</strong> on how accountability is constructed in regulatory enforcement text. Full PDFs available on request.
-  </p>
 
-  <!-- DESIGN RESEARCH -->
-  <section class="section">
-    <div class="section-eyebrow design">— Thread 1 of 2</div>
-    <h2 class="section-title">Design research</h2>
-    <p class="section-subtitle">
-      Five papers on AI tools deployed in pharmaceutical quality control workflows. One framework paper plus four interaction-layer studies, each with an N=20 user study, organized from accessibility (Layer 1) up to reasoning (Layer 4).
+  <div class="page-header">
+    <div class="page-eyebrow">Papers</div>
+    <h1>Seven papers across two tracks</h1>
+    <p class="page-intro">
+      <strong>Four organizational-theory and STS papers</strong> develop a lifecycle of how responsibility is structured before action, accumulated in procedural documents, stabilized through investigation, and accelerated by AI. <strong>Three computational social science papers</strong> operationalize that lifecycle across regulatory corpora, with cross-domain validation between pharmaceutical and aviation.
     </p>
+    <p class="pdf-note">
+      <strong>📄 PDF available on request.</strong> All papers are working manuscripts — preprints not yet posted publicly. To read the full text, <a href="mailto:sorakim.lab@gmail.com?subject=Paper%20request">email me</a> and I'll send the PDF.
+    </p>
+  </div>
 
-    <!-- Umbrella -->
-    <div class="paper">
-      <div class="paper-meta">
-        <span class="paper-tag">Framework</span>
-        <span class="paper-meta-sep">·</span>
-        <span class="paper-year">2026</span>
-      </div>
-      <h3 class="paper-title">Accountability Infrastructure Design: A Four-Layer Framework for Judgment-Preserving Systems in Regulated Work</h3>
-      <div class="paper-highlight">
-        <p class="design-move">AI as an <em>external layer</em> on validated regulatory systems — designed across four interaction layers (accessibility → reasoning) to support, not substitute, practitioner judgment.</p>
-        <p class="design-method">Framework paper<span class="sep">·</span>Synthesizes 4 layer studies (N=20 each)<span class="sep">·</span>GMP pharmaceutical QC</p>
-      </div>
-      <div class="paper-actions">
-        <button class="paper-btn" onclick="toggleAbstract(this)">Read abstract <span class="chevron">▾</span></button>
-        <a class="paper-btn primary" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Accountability%20Infrastructure%20Design">Request full paper ↗</a>
-      </div>
-      <div class="paper-abstract">
-        <div class="paper-abstract-label">Abstract</div>
-        <p>
-          Regulated environments — pharmaceutical manufacturing, aviation, clinical care — share a common interaction problem: every action a practitioner takes is auditable, and AI tools must be designed to fit inside that constraint rather than around it. I propose a four-layer framework for designing AI as an <strong>external layer</strong> on validated regulatory systems, organized by the level of practitioner work each layer intervenes in: <strong>accessibility</strong> (what information can be reached), <strong>structure</strong> (how documents connect), <strong>coordination</strong> (how review work is distributed), and <strong>reasoning</strong> (how investigations are conducted). At each layer, the design principle is the same: AI should make work more legible and reduce systemic friction, without replacing the judgment that the audit trail is meant to preserve. Four interaction-layer studies (N=20 each) deployed in a GMP pharmaceutical quality lab instantiate the framework.
-        </p>
-      </div>
+  <!-- STS THEORY -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow theory">— Organizational theory & STS · 4 papers</div>
+      <h2 class="section-title">A lifecycle of accountability in regulated organizations</h2>
+      <p class="section-subtitle">
+        Four papers covering the full lifecycle: <em>pre-action structuring</em> (AAC), <em>procedural document infrastructure</em> (CF), <em>investigative convergence</em> (RC), and <em>AI-accelerated closure</em> (PAC). Each can be read independently; together they form a single arc.
+      </p>
     </div>
 
-    <!-- L4 -->
-    <div class="paper">
-      <div class="paper-meta">
-        <span class="paper-tag">Layer 4 · Reasoning</span>
-        <span class="paper-meta-sep">·</span>
-        <span class="paper-year">2026</span>
-      </div>
-      <h3 class="paper-title">Keeping Comparison Open: Interface Scaffolding Against Premature Accountability Convergence in Regulated Investigations</h3>
-      <div class="paper-highlight">
-        <p class="design-move">AI as <em>comparison enforcer</em>, not explanation generator — detects when reasoning narrows too early during RCA and reopens alternative hypotheses.</p>
-        <p class="design-method">N=20 think-aloud<span class="sep">·</span>Real deviation cases<span class="sep">·</span>GMP RCA workflow</p>
-      </div>
-      <div class="paper-actions">
-        <button class="paper-btn" onclick="toggleAbstract(this)">Read abstract <span class="chevron">▾</span></button>
-        <a class="paper-btn primary" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Keeping%20Comparison%20Open">Request full paper ↗</a>
-      </div>
-      <div class="paper-abstract">
-        <div class="paper-abstract-label">Abstract</div>
-        <p>
-          In root-cause analysis (RCA) within regulated manufacturing, investigative reasoning often closes prematurely on a single explanation despite available alternatives — a pattern I call <strong>premature accountability convergence</strong>. I designed and deployed an investigation scaffolder that intervenes at the reasoning layer: rather than generating explanations for the analyst to accept, the tool detects narrowing in the analyst's own reasoning trajectory and surfaces alternative hypotheses still consistent with the evidence. In a think-aloud study with twenty QC analysts working on real deviation cases, the scaffolder shifted the role of AI from <em>answer provider</em> to <em>comparison enforcer</em>: participants generated more alternative explanations before committing to a root cause, without reduction in investigation efficiency. The paper argues that judgment-preserving AI in safety-critical work is not about constraining the system's confidence, but about designing for the user's own comparison process.
-        </p>
-      </div>
-    </div>
+    <div class="paper-list">
 
-    <!-- L3 -->
-    <div class="paper">
-      <div class="paper-meta">
-        <span class="paper-tag">Layer 3 · Coordination</span>
-        <span class="paper-meta-sep">·</span>
-        <span class="paper-year">2026</span>
-      </div>
-      <h3 class="paper-title">Friction Before Failure: Making Review Burden Visible in Regulated Document Work</h3>
-      <div class="paper-highlight">
-        <p class="design-move">Make review burden <em>visible before</em> it becomes a missed deadline — without changing what the regulations require.</p>
-        <p class="design-method">Behavior log + N=20 study<span class="sep">·</span>Managers and reviewers<span class="sep">·</span>CAPA workflows</p>
-      </div>
-      <div class="paper-actions">
-        <button class="paper-btn" onclick="toggleAbstract(this)">Read abstract <span class="chevron">▾</span></button>
-        <a class="paper-btn primary" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Friction%20Before%20Failure">Request full paper ↗</a>
-      </div>
-      <div class="paper-abstract">
-        <div class="paper-abstract-label">Abstract</div>
-        <p>
-          Corrective and preventive action (CAPA) workflows in regulated manufacturing distribute review responsibility across multiple reviewers, deadlines, and document versions. The resulting <strong>review burden</strong> is invisible to the people coordinating it — until a deadline slips and the failure becomes a formal deviation. I designed a review dashboard that makes the friction visible <em>before</em> it becomes failure: surfacing where reviews are queued, how long they've been waiting, and which reviewers are overloaded. Behavior log analysis combined with an N=20 study with managers and reviewers shows that the dashboard does not change what regulations require, but redistributes attention earlier in the workflow.
+      <!-- AAC -->
+      <article class="paper">
+        <div class="paper-meta theory">
+          <span class="dot"></span>Paper 1 · AAC
+          <span class="paper-status">Working manuscript</span>
+        </div>
+        <h3 class="paper-title">Anticipated Accountability Convergence: How Organizations Structure Responsibility Before Action</h3>
+        <p class="paper-abstract">
+          Theorizes how organizations structure responsibility <em>before</em> action occurs — through role definitions, procedural anticipation, and pre-allocated accountability slots. The first stage of the lifecycle: accountability begins as anticipation, embedded in organizational forms long before any specific event triggers it.
         </p>
-      </div>
-    </div>
+        <div class="paper-meta-row">
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Anticipated%20Accountability%20Convergence">📄 Request PDF</a>
+        </div>
+      </article>
 
-    <!-- L2 -->
-    <div class="paper">
-      <div class="paper-meta">
-        <span class="paper-tag">Layer 2 · Structure</span>
-        <span class="paper-meta-sep">·</span>
-        <span class="paper-year">2026</span>
-      </div>
-      <h3 class="paper-title">When Documents Don't Connect: Traceability Burden and Loopback Behavior in GMP Document Navigation</h3>
-      <div class="paper-highlight">
-        <p class="design-move">Surface the chain of document references analysts reconstruct by hand — and quantify the <em>loopback</em> behavior that hidden structure creates.</p>
-        <p class="design-method">Behavior log + N=20 study<span class="sep">·</span>Real investigations<span class="sep">·</span>GMP document corpus</p>
-      </div>
-      <div class="paper-actions">
-        <button class="paper-btn" onclick="toggleAbstract(this)">Read abstract <span class="chevron">▾</span></button>
-        <a class="paper-btn primary" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20When%20Documents%20Don%27t%20Connect">Request full paper ↗</a>
-      </div>
-      <div class="paper-abstract">
-        <div class="paper-abstract-label">Abstract</div>
-        <p>
-          Regulated documents — SOPs, batch records, deviation reports, change controls — reference each other in chains that practitioners must reconstruct by hand during investigations. I deployed two tools at the structure layer: a <strong>traceability viewer</strong> that surfaces inter-document references as a navigable graph, and a <strong>navigation tracker</strong> that logs how analysts actually move through documents during real investigations. The tracker reveals a frequent <em>loopback</em> pattern: analysts return to the same document multiple times, often re-reading the same passage, because the connection they need was never made explicit. Combining behavior-log data with an N=20 task study, the paper characterizes the traceability burden as a structural property of the document system, not an individual skill gap.
+      <!-- CF -->
+      <article class="paper">
+        <div class="paper-meta theory">
+          <span class="dot"></span>Paper 2 · CF
+          <span class="paper-status">Working manuscript</span>
+        </div>
+        <h3 class="paper-title">Cognitive Friction: Procedural Documents as Accountability Infrastructure in Regulated Organizations</h3>
+        <p class="paper-abstract">
+          Argues that procedural documents — SOPs, work instructions, deviation protocols — are not neutral records but <em>accountability infrastructure</em>. Their friction (length, fragmentation, retrieval cost) is itself a coordination signal: an organizational technology for distributing where responsibility settles when something goes wrong.
         </p>
-      </div>
-    </div>
+        <div class="paper-meta-row">
+          <span class="paper-repo">Companion code · <a href="https://github.com/sorakim-lab/sop-cognitive-friction-pilot">sop-cognitive-friction-pilot</a></span>
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Cognitive%20Friction">📄 Request PDF</a>
+        </div>
+      </article>
 
-    <!-- L1 -->
-    <div class="paper">
-      <div class="paper-meta">
-        <span class="paper-tag">Layer 1 · Accessibility</span>
-        <span class="paper-meta-sep">·</span>
-        <span class="paper-year">2026</span>
-      </div>
-      <h3 class="paper-title">From Retrieval to Reasoning: How SOP Accessibility Shapes Interpretation in Regulated Work</h3>
-      <div class="paper-highlight">
-        <p class="design-move">Retrieval is an <em>interpretive act</em>, not a precursor — what counts as "relevant" depends on how the analyst is already framing the situation.</p>
-        <p class="design-method">Task-based study, N=20<span class="sep">·</span>Semantic search over SOPs<span class="sep">·</span>GMP QC analysts</p>
-      </div>
-      <div class="paper-actions">
-        <button class="paper-btn" onclick="toggleAbstract(this)">Read abstract <span class="chevron">▾</span></button>
-        <a class="paper-btn primary" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20From%20Retrieval%20to%20Reasoning">Request full paper ↗</a>
-      </div>
-      <div class="paper-abstract">
-        <div class="paper-abstract-label">Abstract</div>
-        <p>
-          Standard operating procedures (SOPs) are the regulated text practitioners must follow at every step — but only what they can reach is what they can reason about. I deployed a semantic search tool over a GMP pharmaceutical site's SOP corpus and conducted a task-based study (N=20) in which QC analysts located the procedures relevant to realistic work scenarios. The paper reframes retrieval as an <strong>interpretive act</strong>, not a precursor to it: what counts as a "relevant" SOP depends on how the analyst is framing the situation, and the search interface itself shapes that framing. Findings show that semantic search outperforms keyword search on accessibility, but the more consequential design choice is what the interface tells the analyst about <em>why</em> a result was retrieved.
+      <!-- RC -->
+      <article class="paper">
+        <div class="paper-meta theory">
+          <span class="dot"></span>Paper 3 · RC
+          <span class="paper-status">Working manuscript</span>
+        </div>
+        <h3 class="paper-title">Responsibility Convergence: How Investigative Systems Stabilize Attribution</h3>
+        <p class="paper-abstract">
+          Examines how investigative processes — root cause analysis, accident inquiries, regulatory enforcement — actively <em>converge</em> on a stable attribution of responsibility. Convergence is not discovery; it is production. The investigation shapes the answer it appears to find, often under closure pressure that runs faster than the evidence supports.
         </p>
-      </div>
+        <div class="paper-meta-row">
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Responsibility%20Convergence">📄 Request PDF</a>
+        </div>
+      </article>
+
+      <!-- PAC -->
+      <article class="paper">
+        <div class="paper-meta theory">
+          <span class="dot"></span>Paper 4 · PAC
+          <span class="paper-status">Working manuscript</span>
+        </div>
+        <h3 class="paper-title">Premature Accountability Convergence: How Technology Accelerates Responsibility Stabilization in Organizations</h3>
+        <p class="paper-abstract">
+          Extends RC into the AI era. As organizations adopt language models and automated decision tools, accountability stabilizes <em>faster</em> than the investigation requires — sometimes faster than the evidence permits. The result is <em>premature convergence</em>: explanations that close before alternatives are fully ruled out, with technology providing the artifact that justifies closure.
+        </p>
+        <div class="paper-meta-row">
+          <span class="paper-repo">Companion code · <a href="https://github.com/sorakim-lab/fda-warning-letters-pac-analysis">fda-warning-letters-pac-analysis</a></span>
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Premature%20Accountability%20Convergence">📄 Request PDF</a>
+        </div>
+      </article>
+
     </div>
   </section>
 
-  <!-- COMPUTATIONAL RESEARCH -->
+  <!-- CSS -->
   <section class="section">
-    <div class="section-eyebrow computational">— Thread 2 of 2</div>
-    <h2 class="section-title">Computational research on regulatory text</h2>
-    <p class="section-subtitle">
-      Five papers on a computational framework for analyzing how accountability is constructed in regulatory enforcement text. Empirical site: FDA Warning Letters corpus (N=50, 160 violations, 2016–2025, 21 CFR 210/211).
-    </p>
-
-    <!-- Umbrella -->
-    <div class="paper">
-      <div class="paper-meta">
-        <span class="paper-tag computational">Framework</span>
-        <span class="paper-meta-sep">·</span>
-        <span class="paper-year">2026</span>
-      </div>
-      <h3 class="paper-title">Responsibility as a Multi-Layer Signal: A Unified Computational Framework for Accountability Convergence in Regulatory Investigations</h3>
-      <div class="paper-highlight">
-        <div class="comp-findings">
-          <div class="comp-finding"><span class="comp-finding-text">Integrates <strong>process</strong>, <strong>structural</strong>, and <strong>linguistic</strong> signals into a composite Responsibility Convergence Index via PCA + Ridge Regression</span></div>
-          <div class="comp-finding"><span class="comp-finding-text">Process-structural signal dominates: <code>w = 0.995</code></span></div>
-          <div class="comp-finding"><span class="comp-finding-text">WL2018-05 identified as extreme convergence case across all four frameworks independently</span></div>
-        </div>
-      </div>
-      <div class="paper-actions">
-        <button class="paper-btn" onclick="toggleAbstract(this)">Read abstract <span class="chevron">▾</span></button>
-        <a class="paper-btn primary" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Responsibility%20as%20a%20Multi-Layer%20Signal">Request full paper ↗</a>
-      </div>
-      <div class="paper-abstract">
-        <div class="paper-abstract-label">Abstract</div>
-        <p>
-          Responsibility in regulatory investigations is not a single label — it is a multi-layered phenomenon produced through language, relational structure, and investigative process simultaneously. I present a proof-of-concept computational framework that operationalizes accountability convergence across three representational layers: <strong>process-level</strong> premature convergence detection, <strong>structural</strong> accountability graph extraction, and <strong>linguistic</strong> responsibility attribution prediction. These three frameworks are integrated into a composite Responsibility Convergence Index (RCI) through PCA compression and Ridge Regression weight learning. Applied to an FDA Warning Letter corpus (N=50, 160 violations, 2016–2025, 21 CFR 210/211), the unified framework produces five cross-framework findings: (1) process-structural signals dominate accountability convergence in enforcement documents (w = 0.995); (2) linguistic attribution is the most individually distinct signal (Individual AUC = 0.940) but contributes minimally to composite convergence; (3) WL2018-05 is identified as the extreme convergence case across all four frameworks independently; (4) FDA Warning Letters exhibit structural pre-convergence in which Firm attribution dominates (99%) due to enforcement document logic rather than investigative reasoning; and (5) accountability convergence is weight-invariant at its extremes.
-        </p>
-      </div>
+    <div class="section-header">
+      <div class="section-eyebrow css">— Computational social science · 3 papers</div>
+      <h2 class="section-title">Operationalizing the lifecycle across regulatory domains</h2>
+      <p class="section-subtitle">
+        The theoretical lifecycle, made testable. FDA Warning Letters (N=50, 160 violations) and NTSB aviation investigations (n=71,114 findings, 23,742 narratives) serve as <em>methodologically contrasting</em> corpora — pharmaceutical regulation makes only final outputs public; aviation regulation makes the entire investigative process traceable. The contrast itself is what validates the theory.
+      </p>
     </div>
 
-    <!-- PAC Detection -->
-    <div class="paper">
-      <div class="paper-meta">
-        <span class="paper-tag computational">Process-level</span>
-        <span class="paper-meta-sep">·</span>
-        <span class="paper-year">2026</span>
-      </div>
-      <h3 class="paper-title">Detecting Premature Accountability Convergence: A Computational Framework for Regulatory Investigations</h3>
-      <div class="paper-highlight">
-        <div class="comp-findings">
-          <div class="comp-finding"><span class="comp-finding-text">Operationalizes PAC as a <strong>process-quality detection task</strong>, distinct from correctness assessment</span></div>
-          <div class="comp-finding"><span class="comp-finding-text">Synthetic dataset <code>n = 500</code> validated against FDA WL corpus; <code>AUC &gt; 0.97</code> across three classifiers</span></div>
-          <div class="comp-finding"><span class="comp-finding-text">Strongest predictor: <em>commitment level</em> (<code>ΔF1 = 0.060</code>); SHAP attributes case variance to <em>explanation count</em></span></div>
+    <div class="paper-list">
+
+      <!-- FDA -->
+      <article class="paper">
+        <div class="paper-meta css">
+          <span class="dot"></span>Paper 5 · FDA
+          <span class="paper-status">Working manuscript</span>
         </div>
-      </div>
-      <div class="paper-actions">
-        <button class="paper-btn" onclick="toggleAbstract(this)">Read abstract <span class="chevron">▾</span></button>
-        <a class="paper-btn primary" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Detecting%20Premature%20Accountability%20Convergence">Request full paper ↗</a>
-      </div>
-      <div class="paper-abstract">
-        <div class="paper-abstract-label">Abstract</div>
-        <p>
-          Premature accountability convergence (PAC) occurs when investigative reasoning closes too early on a single explanation, despite available alternatives. While prior work has theorized this phenomenon in regulated environments, no computational framework exists for its detection. I present a feature-based classification approach that operationalizes PAC as a <strong>process-quality detection task</strong>, distinct from correctness assessment. Using a synthetic dataset (n=500) validated against an FDA Warning Letter corpus (N=50, 2016–2025), I train and evaluate three classifiers (Logistic Regression, Random Forest, SVM), achieving AUC scores above 0.97 across all models. Ablation analysis identifies <em>commitment level</em> as the strongest predictor (ΔF1 = 0.060), while SHAP analysis reveals that <em>explanation count</em> drives case-level variation.
+        <h3 class="paper-title">Responsibility as Multi-Layer Signal: A Computational Framework for FDA Warning Letters</h3>
+        <p class="paper-abstract">
+          Synthesizes four computational components — premature-convergence detection, accountability-graph extraction, responsibility-attribution prediction, and a responsibility-distribution metric — into a unified framework for analyzing FDA Warning Letters as a regulatory enforcement corpus. Demonstrates the lifecycle theory empirically on pharmaceutical regulation's most consequential public output.
         </p>
-      </div>
+        <div class="paper-meta-row">
+          <span class="paper-repo">4 companion repositories · <a href="https://github.com/sorakim-lab">sorakim-lab</a></span>
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Responsibility%20as%20Multi-Layer%20Signal">📄 Request PDF</a>
+        </div>
+      </article>
+
+      <!-- NTSB -->
+      <article class="paper">
+        <div class="paper-meta css">
+          <span class="dot"></span>Paper 6 · NTSB
+          <span class="paper-status">Working manuscript</span>
+        </div>
+        <h3 class="paper-title">Designed Attribution: Coding-Level and Grammatical-Level Evidence of Organizational Accountability Displacement in NTSB Aviation Investigations</h3>
+        <p class="paper-abstract">
+          Two-phase analysis of the full NTSB Aviation Accident Database (1982–2025): structured coding of n=71,114 findings, plus dependency-parsed probable cause statements (n=23,742). Triangulated finding: <strong>organizational accountability appears in only 0.42–0.58% of NTSB outputs across both methods</strong> — a designed pattern of attribution displacement, not a measurement artifact.
+        </p>
+        <div class="paper-meta-row">
+          <span class="paper-repo">Replication code · <a href="https://github.com/sorakim-lab/ntsb-attribution-analysis">ntsb-attribution-analysis</a></span>
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Designed%20Attribution">📄 Request PDF</a>
+        </div>
+      </article>
+
+      <!-- FDA vs NTSB -->
+      <article class="paper">
+        <div class="paper-meta css">
+          <span class="dot"></span>Paper 7 · FDA vs NTSB
+          <span class="paper-status">In preparation</span>
+        </div>
+        <h3 class="paper-title">FDA vs NTSB: Cross-Domain Validation of the Convergence Lifecycle</h3>
+        <p class="paper-abstract">
+          A direct comparison paper using both corpora as cross-domain validation. Pharmaceutical regulation (FDA Warning Letters) and aviation regulation (NTSB investigations) operate under different visibility regimes and produce different artifacts — yet the same lifecycle of accountability convergence appears in both. The contrast strengthens the theoretical claim: convergence is a property of regulated investigation itself, not an artifact of either domain.
+        </p>
+        <div class="paper-meta-row">
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20FDA%20vs%20NTSB%20Cross-Domain%20Validation">📄 Request PDF</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- RESEARCH CORPORA -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow corpus">— Research corpora & data infrastructure</div>
+      <h2 class="section-title">What the papers are built on</h2>
+      <p class="section-subtitle">
+        The empirical foundation: regulatory corpora constructed from public data, plus a four-year field observation archive from inside a GMP-regulated pharmaceutical site.
+      </p>
     </div>
 
-    <!-- Graph -->
-    <div class="paper">
-      <div class="paper-meta">
-        <span class="paper-tag computational">Structural</span>
-        <span class="paper-meta-sep">·</span>
-        <span class="paper-year">2026</span>
-      </div>
-      <h3 class="paper-title">Extracting Accountability Graphs from Regulatory Text: A Structural Analysis of the FDA Warning Letter Corpus</h3>
-      <div class="paper-highlight">
-        <div class="comp-findings">
-          <div class="comp-finding"><span class="comp-finding-text">Extracts <code>320</code> accountability triples across 3 relation types (VIOLATES, INVOLVES, ATTRIBUTED_TO)</span></div>
-          <div class="comp-finding"><span class="comp-finding-text"><strong>Star-topology</strong> structure: Firm dominates as central node, <code>in-degree centrality = 0.444</code></span></div>
-          <div class="comp-finding"><span class="comp-finding-text">Openness score correlates negatively with PAC risk: <code>r = −0.431, p = 0.0018</code></span></div>
-        </div>
-      </div>
-      <div class="paper-actions">
-        <button class="paper-btn" onclick="toggleAbstract(this)">Read abstract <span class="chevron">▾</span></button>
-        <a class="paper-btn primary" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Extracting%20Accountability%20Graphs">Request full paper ↗</a>
-      </div>
-      <div class="paper-abstract">
-        <div class="paper-abstract-label">Abstract</div>
-        <p>
-          Accountability in regulatory investigations is not merely a legal designation — it is a relational structure produced through documentation practices. I present a graph-based framework for extracting accountability relationships from regulatory text and representing them as directed graphs. Applied to an FDA Warning Letter corpus (N=50, 2016–2025, 21 CFR 210/211), the framework extracts <strong>320 accountability triples</strong> across three relation types (VIOLATES, INVOLVES, ATTRIBUTED_TO), constructs case-level accountability graphs, and computes structural metrics including centrality, openness score, and cluster membership. Graph analysis reveals a <em>star-topology</em> accountability structure with Firm as the dominant node (in-degree centrality = 0.444). A composite accountability openness score exhibits significant negative correlation with premature convergence risk (Pearson r = −0.431, p = 0.0018; Spearman ρ = −0.742, p &lt; 0.001), providing cross-framework validation. Cases cluster into three structural types: Open, Standard, and Extreme convergence.
-        </p>
-      </div>
-    </div>
+    <div class="corpus-grid">
 
-    <!-- Attribution -->
-    <div class="paper">
-      <div class="paper-meta">
-        <span class="paper-tag computational">Linguistic</span>
-        <span class="paper-meta-sep">·</span>
-        <span class="paper-year">2026</span>
-      </div>
-      <h3 class="paper-title">Responsibility Attribution Prediction from Regulatory Text: A Linguistic Analysis of Accountability Construction</h3>
-      <div class="paper-highlight">
-        <div class="comp-findings">
-          <div class="comp-finding"><span class="comp-finding-text">Predicts attribution (Firm / Individual / System) from violation text alone: <code>macro F1 = 0.725</code></span></div>
-          <div class="comp-finding"><span class="comp-finding-text">Individual attribution most distinct: <code>AUC = 0.940</code>; model reassigns <strong>49 of 160</strong> Firm-labeled violations to System</span></div>
-          <div class="comp-finding"><span class="comp-finding-text">LIME reveals class-specific markers: Firm = <em>inadequate, failure to establish</em>; Individual = <em>operator, analyst</em>; System = <em>equipment, malfunction</em></span></div>
-        </div>
-      </div>
-      <div class="paper-actions">
-        <button class="paper-btn" onclick="toggleAbstract(this)">Read abstract <span class="chevron">▾</span></button>
-        <a class="paper-btn primary" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Responsibility%20Attribution%20Prediction">Request full paper ↗</a>
-      </div>
-      <div class="paper-abstract">
-        <div class="paper-abstract-label">Abstract</div>
-        <p>
-          Responsibility attribution in regulatory investigations is not discovered from evidence — it is <strong>linguistically constructed</strong> through word choice, syntactic framing, and discourse patterns. I present a text-based classification framework that predicts responsibility attribution (Firm, Individual, System) from violation text alone, using TF-IDF features and Logistic Regression. Applied to an annotated corpus of GMP regulatory language (n=45) with Leave-One-Out cross-validation, the framework achieves macro F1 = 0.725 and demonstrates that Individual-level attribution is most linguistically distinct (AUC = 0.940), while System-level attribution exhibits the lowest discriminability (AUC = 0.764). When applied to the FDA Warning Letter corpus (N=50, 160 violations, 2016–2025), the model reassigns <strong>49 of 160 Firm-labeled violations to System</strong>, suggesting that regulatory enforcement documents systematically attribute infrastructure failures to organizational responsibility. LIME analysis reveals class-specific linguistic markers: Firm attribution is signaled through systemic failure language (<em>inadequate, failure to establish</em>), Individual through agent-action language (<em>operator, analyst</em>), and System through infrastructure language (<em>equipment, malfunction</em>).
+      <div class="corpus-card">
+        <div class="corpus-name">FDA Warning Letters Corpus</div>
+        <div class="corpus-stat">N = 50 letters · 160 violations · 2016–2025</div>
+        <p class="corpus-desc">
+          FDA's formal regulatory enforcement documents — issued when significant compliance failures are identified. The pharmaceutical regulator's most consequential public output. Used across the organizational theory, STS, and computational papers.
         </p>
       </div>
-    </div>
 
-    <!-- Metric -->
-    <div class="paper">
-      <div class="paper-meta">
-        <span class="paper-tag computational">Composite</span>
-        <span class="paper-meta-sep">·</span>
-        <span class="paper-year">2026</span>
-      </div>
-      <h3 class="paper-title">Responsibility Distribution Metric: A Multi-Layer Computational Index for Accountability Concentration in Regulatory Investigations</h3>
-      <div class="paper-highlight">
-        <div class="comp-findings">
-          <div class="comp-finding"><span class="comp-finding-text">Composite RCI metric unifying three frameworks via PCA + Ridge Regression (<code>PC1 = 98.6%</code> variance)</span></div>
-          <div class="comp-finding"><span class="comp-finding-text">Empirical finding: accountability concentration is primarily <strong>structural</strong>, not linguistic (<code>w = 0.995</code>)</span></div>
-          <div class="comp-finding"><span class="comp-finding-text">Case rankings robust across four weight schemes: <code>ρ &gt; 0.97</code> for non-Ridge schemes</span></div>
-        </div>
-      </div>
-      <div class="paper-actions">
-        <button class="paper-btn" onclick="toggleAbstract(this)">Read abstract <span class="chevron">▾</span></button>
-        <a class="paper-btn primary" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Responsibility%20Distribution%20Metric">Request full paper ↗</a>
-      </div>
-      <div class="paper-abstract">
-        <div class="paper-abstract-label">Abstract</div>
-        <p>
-          Responsibility in regulatory investigations is not a single label — it is a multi-layered signal detectable at the linguistic, structural, and process level simultaneously. I present the <strong>Responsibility Concentration Index (RCI)</strong>, a composite metric that unifies three independent computational frameworks into a single accountability concentration score. Applied to an FDA Warning Letter corpus (N=50, 160 violations, 2016–2025), RCI is derived from process-level PAC risk scores, structural centrality measures, and linguistic attribution entropy, with weights learned via Ridge Regression following PCA compression of correlated signals (PC1 = 98.6% variance explained). The learned weight structure reveals that process-structural signal dominates RCI (w = 0.995), reflecting a corpus-level finding: in FDA Warning Letters, accountability concentration is primarily a structural phenomenon, not a linguistic one.
+      <div class="corpus-card">
+        <div class="corpus-name">NTSB Aviation Accident Corpus</div>
+        <div class="corpus-stat">71,114 findings · 27,877 narratives · 1982–2025</div>
+        <p class="corpus-desc">
+          Full Aviation Accident Database (avall.mdb, ~546 MB) analyzed directly. <em>Methodological contrast with FDA:</em> aviation regulation makes the entire investigative pipeline traceable, whereas FDA makes only final outputs public. The cross-domain comparison provides the strongest external validation site for the lifecycle theory.
         </p>
       </div>
+
+      <div class="corpus-card">
+        <div class="corpus-name">Cognitive Friction Corpus</div>
+        <div class="corpus-stat">400 sentences · sentence-level annotation</div>
+        <p class="corpus-desc">
+          400 naturally occurring sentences from regulated procedural documents, manually annotated at sentence level for cognitive friction features. Empirical base for the CF paper.
+        </p>
+      </div>
+
+      <div class="corpus-card">
+        <div class="corpus-name">Field Observation Archive</div>
+        <div class="corpus-stat">~4 years · embedded ethnography</div>
+        <p class="corpus-desc">
+          Field notes from inside a GMP-regulated pharmaceutical site (September 2022 – present). The ethnographic ground that the theoretical papers rest on, and the empirical substrate for the design research on the <a href="tools.html">Tools page</a>.
+        </p>
+      </div>
+
     </div>
   </section>
 
@@ -637,13 +566,12 @@
     else if (cur === 'light') { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
     else { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
   });
-
-  function toggleAbstract(btn) {
-    const abstract = btn.parentElement.parentElement.querySelector('.paper-abstract');
-    const expanded = abstract.classList.toggle('expanded');
-    btn.classList.toggle('expanded', expanded);
-    btn.firstChild.textContent = expanded ? 'Hide abstract ' : 'Read abstract ';
-  }
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', (e) => { e.stopPropagation(); navLinks.classList.toggle('open'); });
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) { navLinks.classList.remove('open'); }
+  });
 </script>
 
 </body>
