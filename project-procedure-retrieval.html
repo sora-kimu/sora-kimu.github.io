@@ -606,38 +606,41 @@
 
     <div class="mockup-wrap">
       <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
-        <!-- Search bar -->
-        <rect x="60" y="30" width="360" height="42" rx="6" fill="var(--card-bg)" stroke="var(--mockup-stroke)" stroke-width="1.2"/>
-        <circle cx="82" cy="51" r="7" fill="none" stroke="var(--accent)" stroke-width="2"/>
-        <line x1="87" y1="56" x2="93" y2="62" stroke="var(--accent)" stroke-width="2"/>
-        <line x1="106" y1="51" x2="240" y2="51" stroke="var(--mockup-stroke)" stroke-width="1" stroke-dasharray="3 3"/>
-        <text x="110" y="55" font-size="11" font-family="Inter, sans-serif" fill="var(--text-faint)">environmental monitoring sampling</text>
+        <!-- Search bar (rounded pill) -->
+        <rect x="40" y="28" width="400" height="46" rx="23" fill="#fff" stroke="#c7cdd6" stroke-width="1.2"/>
+        <circle cx="68" cy="51" r="8" fill="none" stroke="#4a6cf7" stroke-width="2"/>
+        <line x1="74" y1="57" x2="80" y2="63" stroke="#4a6cf7" stroke-width="2" stroke-linecap="round"/>
+        <text x="92" y="56" font-size="12" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="500">environmental monitoring sampling</text>
+        <rect x="376" y="40" width="52" height="22" rx="11" fill="#eef2ff"/>
+        <text x="389" y="55" font-size="10" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="700">Search</text>
 
-        <!-- Results stack -->
-        <rect x="60" y="90" width="360" height="38" rx="5" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
-        <rect x="68" y="98" width="4" height="22" fill="var(--accent)"/>
-        <text x="80" y="106" font-size="11" font-family="Inter, sans-serif" fill="var(--text)" font-weight="700">SOP-001 · Environmental Monitoring</text>
-        <text x="80" y="120" font-size="9.5" font-family="Inter, sans-serif" fill="var(--text-faint)">Strong match · category · title · body</text>
-        <rect x="370" y="100" width="42" height="20" rx="3" fill="var(--accent)"/>
-        <text x="380" y="114" font-size="10" font-family="Inter, sans-serif" fill="#fff" font-weight="700">95%</text>
+        <!-- Result 1 (top match — highlighted) -->
+        <rect x="40" y="92" width="400" height="44" rx="14" fill="#eef2ff" stroke="#4a6cf7" stroke-width="1.5"/>
+        <circle cx="56" cy="114" r="5" fill="#4a6cf7"/>
+        <text x="70" y="111" font-size="11.5" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">SOP-001 · Environmental Monitoring</text>
+        <text x="70" y="124" font-size="9.5" font-family="Inter, sans-serif" fill="#4a6cf7" opacity="0.75">Strong match · category · title · body</text>
+        <rect x="382" y="102" width="44" height="22" rx="11" fill="#4a6cf7"/>
+        <text x="392" y="117" font-size="11" font-family="Inter, sans-serif" fill="#fff" font-weight="800">95%</text>
 
-        <rect x="60" y="138" width="360" height="38" rx="5" fill="var(--card-bg)" stroke="var(--border-soft)" stroke-width="1"/>
-        <rect x="68" y="146" width="4" height="22" fill="var(--accent)" opacity="0.5"/>
-        <text x="80" y="154" font-size="11" font-family="Inter, sans-serif" fill="var(--text)" font-weight="600">SOP-002 · Cleanroom Particle Counting</text>
-        <text x="80" y="168" font-size="9.5" font-family="Inter, sans-serif" fill="var(--text-faint)">Related procedure · adjacent scope</text>
-        <rect x="370" y="148" width="42" height="20" rx="3" fill="var(--accent)" opacity="0.55"/>
-        <text x="380" y="162" font-size="10" font-family="Inter, sans-serif" fill="#fff" font-weight="700">68%</text>
+        <!-- EXPLAINS pill above result 1 -->
+        <rect x="316" y="82" width="72" height="20" rx="10" fill="#fef3eb" stroke="#f59e6e" stroke-width="1"/>
+        <text x="328" y="96" font-size="9" font-family="Inter, sans-serif" fill="#f59e6e" font-weight="800" letter-spacing="0.05em">EXPLAINS</text>
 
-        <rect x="60" y="186" width="360" height="38" rx="5" fill="var(--card-bg)" stroke="var(--border-soft)" stroke-width="1"/>
-        <rect x="68" y="194" width="4" height="22" fill="var(--accent)" opacity="0.3"/>
-        <text x="80" y="202" font-size="11" font-family="Inter, sans-serif" fill="var(--text)" font-weight="600">SOP-018 · Sampling Plan — Quarterly</text>
-        <text x="80" y="216" font-size="9.5" font-family="Inter, sans-serif" fill="var(--text-faint)">Related procedure · same product line</text>
-        <rect x="370" y="196" width="42" height="20" rx="3" fill="var(--accent)" opacity="0.35"/>
-        <text x="380" y="210" font-size="10" font-family="Inter, sans-serif" fill="#fff" font-weight="700">52%</text>
+        <!-- Result 2 -->
+        <rect x="40" y="148" width="400" height="40" rx="14" fill="#fff" stroke="#e8ebf0" stroke-width="1"/>
+        <circle cx="56" cy="168" r="5" fill="#9c7df5"/>
+        <text x="70" y="165" font-size="11.5" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="600">SOP-002 · Cleanroom Particle Counting</text>
+        <text x="70" y="178" font-size="9.5" font-family="Inter, sans-serif" fill="#94a0b1">Related procedure · adjacent scope</text>
+        <rect x="382" y="158" width="44" height="20" rx="10" fill="#f2eeff"/>
+        <text x="394" y="172" font-size="11" font-family="Inter, sans-serif" fill="#9c7df5" font-weight="800">68%</text>
 
-        <!-- "Why this result" tag floating right of first result -->
-        <rect x="305" y="80" width="58" height="14" rx="3" fill="var(--card-bg)" stroke="var(--accent-warm)" stroke-width="0.8"/>
-        <text x="310" y="90" font-size="8" font-family="Inter, sans-serif" fill="var(--accent-warm)" font-weight="700">EXPLAINS</text>
+        <!-- Result 3 -->
+        <rect x="40" y="200" width="400" height="40" rx="14" fill="#fff" stroke="#e8ebf0" stroke-width="1"/>
+        <circle cx="56" cy="220" r="5" fill="#5dc78e"/>
+        <text x="70" y="217" font-size="11.5" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="600">SOP-018 · Sampling Plan — Quarterly</text>
+        <text x="70" y="230" font-size="9.5" font-family="Inter, sans-serif" fill="#94a0b1">Related procedure · same product line</text>
+        <rect x="382" y="210" width="44" height="20" rx="10" fill="#eaf8f0"/>
+        <text x="394" y="224" font-size="11" font-family="Inter, sans-serif" fill="#5dc78e" font-weight="800">52%</text>
       </svg>
     </div>
   </div>

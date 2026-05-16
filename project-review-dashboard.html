@@ -577,44 +577,45 @@
 
     <div class="mockup-wrap">
       <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
-        <!-- 6-tab nav -->
-        <rect x="20" y="20" width="440" height="32" fill="var(--mockup-fill)" rx="4"/>
-        <rect x="24" y="24" width="68" height="24" fill="var(--accent)" rx="3"/>
-        <rect x="100" y="26" width="56" height="20" fill="var(--text-faint)" rx="2" opacity="0.25"/>
-        <rect x="164" y="26" width="56" height="20" fill="var(--text-faint)" rx="2" opacity="0.25"/>
-        <rect x="228" y="26" width="56" height="20" fill="var(--text-faint)" rx="2" opacity="0.25"/>
-        <rect x="292" y="26" width="56" height="20" fill="var(--text-faint)" rx="2" opacity="0.25"/>
-        <rect x="356" y="26" width="56" height="20" fill="var(--text-faint)" rx="2" opacity="0.25"/>
-        <rect x="420" y="26" width="36" height="20" fill="var(--text-faint)" rx="2" opacity="0.25"/>
+        <!-- Pill tab bar -->
+        <rect x="20" y="20" width="440" height="34" rx="17" fill="#eef2ff"/>
+        <rect x="24" y="24" width="80" height="26" rx="13" fill="#4a6cf7"/>
+        <text x="42" y="40" font-size="11" font-family="Inter, sans-serif" fill="#fff" font-weight="700">Burden</text>
+        <text x="120" y="40" font-size="11" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="600" opacity="0.7">Heatmap</text>
+        <text x="194" y="40" font-size="11" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="600" opacity="0.55">Journey</text>
+        <text x="264" y="40" font-size="11" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="600" opacity="0.55">Checkout</text>
+        <text x="346" y="40" font-size="11" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="600" opacity="0.55">Activity</text>
+        <text x="412" y="40" font-size="11" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="600" opacity="0.55">Insights</text>
 
         <!-- Section label -->
-        <text x="24" y="78" font-size="11" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600" letter-spacing="0.05em">REVIEW BURDEN BY DOCUMENT</text>
+        <text x="24" y="78" font-size="11" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="700" letter-spacing="0.08em">REVIEW BURDEN BY DOCUMENT · LAST 30 DAYS</text>
 
-        <!-- Bars -->
-        <g fill="var(--accent)" opacity="0.85">
-          <rect x="40" y="180" width="28" height="60"/>
-          <rect x="84" y="150" width="28" height="90"/>
-          <rect x="128" y="115" width="28" height="125"/>
-          <rect x="172" y="170" width="28" height="70"/>
-          <rect x="216" y="140" width="28" height="100"/>
-          <rect x="260" y="95" width="28" height="145"/>
-          <rect x="304" y="172" width="28" height="68"/>
-          <rect x="348" y="148" width="28" height="92"/>
-          <rect x="392" y="158" width="28" height="82"/>
-          <rect x="436" y="180" width="14" height="60"/>
+        <!-- Bars — colorful, rounded -->
+        <g>
+          <rect x="40" y="180" width="28" height="60" rx="6" fill="#4a6cf7"/>
+          <rect x="84" y="150" width="28" height="90" rx="6" fill="#9c7df5"/>
+          <rect x="128" y="115" width="28" height="125" rx="6" fill="#5dc78e"/>
+          <rect x="172" y="170" width="28" height="70" rx="6" fill="#f7c948"/>
+          <rect x="216" y="140" width="28" height="100" rx="6" fill="#f06292"/>
+          <rect x="260" y="95" width="28" height="145" rx="6" fill="#f59e6e"/>
+          <rect x="304" y="172" width="28" height="68" rx="6" fill="#4a6cf7" opacity="0.7"/>
+          <rect x="348" y="148" width="28" height="92" rx="6" fill="#9c7df5" opacity="0.7"/>
+          <rect x="392" y="158" width="28" height="82" rx="6" fill="#5dc78e" opacity="0.7"/>
+          <rect x="436" y="180" width="14" height="60" rx="6" fill="#f06292" opacity="0.7"/>
         </g>
-        <!-- Warning highlight on tallest bar -->
-        <rect x="260" y="89" width="28" height="5" fill="var(--accent-warm)"/>
-        <circle cx="295" cy="95" r="8" fill="var(--accent-warm)"/>
-        <text x="291" y="99" font-size="11" font-family="Inter, sans-serif" fill="#fff" font-weight="800">!</text>
+
+        <!-- Warning marker on tallest -->
+        <circle cx="274" cy="88" r="9" fill="#ef5a5a"/>
+        <text x="270.5" y="92" font-size="11" font-family="Inter, sans-serif" fill="#fff" font-weight="800">!</text>
 
         <!-- Baseline -->
-        <line x1="34" y1="240" x2="456" y2="240" stroke="var(--text-faint)" stroke-width="0.5"/>
+        <line x1="34" y1="240" x2="456" y2="240" stroke="#c7cdd6" stroke-width="0.5"/>
 
-        <!-- Tooltip-like label on warning bar -->
-        <rect x="298" y="100" width="120" height="26" fill="var(--card-bg)" stroke="var(--accent-warm)" stroke-width="1" rx="4"/>
-        <text x="304" y="115" font-size="9.5" font-family="Inter, sans-serif" fill="var(--text)" font-weight="700">4 rounds · reopened</text>
-        <text x="304" y="122.5" font-size="8.5" font-family="Inter, sans-serif" fill="var(--text-faint)">9 days · QA pattern</text>
+        <!-- Tooltip pill near warning bar -->
+        <rect x="298" y="96" width="138" height="32" rx="10" fill="#fff" stroke="#ef5a5a" stroke-width="1.2"/>
+        <circle cx="312" cy="112" r="4" fill="#ef5a5a"/>
+        <text x="322" y="110" font-size="10" font-family="Inter, sans-serif" fill="#1a1a1a" font-weight="700">4 rounds · reopened</text>
+        <text x="322" y="122" font-size="8.5" font-family="Inter, sans-serif" fill="#94a0b1">9 days · QA pattern</text>
       </svg>
     </div>
   </div>

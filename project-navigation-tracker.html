@@ -646,44 +646,42 @@
 
     <div class="mockup-wrap">
       <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
-        <!-- Navigation path (curved) -->
-        <g fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round">
-          <path d="M 50 200 Q 110 80, 180 150"/>
-          <path d="M 180 150 Q 230 220, 290 130"/>
-          <path d="M 290 130 Q 250 230, 180 160" stroke-dasharray="6 4" opacity="0.5" stroke="var(--accent-warm)" stroke-width="2.2"/>
-          <path d="M 180 160 Q 280 60, 410 130"/>
+        <!-- Navigation path (colorful curves) -->
+        <g fill="none" stroke-width="2.5" stroke-linecap="round">
+          <path d="M 50 200 Q 110 80, 180 150" stroke="#4a6cf7"/>
+          <path d="M 180 150 Q 230 220, 290 130" stroke="#9c7df5"/>
+          <path d="M 290 130 Q 250 230, 180 160" stroke="#f59e6e" stroke-dasharray="6 4" opacity="0.8"/>
+          <path d="M 180 160 Q 280 60, 410 130" stroke="#5dc78e"/>
         </g>
 
-        <!-- Document nodes -->
-        <circle cx="50" cy="200" r="10" fill="var(--accent)"/>
-        <text x="35" y="226" font-size="11" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600">Start</text>
+        <!-- Start node -->
+        <circle cx="50" cy="200" r="11" fill="#4a6cf7"/>
+        <text x="35" y="228" font-size="11" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="600">Start</text>
 
-        <!-- Loopback marker (revisited node — emphasized) -->
-        <circle cx="180" cy="150" r="13" fill="var(--card-bg)" stroke="var(--accent-warm)" stroke-width="2.5"/>
-        <text x="173" y="155" font-size="11" font-family="Inter, sans-serif" fill="var(--accent-warm)" font-weight="800">2×</text>
+        <!-- Loopback node (revisited) — colorful pill -->
+        <rect x="160" y="138" width="44" height="28" rx="14" fill="#fef3eb" stroke="#f59e6e" stroke-width="2.5"/>
+        <text x="173" y="158" font-size="13" font-family="Inter, sans-serif" fill="#f59e6e" font-weight="800">2×</text>
 
-        <circle cx="290" cy="130" r="9" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="2"/>
+        <!-- Intermediate node -->
+        <circle cx="290" cy="130" r="9" fill="#f2eeff" stroke="#9c7df5" stroke-width="2"/>
 
-        <!-- Smaller loopback indicator on revisit -->
-        <circle cx="180" cy="160" r="6" fill="none" stroke="var(--accent-warm)" stroke-width="1.5" opacity="0.7"/>
+        <!-- End node -->
+        <circle cx="410" cy="130" r="11" fill="#5dc78e"/>
+        <text x="395" y="158" font-size="11" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="600">End</text>
 
-        <circle cx="410" cy="130" r="10" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="2"/>
-        <text x="395" y="155" font-size="11" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600">End</text>
+        <!-- Loopback annotation pill -->
+        <rect x="220" y="40" width="160" height="34" rx="17" fill="#fef3eb" stroke="#f59e6e" stroke-width="1.5"/>
+        <circle cx="236" cy="57" r="4" fill="#f59e6e"/>
+        <text x="248" y="55" font-size="10" font-family="Inter, sans-serif" fill="#f59e6e" font-weight="800" letter-spacing="0.06em">LOOPBACK DETECTED</text>
+        <text x="248" y="67" font-size="9" font-family="Inter, sans-serif" fill="#94a0b1">return to prior document</text>
+        <line x1="232" y1="74" x2="192" y2="148" stroke="#f59e6e" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6"/>
 
         <!-- Bottom timeline -->
-        <line x1="40" y1="245" x2="420" y2="245" stroke="var(--text-faint)" stroke-width="0.5"/>
-        <line x1="50" y1="243" x2="50" y2="247" stroke="var(--text-faint)" stroke-width="0.5"/>
-        <line x1="180" y1="243" x2="180" y2="247" stroke="var(--text-faint)" stroke-width="0.5"/>
-        <line x1="290" y1="243" x2="290" y2="247" stroke="var(--text-faint)" stroke-width="0.5"/>
-        <line x1="410" y1="243" x2="410" y2="247" stroke="var(--text-faint)" stroke-width="0.5"/>
-
-        <!-- Loopback annotation -->
-        <rect x="215" y="50" width="125" height="32" rx="5" fill="var(--card-bg)" stroke="var(--accent-warm)" stroke-width="1.2"/>
-        <text x="222" y="64" font-size="10" font-family="Inter, sans-serif" fill="var(--accent-warm)" font-weight="700">LOOPBACK DETECTED</text>
-        <text x="222" y="76" font-size="9" font-family="Inter, sans-serif" fill="var(--text-faint)">return to prior document</text>
-
-        <!-- Arrow from annotation to revisit point -->
-        <line x1="225" y1="82" x2="195" y2="155" stroke="var(--accent-warm)" stroke-width="1" stroke-dasharray="2 2"/>
+        <line x1="40" y1="245" x2="420" y2="245" stroke="#c7cdd6" stroke-width="0.5"/>
+        <circle cx="50" cy="245" r="2.5" fill="#4a6cf7"/>
+        <circle cx="180" cy="245" r="2.5" fill="#f59e6e"/>
+        <circle cx="290" cy="245" r="2.5" fill="#9c7df5"/>
+        <circle cx="410" cy="245" r="2.5" fill="#5dc78e"/>
       </svg>
     </div>
   </div>

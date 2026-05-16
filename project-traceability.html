@@ -631,47 +631,46 @@
 
     <div class="mockup-wrap">
       <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
-        <!-- Center document (current) -->
-        <rect x="200" y="115" width="80" height="40" rx="6" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/>
-        <line x1="210" y1="130" x2="270" y2="130" stroke="var(--card-bg)" stroke-width="1.4"/>
-        <line x1="210" y1="138" x2="262" y2="138" stroke="var(--card-bg)" stroke-width="1.4" opacity="0.7"/>
-        <line x1="210" y1="146" x2="254" y2="146" stroke="var(--card-bg)" stroke-width="1.4" opacity="0.5"/>
-
-        <!-- Connected documents (top-left, top-right, bottom-left, bottom-right) -->
-        <!-- Top-left: linked -->
-        <rect x="50" y="40" width="80" height="40" rx="6" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="1.5"/>
-        <line x1="60" y1="55" x2="120" y2="55" stroke="var(--text-faint)" stroke-width="1.4"/>
-        <line x1="60" y1="63" x2="112" y2="63" stroke="var(--text-faint)" stroke-width="1.2" opacity="0.6"/>
-        <line x1="60" y1="71" x2="105" y2="71" stroke="var(--text-faint)" stroke-width="1.2" opacity="0.4"/>
-
-        <!-- Top-right: BROKEN link (dashed + warning) -->
-        <rect x="350" y="40" width="80" height="40" rx="6" fill="var(--card-bg)" stroke="var(--accent-warm)" stroke-width="1.5" stroke-dasharray="5 4"/>
-        <line x1="360" y1="55" x2="420" y2="55" stroke="var(--text-faint)" stroke-width="1.2" opacity="0.4"/>
-        <line x1="360" y1="63" x2="410" y2="63" stroke="var(--text-faint)" stroke-width="1" opacity="0.3"/>
-        <circle cx="424" cy="48" r="8" fill="var(--accent-warm)"/>
-        <text x="420" y="52" font-size="11" font-family="Inter, sans-serif" fill="#fff" font-weight="800">!</text>
-
-        <!-- Bottom-left: linked -->
-        <rect x="50" y="190" width="80" height="40" rx="6" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="1.5"/>
-        <line x1="60" y1="205" x2="120" y2="205" stroke="var(--text-faint)" stroke-width="1.4"/>
-        <line x1="60" y1="213" x2="112" y2="213" stroke="var(--text-faint)" stroke-width="1.2" opacity="0.6"/>
-        <line x1="60" y1="221" x2="105" y2="221" stroke="var(--text-faint)" stroke-width="1.2" opacity="0.4"/>
-
-        <!-- Bottom-right: MISSING link (faded + label) -->
-        <rect x="350" y="190" width="80" height="40" rx="6" fill="var(--card-bg)" stroke="var(--text-faint)" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.5"/>
-        <text x="368" y="216" font-size="10" font-family="Inter, sans-serif" fill="var(--text-faint)" font-weight="600">Not linked</text>
-
-        <!-- Lines connecting -->
-        <g stroke="var(--accent)" stroke-width="1.8" fill="none">
-          <line x1="130" y1="60" x2="200" y2="125"/>
-          <line x1="130" y1="210" x2="200" y2="145"/>
+        <!-- Connecting lines (drawn first, behind nodes) -->
+        <g stroke-width="2" fill="none" stroke-linecap="round">
+          <line x1="130" y1="60" x2="200" y2="125" stroke="#4a6cf7" opacity="0.55"/>
+          <line x1="130" y1="210" x2="200" y2="145" stroke="#9c7df5" opacity="0.55"/>
+          <line x1="280" y1="125" x2="350" y2="60" stroke="#f59e6e" opacity="0.65" stroke-dasharray="6 4"/>
+          <line x1="280" y1="145" x2="350" y2="210" stroke="#c7cdd6" opacity="0.45" stroke-dasharray="4 4"/>
         </g>
-        <g stroke="var(--accent-warm)" stroke-width="1.8" stroke-dasharray="5 4" fill="none">
-          <line x1="280" y1="125" x2="350" y2="60"/>
-        </g>
-        <g stroke="var(--text-faint)" stroke-width="1.5" stroke-dasharray="3 3" fill="none" opacity="0.5">
-          <line x1="280" y1="145" x2="350" y2="210"/>
-        </g>
+
+        <!-- Center node (current document) -->
+        <rect x="195" y="110" width="90" height="50" rx="14" fill="#4a6cf7"/>
+        <circle cx="208" cy="128" r="4" fill="#fff"/>
+        <rect x="218" y="124" width="56" height="4" rx="1.5" fill="#fff" opacity="0.85"/>
+        <rect x="218" y="132" width="44" height="3.5" rx="1" fill="#fff" opacity="0.55"/>
+        <rect x="218" y="140" width="50" height="3.5" rx="1" fill="#fff" opacity="0.4"/>
+
+        <!-- Top-left node (linked, blue) -->
+        <rect x="45" y="30" width="90" height="44" rx="14" fill="#eef2ff" stroke="#4a6cf7" stroke-width="1.5"/>
+        <circle cx="58" cy="46" r="4" fill="#4a6cf7"/>
+        <rect x="68" y="42" width="56" height="4" rx="1.5" fill="#4a6cf7" opacity="0.75"/>
+        <rect x="68" y="50" width="40" height="3.5" rx="1" fill="#4a6cf7" opacity="0.45"/>
+        <rect x="68" y="58" width="48" height="3.5" rx="1" fill="#4a6cf7" opacity="0.45"/>
+
+        <!-- Top-right node (BROKEN, orange dashed) -->
+        <rect x="345" y="30" width="90" height="44" rx="14" fill="#fef3eb" stroke="#f59e6e" stroke-width="2" stroke-dasharray="5 4"/>
+        <circle cx="358" cy="46" r="4" fill="#f59e6e"/>
+        <rect x="368" y="42" width="40" height="4" rx="1.5" fill="#f59e6e" opacity="0.6"/>
+        <rect x="368" y="50" width="30" height="3.5" rx="1" fill="#f59e6e" opacity="0.35"/>
+        <circle cx="442" cy="40" r="9" fill="#ef5a5a"/>
+        <text x="438" y="44" font-size="11" font-family="Inter, sans-serif" fill="#fff" font-weight="800">!</text>
+
+        <!-- Bottom-left node (linked, purple) -->
+        <rect x="45" y="195" width="90" height="44" rx="14" fill="#f2eeff" stroke="#9c7df5" stroke-width="1.5"/>
+        <circle cx="58" cy="211" r="4" fill="#9c7df5"/>
+        <rect x="68" y="207" width="56" height="4" rx="1.5" fill="#9c7df5" opacity="0.75"/>
+        <rect x="68" y="215" width="40" height="3.5" rx="1" fill="#9c7df5" opacity="0.45"/>
+        <rect x="68" y="223" width="48" height="3.5" rx="1" fill="#9c7df5" opacity="0.45"/>
+
+        <!-- Bottom-right node (MISSING, faded) -->
+        <rect x="345" y="195" width="90" height="44" rx="14" fill="#fff" stroke="#c7cdd6" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.6"/>
+        <text x="362" y="222" font-size="11" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="600">Not linked</text>
       </svg>
     </div>
   </div>
