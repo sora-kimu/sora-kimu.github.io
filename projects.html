@@ -1,346 +1,785 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Projects — Sora Kim</title>
-<meta content="Six empirical HCI projects by Sora Kim on responsibility, reasoning, and procedural visibility in regulated work." name="description"/>
-<link href="assets/favicon-light.png" media="(prefers-color-scheme: light)" rel="icon" type="image/png"/>
-<link href="assets/favicon-dark.png" media="(prefers-color-scheme: dark)" rel="icon" type="image/png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<style>
-  :root{
-    --bg:#ffffff;--bg2:#f5f5f7;--panel:#ffffff;
-    --line:rgba(0,0,0,0.08);--line-soft:rgba(0,0,0,0.05);
-    --text:#0a0a0a;--text-2:#1c1c1e;--text-3:#6e6e73;--text-4:#aeaeb2;
-    --accent:#1a3a6b;--accent-soft:rgba(26,58,107,0.07);--accent-strong:rgba(26,58,107,0.12);
-    --sans:'Plus Jakarta Sans',-apple-system,'Apple SD Gothic Neo',sans-serif;
-    --mono:'DM Mono',monospace;--max:1120px;--nav-h:64px;
-  }
-  html.dark{--bg:#000000;--bg2:#111111;--panel:#1c1c1e;--line:rgba(255,255,255,0.09);--line-soft:rgba(255,255,255,0.05);--text:#f5f5f7;--text-2:#e5e5ea;--text-3:#8e8e93;--text-4:#48484a;--accent:#4a7fd4;--accent-soft:rgba(74,127,212,0.10);--accent-strong:rgba(74,127,212,0.16)}
-  @media(prefers-color-scheme:dark){:root{--bg:#000000;--bg2:#111111;--panel:#1c1c1e;--line:rgba(255,255,255,0.09);--line-soft:rgba(255,255,255,0.05);--text:#f5f5f7;--text-2:#e5e5ea;--text-3:#8e8e93;--text-4:#48484a;--accent:#4a7fd4;--accent-soft:rgba(74,127,212,0.10);--accent-strong:rgba(74,127,212,0.16)}}
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--text-2);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  a{color:inherit;text-decoration:none}
-  img{display:block;max-width:100%}
-  button{font:inherit;background:none;border:none;cursor:pointer}
-  .wrap{width:min(var(--max),calc(100% - 48px));margin:0 auto}
-  .nav{position:sticky;top:0;z-index:100;height:var(--nav-h);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%)}
-  .nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;width:min(var(--max),calc(100% - 48px));margin:0 auto}
-  .nav-icon{width:18px;height:18px;object-fit:contain;content:url(assets/favicon-light.png);flex-shrink:0}
-  html.dark .nav-icon{content:url(assets/favicon-dark.png)}
-  @media(prefers-color-scheme:dark){.nav-icon{content:url(assets/favicon-dark.png)}}
-  .brand-name{font-size:15px;font-weight:700;color:var(--text);letter-spacing:-0.03em}
-  .nav-links{display:flex;align-items:center;gap:24px;list-style:none}
-  .nav-links a{font-size:13px;color:var(--text-3);letter-spacing:-0.01em;transition:color 150ms}
-  .nav-links a:hover,.nav-links a.active{color:var(--text)}
-  .nav-links a.active{font-weight:600}
-  .nav-right{display:flex;align-items:center;gap:8px}
-  .theme-btn{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-3);transition:border-color 150ms,color 150ms}
-  .theme-btn:hover{border-color:var(--text-3);color:var(--text)}
-  .theme-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .cv-btn{height:34px;padding:0 14px;border:1px solid var(--line);border-radius:8px;font-size:12px;font-weight:500;color:var(--text-2);font-family:var(--mono);letter-spacing:0.02em;transition:border-color 150ms,background 150ms;display:inline-flex;align-items:center;justify-content:center}
-  .cv-btn:hover{border-color:var(--text-3);background:var(--bg2)}
-  .hamburger{display:none;width:36px;height:36px;border:1px solid var(--line);border-radius:50%;align-items:center;justify-content:center;color:var(--text-3);cursor:pointer;flex-direction:column;gap:4px;transition:border-color 150ms}
-  .hamburger:hover{border-color:var(--text-3)}
-  .hamburger span{display:block;width:14px;height:1.5px;background:currentColor;border-radius:2px;transition:transform 250ms ease,opacity 250ms ease}
-  .hamburger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
-  .hamburger.open span:nth-child(2){opacity:0}
-  .hamburger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
-  .mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;background:color-mix(in srgb,var(--bg) 97%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:200;padding:32px 24px;flex-direction:column;gap:8px;border-top:1px solid var(--line)}
-  .mobile-menu.open{display:flex}
-  .mobile-menu a{font-size:1.5rem;font-weight:700;letter-spacing:-0.03em;color:var(--text);padding:12px 0;border-bottom:1px solid var(--line-soft);transition:color 150ms}
-  .mobile-menu a:hover{color:var(--accent)}
-  .mobile-menu-cv{margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--text-4)}
-  .page-header{padding:64px 0 56px;border-bottom:1px solid var(--line)}
-  .page-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--text-4);text-transform:uppercase;margin-bottom:16px}
-  .page-h1{font-size:clamp(2rem,4.5vw,3.4rem);font-weight:800;letter-spacing:-0.04em;color:var(--text);line-height:1.08;margin-bottom:16px}
-  .page-sub{font-size:15px;font-weight:400;color:var(--text-3);line-height:1.75;margin-bottom:40px;max-width:72ch}
-  .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--line);gap:1px}
-  .stat{background:var(--bg);padding:20px 22px}
-  .stat-label{font-family:var(--mono);font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-4);margin-bottom:6px}
-  .stat-num{font-size:2rem;font-weight:800;letter-spacing:-0.05em;color:var(--text);line-height:1;margin-bottom:3px}
-  .stat-desc{font-size:12px;color:var(--text-4);line-height:1.5}
-  .axis-sec{padding:56px 0;border-bottom:1px solid var(--line)}
-  .axis-sec:last-of-type{border-bottom:none}
-  .axis-head{display:flex;align-items:center;gap:0;margin-bottom:24px}
-  .axis-tag{font-family:var(--mono);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);padding:7px 12px;border:1px solid rgba(26,58,107,0.18);background:var(--accent-soft);border-radius:8px 0 0 8px;white-space:nowrap}
-  .axis-title{font-size:14px;font-weight:400;letter-spacing:-0.01em;padding:7px 16px;border:1px solid var(--line);border-left:none;border-radius:0 8px 8px 0;color:var(--text-3);background:transparent}
-  .proj-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--line);gap:1px}
-  .proj-card{background:var(--panel);padding:24px;display:flex;flex-direction:column;transition:background 150ms}
-  .proj-card:hover{background:var(--bg2)}
-  .proj-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
-  .proj-num{font-family:var(--mono);font-size:10px;color:var(--text-4);letter-spacing:0.08em;text-transform:uppercase;padding-top:2px;flex-shrink:0}
-  .chips{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
-  .chip{font-family:var(--mono);font-size:10px;padding:3px 7px;border:1px solid var(--line);border-radius:4px;color:var(--text-4);letter-spacing:0.03em}
-  .chip-preprint{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);font-weight:500}
-  .proj-h{font-size:1.1rem;font-weight:700;letter-spacing:-0.025em;line-height:1.25;margin-bottom:10px;color:var(--text);transition:color 150ms}
-  .proj-h:hover{color:var(--accent)}
-  .proj-insight{font-size:13.5px;font-weight:500;color:var(--text-2);line-height:1.7}
-  .proj-result{font-family:var(--mono);font-size:10px;color:var(--accent);line-height:1.65;padding:7px 0 7px 12px;border-left:2px solid var(--accent);margin:12px 0}
-  .proj-expand{overflow:hidden;max-height:0;transition:max-height 350ms cubic-bezier(.2,.7,0,1),opacity 300ms;opacity:0}
-  .proj-card.open .proj-expand{max-height:300px;opacity:1}
-  .proj-intervention{font-size:13px;color:var(--text-3);line-height:1.75;padding-top:10px;border-top:1px solid var(--line-soft)}
-  .proj-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
-  .proj-meta{font-family:var(--mono);font-size:10px;color:var(--text-4)}
-  .proj-toggle{font-family:var(--mono);font-size:10px;color:var(--text-4);letter-spacing:0.04em;transition:color 150ms;display:inline-flex;align-items:center;gap:4px;background:none;border:1px solid var(--line);border-radius:5px;padding:4px 8px;cursor:pointer}
-  .proj-toggle:hover{color:var(--accent);border-color:var(--accent)}
-  .proj-toggle-icon{transition:transform 300ms;display:inline-block}
-  .proj-card.open .proj-toggle-icon{transform:rotate(45deg)}
-  .page-footer{padding:40px 0 60px}
-  .page-footer-inner{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-  .footer-note{font-family:var(--mono);font-size:10px;color:var(--text-4);letter-spacing:0.04em}
-  .footer-nav{display:flex;gap:8px}
-  .footer-btn{height:34px;padding:0 16px;border:1px solid var(--line);border-radius:8px;font-family:var(--mono);font-size:11px;color:var(--text-3);letter-spacing:0.04em;display:inline-flex;align-items:center;justify-content:center;transition:border-color 150ms,background 150ms,color 150ms}
-  .footer-btn:hover{border-color:var(--text-3);background:var(--bg2);color:var(--text)}
-  .reveal{opacity:1;transform:none}
-  .js-ready .reveal{opacity:0;transform:translateY(12px);transition:opacity 550ms cubic-bezier(.2,.7,0,1),transform 550ms cubic-bezier(.2,.7,0,1)}
-  .js-ready .reveal.on{opacity:1;transform:none}
-  @media(max-width:900px){.hero-stats{grid-template-columns:repeat(2,1fr)}.proj-grid{grid-template-columns:1fr}.page-h1{font-size:2rem}}
-  @media(max-width:600px){.wrap{width:calc(100% - 32px)}.nav-links{display:none}.hamburger{display:flex}.hero-stats{grid-template-columns:1fr}.axis-head{flex-direction:column;align-items:flex-start}.axis-title{border-left:1px solid var(--line);border-radius:0 0 8px 8px;margin-top:-1px}.proj-top{flex-direction:column;gap:8px}.chips{justify-content:flex-start}.page-footer-inner{flex-direction:column;align-items:flex-start}}
-  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none !important;transition:none !important}.reveal{opacity:1;transform:none}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Sora Kim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+  <style>
+    :root {
+      --bg: #f5f5f5; --bg-soft: #fafafa;
+      --text: #1a1a1a; --text-muted: #4a4a4a; --text-faint: #888;
+      --accent: #1e3a5f; --accent-soft: rgba(30, 58, 95, 0.08);
+      --accent-warm: #b85d36; --accent-warm-soft: rgba(184, 93, 54, 0.10);
+      --accent-green: #3a6b4a; --accent-green-soft: rgba(58, 107, 74, 0.10);
+      --border: #ddd; --border-soft: #e8e8e8;
+      --card-bg: #fff; --mockup-bg: #fafafa;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #1a1a1a; --bg-soft: #202020;
+        --text: #f0f0f0; --text-muted: #b8b8b8; --text-faint: #888;
+        --accent: #7ba9d8; --accent-soft: rgba(123, 169, 216, 0.14);
+        --accent-warm: #d99b6e; --accent-warm-soft: rgba(217, 155, 110, 0.14);
+        --accent-green: #7eb18e; --accent-green-soft: rgba(126, 177, 142, 0.14);
+        --border: #333; --border-soft: #2a2a2a;
+        --card-bg: #232323; --mockup-bg: #1f1f1f;
+      }
+    }
+    [data-theme="dark"] {
+      --bg: #1a1a1a; --bg-soft: #202020;
+      --text: #f0f0f0; --text-muted: #b8b8b8; --text-faint: #888;
+      --accent: #7ba9d8; --accent-soft: rgba(123, 169, 216, 0.14);
+      --accent-warm: #d99b6e; --accent-warm-soft: rgba(217, 155, 110, 0.14);
+      --accent-green: #7eb18e; --accent-green-soft: rgba(126, 177, 142, 0.14);
+      --border: #333; --border-soft: #2a2a2a;
+      --card-bg: #232323; --mockup-bg: #1f1f1f;
+    }
+    [data-theme="light"] {
+      --bg: #f5f5f5; --bg-soft: #fafafa;
+      --text: #1a1a1a; --text-muted: #4a4a4a; --text-faint: #888;
+      --accent: #1e3a5f; --accent-soft: rgba(30, 58, 95, 0.08);
+      --accent-warm: #b85d36; --accent-warm-soft: rgba(184, 93, 54, 0.10);
+      --accent-green: #3a6b4a; --accent-green-soft: rgba(58, 107, 74, 0.10);
+      --border: #ddd; --border-soft: #e8e8e8;
+      --card-bg: #fff; --mockup-bg: #fafafa;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { overflow-x: hidden; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      font-size: 17px; line-height: 1.65;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      transition: background 0.2s, color 0.2s; overflow-x: hidden;
+    }
+    a { color: var(--accent); }
+
+    nav { max-width: 1100px; margin: 0 auto; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; gap: 16px; position: relative; }
+    @media (max-width: 768px) { nav { padding: 18px 20px; } }
+    .nav-name { font-size: 20px; font-weight: 700; color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; letter-spacing: -0.02em; }
+    .nav-name .shell { font-size: 22px; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { font-size: 15px; font-weight: 400; color: var(--text); text-decoration: none; padding-bottom: 2px; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.active { border-bottom: 2px solid var(--text); font-weight: 500; }
+    .theme-toggle, .menu-toggle { background: none; border: 1px solid var(--border); width: 34px; height: 34px; border-radius: 50%; cursor: pointer; padding: 0; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; transition: border-color 0.15s, color 0.15s; color: var(--text); }
+    .theme-toggle { font-size: 14px; }
+    .theme-toggle:hover, .menu-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .menu-toggle { display: none; }
+    .menu-toggle svg { width: 16px; height: 16px; stroke: var(--text); stroke-width: 1.8; fill: none; stroke-linecap: round; }
+    @media (max-width: 820px) {
+      .menu-toggle { display: inline-flex; }
+      .nav-links { position: absolute; top: 100%; right: 20px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px; flex-direction: column; gap: 4px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); min-width: 180px; z-index: 100; display: none; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 14px; border-radius: 6px; font-size: 15px; }
+      .nav-links a:hover { background: var(--bg-soft); }
+      .nav-links a.active { border-bottom: none; background: var(--accent-soft); color: var(--accent); }
+    }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 56px 40px 80px; }
+    @media (max-width: 640px) { main { padding: 36px 20px 56px; } }
+
+    .page-header { margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px solid var(--border-soft); max-width: 720px; }
+    @media (max-width: 640px) { .page-header { margin-bottom: 40px; padding-bottom: 24px; } }
+    .page-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h1 { font-size: clamp(2.2rem, 5.5vw, 3rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; color: var(--text); margin-bottom: 18px; }
+    .page-intro { font-size: 1rem; color: var(--text-muted); line-height: 1.7; max-width: 640px; }
+    @media (max-width: 640px) { .page-intro { font-size: 0.97rem; } }
+    .page-intro strong { color: var(--text); font-weight: 600; }
+    .page-intro em { font-style: italic; }
+
+    /* Section */
+    .section { margin-top: 72px; }
+    .section:first-of-type { margin-top: 0; }
+    .section-header { margin-bottom: 32px; max-width: 720px; }
+    .section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px; }
+    .section-eyebrow.health { color: var(--accent-warm); }
+    .section-eyebrow.curiosity { color: var(--accent-green); }
+    .section-eyebrow.ongoing { color: var(--accent); }
+    .section-title { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; color: var(--text); margin-bottom: 10px; }
+    @media (max-width: 640px) { .section-title { font-size: 1.4rem; } }
+    .section-subtitle { font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; }
+    .section-subtitle em { font-style: italic; }
+
+    /* Project grid */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 820px) { .project-grid { grid-template-columns: 1fr; gap: 16px; } }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      transform: translateY(-2px);
+    }
+
+    /* Mockup container */
+    .mockup {
+      background: var(--mockup-bg);
+      border-bottom: 1px solid var(--border-soft);
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      overflow: hidden;
+    }
+    .mockup svg {
+      width: 100%;
+      height: 100%;
+      max-width: 380px;
+    }
+
+    .project-body { padding: 22px 26px 26px; flex: 1; display: flex; flex-direction: column; }
+    @media (max-width: 640px) { .project-body { padding: 18px 22px 22px; } }
+
+    .project-meta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .project-meta.health { color: var(--accent-warm); }
+    .project-meta.curiosity { color: var(--accent-green); }
+    .project-meta.ongoing { color: var(--accent); }
+    .project-meta .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+    .project-meta.health .dot { background: var(--accent-warm); }
+    .project-meta.curiosity .dot { background: var(--accent-green); }
+    .project-meta.ongoing .dot { background: var(--accent); }
+
+    .project-emoji {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .project-name {
+      font-size: 1.18rem; font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 640px) { .project-name { font-size: 1.08rem; } }
+
+    .project-desc {
+      font-size: 0.94rem; line-height: 1.65;
+      color: var(--text-muted); margin-bottom: 18px;
+      flex: 1;
+    }
+    .project-desc em { font-style: italic; }
+    .project-desc strong { color: var(--text); font-weight: 600; }
+    .project-desc .quote {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--text-faint);
+      font-style: italic;
+      padding-left: 12px;
+      border-left: 2px solid var(--border-soft);
+      margin-top: 10px;
+      line-height: 1.55;
+    }
+
+    .project-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 16px;
+    }
+    .project-tag {
+      font-size: 11.5px; font-weight: 500;
+      padding: 4px 10px; border-radius: 5px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
+    }
+
+    .contact-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 500;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center; gap: 6px;
+      align-self: flex-start;
+    }
+    .contact-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    footer { text-align: center; padding: 40px 20px; font-size: 13.5px; color: var(--text-muted); border-top: 1px solid var(--border-soft); margin-top: 56px; }
+    footer a { color: var(--text-muted); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  </style>
 </head>
 <body>
-<header class="nav">
-<div class="nav-inner">
-  <a aria-label="Sora Kim home" href="index.html" style="display:flex;align-items:center;gap:8px;">
-    <img alt="" aria-hidden="true" class="nav-icon" src="assets/favicon-light.png"/>
-    <span class="brand-name">Sora Kim</span>
-  </a>
-  <nav aria-label="Primary">
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a class="active" href="projects.html">Projects</a></li>
-      <li><a href="papers.html">Papers</a></li>
-      <li><a href="research.html">Research</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
+
+<nav>
+  <a href="index.html" class="nav-name"><span class="shell">🐚</span> Sora Kim</a>
   <div class="nav-right">
-    <button aria-label="Toggle theme" class="theme-btn" id="themeBtn">
-      <svg aria-hidden="true" viewBox="0 0 24 24" style="pointer-events:none">
-        <path d="M12 3v2M12 19v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M3 12h2M19 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-        <circle cx="12" cy="12" r="4"></circle>
-      </svg>
-    </button>
-    <a class="cv-btn" href="assets/sora_kim_cv.pdf" rel="noopener" target="_blank">CV.pdf ↗</a>
-    <button aria-label="Toggle menu" class="hamburger" id="hamburgerBtn">
-      <span></span><span></span><span></span>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="papers.html">Papers</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="learning.html">Learning</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
     </button>
   </div>
-</div>
-</header>
-
-<nav aria-label="Mobile navigation" class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
-  <a href="projects.html">Projects</a>
-  <a href="papers.html">Papers</a>
-  <a href="research.html">Research</a>
-  <a href="about.html">About</a>
-  <div class="mobile-menu-cv"><a href="assets/sora_kim_cv.pdf" rel="noopener" target="_blank">CV.pdf ↗</a></div>
 </nav>
 
 <main>
-<section class="page-header">
-  <div class="wrap">
-    <div class="page-eyebrow reveal">Research Projects</div>
-    <h1 class="page-h1 reveal">How regulated systems constrain reasoning and redistribute accountability — and how design can intervene.</h1>
-    <p class="page-sub reveal">Six empirical projects examining how regulated systems narrow reasoning, shift interpretive burden, and shape what stays visible long enough to support accountable judgment.</p>
-    <div class="hero-stats reveal">
-      <div class="stat">
-        <div class="stat-label">Projects</div>
-        <div class="stat-num">6</div>
-        <div class="stat-desc">Across two research axes</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Scale</div>
-        <div class="stat-num">N=20</div>
-        <div class="stat-desc">GMP practitioners in regulated environments</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Empirical program</div>
-        <div class="stat-num"> 5</div>
-        <div class="stat-desc">Prototype-based studies across reasoning, navigation, and coordination</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Portfolio papers</div>
-        <div class="stat-num">10</div>
-        <div class="stat-desc">5 HCI papers · 5 STS manuscripts</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- AXIS 01 · REASONING -->
-<section class="axis-sec">
-  <div class="wrap">
-    <div class="axis-head reveal">
-      <div class="axis-tag">axis 01 · reasoning</div>
-      <div class="axis-title">How regulated systems shape causal reasoning</div>
-    </div>
-    <div class="proj-grid reveal">
-      <div class="proj-card">
-        <div class="proj-top">
-          <span class="proj-num">reasoning · 01</span>
-          <div class="chips">
-            <span class="chip">pilot study</span>
-            <span class="chip chip-preprint">preprint</span>
-            <span class="chip">Deployed</span>
-          </div>
-        </div>
-        <a class="proj-h" href="project-rca-reasoning-scaffolder.html">Keeping Comparison Open under Closure Pressure</a>
-        <p class="proj-insight">Closure pressure compresses accountable interpretation before broader contributors can be compared — not because investigators reason poorly, but because investigation structure forecloses alternatives early.</p>
-        <div class="proj-result">18/20 produced broader causal accounts · 15/20 reconsidered initial attribution under scaffolded comparison · CHI 2027 full paper submission in preparation · CSCW 2026 poster under review</div>
-        <div class="proj-expand">
-          <p class="proj-intervention">A structured reasoning scaffold that keeps alternative explanations visible long enough to preserve comparison and delay premature convergence, without automating the conclusion. Intervention half of a two-study paper with the companion premature convergence study.</p>
-        </div>
-        <div class="proj-bottom">
-          <span class="proj-meta">reasoning design · PAC counter-design · streamlit · python</span>
-          <button class="proj-toggle" onclick="this.closest('.proj-card').classList.toggle('open')"><span class="proj-toggle-icon">+</span> details</button>
-        </div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-top">
-          <span class="proj-num">reasoning · 02</span>
-          <div class="chips">
-            <span class="chip">pilot study</span>
-            <span class="chip">timed reflection</span>
-          </div>
-        </div>
-        <a class="proj-h" href="project-premature-causal-convergence.html">Premature Convergence under Closure Pressure</a>
-        <p class="proj-insight">Early closure is not always deliberate — time pressure and the need for a quickly documentable explanation push investigations toward a single explanation before alternatives are meaningfully compared.</p>
-        <div class="proj-result">15/20 single-cause at initial timepoint · 18/20 broadened within 10 minutes · confidence avg 1/5 regardless of experience</div>
-        <div class="proj-expand">
-          <p class="proj-intervention">Observational study examining how early single-explanation accounts broaden when investigators are given more time and interpretive space. Observational half of the same two-study paper.</p>
-        </div>
-        <div class="proj-bottom">
-          <span class="proj-meta">closure pressure · time-based observation · pilot</span>
-          <button class="proj-toggle" onclick="this.closest('.proj-card').classList.toggle('open')"><span class="proj-toggle-icon">+</span> details</button>
-        </div>
-      </div>
-    </div>
+  <div class="page-header">
+    <div class="page-eyebrow">Projects</div>
+    <h1>Side experiments &<br>ongoing research</h1>
+    <p class="page-intro">
+      Projects outside the main research arc — built on weekends, mostly. <strong>Health & patient-facing tools</strong> exploring what AI can do for people navigating chronic illness; <strong>NLP and urban-equity experiments</strong> on the data side; and an <em>ongoing study</em> on how my own QC colleagues actually use AI in regulated work. Most are private or in progress — <strong>contact for more info on any of them</strong>.
+    </p>
   </div>
-</section>
 
-<!-- AXIS 02 · NAVIGATION -->
-<section class="axis-sec">
-  <div class="wrap">
-    <div class="axis-head reveal">
-      <div class="axis-tag">axis 02 · navigation</div>
-      <div class="axis-title">How regulated systems shape document navigation</div>
+  <!-- ============ HEALTH & PATIENT-FACING ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow health">— Health & patient-facing · 4 projects</div>
+      <h2 class="section-title">Tools for navigating chronic illness</h2>
+      <p class="section-subtitle">
+        What happens when patients have AI on their side — not to diagnose, but to <em>track</em>, <em>translate</em>, <em>match</em>, and <em>name</em>. Each tool tries to lower the cost of one specific kind of unpaid labor that chronic-illness patients quietly do every day.
+      </p>
     </div>
-    <div class="proj-grid reveal">
-      <div class="proj-card">
-        <div class="proj-top">
-          <span class="proj-num">navigation · 01</span>
-          <div class="chips">
-            <span class="chip">pilot study</span>
-            <span class="chip chip-preprint">preprint</span>
-            <span class="chip">Deployed</span>
+
+    <div class="project-grid">
+
+      <!-- 1. EMOTION NAMER -->
+      <article class="project-card">
+        <div class="mockup">
+          <svg viewBox="0 0 380 214" xmlns="http://www.w3.org/2000/svg">
+            <!-- Russell 2D coordinate grid -->
+            <rect x="40" y="20" width="300" height="174" rx="12" fill="#fff" stroke="#e8ebf0" stroke-width="1"/>
+            <!-- Axes -->
+            <line x1="190" y1="30" x2="190" y2="184" stroke="#c7cdd6" stroke-width="0.8"/>
+            <line x1="50" y1="107" x2="330" y2="107" stroke="#c7cdd6" stroke-width="0.8"/>
+            <!-- Axis labels -->
+            <text x="324" y="103" font-size="8" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="600">valence +</text>
+            <text x="50" y="103" font-size="8" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="600">−</text>
+            <text x="194" y="38" font-size="8" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="600">arousal +</text>
+            <text x="194" y="190" font-size="8" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="600">−</text>
+
+            <!-- Quadrant emotion dots (small, soft) -->
+            <circle cx="120" cy="60" r="3" fill="#ef5a5a" opacity="0.5"/>
+            <circle cx="100" cy="80" r="3" fill="#ef5a5a" opacity="0.5"/>
+            <circle cx="260" cy="60" r="3" fill="#f7c948" opacity="0.5"/>
+            <circle cx="240" cy="80" r="3" fill="#f7c948" opacity="0.5"/>
+            <circle cx="120" cy="150" r="3" fill="#4a6cf7" opacity="0.5"/>
+            <circle cx="100" cy="170" r="3" fill="#4a6cf7" opacity="0.5"/>
+            <circle cx="260" cy="150" r="3" fill="#5dc78e" opacity="0.5"/>
+            <circle cx="240" cy="170" r="3" fill="#5dc78e" opacity="0.5"/>
+
+            <!-- Highlighted user choice -->
+            <circle cx="148" cy="142" r="11" fill="#f06292" opacity="0.25"/>
+            <circle cx="148" cy="142" r="6" fill="#f06292"/>
+            <line x1="148" y1="142" x2="220" y2="120" stroke="#f06292" stroke-width="1" stroke-dasharray="2 2"/>
+            <rect x="222" y="108" width="80" height="22" rx="11" fill="#fde6ef"/>
+            <text x="232" y="123" font-size="9" font-family="Inter, sans-serif" fill="#f06292" font-weight="700">depleted</text>
+
+            <!-- Top: input + 6 candidates -->
+            <rect x="20" y="20" width="14" height="174" rx="3" fill="#f2eeff"/>
+            <text x="22" y="36" font-size="6.5" font-family="Inter, sans-serif" fill="#9c7df5" font-weight="800" transform="rotate(-90 28 70)">INPUT → 6 CANDIDATES</text>
+
+            <!-- Language tags bottom -->
+            <g transform="translate(40, 198)">
+              <rect x="0" y="0" width="22" height="14" rx="7" fill="#eef2ff"/>
+              <text x="6" y="10" font-size="8" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="800">EN</text>
+              <rect x="28" y="0" width="22" height="14" rx="7" fill="#fef3eb"/>
+              <text x="34" y="10" font-size="8" font-family="Inter, sans-serif" fill="#f59e6e" font-weight="800">KO</text>
+              <rect x="56" y="0" width="22" height="14" rx="7" fill="#eaf8f0"/>
+              <text x="62" y="10" font-size="8" font-family="Inter, sans-serif" fill="#5dc78e" font-weight="800">JP</text>
+            </g>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-meta health"><span class="dot"></span>Patient-facing</div>
+          <span class="project-emoji">🏷</span>
+          <h3 class="project-name">Emotion Namer</h3>
+          <p class="project-desc">
+            <em>If you can't name a feeling, it has nowhere to go.</em> Built on Lieberman's "<em>name it to tame it</em>" research and the <strong>Geneva Emotion Wheel</strong> (Scherer, 2005): you input a vague word, the tool offers six more precise candidates, and the final pick lands on Russell's <strong>valence × arousal</strong> plane (1980). Available in Korean, English, and Japanese.
+            <span class="quote">If the input is too heavy, the tool stops and surfaces help resources first — not a diagnostic, just a thoughtful friend.</span>
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">React + React Native</span>
+            <span class="project-tag">Tailwind</span>
+            <span class="project-tag">i18n (KO/EN/JP)</span>
+            <span class="project-tag">LLM API · serverless</span>
+            <span class="project-tag">Geneva Wheel · Russell 2D</span>
           </div>
+          <a class="contact-btn" href="mailto:sorakim.lab@gmail.com?subject=Project%20info%3A%20Emotion%20Namer">Contact for more info →</a>
         </div>
-        <a class="proj-h" href="project-sop-accessibility.html">Procedural Visibility in SOP Navigation</a>
-        <p class="proj-insight">Document inaccessibility creates interpretive burden upstream of formal error — retrieval difficulty becomes judgment difficulty before any mistake is recorded.</p>
-        <div class="proj-result">Access shapes interpretation: reduced retrieval time (~6 min → ~1 min) while expanding the range of procedures considered actionable · DIS 2027 submission in preparation</div>
-        <div class="proj-expand">
-          <p class="proj-intervention">An external retrieval layer that makes scanned SOP archives searchable without altering validated source files, increasing procedural visibility at the point of need.</p>
+      </article>
+
+      <!-- 2. MEDICATION TRACEABILITY -->
+      <article class="project-card">
+        <div class="mockup">
+          <svg viewBox="0 0 380 214" xmlns="http://www.w3.org/2000/svg">
+            <!-- Top: medication pill row -->
+            <rect x="20" y="20" width="340" height="38" rx="12" fill="#fef3eb"/>
+            <text x="32" y="38" font-size="10" font-family="Inter, sans-serif" fill="#f59e6e" font-weight="800" letter-spacing="0.06em">💊 TODAY · 3 MEDS</text>
+            <circle cx="100" cy="44" r="5" fill="#5dc78e"/>
+            <text x="110" y="48" font-size="9" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="600">Mesalamine</text>
+            <circle cx="178" cy="44" r="5" fill="#5dc78e"/>
+            <text x="188" y="48" font-size="9" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="600">Azathioprine</text>
+            <circle cx="270" cy="44" r="5" fill="#f7c948"/>
+            <text x="280" y="48" font-size="9" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="600">Steroid (taper)</text>
+
+            <!-- Middle: symptom timeline -->
+            <text x="20" y="78" font-size="9" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="700" letter-spacing="0.08em">SYMPTOM SEVERITY · LAST 14 DAYS</text>
+            <rect x="20" y="85" width="340" height="70" rx="12" fill="#fff" stroke="#e8ebf0" stroke-width="1"/>
+            <!-- Severity curve -->
+            <polyline points="32,140 56,135 80,130 104,120 128,108 152,98 176,92 200,90 224,98 248,108 272,110 296,105 320,98 344,90"
+                      fill="none" stroke="#9c7df5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <g fill="#9c7df5">
+              <circle cx="80" cy="130" r="2.5"/>
+              <circle cx="152" cy="98" r="2.5"/>
+              <circle cx="224" cy="98" r="2.5"/>
+              <circle cx="296" cy="105" r="2.5"/>
+              <circle cx="344" cy="90" r="2.5"/>
+            </g>
+            <!-- Flare marker -->
+            <circle cx="200" cy="90" r="6" fill="none" stroke="#ef5a5a" stroke-width="2"/>
+            <text x="210" y="78" font-size="8" font-family="Inter, sans-serif" fill="#ef5a5a" font-weight="800">flare</text>
+            <line x1="20" y1="150" x2="360" y2="150" stroke="#c7cdd6" stroke-width="0.5"/>
+
+            <!-- Bottom: side effects flags -->
+            <rect x="20" y="172" width="160" height="22" rx="11" fill="#fde8e8"/>
+            <text x="32" y="186" font-size="9" font-family="Inter, sans-serif" fill="#ef5a5a" font-weight="700">⚠ Side effect: fatigue</text>
+            <rect x="190" y="172" width="170" height="22" rx="11" fill="#eef2ff"/>
+            <text x="202" y="186" font-size="9" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="700">📓 Note: bedtime irregular</text>
+          </svg>
         </div>
-        <div class="proj-bottom">
-          <span class="proj-meta">document UX · retrieval · streamlit · python</span>
-          <button class="proj-toggle" onclick="this.closest('.proj-card').classList.toggle('open')"><span class="proj-toggle-icon">+</span> details</button>
-        </div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-top">
-          <span class="proj-num">navigation · 02</span>
-          <div class="chips">
-            <span class="chip">pilot study</span>
-            <span class="chip chip-preprint">preprint</span>
-            <span class="chip">Deployed</span>
+        <div class="project-body">
+          <div class="project-meta health"><span class="dot"></span>Patient-facing · in development</div>
+          <span class="project-emoji">💊</span>
+          <h3 class="project-name">Medication Traceability for Crohn's</h3>
+          <p class="project-desc">
+            A daily tracker — currently in active development — that helps people with chronic illness link their <strong>medication</strong>, <strong>symptoms</strong>, and <strong>side effects</strong> over time. The kind of pattern your doctor can't see in a 15-minute appointment. <em>Built for Crohn's specifically</em> rather than chronic disease in general, because doing the medication and symptom data well requires deep familiarity with one condition rather than shallow coverage of many.
+            <span class="quote">Designing for daily mobile use, with health data kept local on-device — exportable as a clean PDF for clinic visits.</span>
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">React Native (mobile)</span>
+            <span class="project-tag">Next.js (web)</span>
+            <span class="project-tag">SQLite + IndexedDB</span>
+            <span class="project-tag">Recharts</span>
+            <span class="project-tag">PDF export</span>
           </div>
+          <a class="contact-btn" href="mailto:sorakim.lab@gmail.com?subject=Project%20info%3A%20Medication%20Traceability">Contact for more info →</a>
         </div>
-        <a class="proj-h" href="project-cross-reference.html">Cross-Reference Burden and Traceability Visibility</a>
-        <p class="proj-insight">Traceability gaps are not merely maintenance defects — they redistribute hidden connective labor onto practitioners reconstructing accountability paths under time pressure.</p>
-        <div class="proj-result">Loopback as a structural signal: navigation friction reflects missing or non-navigable document relationships rather than user error · CSCW 2027 submission in preparation</div>
-        <div class="proj-expand">
-          <p class="proj-intervention">A traceability layer that makes document linkage, broken paths, and lifecycle mismatches visible across document networks without modifying validated systems.</p>
+      </article>
+
+      <!-- 3. MEDICAL RECORD READER -->
+      <article class="project-card">
+        <div class="mockup">
+          <svg viewBox="0 0 380 214" xmlns="http://www.w3.org/2000/svg">
+            <!-- Left: clinical document -->
+            <rect x="20" y="20" width="160" height="174" rx="12" fill="#fff" stroke="#c7cdd6" stroke-width="1"/>
+            <rect x="32" y="32" width="38" height="18" rx="9" fill="#f2eeff"/>
+            <text x="42" y="44" font-size="8.5" font-family="Inter, sans-serif" fill="#9c7df5" font-weight="800">LAB</text>
+            <text x="32" y="70" font-size="8" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="600">CBC Panel</text>
+            <g stroke="#94a0b1" stroke-width="0.6" opacity="0.5">
+              <line x1="32" y1="82" x2="168" y2="82"/>
+              <line x1="32" y1="92" x2="160" y2="92"/>
+              <line x1="32" y1="102" x2="168" y2="102"/>
+              <line x1="32" y1="112" x2="156" y2="112"/>
+            </g>
+            <!-- Highlighted medical terms -->
+            <rect x="36" y="126" width="58" height="11" rx="3" fill="#f7c948" opacity="0.5"/>
+            <text x="40" y="135" font-size="7" font-family="Inter, sans-serif" fill="#a37700" font-weight="700">Hgb 10.2</text>
+            <rect x="100" y="126" width="60" height="11" rx="3" fill="#ef5a5a" opacity="0.4"/>
+            <text x="104" y="135" font-size="7" font-family="Inter, sans-serif" fill="#ef5a5a" font-weight="700">CRP ↑</text>
+            <rect x="36" y="146" width="120" height="11" rx="3" fill="#f7c948" opacity="0.5"/>
+            <text x="40" y="155" font-size="7" font-family="Inter, sans-serif" fill="#a37700" font-weight="700">microcytic anemia</text>
+            <g stroke="#94a0b1" stroke-width="0.6" opacity="0.5">
+              <line x1="32" y1="168" x2="168" y2="168"/>
+              <line x1="32" y1="178" x2="160" y2="178"/>
+            </g>
+
+            <!-- Arrow -->
+            <line x1="190" y1="107" x2="214" y2="107" stroke="#5dc78e" stroke-width="2.5" stroke-linecap="round"/>
+            <polyline points="206,101 214,107 206,113" fill="none" stroke="#5dc78e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- Right: plain language explanation -->
+            <rect x="222" y="20" width="138" height="174" rx="12" fill="#eaf8f0" stroke="#5dc78e" stroke-width="1.5"/>
+            <rect x="234" y="32" width="52" height="18" rx="9" fill="#5dc78e"/>
+            <text x="240" y="44" font-size="8.5" font-family="Inter, sans-serif" fill="#fff" font-weight="800">🧑 PLAIN</text>
+            <text x="234" y="70" font-size="9" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">Hgb 10.2</text>
+            <text x="234" y="82" font-size="8" font-family="Inter, sans-serif" fill="#5dc78e" font-style="italic">slightly low blood</text>
+            <text x="234" y="91" font-size="8" font-family="Inter, sans-serif" fill="#5dc78e" font-style="italic">cell count</text>
+            <text x="234" y="110" font-size="9" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">CRP elevated</text>
+            <text x="234" y="122" font-size="8" font-family="Inter, sans-serif" fill="#5dc78e" font-style="italic">inflammation signal</text>
+            <text x="234" y="142" font-size="9" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">microcytic anemia</text>
+            <text x="234" y="154" font-size="8" font-family="Inter, sans-serif" fill="#5dc78e" font-style="italic">small red blood cells,</text>
+            <text x="234" y="163" font-size="8" font-family="Inter, sans-serif" fill="#5dc78e" font-style="italic">often iron-related</text>
+            <rect x="234" y="172" width="114" height="14" rx="7" fill="#fff"/>
+            <text x="240" y="183" font-size="8" font-family="Inter, sans-serif" fill="#5dc78e" font-weight="700">Ask doctor about ↗</text>
+          </svg>
         </div>
-        <div class="proj-bottom">
-          <span class="proj-meta">traceability · networkx · metadata mapping · streamlit · python</span>
-          <button class="proj-toggle" onclick="this.closest('.proj-card').classList.toggle('open')"><span class="proj-toggle-icon">+</span> details</button>
-        </div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-top">
-          <span class="proj-num">navigation · 03</span>
-          <div class="chips">
-            <span class="chip">pilot study</span>
-            <span class="chip chip-preprint">preprint</span>
-            <span class="chip">Deployed</span>
+        <div class="project-body">
+          <div class="project-meta health"><span class="dot"></span>Patient-facing</div>
+          <span class="project-emoji">📋</span>
+          <h3 class="project-name">Medical Record Reader</h3>
+          <p class="project-desc">
+            Patients receive clinical reports they can't parse — abbreviations, reference ranges, and discipline-specific jargon that doctors never have time to walk through. This tool reads the report and produces a <strong>plain-language version alongside the original</strong>, flagging which findings might be worth asking about. It explains; it doesn't diagnose.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Next.js + React Native</span>
+            <span class="project-tag">pdf.js + Tesseract OCR</span>
+            <span class="project-tag">LLM API</span>
+            <span class="project-tag">Tailwind</span>
           </div>
+          <a class="contact-btn" href="mailto:sorakim.lab@gmail.com?subject=Project%20info%3A%20Medical%20Record%20Reader">Contact for more info →</a>
         </div>
-        <a class="proj-h" href="project-cognitive-navigation-explorer.html">Navigation Friction and Loopback Behavior</a>
-        <p class="proj-insight">Loopbacks are not user error — they mark moments where document structure failed to resolve a judgment demand on the first pass.</p>
-        <div class="proj-result">Loopback behavior observed across all sessions — attributable to document structure rather than interface design</div>
-        <div class="proj-expand">
-          <p class="proj-intervention">A behavioral tracking prototype that captures navigation paths, hesitation, and cross-reference jumps to make otherwise invisible document friction observable across sessions.</p>
+      </article>
+
+      <!-- 4. CLINICAL TRIAL MATCHER -->
+      <article class="project-card">
+        <div class="mockup">
+          <svg viewBox="0 0 380 214" xmlns="http://www.w3.org/2000/svg">
+            <!-- Top: patient profile pills -->
+            <rect x="20" y="20" width="340" height="32" rx="16" fill="#eef2ff"/>
+            <text x="32" y="40" font-size="9" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="800" letter-spacing="0.05em">PATIENT PROFILE</text>
+            <rect x="146" y="28" width="48" height="16" rx="8" fill="#fff"/>
+            <text x="152" y="40" font-size="8.5" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="700">age 32</text>
+            <rect x="200" y="28" width="68" height="16" rx="8" fill="#fff"/>
+            <text x="207" y="40" font-size="8.5" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="700">Crohn's · IBD</text>
+            <rect x="274" y="28" width="78" height="16" rx="8" fill="#fff"/>
+            <text x="280" y="40" font-size="8.5" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="700">prior biologic</text>
+
+            <!-- Trial cards (3) -->
+            <g>
+              <!-- Trial 1: high match -->
+              <rect x="20" y="64" width="340" height="40" rx="12" fill="#fff" stroke="#5dc78e" stroke-width="1.5"/>
+              <text x="32" y="80" font-size="9" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="700">NCT0412...</text>
+              <text x="32" y="94" font-size="10" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">Vedolizumab dose-response</text>
+              <rect x="294" y="74" width="56" height="22" rx="11" fill="#5dc78e"/>
+              <text x="304" y="89" font-size="11" font-family="Inter, sans-serif" fill="#fff" font-weight="800">94% ✓</text>
+
+              <!-- Trial 2: medium match -->
+              <rect x="20" y="116" width="340" height="40" rx="12" fill="#fff" stroke="#f7c948" stroke-width="1.5"/>
+              <text x="32" y="132" font-size="9" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="700">NCT0398...</text>
+              <text x="32" y="146" font-size="10" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">JAK inhibitor — moderate Crohn's</text>
+              <rect x="294" y="126" width="56" height="22" rx="11" fill="#f7c948"/>
+              <text x="304" y="141" font-size="11" font-family="Inter, sans-serif" fill="#7d6300" font-weight="800">71% ~</text>
+
+              <!-- Trial 3: low match — eligibility issue -->
+              <rect x="20" y="168" width="340" height="40" rx="12" fill="#fff" stroke="#ef5a5a" stroke-width="1.5"/>
+              <text x="32" y="184" font-size="9" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="700">NCT0445...</text>
+              <text x="32" y="198" font-size="10" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">Steroid-naive cohort only</text>
+              <rect x="294" y="178" width="56" height="22" rx="11" fill="#ef5a5a"/>
+              <text x="304" y="193" font-size="11" font-family="Inter, sans-serif" fill="#fff" font-weight="800">ineligible</text>
+            </g>
+          </svg>
         </div>
-        <div class="proj-bottom">
-          <span class="proj-meta">loopback tracking · behavioral data · streamlit · python</span>
-          <button class="proj-toggle" onclick="this.closest('.proj-card').classList.toggle('open')"><span class="proj-toggle-icon">+</span> details</button>
-        </div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-top">
-          <span class="proj-num">navigation · 04</span>
-          <div class="chips">
-            <span class="chip">pilot study</span>
-            <span class="chip chip-preprint">preprint</span>
-            <span class="chip">Deployed</span>
+        <div class="project-body">
+          <div class="project-meta health"><span class="dot"></span>Patient-facing</div>
+          <span class="project-emoji">🔬</span>
+          <h3 class="project-name">Clinical Trial Matcher</h3>
+          <p class="project-desc">
+            Trial-finding sites exist, but parsing <strong>inclusion/exclusion criteria</strong> requires reading dozens of trials carefully — work most patients can't realistically do. This tool takes a patient profile and runs it against the trials' criteria, producing a <strong>match percentage</strong> with the reason for ineligibility surfaced when the profile doesn't fit.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Next.js + React Native</span>
+            <span class="project-tag">ClinicalTrials.gov API</span>
+            <span class="project-tag">spaCy (eligibility)</span>
+            <span class="project-tag">Tailwind</span>
           </div>
+          <a class="contact-btn" href="mailto:sorakim.lab@gmail.com?subject=Project%20info%3A%20Clinical%20Trial%20Matcher">Contact for more info →</a>
         </div>
-        <a class="proj-h" href="project-feedback-dashboard.html">Review Burden and Workflow Visibility</a>
-        <p class="proj-insight">Coordination breakdown is produced gradually when review burden stays invisible until delay has already accumulated — the problem is structural, not behavioral.</p>
-        <div class="proj-result">Review delays, revision loops, and feedback burden rendered visible across sessions · participants interpreted delay as structural rather than individual · CSCW 2027 full paper submission in preparation</div>
-        <div class="proj-expand">
-          <p class="proj-intervention">A workflow visibility layer that makes review delays, revision loops, and feedback burden legible before coordination breaks down, without modifying validated systems.</p>
-        </div>
-        <div class="proj-bottom">
-          <span class="proj-meta">workflow friction · TF-IDF · dashboard · streamlit · python</span>
-          <button class="proj-toggle" onclick="this.closest('.proj-card').classList.toggle('open')"><span class="proj-toggle-icon">+</span> details</button>
-        </div>
-      </div>
+      </article>
+
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- ============ NLP & URBAN EQUITY ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow curiosity">— NLP & urban equity · 2 projects</div>
+      <h2 class="section-title">Data-side experiments</h2>
+      <p class="section-subtitle">
+        Two threads that don't sit inside the main research arc but sharpen the skills it uses — corpus analysis and spatial data work.
+      </p>
+    </div>
+
+    <div class="project-grid">
+
+      <!-- 5. TERMS-OF-SERVICE NLP -->
+      <article class="project-card">
+        <div class="mockup">
+          <svg viewBox="0 0 380 214" xmlns="http://www.w3.org/2000/svg">
+            <!-- Document with clauses -->
+            <rect x="20" y="20" width="340" height="174" rx="12" fill="#fff" stroke="#e8ebf0" stroke-width="1"/>
+            <rect x="32" y="32" width="78" height="20" rx="10" fill="#fef3eb"/>
+            <text x="42" y="46" font-size="9" font-family="Inter, sans-serif" fill="#f59e6e" font-weight="800">📜 ToS · v2.4</text>
+            <!-- Clause lines with severity highlights -->
+            <g stroke="#94a0b1" stroke-width="0.7" opacity="0.5">
+              <line x1="32" y1="68" x2="348" y2="68"/>
+              <line x1="32" y1="78" x2="340" y2="78"/>
+            </g>
+            <rect x="32" y="86" width="240" height="12" rx="3" fill="#ef5a5a" opacity="0.45"/>
+            <text x="280" y="96" font-size="8" font-family="Inter, sans-serif" fill="#ef5a5a" font-weight="800">⚠ ARBITRATION</text>
+            <g stroke="#94a0b1" stroke-width="0.7" opacity="0.5">
+              <line x1="32" y1="106" x2="348" y2="106"/>
+              <line x1="32" y1="116" x2="332" y2="116"/>
+            </g>
+            <rect x="32" y="124" width="200" height="12" rx="3" fill="#f7c948" opacity="0.5"/>
+            <text x="238" y="134" font-size="8" font-family="Inter, sans-serif" fill="#a37700" font-weight="800">⚡ UNILATERAL CHANGE</text>
+            <g stroke="#94a0b1" stroke-width="0.7" opacity="0.5">
+              <line x1="32" y1="144" x2="348" y2="144"/>
+              <line x1="32" y1="154" x2="340" y2="154"/>
+            </g>
+            <rect x="32" y="162" width="180" height="12" rx="3" fill="#f59e6e" opacity="0.5"/>
+            <text x="218" y="172" font-size="8" font-family="Inter, sans-serif" fill="#f59e6e" font-weight="800">⚠ DATA SHARING</text>
+            <g stroke="#94a0b1" stroke-width="0.7" opacity="0.5">
+              <line x1="32" y1="182" x2="348" y2="182"/>
+            </g>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-meta curiosity"><span class="dot"></span>NLP experiment</div>
+          <span class="project-emoji">📜</span>
+          <h3 class="project-name">Terms-of-Service NLP</h3>
+          <p class="project-desc">
+            Most ToS documents are long, dense, and structurally designed to be unread. This project extracts <strong>unfair clauses</strong> — forced arbitration, unilateral change, broad data-sharing — and tags each with a <em>severity level</em>, producing a quick readable summary of what the document is asking you to agree to. A practice corpus for clause classification, structured on the question of <em>what the document hides</em>.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Clause classification</span>
+            <span class="project-tag">Legal NLP</span>
+          </div>
+          <a class="contact-btn" href="mailto:sorakim.lab@gmail.com?subject=Project%20info%3A%20Terms-of-Service%20NLP">Contact for more info →</a>
+        </div>
+      </article>
+
+      <!-- 6. URBAN EQUITY COLLECTION -->
+      <article class="project-card">
+        <div class="mockup">
+          <svg viewBox="0 0 380 214" xmlns="http://www.w3.org/2000/svg">
+            <!-- Map background -->
+            <rect x="20" y="20" width="340" height="174" rx="12" fill="#eaf8f0"/>
+            <!-- Map roads/grid -->
+            <g stroke="#fff" stroke-width="3" opacity="0.85" stroke-linecap="round">
+              <path d="M 30 70 Q 100 90, 180 60 T 350 80" fill="none"/>
+              <path d="M 60 140 Q 140 120, 220 150 T 350 130" fill="none"/>
+              <path d="M 100 30 L 110 184"/>
+              <path d="M 220 30 L 230 184"/>
+              <path d="M 290 30 L 295 184"/>
+            </g>
+            <!-- Equity heat blobs -->
+            <circle cx="80" cy="80" r="22" fill="#ef5a5a" opacity="0.35"/>
+            <circle cx="180" cy="110" r="28" fill="#f59e6e" opacity="0.35"/>
+            <circle cx="300" cy="60" r="18" fill="#f7c948" opacity="0.4"/>
+            <circle cx="260" cy="150" r="24" fill="#5dc78e" opacity="0.4"/>
+            <circle cx="120" cy="160" r="16" fill="#4a6cf7" opacity="0.35"/>
+
+            <!-- Map pins (colorful) -->
+            <circle cx="80" cy="80" r="5" fill="#ef5a5a" stroke="#fff" stroke-width="2"/>
+            <circle cx="180" cy="110" r="5" fill="#f59e6e" stroke="#fff" stroke-width="2"/>
+            <circle cx="300" cy="60" r="5" fill="#f7c948" stroke="#fff" stroke-width="2"/>
+            <circle cx="260" cy="150" r="5" fill="#5dc78e" stroke="#fff" stroke-width="2"/>
+            <circle cx="120" cy="160" r="5" fill="#4a6cf7" stroke="#fff" stroke-width="2"/>
+            <circle cx="220" cy="80" r="5" fill="#9c7df5" stroke="#fff" stroke-width="2"/>
+
+            <!-- Category pill -->
+            <rect x="200" y="172" width="146" height="18" rx="9" fill="#fff" opacity="0.92"/>
+            <circle cx="212" cy="181" r="3" fill="#5dc78e"/>
+            <text x="220" y="185" font-size="8.5" font-family="Inter, sans-serif" fill="#3a6b4a" font-weight="700">greening · mobility · housing</text>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-meta curiosity"><span class="dot"></span>Data collection</div>
+          <span class="project-emoji">🗺</span>
+          <h3 class="project-name">Urban Equity Collection</h3>
+          <p class="project-desc">
+            Over four years, ~<strong>21+ data visualizations</strong> exploring urban equity across six continents — greening, mobility, housing, climate exposure, community access — across single-city deep dives, multi-city syntheses, and persona-based variants. <em>Repositories kept private</em> (personal exploration; not packaged for public sharing). The thread that connects to future post-PhD work on cross-domain regulated spaces.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">geopandas</span>
+            <span class="project-tag">folium · kepler.gl</span>
+            <span class="project-tag">OSMnx</span>
+            <span class="project-tag">ResNet · StreetView CV</span>
+          </div>
+          <a class="contact-btn" href="mailto:sorakim.lab@gmail.com?subject=Project%20info%3A%20Urban%20Equity%20Collection">Contact for more info →</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ ONGOING RESEARCH ============ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow ongoing">— Ongoing research · in progress</div>
+      <h2 class="section-title">What I'm working on right now</h2>
+      <p class="section-subtitle">
+        Not a side project — a study in progress, directly inside the thesis arc: how my own QC colleagues actually use AI, where they trust it, where they don't, and what they're carefully watching out for in a regulated environment.
+      </p>
+    </div>
+
+    <div class="project-grid" style="grid-template-columns: 1fr; max-width: 700px;">
+
+      <!-- 7. AI USAGE TAXONOMY -->
+      <article class="project-card">
+        <div class="mockup">
+          <svg viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg">
+            <!-- Center: robot -->
+            <g>
+              <rect x="330" y="105" width="100" height="100" rx="20" fill="#eef2ff" stroke="#4a6cf7" stroke-width="2"/>
+              <!-- Robot face -->
+              <rect x="346" y="125" width="68" height="50" rx="12" fill="#fff"/>
+              <circle cx="362" cy="148" r="5" fill="#4a6cf7"/>
+              <circle cx="398" cy="148" r="5" fill="#4a6cf7"/>
+              <rect x="365" y="162" width="30" height="3" rx="1.5" fill="#4a6cf7" opacity="0.6"/>
+              <!-- Antenna -->
+              <line x1="380" y1="105" x2="380" y2="92" stroke="#4a6cf7" stroke-width="2"/>
+              <circle cx="380" cy="88" r="4" fill="#4a6cf7"/>
+              <!-- Robot body -->
+              <rect x="358" y="183" width="44" height="18" rx="4" fill="#4a6cf7" opacity="0.85"/>
+              <text x="362" y="196" font-size="9" font-family="Inter, sans-serif" fill="#fff" font-weight="800">AI</text>
+            </g>
+
+            <!-- Speech bubbles - 6 around the robot -->
+            <!-- Top-left: trust -->
+            <g>
+              <path d="M 30 50 Q 30 30, 50 30 L 230 30 Q 250 30, 250 50 L 250 80 Q 250 100, 230 100 L 130 100 L 120 110 L 115 100 L 50 100 Q 30 100, 30 80 Z" fill="#eaf8f0" stroke="#5dc78e" stroke-width="1.2"/>
+              <rect x="44" y="42" width="44" height="14" rx="7" fill="#5dc78e"/>
+              <text x="50" y="52" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">TRUST</text>
+              <text x="44" y="74" font-size="9.5" font-family="Inter, sans-serif" fill="#1a1d23" font-style="italic">"AI helps me draft</text>
+              <text x="44" y="86" font-size="9.5" font-family="Inter, sans-serif" fill="#1a1d23" font-style="italic">SOPs faster — I still review every line."</text>
+            </g>
+
+            <!-- Top-right: distrust -->
+            <g>
+              <path d="M 510 50 Q 510 30, 530 30 L 710 30 Q 730 30, 730 50 L 730 80 Q 730 100, 710 100 L 640 100 L 635 110 L 625 100 L 530 100 Q 510 100, 510 80 Z" fill="#fde8e8" stroke="#ef5a5a" stroke-width="1.2"/>
+              <rect x="524" y="42" width="60" height="14" rx="7" fill="#ef5a5a"/>
+              <text x="530" y="52" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">DISTRUST</text>
+              <text x="524" y="74" font-size="9.5" font-family="Inter, sans-serif" fill="#1a1d23" font-style="italic">"I tried once, it</text>
+              <text x="524" y="86" font-size="9.5" font-family="Inter, sans-serif" fill="#1a1d23" font-style="italic">gave me wrong cite. Never again."</text>
+            </g>
+
+            <!-- Mid-left: blocked -->
+            <g>
+              <path d="M 30 130 Q 30 115, 45 115 L 250 115 Q 265 115, 265 130 L 265 170 Q 265 185, 250 185 L 180 185 L 170 195 L 165 185 L 45 185 Q 30 185, 30 170 Z" fill="#fef3eb" stroke="#f59e6e" stroke-width="1.2"/>
+              <rect x="44" y="127" width="54" height="14" rx="7" fill="#f59e6e"/>
+              <text x="50" y="137" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">BLOCKED</text>
+              <text x="44" y="159" font-size="9.5" font-family="Inter, sans-serif" fill="#1a1d23" font-style="italic">"I don't know how</text>
+              <text x="44" y="171" font-size="9.5" font-family="Inter, sans-serif" fill="#1a1d23" font-style="italic">to write the prompt to get what I need."</text>
+            </g>
+
+            <!-- Mid-right: careful (GMP context) -->
+            <g>
+              <path d="M 495 130 Q 495 115, 510 115 L 730 115 Q 745 115, 745 130 L 745 170 Q 745 185, 730 185 L 605 185 L 600 195 L 590 185 L 510 185 Q 495 185, 495 170 Z" fill="#f2eeff" stroke="#9c7df5" stroke-width="1.2"/>
+              <rect x="509" y="127" width="54" height="14" rx="7" fill="#9c7df5"/>
+              <text x="515" y="137" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">CAREFUL</text>
+              <text x="509" y="159" font-size="9.5" font-family="Inter, sans-serif" fill="#1a1d23" font-style="italic">"Never AI for vali-</text>
+              <text x="509" y="171" font-size="9.5" font-family="Inter, sans-serif" fill="#1a1d23" font-style="italic">dated docs. Drafting only, double-checked."</text>
+            </g>
+
+            <!-- Bottom-left: question -->
+            <g>
+              <path d="M 70 210 Q 70 195, 85 195 L 290 195 Q 305 195, 305 210 L 305 245 Q 305 260, 290 260 L 210 260 L 200 270 L 195 260 L 85 260 Q 70 260, 70 245 Z" fill="#fef8e0" stroke="#f7c948" stroke-width="1.2"/>
+              <rect x="84" y="207" width="58" height="14" rx="7" fill="#f7c948"/>
+              <text x="90" y="217" font-size="8" font-family="Inter, sans-serif" fill="#7d6300" font-weight="800">UNSURE</text>
+              <text x="84" y="239" font-size="9.5" font-family="Inter, sans-serif" fill="#1a1d23" font-style="italic">"How do I know it's</text>
+              <text x="84" y="251" font-size="9.5" font-family="Inter, sans-serif" fill="#1a1d23" font-style="italic">not just making things up?"</text>
+            </g>
+
+            <!-- Bottom-right: efficient -->
+            <g>
+              <path d="M 455 210 Q 455 195, 470 195 L 695 195 Q 710 195, 710 210 L 710 245 Q 710 260, 695 260 L 620 260 L 610 270 L 600 260 L 470 260 Q 455 260, 455 245 Z" fill="#eef2ff" stroke="#4a6cf7" stroke-width="1.2"/>
+              <rect x="469" y="207" width="68" height="14" rx="7" fill="#4a6cf7"/>
+              <text x="475" y="217" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">EFFICIENT</text>
+              <text x="469" y="239" font-size="9.5" font-family="Inter, sans-serif" fill="#1a1d23" font-style="italic">"Translation, format</text>
+              <text x="469" y="251" font-size="9.5" font-family="Inter, sans-serif" fill="#1a1d23" font-style="italic">checks, simple email drafts — saves hours."</text>
+            </g>
+
+            <!-- Connection lines from bubbles to robot -->
+            <g stroke="#c7cdd6" stroke-width="1" stroke-dasharray="3 3" opacity="0.5" fill="none">
+              <line x1="250" y1="100" x2="335" y2="135"/>
+              <line x1="510" y1="100" x2="425" y2="135"/>
+              <line x1="265" y1="150" x2="335" y2="160"/>
+              <line x1="495" y1="150" x2="425" y2="160"/>
+              <line x1="270" y1="200" x2="340" y2="190"/>
+              <line x1="460" y1="200" x2="420" y2="190"/>
+            </g>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-meta ongoing"><span class="dot"></span>Ongoing study · in progress</div>
+          <span class="project-emoji">🧭</span>
+          <h3 class="project-name">AI Usage Taxonomy — peer interviews</h3>
+          <p class="project-desc">
+            A study with my QC colleagues — the people who actually work alongside AI tools every day in a regulated environment. The interview asks where they use AI, where they get stuck, where their <strong>trust forms</strong>, where their <strong>distrust forms</strong>, and what they're <em>specifically watching out for</em> because the work is GMP-regulated. The output will be a taxonomy of practitioner-AI relationships grounded in the language people actually use to describe their own work — not researcher-imposed categories.
+            <span class="quote">Sits inside the broader Regulatory HCI thesis. The taxonomy itself is a contribution; the patterns of <em>where trust forms or breaks</em> are what the dissertation will build on.</span>
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Qualitative</span>
+            <span class="project-tag">Semi-structured interviews</span>
+            <span class="project-tag">Grounded coding</span>
+            <span class="project-tag">GMP context</span>
+          </div>
+          <a class="contact-btn" href="mailto:sorakim.lab@gmail.com?subject=Project%20info%3A%20AI%20Usage%20Taxonomy">Contact for more info →</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
 </main>
 
-<footer class="page-footer">
-  <div class="wrap">
-    <div class="page-footer-inner">
-      <span class="footer-note">6 projects · 2 research axes · one inquiry into accountable reasoning</span>
-      <div class="footer-nav">
-        <a class="footer-btn" href="index.html">← Home</a>
-        <a class="footer-btn" href="papers.html">Papers →</a>
-      </div>
-    </div>
-  </div>
+<footer>
+  © 2026 <a href="index.html">Sora Kim</a> · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
 </footer>
 
 <script>
-(function(){
-  var root=document.documentElement,themeBtn=document.getElementById('themeBtn'),hamburgerBtn=document.getElementById('hamburgerBtn'),mobileMenu=document.getElementById('mobileMenu');
-  try{var s=localStorage.getItem('theme');if(s==='dark')root.classList.add('dark');else if(s==='light')root.classList.remove('dark');else if(window.matchMedia('(prefers-color-scheme: dark)').matches)root.classList.add('dark');}catch(e){}
-  if(themeBtn)themeBtn.addEventListener('click',function(){root.classList.toggle('dark');try{localStorage.setItem('theme',root.classList.contains('dark')?'dark':'light');}catch(e){}});
-  if(hamburgerBtn&&mobileMenu){hamburgerBtn.addEventListener('click',function(){hamburgerBtn.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});mobileMenu.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){hamburgerBtn.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow='';});});}
-  document.body.classList.add('js-ready');
-  var reveals=document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -20px 0px'});reveals.forEach(function(el){obs.observe(el);});}else{reveals.forEach(function(el){el.classList.add('on');});}
-  setTimeout(function(){reveals.forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight)el.classList.add('on');});},100);
-})();
+  const toggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') { root.setAttribute('data-theme','light'); toggle.textContent='🌙'; }
+  else if (saved === 'dark') { root.setAttribute('data-theme','dark'); toggle.textContent='☀️'; }
+  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { toggle.textContent='☀️'; }
+  toggle.addEventListener('click', () => {
+    const cur = root.getAttribute('data-theme');
+    if (cur === 'dark') { root.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); toggle.textContent='🌙'; }
+    else if (cur === 'light') { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
+    else { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
+  });
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', (e) => { e.stopPropagation(); navLinks.classList.toggle('open'); });
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) { navLinks.classList.remove('open'); }
+  });
 </script>
+
 </body>
 </html>
