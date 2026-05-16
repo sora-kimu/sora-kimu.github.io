@@ -6,369 +6,337 @@
   <title>Sora Kim</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
   <style>
     :root {
-      --bg: #ffffff; --text: #111111; --text-muted: #555555; --text-light: #888888; --text-faint: #b0b0b0;
-      --border: #e5e5e5; --border-soft: #efefef; --surface: #fafafa; --surface-hover: #f0f0f0;
-      /* Color discipline:
-         --primary (blue) = HCI design work
-         --accent (purple) = Axis 2 thread + thesis only */
-      --primary: #2563EB;
-      --accent: #7c3aed;
+      --bg: #f5f5f5;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --accent: #1e3a5f;
+      --border: #ddd;
+      --button-bg: #e5e5e5;
+      --button-hover: #d5d5d5;
+      --tag-bg: #ebebeb;
+      --tag-border: #d8d8d8;
     }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
-        --bg: #111111; --text: #f0f0f0; --text-muted: #aaaaaa; --text-light: #777777; --text-faint: #555555;
-        --border: #2a2a2a; --border-soft: #1f1f1f; --surface: #1a1a1a; --surface-hover: #242424;
-        --primary: #60a5fa; --accent: #a78bfa;
+        --bg: #1a1a1a;
+        --text: #f0f0f0;
+        --text-muted: #aaa;
+        --accent: #7ba9d8;
+        --border: #333;
+        --button-bg: #2a2a2a;
+        --button-hover: #3a3a3a;
+        --tag-bg: #262626;
+        --tag-border: #3a3a3a;
       }
     }
     [data-theme="dark"] {
-      --bg: #111111; --text: #f0f0f0; --text-muted: #aaaaaa; --text-light: #777777; --text-faint: #555555;
-      --border: #2a2a2a; --border-soft: #1f1f1f; --surface: #1a1a1a; --surface-hover: #242424;
-      --primary: #60a5fa; --accent: #a78bfa;
+      --bg: #1a1a1a;
+      --text: #f0f0f0;
+      --text-muted: #aaa;
+      --accent: #7ba9d8;
+      --border: #333;
+      --button-bg: #2a2a2a;
+      --button-hover: #3a3a3a;
+      --tag-bg: #262626;
+      --tag-border: #3a3a3a;
     }
     [data-theme="light"] {
-      --bg: #ffffff; --text: #111111; --text-muted: #555555; --text-light: #888888; --text-faint: #b0b0b0;
-      --border: #e5e5e5; --border-soft: #efefef; --surface: #fafafa; --surface-hover: #f0f0f0;
-      --primary: #2563EB; --accent: #7c3aed;
+      --bg: #f5f5f5;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --accent: #1e3a5f;
+      --border: #ddd;
+      --button-bg: #e5e5e5;
+      --button-hover: #d5d5d5;
+      --tag-bg: #ebebeb;
+      --tag-border: #d8d8d8;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 17px; line-height: 1.65; transition: background 0.2s, color 0.2s; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    p { text-wrap: pretty; }
-    h1, h2, h3, h4 { text-wrap: balance; }
-
-    /* NAV */
-    nav { padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 100; }
-    .nav-name { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: 0.04em; display: flex; align-items: center; gap: 6px; transition: color 0.2s; white-space: nowrap; }
-    .nav-name:hover { color: var(--primary); }
-    .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px; font-size: 14px; cursor: pointer; color: var(--text); transition: border-color 0.2s; }
-    .theme-toggle:hover { border-color: var(--primary); }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; position: relative; padding-bottom: 4px; transition: color 0.2s; }
-    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: var(--primary); transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; }
-    .nav-links a:hover { color: var(--primary); }
-    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: left; }
-    .nav-links a.active { color: var(--primary); }
-
-    /* LAYOUT */
-    .layout { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
-    main { padding: 56px 0 64px; min-width: 0; }
-
-    /* SECTION WRAPPER — relative anchor for marginalia */
-    .section-wrap { position: relative; }
-    @media (min-width: 1000px) {
-      .section-wrap { padding-right: 220px; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.2s, color 0.2s;
     }
+    a { color: var(--accent); }
 
-    /* MARGINALIA — Tufte-style notes, anchored to section */
-    .marg { position: absolute; top: 0; right: 0; width: 200px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; color: var(--text-muted); line-height: 1.6; padding-left: 16px; border-left: 1px solid var(--border); transition: opacity 0.3s, border-color 0.3s; }
-    .marg::before { content: ''; position: absolute; left: -1px; top: 0; width: 1px; height: 18px; background: var(--text-light); transition: background 0.3s, height 0.3s; }
-    .marg-tag { display: block; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; transition: color 0.3s; }
-    .marg em { font-style: italic; color: var(--text); font-weight: 500; }
-    @media (max-width: 999px) { .marg { display: none; } }
-
-    /* Marginalia hover sync state */
-    .section-wrap:not(.marg-active) .marg { opacity: 0.55; }
-    .section-wrap.marg-active .marg { opacity: 1; }
-    .section-wrap.marg-active .marg::before { height: 28px; background: var(--primary); }
-    .section-wrap.marg-active .marg-tag { color: var(--primary); }
-    .section-wrap.marg-active.marg-accent .marg::before { background: var(--accent); }
-    .section-wrap.marg-active.marg-accent .marg-tag { color: var(--accent); }
-
-    /* HERO */
-    .hero { display: grid; grid-template-columns: 180px 1fr; gap: 32px; align-items: start; margin-bottom: 40px; }
-    @media (max-width: 640px) { .hero { grid-template-columns: 1fr; gap: 18px; } }
-    .hero-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; object-position: center 20%; -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); }
-    @media (max-width: 640px) { .hero-img { width: 130px; height: 130px; } }
-    .hero-name-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
-    .hero-name { font-size: 2.1rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.035em; display: inline-flex; align-items: baseline; gap: 12px; }
-    .hero-name-ko { font-size: 1.0rem; font-weight: 400; color: var(--text-muted); letter-spacing: 0; padding-left: 12px; border-left: 1px solid var(--border); line-height: 1; }
-    .hero-pill { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--primary); text-transform: uppercase; padding: 4px 10px; border: 1px solid var(--primary); border-radius: 999px; line-height: 1; font-weight: 500; }
-    .hero-pill-strong { background: var(--primary); color: var(--bg); }
-    .hero-meta { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--text-light); margin-bottom: 18px; text-transform: uppercase; line-height: 1.7; }
-    .hero-meta-sub { color: var(--text-muted); }
-    .hero-greeting { font-size: 1.18rem; line-height: 1.45; color: var(--text); font-weight: 500; margin-bottom: 14px; max-width: 580px; letter-spacing: -0.012em; text-wrap: pretty; }
-    .hero-greeting em { font-style: normal; font-weight: 700; color: var(--primary); }
-    .hero-line { font-size: 1.0rem; line-height: 1.55; color: var(--text-muted); font-weight: 400; margin-bottom: 22px; max-width: 580px; text-wrap: pretty; }
-    .hero-line em { font-style: normal; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--primary); padding-bottom: 1px; }
-    .hero-social { display: flex; gap: 18px; flex-wrap: wrap; }
-    .hero-social a { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--primary); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; position: relative; padding-bottom: 2px; }
-    .hero-social a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; }
-    .hero-social a:hover::after { transform: scaleX(1); transform-origin: left; }
-
-    /* THESIS — the focal point of the page */
-    .thesis-zone { margin: 64px -8px 80px; padding: 56px 32px 44px; position: relative; text-align: center; }
-    @media (max-width: 640px) { .thesis-zone { margin: 48px 0 64px; padding: 40px 8px; } }
-    .thesis-zone::before, .thesis-zone::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 32px; height: 1px; background: var(--accent); opacity: 0.5; }
-    .thesis-zone::before { top: 0; }
-    .thesis-zone::after { bottom: 0; }
-    .thesis-eyebrow { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 26px; opacity: 0; animation: fadeUp 0.6s ease 0.05s forwards; }
-    .thesis-text { font-size: 2.4rem; line-height: 1.12; letter-spacing: -0.035em; font-weight: 700; color: var(--text); margin: 0 auto 28px; max-width: 600px; }
-    @media (max-width: 640px) { .thesis-text { font-size: 1.7rem; } }
-    .thesis-word { display: inline-block; opacity: 0; transform: translateY(10px); animation: fadeUp 0.55s cubic-bezier(0.2,0.7,0.2,1) forwards; }
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-    .thesis-word.emph { color: var(--accent); font-style: italic; font-weight: 700; cursor: help; position: relative; }
-    .thesis-word.emph::after { content: attr(data-def-text); position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(4px); background: var(--text); color: var(--bg); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12.5px; font-weight: 400; font-style: normal; line-height: 1.5; letter-spacing: -0.005em; padding: 10px 14px; border-radius: 6px; width: 240px; max-width: 240px; opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; z-index: 10; box-shadow: 0 4px 18px rgba(0,0,0,0.15); }
-    .thesis-word.emph::before { content: ''; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(4px); border: 6px solid transparent; border-top-color: var(--text); opacity: 0; transition: opacity 0.25s, transform 0.25s; pointer-events: none; z-index: 10; }
-    .thesis-word.emph:hover::after, .thesis-word.emph:hover::before { opacity: 1; transform: translateX(-50%) translateY(0); }
-    .thesis-toggle-btn { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); background: transparent; border: none; cursor: pointer; padding: 6px 12px; transition: color 0.2s; opacity: 0; animation: fadeUp 0.4s ease 1.6s forwards; display: inline-flex; align-items: center; gap: 6px; }
-    .thesis-toggle-btn:hover { color: var(--accent); }
-    .thesis-toggle-btn .toggle-icon { display: inline-block; transition: transform 0.3s; }
-    .thesis-toggle-btn.expanded .toggle-icon { transform: rotate(180deg); }
-    .thesis-detail { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), margin-top 0.4s ease; max-width: 580px; margin: 0 auto; text-align: left; }
-    .thesis-detail.expanded { max-height: 600px; margin-top: 28px; }
-    .thesis-detail-inner { padding-top: 24px; border-top: 1px solid var(--border); font-size: 0.95rem; line-height: 1.7; color: var(--text-muted); }
-    .thesis-detail-inner p { margin-bottom: 12px; }
-    .thesis-detail-inner p:last-child { margin-bottom: 0; }
-    .thesis-detail-inner strong { color: var(--text); font-weight: 600; }
-    .thesis-detail-inner em { font-style: italic; }
-    .thesis-lineage { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10.5px; color: var(--text-light); margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border); letter-spacing: 0.02em; }
-
-    /* SECTION HEAD */
-    .section-head { margin-bottom: 32px; }
-    .section-eyebrow { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-light); margin-bottom: 10px; }
-    .section-title { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; max-width: 600px; }
-    .section-title em { font-style: normal; font-weight: 700; color: var(--primary); }
-    .section-sub { font-size: 0.93rem; color: var(--text-muted); line-height: 1.65; margin-top: 14px; max-width: 580px; }
-    .section-sub em { font-style: italic; font-weight: 500; color: var(--text); }
-
-    /* RESEARCH SECTION */
-    .research { margin-bottom: 72px; }
-
-    /* PRIMARY TOOLS — 4-layer axis chart (framework as data visualization) */
-    /* PRIMARY TOOLS — clean stack with minimal left-side hierarchy line */
-    .layer-chart {
-      position: relative;
-      margin: 24px 0 16px;
-      padding-left: 24px;
-      border-left: 1px solid var(--border);
-    }
-    @media (max-width: 640px) {
-      .layer-chart { padding-left: 16px; }
-    }
-
-    .layer-rows {
-      position: relative;
-      min-width: 0;
-    }
-
-    .layer-row {
-      position: relative;
-      cursor: pointer;
-      padding: 16px 0;
-      transition: opacity 0.25s;
-    }
-    .layer-row + .layer-row { border-top: 1px solid var(--border-soft); }
-
-    .layer-row-head {
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 40px;
       display: flex;
-      flex-direction: column;
-      gap: 4px;
-      min-width: 0;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
     }
-    .layer-row-num {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 9.5px;
-      color: var(--text-faint);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: color 0.3s;
-    }
-    .layer-row.expanded .layer-row-num,
-    .layer-row:hover .layer-row-num { color: var(--primary); }
-    .layer-row-name {
-      font-size: 1.0rem;
+    @media (max-width: 640px) { nav { padding: 20px 24px; } }
+
+    .nav-name {
+      font-size: 22px;
       font-weight: 700;
       color: var(--text);
-      letter-spacing: -0.01em;
-      line-height: 1.25;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-    .layer-row-tool {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 10.5px;
-      color: var(--text-light);
-      letter-spacing: 0.02em;
-      line-height: 1.5;
-      margin-top: 2px;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-    .layer-row-tool::before { content: '→ '; color: var(--text-faint); }
-
-    .layer-row-detail {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), margin-top 0.3s, padding-top 0.3s;
-    }
-    .layer-row.expanded .layer-row-detail { max-height: 280px; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); }
-    .layer-row-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
-    .layer-row-desc em { font-style: italic; color: var(--text); font-weight: 500; }
-    .layer-row-meta { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10.5px; color: var(--text-light); letter-spacing: 0.04em; display: flex; gap: 14px; flex-wrap: wrap; }
-    .layer-row-meta strong { color: var(--text); font-weight: 600; }
-
-    /* Subtle left marker — replaces dots/ticks/connectors entirely */
-    .layer-row::before {
-      content: '';
-      position: absolute;
-      left: -25px;
-      top: 24px;
-      width: 9px;
-      height: 1px;
-      background: var(--text-light);
-      transition: background 0.25s, width 0.25s;
-    }
-    @media (max-width: 640px) { .layer-row::before { left: -17px; width: 7px; } }
-    .layer-row:hover::before, .layer-row.expanded::before { background: var(--primary); width: 14px; }
-
-    /* Dim siblings on hover/expand */
-    .layer-rows:hover .layer-row:not(:hover):not(.expanded) { opacity: 0.55; }
-    .layer-rows:has(.layer-row.expanded) .layer-row:not(.expanded):not(:hover) { opacity: 0.55; }
-
-    /* Umbrella as horizontal bar wrapping the chart */
-    .layer-umbrella {
-      padding: 14px 18px 14px 22px;
-      background: var(--bg);
-      border: 1px solid var(--accent);
-      border-radius: 8px;
-      margin-bottom: 0;
-      position: relative;
-    }
-    .layer-umbrella-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
-    .layer-umbrella-tag { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
-    .layer-umbrella-tag::before { content: '∩'; font-size: 14px; line-height: 1; }
-    .layer-umbrella-meta { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; color: var(--text-light); letter-spacing: 0.04em; }
-    .layer-umbrella-name { font-size: 0.96rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
-    .layer-umbrella-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.55; margin-top: 4px; }
-
-    /* Bracket linking umbrella to chart */
-    .layer-umbrella-bracket {
-      grid-column: 1 / -1;
-      height: 14px;
-      position: relative;
-      margin: 0;
-    }
-    .layer-umbrella-bracket::before {
-      content: '';
-      position: absolute;
-      left: 8px;
-      right: 0;
-      top: 50%;
-      height: 8px;
-      border-left: 1px solid var(--accent);
-      border-right: 1px solid var(--accent);
-      border-bottom: 1px solid var(--accent);
-      border-radius: 0 0 4px 4px;
-      transform: translateY(-50%);
-      opacity: 0.5;
-    }
-    @media (max-width: 640px) {
-      .layer-umbrella-bracket::before { left: 6px; }
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    /* TOOLS SECONDARY — 4 deployment-only tools, single line list */
-    .tools-secondary { font-size: 0.84rem; color: var(--text-muted); line-height: 1.6; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border-soft); border-radius: 8px; margin-bottom: 14px; }
-    .tools-secondary-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9.5px; letter-spacing: 0.1em; color: var(--text-light); text-transform: uppercase; margin-right: 8px; font-weight: 500; }
-    .tools-secondary-list { color: var(--text); }
-    .tools-secondary-list span { color: var(--text-muted); font-weight: 400; }
-    .tools-link-row { display: flex; gap: 18px; padding-top: 4px; }
-    .tools-link-row a { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; color: var(--primary); text-decoration: none; letter-spacing: 0.04em; }
-    .tools-link-row a:hover { text-decoration: underline; }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    @media (max-width: 640px) { .nav-right { gap: 12px; } }
 
-    /* §03 SECOND THREAD — substantial stat block */
-    .extension { margin-bottom: 64px; padding: 24px 26px; background: var(--bg); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; }
-    .extension-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
-    .extension-eyebrow { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; letter-spacing: 0.14em; color: var(--accent); text-transform: uppercase; font-weight: 700; }
-    .extension-link { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; color: var(--accent); text-decoration: none; letter-spacing: 0.04em; font-weight: 600; }
-    .extension-link:hover { text-decoration: underline; }
-    .extension-title { font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 8px; letter-spacing: -0.02em; line-height: 1.2; }
-    .extension-title em { font-style: italic; color: var(--accent); }
-    .extension-desc { font-size: 0.94rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 22px; max-width: 640px; }
-    .extension-desc em { font-style: italic; color: var(--text); font-weight: 500; }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    @media (max-width: 640px) { .nav-links { gap: 14px; } }
+    .nav-links a {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      padding-bottom: 2px;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.active {
+      border-bottom: 2px solid var(--text);
+      font-weight: 500;
+    }
 
-    .extension-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+      text-align: center;
+    }
+    @media (max-width: 640px) { main { padding: 40px 24px 60px; } }
+
+    .photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 25%;
+      margin: 0 auto 28px;
+      display: block;
+    }
+    @media (max-width: 640px) { .photo { width: 160px; height: 160px; } }
+
+    .name {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+    @media (max-width: 640px) { .name { font-size: 2rem; } }
+    .name-ko {
+      font-size: 0.5em;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-left: 12px;
+    }
+
+    .greeting {
+      font-size: 1.1rem;
+      color: var(--text);
+      line-height: 1.6;
       margin-bottom: 14px;
     }
-    @media (max-width: 640px) {
-      .extension-stats { grid-template-columns: 1fr; }
-    }
-    .ext-stat {
-      padding: 18px 20px;
-      border-right: 1px solid var(--border-soft);
-    }
-    .ext-stat:last-child { border-right: none; }
-    @media (max-width: 640px) {
-      .ext-stat { border-right: none; border-bottom: 1px solid var(--border-soft); }
-      .ext-stat:last-child { border-bottom: none; }
-    }
-    .ext-stat-corpus { font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
-    .ext-stat-headline {
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 800;
-      letter-spacing: -0.035em;
-      line-height: 0.95;
+
+    .intro {
+      font-size: 1.0rem;
       color: var(--text);
-      margin-bottom: 8px;
+      line-height: 1.65;
+      margin-bottom: 32px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .ext-stat-headline .of { font-weight: 400; color: var(--text-faint); }
-    .ext-stat-caption { font-size: 0.84rem; color: var(--text-muted); line-height: 1.55; }
-    .ext-stat-caption em { font-style: italic; color: var(--text); font-weight: 500; }
 
-    .extension-foot {
-      font-size: 0.85rem;
+    /* Research interests section */
+    .interests {
+      margin: 0 auto 36px;
+      max-width: 580px;
+    }
+    .interests-label {
+      font-size: 13px;
+      font-weight: 600;
       color: var(--text-muted);
-      line-height: 1.6;
-      padding-top: 4px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
-    .extension-foot em { font-style: italic; color: var(--text); font-weight: 500; }
+    .interests-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      color: var(--text);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .tag:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .tag .tag-emoji {
+      font-size: 15px;
+      line-height: 1;
+    }
 
-    /* HUB */
-    .hub { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
-    @media (max-width: 640px) { .hub { grid-template-columns: 1fr; } }
-    .hub-card { padding: 16px 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); display: flex; flex-direction: column; gap: 6px; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
-    .hub-card:hover { border-color: var(--primary); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
-    .hub-card .hub-arrow { transition: transform 0.3s; display: inline-block; }
-    .hub-card:hover .hub-arrow { transform: translateX(4px); color: var(--primary); }
-    .hub-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
-    .hub-tag { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9.5px; letter-spacing: 0.1em; color: var(--text-light); text-transform: uppercase; font-weight: 500; }
-    .hub-count { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10.5px; color: var(--text-muted); }
-    .hub-title { font-size: 1.0rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
-    .hub-arrow { color: var(--text-light); font-size: 0.85rem; }
-    .hub-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      margin-bottom: 36px;
+    }
+    .social a {
+      color: var(--text);
+      transition: color 0.15s;
+      display: inline-flex;
+    }
+    .social a:hover { color: var(--accent); }
+    .social svg {
+      width: 26px;
+      height: 26px;
+    }
 
-    /* FADE IN */
-    .research, .extension, .hub { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.4,0,0.2,1); }
-    .research.in-view, .extension.in-view, .hub.in-view { opacity: 1; transform: translateY(0); }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .button {
+      background: var(--button-bg);
+      color: var(--text);
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background 0.15s;
+    }
+    .button:hover { background: var(--button-hover); }
 
-    /* FOOTER */
-    footer { padding: 36px 40px 28px; border-top: 1px solid var(--border); text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 40px; }
-    footer a { color: var(--primary); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    .footer-meta { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; color: var(--text-light); margin-top: 6px; letter-spacing: 0.04em; }
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="nav-name">🐚 Sora Kim</a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="papers.html">Papers</a></li>
-    <li><a href="tools.html">Tools</a></li>
-    <li><a href="teaching.html">Teaching</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="papers.html">Papers</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="learning.html">Learning</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+  </div>
 </nav>
+
+<main>
+  <img src="SoraKim.jpg" alt="Sora Kim" class="photo">
+
+  <h1 class="name">Sora Kim<span class="name-ko">소라</span></h1>
+
+  <p class="greeting">Welcome to my website! 👋</p>
+
+  <p class="intro">
+    I study how AI can add value in <strong>regulated work</strong> — pharmaceutical manufacturing, aviation, clinical care, finance — without violating the regulations that make it trustworthy. As a design researcher, I answer in two ways: tools that stay within regulation, and learning materials so people know how to use them.
+  </p>
+
+  <div class="interests">
+    <div class="interests-label">Research interests</div>
+    <div class="interests-tags">
+      <span class="tag"><span class="tag-emoji">🤖</span> AI augmentation</span>
+      <span class="tag"><span class="tag-emoji">📋</span> Regulatory compliance</span>
+      <span class="tag"><span class="tag-emoji">🛠️</span> Design research</span>
+      <span class="tag"><span class="tag-emoji">🏭</span> Safety-critical systems</span>
+      <span class="tag"><span class="tag-emoji">📚</span> AI literacy education</span>
+      <span class="tag"><span class="tag-emoji">🔬</span> Pharmaceutical QC</span>
+    </div>
+  </div>
+
+  <div class="social">
+    <a href="https://github.com/sorakim-lab" target="_blank" aria-label="GitHub">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+    </a>
+    <a href="https://orcid.org/0009-0003-0856-4193" target="_blank" aria-label="ORCID">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947 0 .525-.422.947-.947.947-.525 0-.946-.422-.946-.947 0-.516.421-.947.946-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
+    </a>
+    <a href="mailto:sorakim.lab@gmail.com" aria-label="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7l9 6 9-6"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+    </a>
+    <a href="SoraKim_CV.pdf" aria-label="CV">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+    </a>
+  </div>
+
+  <div class="buttons">
+    <a href="about.html" class="button">About</a>
+    <a href="papers.html" class="button">Papers</a>
+    <a href="tools.html" class="button">Tools</a>
+    <a href="learning.html" class="button">Learning</a>
+  </div>
+</main>
+
+<footer>
+  © 2026 <a href="index.html">Sora Kim</a> · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
+</footer>
 
 <script>
   const toggle = document.getElementById('themeToggle');
@@ -383,267 +351,6 @@
     else if (cur === 'light') { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
     else { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
   });
-</script>
-
-<div class="layout">
-<main>
-
-  <!-- HERO -->
-  <div class="section-wrap">
-    <section class="hero">
-      <img src="SoraKim.jpg" alt="Sora Kim" class="hero-img" width="180" height="180">
-      <div>
-        <div class="hero-name-row">
-          <h1 class="hero-name">Sora Kim<span class="hero-name-ko">소라</span></h1>
-          <span class="hero-pill hero-pill-strong">Regulatory HCI</span>
-        </div>
-        <div class="hero-meta">
-          <div>Practitioner-researcher · Pharmaceutical manufacturing (GMP), Seoul</div>
-          <div class="hero-meta-sub">Applying to PhD programs · Fall 2027</div>
-        </div>
-        <p class="hero-greeting">Hi, I'm Sora. I work on <em>Regulatory HCI</em> from inside the regulated environments I&nbsp;study.</p>
-        <p class="hero-line">Four years inside a regulated environment taught me how interfaces, documents, and decisions all carry weight — because every move can be <em>audited</em>&nbsp;later.</p>
-        <div class="hero-social">
-          <a href="mailto:sorakim.lab@gmail.com">✉️ Email</a>
-          <a href="https://github.com/sorakim-lab" target="_blank">🐙 GitHub</a>
-          <a href="https://orcid.org/0009-0003-0856-4193" target="_blank">🆔 ORCID</a>
-          <a href="SoraKim_CV.pdf">📎 CV</a>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- THESIS — focal point -->
-  <div class="section-wrap marg-accent" data-marg="thesis">
-    <section class="thesis-zone">
-      <div class="thesis-eyebrow">Working thesis</div>
-      <h2 class="thesis-text">
-        <span class="thesis-word" style="animation-delay:.20s">Responsibility</span>
-        <span class="thesis-word" style="animation-delay:.34s">is</span>
-        <span class="thesis-word emph" data-def-text="Emerges through interfaces, documents, and review rituals — not pre-existing." style="animation-delay:.54s">produced,</span>
-        <span class="thesis-word" style="animation-delay:.78s">not</span>
-        <span class="thesis-word emph" data-def-text="The default view: responsibility is fixed and merely labeled after the fact." style="animation-delay:.96s">assigned.</span>
-      </h2>
-      <button class="thesis-toggle-btn" id="thesisToggleBtn">Read more <span class="toggle-icon">▾</span></button>
-      <div class="thesis-detail" id="thesisDetail">
-        <div class="thesis-detail-inner">
-          <p><strong>"Produced"</strong> means responsibility emerges through organizational processes — documentation regimes, investigative systems, attribution rituals, and increasingly the interfaces practitioners use — rather than pre-existing and merely labeled.</p>
-          <p>This shifts the design question from <em>"who is responsible?"</em> to <em>"how does this system produce responsibility?"</em> The first question takes accountability as given. The second treats it as a designed outcome — and therefore as something a designer can intervene in.</p>
-          <p class="thesis-lineage">Theoretical lineage: Garfinkel · Star &amp; Ruhleder · Suchman · Orlikowski · Amershi et al.</p>
-        </div>
-      </div>
-    </section>
-    <aside class="marg">
-      <span class="marg-tag">A note on framing</span>
-      The shift from <em>assigned</em> to <em>produced</em> is the move that turns accountability into a design problem.
-    </aside>
-  </div>
-
-  <!-- RESEARCH -->
-  <div class="section-wrap" data-marg="research">
-    <section class="research">
-      <div class="section-head">
-        <div class="section-eyebrow">Research program</div>
-        <h2 class="section-title"><em>Regulatory HCI</em> — designing interfaces for work that gets audited.</h2>
-        <p class="section-sub">In regulated environments — pharmaceutical manufacturing, aviation, clinical care, finance — every action a practitioner takes can later be reviewed by a regulator. That changes what interfaces are <em>for</em>: not just efficiency, but <em>preserving the conditions of judgment</em> — keeping reasoning legible, traceable, and open enough that the person using the tool can stand behind their decision.</p>
-      </div>
-
-      <!-- Umbrella framework paper -->
-      <div class="layer-umbrella">
-        <div class="layer-umbrella-row">
-          <span class="layer-umbrella-tag">Framework paper</span>
-          <span class="layer-umbrella-meta">2026 · Preprint</span>
-        </div>
-        <div class="layer-umbrella-name">How Regulated Systems Produce Responsibility</div>
-        <div class="layer-umbrella-desc">The framework. Four interaction layers, each grounded in a deployed prototype and an N=20 study.</div>
-      </div>
-
-      <div class="layer-umbrella-bracket"></div>
-
-      <!-- 4 layer stack — clean list with subtle hierarchy line -->
-      <div class="layer-chart" id="layerChart">
-        <div class="layer-rows">
-          <div class="layer-row" data-layer="reasoning">
-            <div class="layer-row-head">
-              <span class="layer-row-num">Layer 4</span>
-              <span class="layer-row-name">Reasoning</span>
-              <span class="layer-row-tool">Investigation scaffolder</span>
-            </div>
-            <div class="layer-row-detail">
-              <p class="layer-row-desc">During root-cause investigations, the tool detects when reasoning is narrowing too early and reopens alternatives. AI as <em>comparison enforcer</em>, not explanation generator. The most direct attempt at <em>preserving judgment</em> in the stack.</p>
-              <div class="layer-row-meta"><span><strong>Paper:</strong> Keeping Comparison Open</span><span><strong>Method:</strong> N=20 think-aloud</span></div>
-            </div>
-          </div>
-
-          <div class="layer-row" data-layer="coordination">
-            <div class="layer-row-head">
-              <span class="layer-row-num">Layer 3</span>
-              <span class="layer-row-name">Coordination</span>
-              <span class="layer-row-tool">Review dashboard</span>
-            </div>
-            <div class="layer-row-detail">
-              <p class="layer-row-desc">Makes the invisible review burden across corrective-action workflows (CAPA) visible to managers and reviewers. Surfaces friction <em>before</em> it becomes a failure to investigate. Accountability labor stops being hidden.</p>
-              <div class="layer-row-meta"><span><strong>Paper:</strong> Friction Before Failure</span><span><strong>Method:</strong> Behavior log + N=20 study</span></div>
-            </div>
-          </div>
-
-          <div class="layer-row" data-layer="structure">
-            <div class="layer-row-head">
-              <span class="layer-row-num">Layer 2</span>
-              <span class="layer-row-name">Structure</span>
-              <span class="layer-row-tool">Document traceability · Navigation tracker</span>
-            </div>
-            <div class="layer-row-detail">
-              <p class="layer-row-desc">Surfaces the chain of references between regulatory documents that practitioners normally reconstruct by hand. The tracker logs how analysts actually navigate during real investigations — empirical input for the rest of the design papers.</p>
-              <div class="layer-row-meta"><span><strong>Paper:</strong> When Documents Don't Connect</span><span><strong>Method:</strong> Behavior log + N=20 study</span></div>
-            </div>
-          </div>
-
-          <div class="layer-row" data-layer="accessibility">
-            <div class="layer-row-head">
-              <span class="layer-row-num">Layer 1</span>
-              <span class="layer-row-name">Accessibility</span>
-              <span class="layer-row-tool">Procedure retrieval</span>
-            </div>
-            <div class="layer-row-detail">
-              <p class="layer-row-desc">Semantic search over the regulated procedures (SOPs) practitioners must follow at every step. Reframes retrieval as an <em>interpretive act</em>, not just access — what you can reach is what you can reason about.</p>
-              <div class="layer-row-meta"><span><strong>Paper:</strong> From Retrieval to Reasoning</span><span><strong>Method:</strong> Task-based study, N=20</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tools-secondary">
-        <span class="tools-secondary-label">Plus four production-only</span>
-        <span class="tools-secondary-list">Stability dashboard <span>·</span> Change-management interface <span>·</span> Reagent inventory &amp; expiry <span>·</span> First-pass document review AI</span>
-      </div>
-
-      <div class="tools-link-row">
-        <a href="tools.html">→ All tools</a>
-        <a href="papers.html">→ Papers</a>
-      </div>
-    </section>
-    <aside class="marg">
-      <span class="marg-tag">Hierarchy</span>
-      One umbrella paper plus four layer-specific studies (N=20 each). Below: four more tools deployed but unstudied — they earn their place by working, not by being measured.
-    </aside>
-  </div>
-
-  <!-- AXIS 2 EXTENSION -->
-  <div class="section-wrap marg-accent" data-marg="extension">
-    <div class="extension">
-      <div class="extension-row">
-        <span class="extension-eyebrow">A second thread</span>
-        <a href="papers.html" class="extension-link">→ Papers</a>
-      </div>
-      <div class="extension-title">A second method: <em>computational analysis</em> of regulatory text</div>
-      <div class="extension-desc">A complementary thread studies the same convergence at the institutional scale — how <em>FDA Warning Letters</em> and <em>NTSB accident findings</em> structurally produce attribution. The same closure mechanism, in opposite institutional directions.</div>
-
-      <div class="extension-stats">
-        <div class="ext-stat">
-          <div class="ext-stat-corpus">FDA Warning Letters</div>
-          <div class="ext-stat-headline">159<span class="of">/160</span></div>
-          <p class="ext-stat-caption">violations converge on <em>firm-level</em> attribution despite system-level causes.</p>
-        </div>
-        <div class="ext-stat">
-          <div class="ext-stat-corpus">NTSB Accident Findings</div>
-          <div class="ext-stat-headline">~ 0.5<span class="of">%</span></div>
-          <p class="ext-stat-caption">of <em>71,114</em> findings name <em>organizational</em> accountability — vs. individuals.</p>
-        </div>
-      </div>
-
-      <p class="extension-foot">Two papers, dependency parsing and manual annotation. <em>Read together</em>, the convergence is a property of investigative language — not of the underlying events.</p>
-    </div>
-    <aside class="marg">
-      <span class="marg-tag">Why two threads</span>
-      The same closure mechanism shows up at both scales — at the desk of one analyst, and across <em>50 FDA Warning Letters</em>.
-    </aside>
-  </div>
-
-  <!-- HUB -->
-  <div class="section-wrap" data-marg="hub">
-    <div class="section-head">
-      <div class="section-eyebrow">Elsewhere on the site</div>
-      <h2 class="section-title">Pages.</h2>
-    </div>
-    <div class="hub">
-      <a class="hub-card" href="papers.html">
-        <div class="hub-row"><span class="hub-tag">Papers</span><span class="hub-count">8 preprints</span></div>
-        <div class="hub-title">Papers <span class="hub-arrow">→</span></div>
-        <div class="hub-desc">Five HCI design studies plus two on the institutional-scale thread (FDA, NTSB).</div>
-      </a>
-      <a class="hub-card" href="tools.html">
-        <div class="hub-row"><span class="hub-tag">Tools</span><span class="hub-count">9 deployed</span></div>
-        <div class="hub-title">Tools <span class="hub-arrow">→</span></div>
-        <div class="hub-desc">All nine systems, with deployment context, methods, and what each one taught me.</div>
-      </a>
-      <a class="hub-card" href="teaching.html">
-        <div class="hub-row"><span class="hub-tag">Teaching</span><span class="hub-count">2 artifacts</span></div>
-        <div class="hub-title">Teaching <span class="hub-arrow">→</span></div>
-        <div class="hub-desc">A bilingual AI literacy cookbook for analysts, and <em>DAY ONE: GMP</em>, a pixel-art onboarding game.</div>
-      </a>
-      <a class="hub-card" href="about.html">
-        <div class="hub-row"><span class="hub-tag">About</span><span class="hub-count">the long story</span></div>
-        <div class="hub-title">About <span class="hub-arrow">→</span></div>
-        <div class="hub-desc">How an English Lit major ended up doing HCI research from inside a regulated pharmaceutical environment in Seoul.</div>
-      </a>
-    </div>
-    <aside class="marg">
-      <span class="marg-tag">Reading order</span>
-      <em>Papers</em> for the arguments. <em>Tools</em> for the deployments. <em>About</em> for how I got here.
-    </aside>
-  </div>
-
-</main>
-</div>
-
-<footer>
-  © 2026 Sora Kim · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
-  <span class="footer-meta">Last updated May 2026 · Built with care in Seoul 🐚</span>
-</footer>
-
-<script>
-  // Thesis collapse
-  const thesisBtn = document.getElementById('thesisToggleBtn');
-  const thesisDetail = document.getElementById('thesisDetail');
-  thesisBtn.addEventListener('click', () => {
-    const expanded = thesisBtn.classList.toggle('expanded');
-    thesisDetail.classList.toggle('expanded', expanded);
-    thesisBtn.firstChild.textContent = expanded ? 'Read less ' : 'Read more ';
-  });
-
-  // 4-layer axis chart — click to expand, others dim. Tick activation is handled by CSS.
-  const layerRows = document.querySelectorAll('.layer-row');
-  layerRows.forEach(row => {
-    row.addEventListener('click', () => {
-      const wasExpanded = row.classList.contains('expanded');
-      layerRows.forEach(r => r.classList.remove('expanded'));
-      if (!wasExpanded) row.classList.add('expanded');
-    });
-  });
-
-  // Section ↔ marginalia hover sync
-  const sectionWraps = document.querySelectorAll('.section-wrap[data-marg]');
-  sectionWraps.forEach(wrap => {
-    wrap.addEventListener('mouseenter', () => {
-      sectionWraps.forEach(w => w.classList.remove('marg-active'));
-      wrap.classList.add('marg-active');
-    });
-    wrap.addEventListener('mouseleave', () => {
-      wrap.classList.remove('marg-active');
-    });
-  });
-
-  // Fade-in
-  const fadeEls = document.querySelectorAll('.research, .extension, .hub');
-  if ('IntersectionObserver' in window) {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) { entry.target.classList.add('in-view'); obs.unobserve(entry.target); }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    fadeEls.forEach(el => obs.observe(el));
-  } else { fadeEls.forEach(el => el.classList.add('in-view')); }
 </script>
 
 </body>
