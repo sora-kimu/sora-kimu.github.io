@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning — Sora Kim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐚</text></svg>">
+  <style>
+    :root {
+      --bg: #f5f5f5; --bg-soft: #fafafa;
+      --text: #1a1a1a; --text-muted: #4a4a4a; --text-faint: #888;
+      --accent: #1e3a5f; --accent-soft: rgba(30, 58, 95, 0.08);
+      --accent-warm: #b85d36; --accent-warm-soft: rgba(184, 93, 54, 0.10);
+      --accent-green: #3a6b4a; --accent-green-soft: rgba(58, 107, 74, 0.10);
+      --border: #ddd; --border-soft: #e8e8e8;
+      --card-bg: #fff; --mockup-bg: #fafafa;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #1a1a1a; --bg-soft: #202020;
+        --text: #f0f0f0; --text-muted: #b8b8b8; --text-faint: #888;
+        --accent: #7ba9d8; --accent-soft: rgba(123, 169, 216, 0.14);
+        --accent-warm: #d99b6e; --accent-warm-soft: rgba(217, 155, 110, 0.14);
+        --accent-green: #7eb18e; --accent-green-soft: rgba(126, 177, 142, 0.14);
+        --border: #333; --border-soft: #2a2a2a;
+        --card-bg: #232323; --mockup-bg: #1f1f1f;
+      }
+    }
+    [data-theme="dark"] {
+      --bg: #1a1a1a; --bg-soft: #202020;
+      --text: #f0f0f0; --text-muted: #b8b8b8; --text-faint: #888;
+      --accent: #7ba9d8; --accent-soft: rgba(123, 169, 216, 0.14);
+      --accent-warm: #d99b6e; --accent-warm-soft: rgba(217, 155, 110, 0.14);
+      --accent-green: #7eb18e; --accent-green-soft: rgba(126, 177, 142, 0.14);
+      --border: #333; --border-soft: #2a2a2a;
+      --card-bg: #232323; --mockup-bg: #1f1f1f;
+    }
+    [data-theme="light"] {
+      --bg: #f5f5f5; --bg-soft: #fafafa;
+      --text: #1a1a1a; --text-muted: #4a4a4a; --text-faint: #888;
+      --accent: #1e3a5f; --accent-soft: rgba(30, 58, 95, 0.08);
+      --accent-warm: #b85d36; --accent-warm-soft: rgba(184, 93, 54, 0.10);
+      --accent-green: #3a6b4a; --accent-green-soft: rgba(58, 107, 74, 0.10);
+      --border: #ddd; --border-soft: #e8e8e8;
+      --card-bg: #fff; --mockup-bg: #fafafa;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { overflow-x: hidden; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      font-size: 17px; line-height: 1.65;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      transition: background 0.2s, color 0.2s; overflow-x: hidden;
+    }
+    a { color: var(--accent); }
+
+    nav { max-width: 1100px; margin: 0 auto; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; gap: 16px; position: relative; }
+    @media (max-width: 768px) { nav { padding: 18px 20px; } }
+    .nav-name { font-size: 20px; font-weight: 700; color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; letter-spacing: -0.02em; }
+    .nav-name .shell { font-size: 22px; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { font-size: 15px; font-weight: 400; color: var(--text); text-decoration: none; padding-bottom: 2px; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.active { border-bottom: 2px solid var(--text); font-weight: 500; }
+    .theme-toggle, .menu-toggle { background: none; border: 1px solid var(--border); width: 34px; height: 34px; border-radius: 50%; cursor: pointer; padding: 0; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; transition: border-color 0.15s, color 0.15s; color: var(--text); }
+    .theme-toggle { font-size: 14px; }
+    .theme-toggle:hover, .menu-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .menu-toggle { display: none; }
+    .menu-toggle svg { width: 16px; height: 16px; stroke: var(--text); stroke-width: 1.8; fill: none; stroke-linecap: round; }
+    @media (max-width: 820px) {
+      .menu-toggle { display: inline-flex; }
+      .nav-links { position: absolute; top: 100%; right: 20px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px; flex-direction: column; gap: 4px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); min-width: 180px; z-index: 100; display: none; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 14px; border-radius: 6px; font-size: 15px; }
+      .nav-links a:hover { background: var(--bg-soft); }
+      .nav-links a.active { border-bottom: none; background: var(--accent-soft); color: var(--accent); }
+    }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 56px 40px 80px; }
+    @media (max-width: 640px) { main { padding: 36px 20px 56px; } }
+
+    .page-header { margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px solid var(--border-soft); max-width: 720px; }
+    @media (max-width: 640px) { .page-header { margin-bottom: 40px; padding-bottom: 24px; } }
+    .page-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h1 { font-size: clamp(2.2rem, 5.5vw, 3rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; color: var(--text); margin-bottom: 18px; }
+    .page-intro { font-size: 1rem; color: var(--text-muted); line-height: 1.7; max-width: 640px; }
+    @media (max-width: 640px) { .page-intro { font-size: 0.97rem; } }
+    .page-intro strong { color: var(--text); font-weight: 600; }
+    .page-intro em { font-style: italic; }
+
+    /* Section */
+    .section { margin-top: 72px; }
+    .section:first-of-type { margin-top: 0; }
+    .section-header { margin-bottom: 32px; max-width: 720px; }
+    .section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px; }
+    .section-eyebrow.cookbook { color: var(--accent); }
+    .section-eyebrow.game { color: var(--accent-warm); }
+    .section-eyebrow.sustain { color: var(--accent-green); }
+    .section-title { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; color: var(--text); margin-bottom: 10px; }
+    @media (max-width: 640px) { .section-title { font-size: 1.4rem; } }
+    .section-subtitle { font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; }
+    .section-subtitle em { font-style: italic; }
+
+    /* Learning card — wider, side-by-side */
+    .learning-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 0;
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+    @media (max-width: 820px) {
+      .learning-card { grid-template-columns: 1fr; }
+    }
+    .learning-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    .learning-mockup {
+      background: var(--mockup-bg);
+      border-right: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      min-height: 300px;
+      overflow: hidden;
+    }
+    @media (max-width: 820px) {
+      .learning-mockup { border-right: none; border-bottom: 1px solid var(--border-soft); }
+    }
+    .learning-mockup svg { width: 100%; height: auto; max-width: 280px; }
+
+    .learning-body {
+      padding: 32px 36px;
+      display: flex;
+      flex-direction: column;
+    }
+    @media (max-width: 640px) { .learning-body { padding: 24px 26px; } }
+
+    .learning-meta { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
+    .learning-meta.cookbook { color: var(--accent); }
+    .learning-meta.game { color: var(--accent-warm); }
+    .learning-meta.sustain { color: var(--accent-green); }
+    .learning-meta .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+    .learning-meta.cookbook .dot { background: var(--accent); }
+    .learning-meta.game .dot { background: var(--accent-warm); }
+    .learning-meta.sustain .dot { background: var(--accent-green); }
+
+    .learning-emoji { font-size: 24px; margin-bottom: 10px; display: inline-block; }
+
+    .learning-name {
+      font-size: 1.35rem; font-weight: 800;
+      letter-spacing: -0.025em; line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    @media (max-width: 640px) { .learning-name { font-size: 1.2rem; } }
+    .learning-tagline {
+      font-size: 0.93rem; color: var(--text-faint);
+      line-height: 1.5; margin-bottom: 18px;
+      font-style: italic;
+    }
+    .learning-desc {
+      font-size: 0.95rem; line-height: 1.7;
+      color: var(--text-muted); margin-bottom: 20px;
+    }
+    .learning-desc strong { color: var(--text); font-weight: 600; }
+    .learning-desc em { font-style: italic; }
+
+    /* Chapters/scenarios list inside card */
+    .feature-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 480px) { .feature-list { grid-template-columns: 1fr; } }
+    .feature-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 12px;
+      background: var(--bg-soft);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+    .feature-item-num {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .feature-item.c1 .feature-item-num { background: #4a6cf7; }
+    .feature-item.c2 .feature-item-num { background: #ef5a5a; }
+    .feature-item.c3 .feature-item-num { background: #5dc78e; }
+    .feature-item.c4 .feature-item-num { background: #9c7df5; }
+    .feature-item.c5 .feature-item-num { background: #f59e6e; }
+    .feature-item-text {
+      flex: 1;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .feature-item-text small {
+      display: block;
+      font-size: 11px;
+      color: var(--text-faint);
+      font-weight: 400;
+      margin-top: 1px;
+    }
+
+    /* Action button row */
+    .learning-actions {
+      display: flex; gap: 10px;
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: 12px;
+    }
+    .action-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center; gap: 6px;
+    }
+    .action-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .action-btn.primary { color: #fff; }
+    .action-btn.primary.cookbook { background: var(--accent); border-color: var(--accent); }
+    .action-btn.primary.cookbook:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
+    .action-btn.primary.game { background: var(--accent-warm); border-color: var(--accent-warm); }
+    .action-btn.primary.game:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
+    .action-btn.primary.sustain { background: var(--accent-green); border-color: var(--accent-green); }
+    .action-btn.primary.sustain:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
+
+    /* Language tags */
+    .lang-tags {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .lang-tag {
+      font-size: 11px; font-weight: 700;
+      padding: 4px 10px; border-radius: 5px;
+      letter-spacing: 0.05em;
+    }
+    .lang-tag.en { background: rgba(74,108,247,0.1); color: #4a6cf7; }
+    .lang-tag.ko { background: rgba(245,158,110,0.12); color: #f59e6e; }
+
+    footer { text-align: center; padding: 40px 20px; font-size: 13.5px; color: var(--text-muted); border-top: 1px solid var(--border-soft); margin-top: 56px; }
+    footer a { color: var(--text-muted); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name"><span class="shell">🐚</span> Sora Kim</a>
+  <div class="nav-right">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="papers.html">Papers</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="learning.html" class="active">Learning</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main>
+
+  <div class="page-header">
+    <div class="page-eyebrow">Learning</div>
+    <h1>Materials I've made for the team</h1>
+    <p class="page-intro">
+      Building the tools is only half of it. <strong>People also have to know how to use them — and how to keep them running after I leave.</strong> Three sets of learning materials: an AI literacy cookbook for the GMP context, a pixel-art onboarding game for newcomers, and the sustainability documentation that ships alongside every deployed tool.
+    </p>
+  </div>
+
+  <!-- ========== COOKBOOK ========== -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow cookbook">— AI literacy cookbook</div>
+      <h2 class="section-title">Using Claude Right</h2>
+      <p class="section-subtitle">
+        A 15-page practical guide for using Claude safely and effectively in <em>GMP environments</em> — written for QC quality teams, where data integrity isn't optional.
+      </p>
+    </div>
+
+    <div class="learning-card">
+      <div class="learning-mockup">
+        <!-- Cookbook cover mockup -->
+        <svg viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg">
+          <!-- Book shadow -->
+          <rect x="20" y="24" width="200" height="280" rx="8" fill="#000" opacity="0.08"/>
+          <!-- Book body -->
+          <rect x="14" y="18" width="200" height="280" rx="8" fill="#fff" stroke="#e8ebf0" stroke-width="1"/>
+
+          <!-- Top label -->
+          <text x="28" y="38" font-size="6.5" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="700" letter-spacing="0.12em">GMP QUALITY LAB · AI LITERACY</text>
+
+          <!-- Stat row -->
+          <g>
+            <rect x="28" y="50" width="46" height="38" rx="6" fill="#eef2ff"/>
+            <text x="38" y="68" font-size="14" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="800">4</text>
+            <text x="34" y="80" font-size="6" font-family="Inter, sans-serif" fill="#4a6cf7" opacity="0.7" font-weight="600">Chapters</text>
+
+            <rect x="80" y="50" width="46" height="38" rx="6" fill="#fef3eb"/>
+            <text x="86" y="68" font-size="14" font-family="Inter, sans-serif" fill="#f59e6e" font-weight="800">15+</text>
+            <text x="84" y="80" font-size="6" font-family="Inter, sans-serif" fill="#f59e6e" opacity="0.7" font-weight="600">Prompts</text>
+
+            <rect x="132" y="50" width="46" height="38" rx="6" fill="#eaf8f0"/>
+            <text x="142" y="68" font-size="14" font-family="Inter, sans-serif" fill="#5dc78e" font-weight="800">3</text>
+            <text x="138" y="80" font-size="6" font-family="Inter, sans-serif" fill="#5dc78e" opacity="0.7" font-weight="600">Sec. rules</text>
+          </g>
+
+          <!-- Chapter tiles -->
+          <g>
+            <rect x="28" y="100" width="74" height="26" rx="5" fill="#f8f9fb"/>
+            <circle cx="38" cy="113" r="4" fill="#4a6cf7"/>
+            <text x="46" y="111" font-size="6" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">AI Basics</text>
+            <text x="46" y="120" font-size="5" font-family="Inter, sans-serif" fill="#94a0b1">Capabilities</text>
+
+            <rect x="108" y="100" width="74" height="26" rx="5" fill="#f8f9fb"/>
+            <circle cx="118" cy="113" r="4" fill="#ef5a5a"/>
+            <text x="126" y="111" font-size="6" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">Security</text>
+            <text x="126" y="120" font-size="5" font-family="Inter, sans-serif" fill="#94a0b1">ALCOA+</text>
+
+            <rect x="28" y="132" width="74" height="26" rx="5" fill="#f8f9fb"/>
+            <circle cx="38" cy="145" r="4" fill="#5dc78e"/>
+            <text x="46" y="143" font-size="6" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">Docs</text>
+            <text x="46" y="152" font-size="5" font-family="Inter, sans-serif" fill="#94a0b1">SOP · CAPA</text>
+
+            <rect x="108" y="132" width="74" height="26" rx="5" fill="#f8f9fb"/>
+            <circle cx="118" cy="145" r="4" fill="#9c7df5"/>
+            <text x="126" y="143" font-size="6" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">Manager</text>
+            <text x="126" y="152" font-size="5" font-family="Inter, sans-serif" fill="#94a0b1">Workflow</text>
+          </g>
+
+          <!-- Quote -->
+          <rect x="28" y="172" width="154" height="32" rx="5" fill="#fafbfc"/>
+          <rect x="32" y="174" width="2" height="28" fill="#4a6cf7"/>
+          <text x="40" y="186" font-size="6" font-family="Inter, sans-serif" fill="#5a6270" font-style="italic">"When systems are well-designed,</text>
+          <text x="40" y="195" font-size="6" font-family="Inter, sans-serif" fill="#5a6270" font-style="italic">people can focus on what matters</text>
+          <text x="40" y="201" font-size="6" font-family="Inter, sans-serif" fill="#5a6270" font-style="italic">most: judgment."</text>
+
+          <!-- Pharma label -->
+          <text x="28" y="230" font-size="7" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="600">Pharmaceutical QC</text>
+
+          <!-- Title -->
+          <text x="28" y="252" font-size="20" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="800" letter-spacing="-0.03em">Using</text>
+          <text x="28" y="270" font-size="20" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="800" letter-spacing="-0.03em">Claude</text>
+          <text x="28" y="288" font-size="20" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="800" letter-spacing="-0.03em">Right.</text>
+
+          <!-- Test tube emoji -->
+          <text x="148" y="284" font-size="24">🧪</text>
+        </svg>
+      </div>
+
+      <div class="learning-body">
+        <div class="learning-meta cookbook"><span class="dot"></span>Cookbook · v1.0 · 2026</div>
+        <span class="learning-emoji">📚</span>
+        <h3 class="learning-name">Using Claude Right</h3>
+        <p class="learning-tagline">A practical team guide for using Claude safely and effectively in GMP environments.</p>
+
+        <div class="lang-tags">
+          <span class="lang-tag en">EN</span>
+          <span class="lang-tag ko">KO</span>
+        </div>
+
+        <p class="learning-desc">
+          Most AI-literacy material is written for office workers. <strong>This one isn't.</strong> It's written for QC teams in a regulated manufacturing environment — where the rule is "no credentials, no Veeva, no shared drives," where every action has an audit trail, and where <em>ALCOA+ data integrity</em> isn't optional. Four chapters covering what AI can and can't do, how to keep it safe, how to use it for the documents that matter (SOPs, deviations, CAPA, translation), and how managers can build small workflows without writing code.
+        </p>
+
+        <div class="feature-list">
+          <div class="feature-item c1">
+            <span class="feature-item-num">1</span>
+            <span class="feature-item-text">AI Fundamentals<small>What it can and can't do</small></span>
+          </div>
+          <div class="feature-item c2">
+            <span class="feature-item-num">2</span>
+            <span class="feature-item-text">Security & Data Integrity<small>What never to share</small></span>
+          </div>
+          <div class="feature-item c3">
+            <span class="feature-item-num">3</span>
+            <span class="feature-item-text">Document Writing<small>SOP · Deviation · CAPA · Translation</small></span>
+          </div>
+          <div class="feature-item c4">
+            <span class="feature-item-num">4</span>
+            <span class="feature-item-text">Manager Automation<small>Tool requests · workflow design</small></span>
+          </div>
+        </div>
+
+        <div class="learning-actions">
+          <a class="action-btn primary cookbook" href="https://sorakim-lab.github.io/teaching" target="_blank" rel="noopener">📖 Open cookbook ↗</a>
+          <a class="action-btn" href="mailto:sorakim.lab@gmail.com?subject=Cookbook%20feedback">Send feedback</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DAY ONE: GMP ========== -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow game">— Pixel-art onboarding game</div>
+      <h2 class="section-title">DAY ONE: GMP</h2>
+      <p class="section-subtitle">
+        First day on the job in a GMP-regulated environment is overwhelming. This game lets newcomers <em>practice the day</em> before they live it — five workday scenarios, structured decisions, and an explanation after every choice.
+      </p>
+    </div>
+
+    <div class="learning-card">
+      <div class="learning-mockup">
+        <!-- Pixel game mockup -->
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- Game screen background (dark navy) -->
+          <rect x="0" y="0" width="320" height="220" rx="12" fill="#0d1929"/>
+
+          <!-- Top status bar -->
+          <rect x="10" y="10" width="300" height="22" rx="4" fill="#1a2940"/>
+          <text x="20" y="25" font-size="7" font-family="ui-monospace, monospace" fill="#f7c948" font-weight="700">09:00 AM</text>
+          <text x="135" y="25" font-size="7" font-family="ui-monospace, monospace" fill="#fff" font-weight="700">SCENARIO 1 / 5</text>
+          <text x="262" y="25" font-size="7" font-family="ui-monospace, monospace" fill="#f7c948" font-weight="700">SCORE: 0</text>
+
+          <!-- Game scene -->
+          <rect x="10" y="38" width="300" height="80" rx="4" fill="#1a2940"/>
+          <!-- Gowning area background -->
+          <rect x="14" y="42" width="292" height="60" fill="#243556"/>
+
+          <!-- Floor/wall divider -->
+          <rect x="14" y="86" width="292" height="16" fill="#1a2940"/>
+
+          <!-- Gown lockers on left -->
+          <rect x="30" y="50" width="22" height="32" fill="#8b7355"/>
+          <rect x="38" y="55" width="2" height="6" fill="#0d1929"/>
+          <rect x="54" y="50" width="22" height="32" fill="#8b7355"/>
+          <rect x="62" y="55" width="2" height="6" fill="#0d1929"/>
+
+          <!-- Documents/SOPs on wall -->
+          <rect x="88" y="54" width="16" height="22" fill="#f8f8f8"/>
+          <rect x="106" y="54" width="16" height="22" fill="#f8f8f8"/>
+          <rect x="124" y="54" width="16" height="22" fill="#f8f8f8"/>
+
+          <!-- Character (Jun) -->
+          <g>
+            <!-- Hat with question mark -->
+            <rect x="180" y="56" width="8" height="3" fill="#f7c948"/>
+            <text x="180" y="55" font-size="6" font-family="ui-monospace, monospace" fill="#f7c948" font-weight="800">?</text>
+            <!-- Head -->
+            <rect x="178" y="60" width="12" height="10" fill="#f4c8a0"/>
+            <!-- Body (blue shirt) -->
+            <rect x="174" y="70" width="20" height="14" fill="#4a6cf7"/>
+            <!-- Legs -->
+            <rect x="176" y="84" width="6" height="6" fill="#1e3a5f"/>
+            <rect x="186" y="84" width="6" height="6" fill="#1e3a5f"/>
+          </g>
+
+          <!-- Cleanroom door on right -->
+          <rect x="230" y="50" width="50" height="34" fill="#4a6cf7"/>
+          <rect x="232" y="52" width="46" height="30" fill="none" stroke="#7b94ff" stroke-width="0.5"/>
+          <rect x="252" y="60" width="8" height="3" fill="#f7c948"/>
+
+          <!-- Dialog box -->
+          <rect x="10" y="124" width="300" height="40" rx="4" fill="none" stroke="#5dc78e" stroke-width="1.2"/>
+          <text x="18" y="138" font-size="7" font-family="ui-monospace, monospace" fill="#5dc78e" font-weight="700">JUN</text>
+          <text x="18" y="150" font-size="6.5" font-family="ui-monospace, monospace" fill="#fff">First day! I'm at the gowning area.</text>
+          <text x="18" y="158" font-size="6.5" font-family="ui-monospace, monospace" fill="#fff">What should I do?</text>
+
+          <!-- Choice buttons (2x2) -->
+          <g>
+            <rect x="10" y="170" width="146" height="18" rx="3" fill="none" stroke="#5a6270" stroke-width="0.8"/>
+            <text x="16" y="182" font-size="6" font-family="ui-monospace, monospace" fill="#fff">A. Just put on gown</text>
+
+            <rect x="164" y="170" width="146" height="18" rx="3" fill="#1a3d2a" stroke="#5dc78e" stroke-width="1"/>
+            <text x="170" y="182" font-size="6" font-family="ui-monospace, monospace" fill="#5dc78e" font-weight="700">B. Find gowning SOP ✓</text>
+
+            <rect x="10" y="194" width="146" height="18" rx="3" fill="none" stroke="#5a6270" stroke-width="0.8"/>
+            <text x="16" y="206" font-size="6" font-family="ui-monospace, monospace" fill="#fff">C. Skip — just observing</text>
+
+            <rect x="164" y="194" width="146" height="18" rx="3" fill="none" stroke="#5a6270" stroke-width="0.8"/>
+            <text x="170" y="206" font-size="6" font-family="ui-monospace, monospace" fill="#fff">D. Copy a senior</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="learning-body">
+        <div class="learning-meta game"><span class="dot"></span>Game · v1.0 · 2026</div>
+        <span class="learning-emoji">🎮</span>
+        <h3 class="learning-name">DAY ONE: GMP</h3>
+        <p class="learning-tagline">A pixel onboarding game for pharmaceutical newcomers · ~15 min.</p>
+
+        <div class="lang-tags">
+          <span class="lang-tag en">EN</span>
+          <span class="lang-tag ko">KO</span>
+        </div>
+
+        <p class="learning-desc">
+          Newcomers in pharmaceutical GMP environments typically learn by watching seniors and hoping nothing breaks. This is gentler: a <strong>character named Jun</strong> walks through their first day across five scenarios — gowning, material verification, SOP retrieval under pressure, deviation reporting, and end-of-day sign-off — each with four choices and an <em>explanation after every pick</em>. The game doesn't punish wrong answers; it shows why one path is more aligned with regulated practice than the others.
+        </p>
+
+        <div class="feature-list" style="grid-template-columns: 1fr;">
+          <div class="feature-item c1">
+            <span class="feature-item-num">1</span>
+            <span class="feature-item-text">Gowning area<small>Following the documented sequence</small></span>
+          </div>
+          <div class="feature-item c2">
+            <span class="feature-item-num">2</span>
+            <span class="feature-item-text">Material verification<small>What gets checked, and why</small></span>
+          </div>
+          <div class="feature-item c3">
+            <span class="feature-item-num">3</span>
+            <span class="feature-item-text">SOP retrieval under pressure<small>Asking vs. acting on memory</small></span>
+          </div>
+          <div class="feature-item c4">
+            <span class="feature-item-num">4</span>
+            <span class="feature-item-text">Deviation reporting<small>What counts, what doesn't</small></span>
+          </div>
+          <div class="feature-item c5">
+            <span class="feature-item-num">5</span>
+            <span class="feature-item-text">End-of-day sign-off<small>Closing out the workday properly</small></span>
+          </div>
+        </div>
+
+        <div class="learning-actions">
+          <a class="action-btn primary game" href="https://sorakim-lab.github.io/teaching" target="_blank" rel="noopener">🎮 Play DAY ONE ↗</a>
+          <a class="action-btn" href="mailto:sorakim.lab@gmail.com?subject=DAY%20ONE%3A%20GMP%20feedback">Send feedback</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SUSTAINABILITY ========== -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-eyebrow sustain">— Sustainability documentation</div>
+      <h2 class="section-title">The tools have to outlast me</h2>
+      <p class="section-subtitle">
+        A deployed tool that depends on its builder to maintain is a <em>liability</em>, not infrastructure. Every operational tool on the <a href="tools.html">Tools page</a> ships with documentation that lets the team keep it running after I leave.
+      </p>
+    </div>
+
+    <div class="learning-card">
+      <div class="learning-mockup">
+        <!-- Sustainability docs mockup — folder + handoff visual -->
+        <svg viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg">
+          <!-- Folder tab -->
+          <rect x="30" y="22" width="80" height="14" rx="3" fill="#5dc78e"/>
+          <text x="40" y="33" font-size="8" font-family="Inter, sans-serif" fill="#fff" font-weight="800">TOOL #4</text>
+
+          <!-- Folder body -->
+          <rect x="20" y="34" width="240" height="190" rx="10" fill="#fff" stroke="#5dc78e" stroke-width="1.5"/>
+
+          <!-- Doc 1: README -->
+          <rect x="36" y="52" width="208" height="36" rx="8" fill="#eef2ff"/>
+          <rect x="46" y="62" width="20" height="16" rx="4" fill="#4a6cf7"/>
+          <text x="50" y="74" font-size="9" font-family="Inter, sans-serif" fill="#fff" font-weight="800">📄</text>
+          <text x="74" y="68" font-size="9" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">README.md</text>
+          <text x="74" y="80" font-size="7" font-family="Inter, sans-serif" fill="#4a6cf7" opacity="0.75">What it does · why it exists</text>
+
+          <!-- Doc 2: Setup -->
+          <rect x="36" y="96" width="208" height="36" rx="8" fill="#fef3eb"/>
+          <rect x="46" y="106" width="20" height="16" rx="4" fill="#f59e6e"/>
+          <text x="49" y="118" font-size="9" font-family="Inter, sans-serif" fill="#fff" font-weight="800">⚙</text>
+          <text x="74" y="112" font-size="9" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">SETUP.md</text>
+          <text x="74" y="124" font-size="7" font-family="Inter, sans-serif" fill="#f59e6e" opacity="0.75">How to reproduce it from scratch</text>
+
+          <!-- Doc 3: Training -->
+          <rect x="36" y="140" width="208" height="36" rx="8" fill="#f2eeff"/>
+          <rect x="46" y="150" width="20" height="16" rx="4" fill="#9c7df5"/>
+          <text x="50" y="162" font-size="9" font-family="Inter, sans-serif" fill="#fff" font-weight="800">🧑</text>
+          <text x="74" y="156" font-size="9" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">TRAINING.md</text>
+          <text x="74" y="168" font-size="7" font-family="Inter, sans-serif" fill="#9c7df5" opacity="0.75">How to train new users</text>
+
+          <!-- Doc 4: Handoff -->
+          <rect x="36" y="184" width="208" height="36" rx="8" fill="#eaf8f0"/>
+          <rect x="46" y="194" width="20" height="16" rx="4" fill="#5dc78e"/>
+          <text x="49" y="206" font-size="9" font-family="Inter, sans-serif" fill="#fff" font-weight="800">↗</text>
+          <text x="74" y="200" font-size="9" font-family="Inter, sans-serif" fill="#1a1d23" font-weight="700">HANDOFF.md</text>
+          <text x="74" y="212" font-size="7" font-family="Inter, sans-serif" fill="#5dc78e" opacity="0.75">What to do when I'm not here</text>
+        </svg>
+      </div>
+
+      <div class="learning-body">
+        <div class="learning-meta sustain"><span class="dot"></span>Internal · per deployed tool</div>
+        <span class="learning-emoji">🔄</span>
+        <h3 class="learning-name">Reproduction guides & training materials</h3>
+        <p class="learning-tagline">Every operational tool ships with handoff documentation. Nothing depends on me to keep working.</p>
+
+        <p class="learning-desc">
+          One of the easiest ways for internal tools to fail is for their builder to leave. The team loses the tool, or — worse — keeps using it without being able to fix it when something breaks. My answer is structural: <strong>every operational tool I've deployed comes with four documents</strong> that together let someone else maintain, modify, and teach the tool without me being there. The documentation is part of the tool's design, not an afterthought.
+        </p>
+
+        <div class="feature-list">
+          <div class="feature-item c1">
+            <span class="feature-item-num">1</span>
+            <span class="feature-item-text">README<small>What it does, why it exists</small></span>
+          </div>
+          <div class="feature-item c5">
+            <span class="feature-item-num">2</span>
+            <span class="feature-item-text">SETUP<small>How to reproduce it from scratch</small></span>
+          </div>
+          <div class="feature-item c4">
+            <span class="feature-item-num">3</span>
+            <span class="feature-item-text">TRAINING<small>How to onboard new users</small></span>
+          </div>
+          <div class="feature-item c3">
+            <span class="feature-item-num">4</span>
+            <span class="feature-item-text">HANDOFF<small>What to do when I'm not here</small></span>
+          </div>
+        </div>
+
+        <p class="learning-desc" style="margin-bottom: 16px;">
+          The documentation lives internally with the tool, not publicly — it references the regulated environment it operates in. <strong>Contact me for review</strong> if you'd like to see the structure or methodology.
+        </p>
+
+        <div class="learning-actions">
+          <a class="action-btn primary sustain" href="mailto:sorakim.lab@gmail.com?subject=Sustainability%20documentation%20review">Contact for review →</a>
+          <a class="action-btn" href="tools.html">← See the tools</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 <a href="index.html">Sora Kim</a> · <a href="mailto:sorakim.lab@gmail.com">sorakim.lab@gmail.com</a>
+</footer>
+
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') { root.setAttribute('data-theme','light'); toggle.textContent='🌙'; }
+  else if (saved === 'dark') { root.setAttribute('data-theme','dark'); toggle.textContent='☀️'; }
+  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { toggle.textContent='☀️'; }
+  toggle.addEventListener('click', () => {
+    const cur = root.getAttribute('data-theme');
+    if (cur === 'dark') { root.setAttribute('data-theme','light'); localStorage.setItem('theme','light'); toggle.textContent='🌙'; }
+    else if (cur === 'light') { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
+    else { root.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); toggle.textContent='☀️'; }
+  });
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', (e) => { e.stopPropagation(); navLinks.classList.toggle('open'); });
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) { navLinks.classList.remove('open'); }
+  });
+</script>
+
+</body>
+</html>
