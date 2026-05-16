@@ -198,23 +198,11 @@
       width: 100%; height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      object-position: center 20%;
+      object-position: center center;
       display: block;
       position: relative;
       z-index: 1;
-      /* Rendering hints to improve pixel quality on resize */
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: auto;
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      /* Subtle inner shadow to mask noise edges */
-      box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.05),
-        0 4px 24px rgba(0,0,0,0.06);
-      /* Tiny smoothing without losing detail */
-      filter: contrast(1.02) brightness(1.01);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
     }
 
     /* Name */
