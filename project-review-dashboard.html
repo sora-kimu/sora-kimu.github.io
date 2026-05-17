@@ -295,7 +295,6 @@
       display: block;
     }
 
-    /* Component list (2 components: dashboard + pattern detection) */
     .component-list {
       list-style: none;
       margin: 32px 0;
@@ -394,7 +393,19 @@
     }
     .result-label strong { color: var(--text); font-weight: 600; }
 
-    /* Reflection / "what this changed" box — warm color */
+    /* Disclaimer for results-grid — added across all design prototype pages */
+    .results-disclaimer {
+      font-size: 0.88rem;
+      color: var(--text-faint);
+      font-style: italic;
+      line-height: 1.65;
+      margin: -8px 0 28px;
+      padding: 14px 18px;
+      background: var(--bg-soft);
+      border-left: 2px solid var(--border);
+      border-radius: 0 6px 6px 0;
+    }
+
     .reflection-box {
       background: var(--accent-warm-soft);
       border-radius: 14px;
@@ -421,7 +432,6 @@
     .reflection-text strong { font-weight: 600; }
     .reflection-text em { font-style: italic; }
 
-    /* "Unexpected finding" box — special emphasis for fairness infrastructure */
     .surprise-box {
       background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent-warm-soft) 100%);
       border-radius: 14px;
@@ -465,7 +475,6 @@
     .surprise-text strong { font-weight: 600; }
     .surprise-text em { font-style: italic; }
 
-    /* Takeaway list */
     .takeaway-list { margin: 32px 0; }
     .takeaway {
       display: flex;
@@ -577,7 +586,6 @@
 
     <div class="mockup-wrap">
       <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
-        <!-- Pill tab bar -->
         <rect x="20" y="20" width="440" height="34" rx="17" fill="#eef2ff"/>
         <rect x="24" y="24" width="80" height="26" rx="13" fill="#4a6cf7"/>
         <text x="42" y="40" font-size="11" font-family="Inter, sans-serif" fill="#fff" font-weight="700">Burden</text>
@@ -586,11 +594,7 @@
         <text x="264" y="40" font-size="11" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="600" opacity="0.55">Checkout</text>
         <text x="346" y="40" font-size="11" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="600" opacity="0.55">Activity</text>
         <text x="412" y="40" font-size="11" font-family="Inter, sans-serif" fill="#4a6cf7" font-weight="600" opacity="0.55">Insights</text>
-
-        <!-- Section label -->
         <text x="24" y="78" font-size="11" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="700" letter-spacing="0.08em">REVIEW BURDEN BY DOCUMENT · LAST 30 DAYS</text>
-
-        <!-- Bars — colorful, rounded -->
         <g>
           <rect x="40" y="180" width="28" height="60" rx="6" fill="#4a6cf7"/>
           <rect x="84" y="150" width="28" height="90" rx="6" fill="#9c7df5"/>
@@ -603,15 +607,9 @@
           <rect x="392" y="158" width="28" height="82" rx="6" fill="#5dc78e" opacity="0.7"/>
           <rect x="436" y="180" width="14" height="60" rx="6" fill="#f06292" opacity="0.7"/>
         </g>
-
-        <!-- Warning marker on tallest -->
         <circle cx="274" cy="88" r="9" fill="#ef5a5a"/>
         <text x="270.5" y="92" font-size="11" font-family="Inter, sans-serif" fill="#fff" font-weight="800">!</text>
-
-        <!-- Baseline -->
         <line x1="34" y1="240" x2="456" y2="240" stroke="#c7cdd6" stroke-width="0.5"/>
-
-        <!-- Tooltip pill near warning bar -->
         <rect x="298" y="96" width="138" height="32" rx="10" fill="#fff" stroke="#ef5a5a" stroke-width="1.2"/>
         <circle cx="312" cy="112" r="4" fill="#ef5a5a"/>
         <text x="322" y="110" font-size="10" font-family="Inter, sans-serif" fill="#1a1a1a" font-weight="700">4 rounds · reopened</text>
@@ -759,6 +757,10 @@
         </div>
       </div>
 
+      <p class="results-disclaimer">
+        Study context: n=20 experienced practitioners, within-subjects design. Ratings reflect this evaluation, not generalized validation.
+      </p>
+
       <p>
         That last result is the study's central empirical finding — and it took some interpretation. The checklist was immediately legible because it addresses a problem practitioners already recognize: inconsistent review preparation. The pattern detection layer required initial orientation because it addresses a problem practitioners <em>haven't previously had the tools to name</em> — structural friction accumulation. The unfamiliarity didn't produce rejection; once framed, all twenty participants endorsed it as useful.
       </p>
@@ -774,7 +776,7 @@
     </div>
   </section>
 
-  <!-- UNEXPECTED FINDING — Fairness infrastructure -->
+  <!-- UNEXPECTED FINDING -->
   <section class="section">
     <div class="section-eyebrow">An unexpected finding</div>
 
