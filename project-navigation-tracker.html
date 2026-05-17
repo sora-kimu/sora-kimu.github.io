@@ -295,7 +295,6 @@
       display: block;
     }
 
-    /* Method list */
     .method-list {
       list-style: none;
       margin: 32px 0;
@@ -392,7 +391,19 @@
     }
     .result-label strong { color: var(--text); font-weight: 600; }
 
-    /* Loopback comparison — experience contrast */
+    /* Disclaimer for results-grid — added across all design prototype pages */
+    .results-disclaimer {
+      font-size: 0.88rem;
+      color: var(--text-faint);
+      font-style: italic;
+      line-height: 1.65;
+      margin: -8px 0 28px;
+      padding: 14px 18px;
+      background: var(--bg-soft);
+      border-left: 2px solid var(--border);
+      border-radius: 0 6px 6px 0;
+    }
+
     .loopback-contrast {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -646,37 +657,24 @@
 
     <div class="mockup-wrap">
       <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
-        <!-- Navigation path (colorful curves) -->
         <g fill="none" stroke-width="2.5" stroke-linecap="round">
           <path d="M 50 200 Q 110 80, 180 150" stroke="#4a6cf7"/>
           <path d="M 180 150 Q 230 220, 290 130" stroke="#9c7df5"/>
           <path d="M 290 130 Q 250 230, 180 160" stroke="#f59e6e" stroke-dasharray="6 4" opacity="0.8"/>
           <path d="M 180 160 Q 280 60, 410 130" stroke="#5dc78e"/>
         </g>
-
-        <!-- Start node -->
         <circle cx="50" cy="200" r="11" fill="#4a6cf7"/>
         <text x="35" y="228" font-size="11" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="600">Start</text>
-
-        <!-- Loopback node (revisited) — colorful pill -->
         <rect x="160" y="138" width="44" height="28" rx="14" fill="#fef3eb" stroke="#f59e6e" stroke-width="2.5"/>
         <text x="173" y="158" font-size="13" font-family="Inter, sans-serif" fill="#f59e6e" font-weight="800">2×</text>
-
-        <!-- Intermediate node -->
         <circle cx="290" cy="130" r="9" fill="#f2eeff" stroke="#9c7df5" stroke-width="2"/>
-
-        <!-- End node -->
         <circle cx="410" cy="130" r="11" fill="#5dc78e"/>
         <text x="395" y="158" font-size="11" font-family="Inter, sans-serif" fill="#94a0b1" font-weight="600">End</text>
-
-        <!-- Loopback annotation pill -->
         <rect x="220" y="40" width="160" height="34" rx="17" fill="#fef3eb" stroke="#f59e6e" stroke-width="1.5"/>
         <circle cx="236" cy="57" r="4" fill="#f59e6e"/>
         <text x="248" y="55" font-size="10" font-family="Inter, sans-serif" fill="#f59e6e" font-weight="800" letter-spacing="0.06em">LOOPBACK DETECTED</text>
         <text x="248" y="67" font-size="9" font-family="Inter, sans-serif" fill="#94a0b1">return to prior document</text>
         <line x1="232" y1="74" x2="192" y2="148" stroke="#f59e6e" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6"/>
-
-        <!-- Bottom timeline -->
         <line x1="40" y1="245" x2="420" y2="245" stroke="#c7cdd6" stroke-width="0.5"/>
         <circle cx="50" cy="245" r="2.5" fill="#4a6cf7"/>
         <circle cx="180" cy="245" r="2.5" fill="#f59e6e"/>
@@ -694,11 +692,9 @@
       <p>
         When a practitioner re-visits a document during an investigation — returning to a procedure they already read, re-opening a record they already checked — the standard interpretation is that <em>the practitioner</em> is the problem. Maybe they got lost. Maybe they need more training. Maybe the interface is confusing.
       </p>
-
       <p>
         But there's another reading. The practitioner went back to that document because <strong>the path forward wasn't legible from where they were standing</strong>. The system didn't resolve the question on the first pass. The return wasn't a navigation error. It was a rational response to a structural gap.
       </p>
-
       <p>
         That distinction matters because it determines what gets fixed. If loopbacks are individual failures, the response is training. If loopbacks are structural signals, the response is design. And until we can actually measure them, we can't tell which one we're looking at.
       </p>
@@ -831,6 +827,10 @@
           <div class="result-label">mean number of <strong>loopbacks per session</strong>, with consistent variation by experience level.</div>
         </div>
       </div>
+
+      <p class="results-disclaimer">
+        Study context: n=20 experienced practitioners, within-subjects design. Ratings reflect this evaluation, not generalized validation.
+      </p>
 
       <p>
         When asked what made the navigation difficult, participants overwhelmingly attributed it to <em>document structure</em> — not to the interface, not to their own preparation. The behavior data and the participant interpretation pointed in the same direction.
