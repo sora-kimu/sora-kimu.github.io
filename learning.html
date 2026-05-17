@@ -249,6 +249,22 @@
     .action-btn.primary.sustain { background: var(--accent-green); border-color: var(--accent-green); }
     .action-btn.primary.sustain:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
 
+    /* Language pill in action button */
+    .action-btn .lang-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-left: 4px;
+      background: rgba(255,255,255,0.2);
+    }
+    .action-btn:not(.primary) .lang-pill {
+      background: var(--bg-soft);
+      color: var(--text-muted);
+    }
+
     /* Language tags */
     .lang-tags {
       display: flex; gap: 6px; flex-wrap: wrap;
@@ -411,7 +427,8 @@
         </div>
 
         <div class="learning-actions">
-          <a class="action-btn primary cookbook" href="https://sorakim-lab.github.io/teaching" target="_blank" rel="noopener">📖 Open cookbook ↗</a>
+          <a class="action-btn primary cookbook" href="cookbook-en.pdf" target="_blank" rel="noopener">📖 Open cookbook <span class="lang-pill">EN</span></a>
+          <a class="action-btn" href="cookbook-ko.pdf" target="_blank" rel="noopener">📖 쿡북 열기 <span class="lang-pill">KO</span></a>
           <a class="action-btn" href="mailto:sorakim.lab@gmail.com?subject=Cookbook%20feedback">Send feedback</a>
         </div>
       </div>
@@ -541,7 +558,8 @@
         </div>
 
         <div class="learning-actions">
-          <a class="action-btn primary game" href="https://sorakim-lab.github.io/teaching" target="_blank" rel="noopener">🎮 Play DAY ONE ↗</a>
+          <a class="action-btn primary game" href="dayone-gmp-en.html" target="_blank" rel="noopener">🎮 Play DAY ONE <span class="lang-pill">EN</span></a>
+          <a class="action-btn" href="dayone-gmp-ko.html" target="_blank" rel="noopener">🎮 데이원 플레이 <span class="lang-pill">KO</span></a>
           <a class="action-btn" href="mailto:sorakim.lab@gmail.com?subject=DAY%20ONE%3A%20GMP%20feedback">Send feedback</a>
         </div>
       </div>
