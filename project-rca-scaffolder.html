@@ -73,7 +73,6 @@
     }
     a { color: var(--accent); }
 
-    /* ============ NAV ============ */
     nav {
       max-width: 1100px; margin: 0 auto;
       padding: 24px 40px;
@@ -131,14 +130,12 @@
       .nav-links a.active { border-bottom: none; background: var(--accent-soft); color: var(--accent); }
     }
 
-    /* ============ MAIN ============ */
     main {
       max-width: 740px; margin: 0 auto;
       padding: 40px 40px 100px;
     }
     @media (max-width: 640px) { main { padding: 24px 20px 64px; } }
 
-    /* Breadcrumb */
     .back-link {
       display: inline-flex;
       align-items: center;
@@ -151,7 +148,6 @@
     }
     .back-link:hover { color: var(--accent); }
 
-    /* Hero — generous breathing room */
     .hero {
       margin-bottom: 72px;
     }
@@ -194,7 +190,6 @@
     }
     @media (max-width: 640px) { .hero-tagline { font-size: 1.05rem; margin-bottom: 32px; } }
 
-    /* Mockup — bigger, more breathing space */
     .mockup-wrap {
       background: var(--mockup-bg);
       border: 1px solid var(--border-soft);
@@ -213,7 +208,6 @@
       height: auto;
     }
 
-    /* Section — clear separation */
     .section {
       margin-top: 88px;
     }
@@ -239,7 +233,6 @@
     }
     @media (max-width: 640px) { .section-title { font-size: 1.4rem; margin-bottom: 22px; } }
 
-    /* Prose — generous line-height and spacing */
     .prose {
       font-size: 1rem;
       line-height: 1.85;
@@ -253,14 +246,12 @@
     .prose strong { font-weight: 600; }
     .prose em { font-style: italic; }
 
-    /* Inline term explainer */
     .term-explain {
       color: var(--text-faint);
       font-size: 0.92em;
       font-style: italic;
     }
 
-    /* Pull quote */
     .pull-quote {
       background: var(--quote-bg);
       border-left: 3px solid var(--accent);
@@ -282,7 +273,6 @@
       font-weight: 500;
     }
 
-    /* The reframe box — special emphasis */
     .reframe-box {
       background: var(--accent-soft);
       border-radius: 14px;
@@ -317,7 +307,6 @@
       display: block;
     }
 
-    /* Stage list */
     .stage-list {
       list-style: none;
       margin: 32px 0;
@@ -372,7 +361,6 @@
       line-height: 1.7;
     }
 
-    /* Audience callout */
     .audience-callout {
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -395,7 +383,6 @@
       color: var(--text);
     }
 
-    /* Results grid */
     .results-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -432,7 +419,19 @@
     }
     .result-label strong { color: var(--text); font-weight: 600; }
 
-    /* AI reflection box — special voice section */
+    /* Disclaimer for results-grid — added across all design prototype pages */
+    .results-disclaimer {
+      font-size: 0.88rem;
+      color: var(--text-faint);
+      font-style: italic;
+      line-height: 1.65;
+      margin: -8px 0 28px;
+      padding: 14px 18px;
+      background: var(--bg-soft);
+      border-left: 2px solid var(--border);
+      border-radius: 0 6px 6px 0;
+    }
+
     .reflection-box {
       background: var(--accent-warm-soft);
       border-radius: 14px;
@@ -459,7 +458,6 @@
     .reflection-text strong { font-weight: 600; }
     .reflection-text em { font-style: italic; }
 
-    /* Takeaway box — distinct from reflection */
     .takeaway-list {
       margin: 32px 0;
     }
@@ -489,7 +487,6 @@
     .takeaway-text strong { font-weight: 600; }
     .takeaway-text em { font-style: italic; }
 
-    /* Bottom actions */
     .bottom-actions {
       display: flex;
       gap: 12px;
@@ -574,40 +571,29 @@
 
     <div class="mockup-wrap">
       <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
-        <!-- Root node -->
         <rect x="180" y="30" width="120" height="46" rx="23" fill="#4a6cf7"/>
         <circle cx="200" cy="53" r="5" fill="#fff"/>
         <rect x="212" y="48" width="74" height="5" rx="1.5" fill="#fff" opacity="0.85"/>
         <rect x="212" y="58" width="58" height="4" rx="1" fill="#fff" opacity="0.55"/>
-
-        <!-- AI badge on root -->
         <rect x="304" y="22" width="44" height="20" rx="10" fill="#f7c948"/>
         <text x="316" y="36" font-size="11" font-family="Inter, sans-serif" fill="#7d6300" font-weight="800">AI</text>
-
-        <!-- Branches -->
         <g stroke-width="2" fill="none" stroke-linecap="round">
           <line x1="200" y1="76" x2="80" y2="125" stroke="#4a6cf7" opacity="0.55"/>
           <line x1="240" y1="76" x2="240" y2="125" stroke="#4a6cf7" opacity="0.55"/>
           <line x1="280" y1="76" x2="380" y2="125" stroke="#f59e6e" opacity="0.65" stroke-dasharray="6 4"/>
         </g>
-
-        <!-- Alternative hypothesis nodes -->
         <g>
           <rect x="40" y="125" width="100" height="44" rx="22" fill="#f2eeff" stroke="#9c7df5" stroke-width="1.5"/>
           <circle cx="58" cy="147" r="5" fill="#9c7df5"/>
           <rect x="70" y="142" width="58" height="4.5" rx="1.5" fill="#9c7df5" opacity="0.75"/>
           <rect x="70" y="151" width="44" height="3.5" rx="1" fill="#9c7df5" opacity="0.45"/>
-
           <rect x="190" y="125" width="100" height="44" rx="22" fill="#eaf8f0" stroke="#5dc78e" stroke-width="1.5"/>
           <circle cx="208" cy="147" r="5" fill="#5dc78e"/>
           <rect x="220" y="142" width="58" height="4.5" rx="1.5" fill="#5dc78e" opacity="0.75"/>
           <rect x="220" y="151" width="44" height="3.5" rx="1" fill="#5dc78e" opacity="0.45"/>
-
           <rect x="340" y="125" width="100" height="44" rx="22" fill="#fef3eb" stroke="#f59e6e" stroke-width="2" stroke-dasharray="6 4"/>
           <text x="370" y="153" font-size="14" font-family="Inter, sans-serif" fill="#f59e6e" font-weight="800">+ alt</text>
         </g>
-
-        <!-- Secondary mini branches -->
         <g stroke-width="1.4" fill="none" opacity="0.5" stroke-linecap="round">
           <line x1="65" y1="169" x2="48" y2="208" stroke="#9c7df5"/>
           <line x1="115" y1="169" x2="132" y2="208" stroke="#9c7df5"/>
@@ -674,7 +660,6 @@
       </p>
     </div>
 
-    <!-- AI reflection — own voice, what this changed in my thinking about AI -->
     <div class="reflection-box">
       <div class="reflection-label">A note on what this changed for me</div>
       <div class="reflection-text">
@@ -785,6 +770,10 @@
           <div class="result-label">expressed <strong>adoption intent</strong> — while simultaneously naming the audit trail as a structural barrier to deployment.</div>
         </div>
       </div>
+
+      <p class="results-disclaimer">
+        Study context: n=20 experienced practitioners, within-subjects design. Ratings reflect this evaluation, not generalized validation.
+      </p>
 
       <p>
         Confidence ratings were maintained or slightly decreased while causal breadth increased substantially. That dissociation matters: in high-accountability environments, expanded reasoning <em>without</em> confidence collapse is exactly what comparison-preserving design needs to produce. Investigators reasoned more openly without becoming less sure of their conclusions.
