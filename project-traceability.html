@@ -392,6 +392,19 @@
     }
     .result-label strong { color: var(--text); font-weight: 600; }
 
+    /* Disclaimer for results-grid — added across all design prototype pages */
+    .results-disclaimer {
+      font-size: 0.88rem;
+      color: var(--text-faint);
+      font-style: italic;
+      line-height: 1.65;
+      margin: -8px 0 28px;
+      padding: 14px 18px;
+      background: var(--bg-soft);
+      border-left: 2px solid var(--border);
+      border-radius: 0 6px 6px 0;
+    }
+
     /* Stats discovered — pre-results, what the graph analysis surfaced */
     .stats-discovered {
       display: grid;
@@ -844,6 +857,10 @@
           <div class="result-label">categories of <strong>structural linkage problem</strong> made systematically visible: missing links, broken references, lifecycle mismatches.</div>
         </div>
       </div>
+
+      <p class="results-disclaimer">
+        Study context: n=20 experienced practitioners, within-subjects design. Ratings reflect this evaluation, not generalized validation.
+      </p>
 
       <p>
         The most informative finding wasn't the time savings — it was what participants said about <em>who</em> the savings mattered to. The reconstructed path was the same path experienced practitioners had been building in their heads for years. What changed was that less experienced practitioners could now build it too, on the first try.
