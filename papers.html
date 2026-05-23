@@ -179,6 +179,7 @@
     }
     .section-eyebrow.theory { color: var(--accent); }
     .section-eyebrow.css { color: var(--accent-warm); }
+    .section-eyebrow.hci { color: var(--accent-green); }
     .section-eyebrow.corpus { color: var(--accent-green); }
     .section-title {
       font-size: 1.6rem; font-weight: 700;
@@ -218,12 +219,14 @@
     }
     .paper-meta.theory { color: var(--accent); }
     .paper-meta.css { color: var(--accent-warm); }
+    .paper-meta.hci { color: var(--accent-green); }
     .paper-meta .dot {
       width: 6px; height: 6px; border-radius: 50%;
       display: inline-block;
     }
     .paper-meta.theory .dot { background: var(--accent); }
     .paper-meta.css .dot { background: var(--accent-warm); }
+    .paper-meta.hci .dot { background: var(--accent-green); }
     .paper-status {
       font-size: 10.5px; font-weight: 600;
       padding: 3px 9px; border-radius: 4px;
@@ -231,6 +234,37 @@
       letter-spacing: 0.05em;
       margin-left: auto;
     }
+    .paper-status.under-review {
+      background: var(--accent-green-soft);
+      color: var(--accent-green);
+    }
+    .paper-status.in-prep {
+      background: var(--accent-warm-soft);
+      color: var(--accent-warm);
+    }
+    .paper-venue {
+      display: block;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+    .paper-venue strong {
+      color: var(--text);
+      font-style: normal;
+      font-weight: 600;
+    }
+    .paper-hook {
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: var(--text);
+      font-weight: 500;
+      margin: 6px 0 14px;
+      padding-left: 14px;
+      border-left: 2px solid var(--accent);
+      font-style: italic;
+    }
+    @media (max-width: 640px) { .paper-hook { font-size: 14px; padding-left: 10px; } }
     .paper-title {
       font-size: 1.2rem; font-weight: 700;
       letter-spacing: -0.02em; line-height: 1.35;
@@ -352,148 +386,128 @@
 
   <div class="page-header">
     <div class="page-eyebrow">Papers</div>
-    <h1>Seven papers across two tracks</h1>
+    <h1>The same question, six angles.</h1>
     <p class="page-intro">
-      <strong>Four organizational-theory and STS papers</strong> develop a lifecycle of how responsibility is structured before action, accumulated in procedural documents, stabilized through investigation, and accelerated by AI. <strong>Three computational social science papers</strong> operationalize that lifecycle across regulatory corpora, with cross-domain validation between pharmaceutical and aviation.
+      What goes wrong when you bring AI into work that's tightly bound by rules — and what would it take to do it well? Six papers explore this from theory, from data, from four years of building tools inside a regulated workplace, and from the materials it takes to teach the people doing the work.
     </p>
     <p class="pdf-note">
-      <strong>📄 PDF available on request.</strong> All papers are working manuscripts — preprints not yet posted publicly. To read the full text, <a href="mailto:sorakim.lab@gmail.com?subject=Paper%20request">email me</a> and I'll send the PDF.
+      <strong>📄 PDF available on request.</strong> <a href="mailto:sorakim.lab@gmail.com?subject=Paper%20request">Email me</a> and I'll send the PDF.
     </p>
   </div>
 
-  <!-- STS THEORY -->
+  <!-- UNDER REVIEW -->
   <section class="section">
     <div class="section-header">
-      <div class="section-eyebrow theory">— Organizational theory & STS · 4 papers</div>
-      <h2 class="section-title">A lifecycle of accountability in regulated organizations</h2>
-      <p class="section-subtitle">
-        Four papers covering the full lifecycle: <em>pre-action structuring</em> (AAC), <em>procedural document infrastructure</em> (CF), <em>investigative convergence</em> (RC), and <em>AI-accelerated closure</em> (PAC). Each can be read independently; together they form a single arc.
-      </p>
+      <div class="section-eyebrow theory">— Under review</div>
     </div>
 
     <div class="paper-list">
 
-      <!-- AAC -->
+      <!-- 1. Convergence Lifecycle -->
       <article class="paper">
         <div class="paper-meta theory">
-          <span class="dot"></span>Paper 1 · AAC
-          <span class="paper-status">Working manuscript</span>
+          <span class="dot"></span>Paper 1
+          <span class="paper-status under-review">Under review</span>
         </div>
-        <h3 class="paper-title">Anticipated Accountability Convergence: How Organizations Structure Responsibility Before Action</h3>
+        <h3 class="paper-title">The Convergence Lifecycle</h3>
+        <p class="paper-hook">When something goes wrong in a regulated organization, who ends up responsible — and was that decided long before the event?</p>
         <p class="paper-abstract">
-          Theorizes how organizations structure responsibility <em>before</em> action occurs — through role definitions, procedural anticipation, and pre-allocated accountability slots. The first stage of the lifecycle: accountability begins as anticipation, embedded in organizational forms long before any specific event triggers it.
+          Responsibility doesn't appear at the moment of failure. It's already being shaped — in role definitions, in procedural documents, in the way investigations are designed to look for some causes and not others, and now in how AI systems close off questions before humans have asked them. This paper traces that production across four stages and argues that accountability in regulated work is less a verdict than a slow accumulation. The argument draws on procedural corpus analysis, FDA Warning Letters, and two behavioral studies of how people reason under closure pressure.
         </p>
         <div class="paper-meta-row">
-          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Anticipated%20Accountability%20Convergence">📄 Request PDF</a>
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Convergence%20Lifecycle">📄 Request PDF</a>
         </div>
       </article>
 
-      <!-- CF -->
+      <!-- 2. Designed Attribution -->
       <article class="paper">
-        <div class="paper-meta theory">
-          <span class="dot"></span>Paper 2 · CF
-          <span class="paper-status">Working manuscript</span>
+        <div class="paper-meta css">
+          <span class="dot"></span>Paper 2
+          <span class="paper-status under-review">Under review</span>
         </div>
-        <h3 class="paper-title">Cognitive Friction: Procedural Documents as Accountability Infrastructure in Regulated Organizations</h3>
+        <h3 class="paper-title">Designed Attribution</h3>
+        <p class="paper-hook">Why does aviation think most crashes are human error? Because the investigations are designed to find that answer.</p>
         <p class="paper-abstract">
-          Argues that procedural documents — SOPs, work instructions, deviation protocols — are not neutral records but <em>accountability infrastructure</em>. Their friction (length, fragmentation, retrieval cost) is itself a coordination signal: an organizational technology for distributing where responsibility settles when something goes wrong.
+          Forty years of NTSB aviation investigations — 71,114 findings and 23,742 cause statements — read two ways. The first reading looks at how investigators code findings: organizational causes appear in 0.58% of records, while individual causes appear nearly six times as often. The second reading looks at the grammar of probable-cause statements: individuals show up as the subject of 74% of sentences, organizations in 0.42%. Both methods converge on the same finding — what aviation calls "human error" is partly a product of how the inquiry is shaped, not just of what happened.
         </p>
         <div class="paper-meta-row">
-          <span class="paper-repo">Companion code · <a href="https://github.com/sorakim-lab/sop-cognitive-friction-pilot">sop-cognitive-friction-pilot</a></span>
-          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Cognitive%20Friction">📄 Request PDF</a>
+          <span class="paper-repo">Companion code · <a href="https://github.com/sorakim-lab/ntsb-attribution-analysis">ntsb-attribution-analysis</a></span>
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Designed%20Attribution">📄 Request PDF</a>
         </div>
       </article>
 
-      <!-- RC -->
+      <!-- 3. Designing AI Augmentation Tools -->
       <article class="paper">
-        <div class="paper-meta theory">
-          <span class="dot"></span>Paper 3 · RC
-          <span class="paper-status">Working manuscript</span>
+        <div class="paper-meta hci">
+          <span class="dot"></span>Paper 3
+          <span class="paper-status under-review">Under review</span>
         </div>
-        <h3 class="paper-title">Responsibility Convergence: How Investigative Systems Stabilize Attribution</h3>
+        <h3 class="paper-title">Designing AI Augmentation Tools for Regulated Work</h3>
+        <p class="paper-hook">What I learned building twelve AI tools inside a workplace where you can't afford to break anything.</p>
         <p class="paper-abstract">
-          Examines how investigative processes — root cause analysis, accident inquiries, regulatory enforcement — actively <em>converge</em> on a stable attribution of responsibility. Convergence is not discovery; it is production. The investigation shapes the answer it appears to find, often under closure pressure that runs faster than the evidence supports.
+          A reflection from four years inside a GMP-regulated pharmaceutical quality control team — the kind of site HCI rarely gets to study, because outsiders aren't let in and what they'd see can't leave. Across twelve deployed tools, certain design rules kept emerging: don't cross the line into validated systems; let AI draft, let humans decide; treat tacit know-how that senior staff carry as something the tool should make explicit for newer staff. The paper is less about any one tool and more about what designing AI looks like when regulation, judgment, and the people doing the work all have to stay intact.
         </p>
         <div class="paper-meta-row">
-          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Responsibility%20Convergence">📄 Request PDF</a>
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Designing%20AI%20Augmentation%20Tools">📄 Request PDF</a>
         </div>
       </article>
 
-      <!-- PAC -->
+      <!-- 4. Toward Regulatory HCI -->
       <article class="paper">
-        <div class="paper-meta theory">
-          <span class="dot"></span>Paper 4 · PAC
-          <span class="paper-status">Working manuscript</span>
+        <div class="paper-meta hci">
+          <span class="dot"></span>Paper 4
+          <span class="paper-status under-review">Under review</span>
         </div>
-        <h3 class="paper-title">Premature Accountability Convergence: How Technology Accelerates Responsibility Stabilization in Organizations</h3>
+        <h3 class="paper-title">Toward Regulatory HCI</h3>
+        <p class="paper-hook">HCI knows how to study users. It doesn't yet know how to study users working under rules that govern what AI is even allowed to touch.</p>
         <p class="paper-abstract">
-          Extends RC into the AI era. As organizations adopt language models and automated decision tools, accountability stabilizes <em>faster</em> than the investigation requires — sometimes faster than the evidence permits. The result is <em>premature convergence</em>: explanations that close before alternatives are fully ruled out, with technology providing the artifact that justifies closure.
+          Pharmaceutical manufacturing, aviation, clinical care, finance — these are workplaces where AI can't just be deployed; it has to be deployed under rules that decide what it's permitted to do and where human judgment must remain. A position paper proposing that the human–AI interactions in these environments are coherent enough to form a research area in their own right, with shared questions, shared methods, and a comparative framework across regulated industries. The other five papers serve as evidence that the area is already in motion.
         </p>
         <div class="paper-meta-row">
-          <span class="paper-repo">Companion code · <a href="https://github.com/sorakim-lab/fda-warning-letters-pac-analysis">fda-warning-letters-pac-analysis</a></span>
-          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Premature%20Accountability%20Convergence">📄 Request PDF</a>
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Toward%20Regulatory%20HCI">📄 Request PDF</a>
+        </div>
+      </article>
+
+      <!-- 5. GMP AI Literacy -->
+      <article class="paper">
+        <div class="paper-meta hci">
+          <span class="dot"></span>Paper 5
+          <span class="paper-status under-review">Under review</span>
+        </div>
+        <h3 class="paper-title">GMP AI Literacy</h3>
+        <p class="paper-hook">How do you teach AI to workers whose mistakes would be illegal — and whose judgment regulators trust more than the AI?</p>
+        <p class="paper-abstract">
+          A 15-page bilingual Korean–English cookbook and a pixel-art onboarding game called <em>DAY ONE: GMP</em>, both built for frontline QC analysts who needed to use AI without giving up the judgment that makes their work regulated in the first place. The paper walks through the design rationale: why generic AI literacy material doesn't transfer to GMP, what changes when the learner already carries the institutional rules in their head, and how a game can teach things a cookbook can't.
+        </p>
+        <div class="paper-meta-row">
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20GMP%20AI%20Literacy">📄 Request PDF</a>
         </div>
       </article>
 
     </div>
   </section>
 
-  <!-- CSS -->
+  <!-- IN PROGRESS -->
   <section class="section">
     <div class="section-header">
-      <div class="section-eyebrow css">— Computational social science · 3 papers</div>
-      <h2 class="section-title">Operationalizing the lifecycle across regulatory domains</h2>
-      <p class="section-subtitle">
-        The theoretical lifecycle, made testable. FDA Warning Letters (N=50, 160 violations) and NTSB aviation investigations (n=71,114 findings, 23,742 narratives) serve as <em>methodologically contrasting</em> corpora — pharmaceutical regulation makes only final outputs public; aviation regulation makes the entire investigative process traceable. The contrast itself is what validates the theory.
-      </p>
+      <div class="section-eyebrow css">— In progress</div>
     </div>
 
     <div class="paper-list">
 
-      <!-- FDA -->
+      <!-- 6. Augmentation vs Automation -->
       <article class="paper">
-        <div class="paper-meta css">
-          <span class="dot"></span>Paper 5 · FDA
-          <span class="paper-status">Working manuscript</span>
+        <div class="paper-meta hci">
+          <span class="dot"></span>Paper 6
+          <span class="paper-status in-prep">In progress</span>
         </div>
-        <h3 class="paper-title">Responsibility as Multi-Layer Signal: A Computational Framework for FDA Warning Letters</h3>
+        <h3 class="paper-title">Augmentation vs Automation in Regulatory Decision-Making</h3>
+        <p class="paper-hook">Same task, two AI designs: one helps humans think, one tries to replace them. Which actually works inside a regulated process?</p>
         <p class="paper-abstract">
-          Synthesizes four computational components — premature-convergence detection, accountability-graph extraction, responsibility-attribution prediction, and a responsibility-distribution metric — into a unified framework for analyzing FDA Warning Letters as a regulatory enforcement corpus. Demonstrates the lifecycle theory empirically on pharmaceutical regulation's most consequential public output.
+          Ten root-cause analysis scenarios from regulated manufacturing, each run through two different AI designs — a human-in-the-loop scaffolding tool I built myself, and a Claude-based agentic pipeline that runs the same task end-to-end. The paper compares not just output quality but where human judgment gets preserved, where it gets quietly elided, and the failure modes that show up only when no one is left in the loop. A direct test of the augmentation-over-automation stance that runs through the rest of the work.
         </p>
         <div class="paper-meta-row">
-          <span class="paper-repo">4 companion repositories · <a href="https://github.com/sorakim-lab">sorakim-lab</a></span>
-          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Responsibility%20as%20Multi-Layer%20Signal">📄 Request PDF</a>
-        </div>
-      </article>
-
-      <!-- NTSB -->
-      <article class="paper">
-        <div class="paper-meta css">
-          <span class="dot"></span>Paper 6 · NTSB
-          <span class="paper-status">Working manuscript</span>
-        </div>
-        <h3 class="paper-title">Designed Attribution: Coding-Level and Grammatical-Level Evidence of Organizational Accountability Displacement in NTSB Aviation Investigations</h3>
-        <p class="paper-abstract">
-          Two-phase analysis of the full NTSB Aviation Accident Database (1982–2025): structured coding of n=71,114 findings, plus dependency-parsed probable cause statements (n=23,742). Triangulated finding: <strong>organizational accountability appears in only 0.42–0.58% of NTSB outputs across both methods</strong> — a designed pattern of attribution displacement, not a measurement artifact.
-        </p>
-        <div class="paper-meta-row">
-          <span class="paper-repo">Replication code · <a href="https://github.com/sorakim-lab/ntsb-attribution-analysis">ntsb-attribution-analysis</a></span>
-          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Designed%20Attribution">📄 Request PDF</a>
-        </div>
-      </article>
-
-      <!-- FDA vs NTSB -->
-      <article class="paper">
-        <div class="paper-meta css">
-          <span class="dot"></span>Paper 7 · FDA vs NTSB
-          <span class="paper-status">In preparation</span>
-        </div>
-        <h3 class="paper-title">FDA vs NTSB: Cross-Domain Validation of the Convergence Lifecycle</h3>
-        <p class="paper-abstract">
-          A direct comparison paper using both corpora as cross-domain validation. Pharmaceutical regulation (FDA Warning Letters) and aviation regulation (NTSB investigations) operate under different visibility regimes and produce different artifacts — yet the same lifecycle of accountability convergence appears in both. The contrast strengthens the theoretical claim: convergence is a property of regulated investigation itself, not an artifact of either domain.
-        </p>
-        <div class="paper-meta-row">
-          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20FDA%20vs%20NTSB%20Cross-Domain%20Validation">📄 Request PDF</a>
+          <a class="request-btn" href="mailto:sorakim.lab@gmail.com?subject=Paper%20request%3A%20Augmentation%20vs%20Automation">📄 Request PDF (in progress)</a>
         </div>
       </article>
 
